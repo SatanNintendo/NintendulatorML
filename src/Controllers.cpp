@@ -6,6 +6,7 @@
 #include "Nintendulator.h"
 #include "resource.h"
 #include "MapperInterface.h"
+#include "Lang.h"
 #include "Movie.h"
 #include "Controllers.h"
 #include <commdlg.h>
@@ -69,7 +70,7 @@ void	StdPort_SetControllerType (StdPort *&Port, STDCONT_TYPE Type, DWORD *button
 	}
 	switch (Type)
 	{
-	default:			MessageBox(hMainWnd, _T("Error: selected invalid controller type for standard port!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+	default:			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_INVALID_STD), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 	case STD_UNCONNECTED:		Port = new StdPort_Unconnected(buttons);	break;
 	case STD_STDCONTROLLER:		Port = new StdPort_StdController(buttons);	break;
 	case STD_ZAPPER:		Port = new StdPort_Zapper(buttons);		break;
@@ -106,7 +107,7 @@ void    ExpPort_SetControllerType (ExpPort *&Port, EXPCONT_TYPE Type, DWORD *but
 	}
         switch (Type)
         {
-        default:			MessageBox(hMainWnd, _T("Error: selected invalid controller type for expansion port!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+                default:			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_INVALID_EXP), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
         case EXP_UNCONNECTED:		Port = new ExpPort_Unconnected(buttons);		break;
         case EXP_FAMI4PLAY:		Port = new ExpPort_Fami4Play(buttons);			break;
         case EXP_ARKANOIDPADDLE:	Port = new ExpPort_ArkanoidPaddle(buttons);		break;
