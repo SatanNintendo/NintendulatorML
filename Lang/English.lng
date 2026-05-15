@@ -1,0 +1,151 @@
+# NintendulatorML Language File - English
+# Format: KEY=Value  |  # = comment  |  \n = newline in value
+
+[Info]
+Language=English
+Author=Nintendulator Dev Team
+Version=1.0
+
+[Strings]
+# === Main Menu ===
+MENU_FILE=&File
+MENU_FILE_OPEN=&Open ROM...
+MENU_FILE_CLOSE=&Close
+MENU_FILE_RECENT=Recent &Files
+MENU_FILE_RECENT_CLEAR=&Clear Recent Files
+MENU_FILE_EXIT=E&xit
+MENU_NES=&NES
+MENU_NES_RUN=&Run
+MENU_NES_PAUSE=&Pause
+MENU_NES_RESET=&Reset
+MENU_NES_POWER=Power &Cycle
+MENU_NES_STOP=&Stop
+MENU_SETTINGS=&Settings
+MENU_SETTINGS_VIDEO=&Video...
+MENU_SETTINGS_SOUND=&Sound...
+MENU_SETTINGS_CONTROLLERS=&Controllers...
+MENU_SETTINGS_GAMEGENIE=&Game Genie...
+MENU_SETTINGS_PATHS=&Paths...
+MENU_SETTINGS_CLOCK=&Clock speed...
+MENU_MOVIE=&Movie
+MENU_MOVIE_RECORD=&Record...
+MENU_MOVIE_PLAY=&Play...
+MENU_MOVIE_STOP=&Stop
+MENU_DEBUG=&Debug
+MENU_DEBUG_CPU=&CPU Debugger
+MENU_DEBUG_PPU=&PPU Debugger
+MENU_LANGUAGE=&Language
+MENU_HELP=&Help
+MENU_HELP_ABOUT=&About...
+
+# === Window title ===
+WINDOW_TITLE=Nintendulator
+WINDOW_TITLE_PAUSED=Nintendulator [Paused]
+WINDOW_TITLE_FPS=Nintendulator - %s - %d FPS
+
+# === File dialogs ===
+OPEN_ROM_TITLE=Open ROM
+OPEN_ROM_FILTER=NES ROMs (*.nes;*.unif;*.fds;*.nsf)\0*.nes;*.unif;*.fds;*.nsf\0All Files (*.*)\0*.*\0
+OPEN_MOVIE_TITLE=Open Movie
+SAVE_MOVIE_TITLE=Save Movie
+OPEN_PALETTE_TITLE=Open Palette
+SAVE_AVI_TITLE=Save AVI
+
+# === ROM errors ===
+ERR_ROM_OPEN=Failed to open ROM file
+ERR_ROM_INVALID=Invalid ROM file format
+ERR_ROM_MAPPER=Unsupported mapper
+ERR_ROM_UNIF=Invalid UNIF ROM
+ERR_ROM_FDS_HEADER=Invalid FDS header
+ERR_ROM_FDS_DISKSIDE=Invalid FDS disk side
+ERR_ROM_NSF=Invalid NSF file
+MSG_ROM_LOADED=ROM loaded: %s
+MSG_ROM_CLOSED=ROM closed
+MSG_ROM_ALREADY_LOADED=A ROM is already loaded. Close it first.
+
+# === Video ===
+ERR_GFX_DIRECTDRAW=Failed to initialize DirectDraw
+ERR_GFX_SURFACE=Failed to create DirectDraw surface
+ERR_GFX_PALETTE=Failed to set DirectDraw palette
+ERR_GFX_RENDER=DirectDraw render error
+ERR_GFX_MODE=Unsupported video mode
+MSG_GFX_SCREENSHOT=Screenshot saved: %s
+
+# === Sound ===
+ERR_APU_DIRECTSOUND=Failed to initialize DirectSound
+ERR_APU_BUFFER=Failed to create DirectSound buffer
+ERR_APU_FORMAT=Unsupported audio format
+MSG_APU_DISABLED=Sound disabled
+
+# === Controllers ===
+ERR_CTRL_KEYBOARD_INIT=Unable to initialize keyboard input device!
+ERR_CTRL_KEYBOARD_FORMAT=Unable to set keyboard input data format!
+ERR_CTRL_KEYBOARD_LEVEL=Unable to set keyboard input cooperative level!
+ERR_CTRL_MOUSE_INIT=Unable to initialize mouse input device!
+ERR_CTRL_MOUSE_LEVEL=Unable to set mouse input cooperative level!
+ERR_CTRL_JOY_LEVEL=Unable to restore joystick input cooperative level!
+ERR_CTRL_INVALID_STD=Error: selected invalid controller type for standard port!
+ERR_CTRL_INVALID_EXP=Error: selected invalid controller type for expansion port!
+
+# === Save states ===
+MSG_STATE_SAVED=State saved to slot %d
+MSG_STATE_LOADED=State loaded from slot %d
+ERR_STATE_SAVE=Failed to save state
+ERR_STATE_LOAD=Failed to load state
+ERR_STATE_VERSION=State file version mismatch
+ERR_STATE_CORRUPT=State file is corrupted
+MSG_STATE_SLOT=Slot %d
+
+# === Movie recording ===
+MSG_MOVIE_RECORDING=Recording movie...
+MSG_MOVIE_PLAYING=Playing movie...
+MSG_MOVIE_STOPPED=Movie stopped
+ERR_MOVIE_OPEN=Failed to open movie file
+ERR_MOVIE_INVALID=Invalid movie file
+ERR_MOVIE_VERSION=Movie version mismatch
+MSG_AVI_RECORDING=Recording AVI...
+ERR_AVI_OPEN=Failed to open AVI file
+MSG_AVI_STOPPED=AVI recording stopped
+
+# === Game Genie ===
+ERR_GENIE_INVALID=Invalid Game Genie code
+ERR_GENIE_TOO_MANY=Too many Game Genie codes (maximum 3)
+MSG_GENIE_APPLIED=Game Genie code applied
+
+# === Mapper ===
+ERR_MAPPER_LOAD=Failed to load mapper DLL
+ERR_MAPPER_NOTFOUND=Mapper not found
+ERR_MAPPER_VERSION=Mapper version mismatch
+
+# === Debugger breakpoints ===
+DBG_BREAK_EXEC=Exec: $%04X
+DBG_BREAK_READ=Read: $%04X
+DBG_BREAK_WRITE=Write: $%04X
+DBG_BREAK_ACCESS=Access: $%04X
+DBG_BREAK_OPCODE=Opcode: $%02X
+DBG_BREAK_NMI=Interrupt: NMI
+DBG_BREAK_IRQ=Interrupt: IRQ
+DBG_BREAK_BRK=Interrupt: BRK
+DBG_BREAK_SCANLINE=Scanline: %i
+DBG_BREAK_UNDEF=UNDEFINED
+DBG_BREAK_ENABLED= (+)
+DBG_BREAK_DISABLED= (-)
+MSG_DBG_LOG_STARTED=Logging started
+MSG_DBG_LOG_STOPPED=Logging stopped
+
+# === Dialogs ===
+DLG_OK=OK
+DLG_CANCEL=Cancel
+DLG_YES=Yes
+DLG_NO=No
+DLG_APPLY=Apply
+DLG_BROWSE=Browse...
+DLG_NINTENDULATOR=Nintendulator
+
+# === About ===
+ABOUT_TITLE=About Nintendulator
+ABOUT_TEXT=Nintendulator\nNES Emulator\n\nCopyright (C) QMT Productions
+
+# === Language ===
+LANG_CHANGED=Language Changed
+LANG_CHANGED_MSG=Language has been changed. Some elements will update on restart.
