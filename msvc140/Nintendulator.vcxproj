@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -84,6 +84,7 @@
     <ClCompile Include="..\src\Movie.cpp" />
     <ClCompile Include="..\src\NES.cpp" />
     <ClCompile Include="..\src\Nintendulator.cpp" />
+    <ClCompile Include="..\src\Lang.cpp" />
     <ClCompile Include="..\src\PPU.cpp" />
     <ClCompile Include="..\src\States.cpp" />
     <ClCompile Include="..\src\c_s_arkpad.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="..\src\Movie.h" />
     <ClInclude Include="..\src\NES.h" />
     <ClInclude Include="..\src\Nintendulator.h" />
+    <ClInclude Include="..\src\Lang.h" />
     <ClInclude Include="..\src\PPU.h" />
     <ClInclude Include="..\src\States.h" />
     <ClInclude Include="..\src\StdAfx.h" />
