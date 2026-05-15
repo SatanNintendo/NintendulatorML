@@ -3,6 +3,7 @@
  */
 
 #pragma once
+#include "Lang.h"
 
 #define	ENABLE_DEBUGGER	// Enable the debugger - emulation is faster without it
 //#define	CPU_BENCHMARK	// Run cyctest.nes for 4542110 cycles (10 seconds), then report how long it took
