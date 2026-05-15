@@ -2,7 +2,7 @@
  * Copyright (C) 2002-2022 QMT Productions
  *
  * Based on NinthStar, a portable Win32 NES Emulator written in C++
- * Copyright (C) 2000  David de Regt
+ * Copyright (C) 2000 David de Regt
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -11,16 +11,17 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include "stdafx.h"
 #include "Nintendulator.h"
 #include "resource.h"
+#include "Lang.h"
 #include "MapperInterface.h"
 #include "NES.h"
 #include "CPU.h"
@@ -33,7 +34,7 @@
 #include "Controllers.h"
 #include "States.h"
 #include "HeaderEdit.h"
-#include <shellapi.h>
+#include <shlwapi.h>
 
 #pragma comment(lib, "shlwapi.lib")
 #pragma comment(lib, "winmm.lib")
@@ -41,39 +42,64 @@
 #define MAX_LOADSTRING 100
 
 // Global Variables:
-int		ConfigVersion;	// current version of configuration data
-HINSTANCE	hInst;		// current instance
-HWND		hMainWnd;		// main window
-HMENU		hMenu;		// main window menu
-HACCEL		hAccelTable;	// accelerators
-int		SizeMult;	// size multiplier
-BOOL		FixAspect;	// fix aspect ratio for NTSC/PAL
-TCHAR		ProgPath[MAX_PATH];	// program path
-TCHAR		Path_ROM[MAX_PATH];	// current ROM directory
-TCHAR		Path_NMV[MAX_PATH];	// current movie directory
-TCHAR		Path_AVI[MAX_PATH];	// current AVI directory
-TCHAR		Path_PAL[MAX_PATH];	// current palette directory
-TCHAR		DataPath[MAX_PATH];	// user data path
-BOOL		MaskKeyboard = FALSE;	// mask keyboard accelerators (for when Family Basic Keyboard is active)
-BOOL		MaskMouse = FALSE;	// hide mouse cursor (for Arkanoid paddle and SNES Mouse)
-HWND		hDebug;		// Debug Info window
-BOOL		dbgVisible;	// whether or not the Debug window is open
+int ConfigVersion; // current version of configuration data
+HINSTANCE hInst; // current instance
+HWND hMainWnd; // main window
+HMENU hMenu; // main window menu
+HACCEL hAccelTable; // accelerators
+int SizeMult; // size multiplier
+BOOL FixAspect; // fix aspect ratio for NTSC/PAL
+TCHAR ProgPath[MAX_PATH]; // program path
+TCHAR Path_ROM[MAX_PATH]; // current ROM directory
+TCHAR Path_NMV[MAX_PATH]; // current movie directory
+TCHAR Path_AVI[MAX_PATH]; // current AVI directory
+TCHAR Path_PAL[MAX_PATH]; // current palette directory
+TCHAR DataPath[MAX_PATH]; // user data path
+BOOL MaskKeyboard = FALSE; // mask keyboard accelerators (for when Family Basic Keyboard is active)
+BOOL MaskMouse = FALSE; // hide mouse cursor (for Arkanoid paddle and SNES Mouse)
+HWND hDebug; // Debug Info window
+BOOL dbgVisible; // whether or not the Debug window is open
 
-TCHAR	szTitle[MAX_LOADSTRING];	// The title bar text
-TCHAR	szWindowClass[MAX_LOADSTRING];	// The title bar text
+TCHAR szTitle[MAX_LOADSTRING]; // The title bar text
+TCHAR szWindowClass[MAX_LOADSTRING]; // The title bar text
 
+// Forward declarations of functions included in this code module:
+ATOM MyRegisterClass(HINSTANCE hInstance);
+BOOL InitInstance(HINSTANCE, int);
+LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK About(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK DebugWnd(HWND, UINT, WPARAM, LPARAM);
 
-// Foward declarations of functions included in this code module:
-ATOM			MyRegisterClass(HINSTANCE hInstance);
-BOOL			InitInstance(HINSTANCE, int);
-LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK	DebugWnd(HWND, UINT, WPARAM, LPARAM);
+TCHAR TitlebarBuffer[256];
+int TitlebarDelay;
 
-TCHAR	TitlebarBuffer[256];
-int	TitlebarDelay;
+void BuildLanguageMenu(HMENU hMainMenu)
+{
+	int cnt = GetMenuItemCount(hMainMenu);
+	HMENU hLangMenu = GetSubMenu(hMainMenu, cnt - 2); // Language before Help
+	if (!hLangMenu) return;
 
-int APIENTRY	_tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+	while (GetMenuItemCount(hLangMenu) > 0)
+		DeleteMenu(hLangMenu, 0, MF_BYPOSITION);
+
+	const std::vector<std::wstring> &langs = Lang::GetLanguageList();
+	if (langs.empty())
+	{
+		AppendMenu(hLangMenu, MF_STRING | MF_GRAYED, IDM_LANGUAGE_BASE,
+			_T("(No languages found)"));
+		return;
+	}
+
+	for (int i = 0; i < (int)langs.size() && i < 100; i++)
+	{
+		UINT flags = MF_STRING;
+		if (langs[i] == Lang::GetCurrentLanguage())
+			flags |= MF_CHECKED;
+		AppendMenu(hLangMenu, flags, IDM_LANGUAGE_BASE + i, langs[i].c_str());
+	}
+}
+
+int APIENTRY _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
 	size_t i;
 	MSG msg;
@@ -99,10 +125,15 @@ int APIENTRY	_tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpC
 		CreateDirectory(DataPath, NULL);
 
 	// Perform application initialization:
-	if (!InitInstance (hInstance, nCmdShow)) 
+	if (!InitInstance (hInstance, nCmdShow))
 		return FALSE;
 
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_NINTENDULATOR));
+
+	// Initialize language system
+	Lang::Init(hInstance);
+	BuildLanguageMenu(GetMenu(hMainWnd));
+	Lang::UpdateMenu(GetMenu(hMainWnd));
 
 	timeBeginPeriod(1);
 
@@ -127,7 +158,7 @@ int APIENTRY	_tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpC
 
 		NES::OpenFile(cmdline);
 		// Allocated using _tcsdup()
-		free(bkptr);	// free up the memory from its original pointer
+		free(bkptr); // free up the memory from its original pointer
 	}
 
 	// Main message loop:
@@ -163,7 +194,7 @@ int APIENTRY	_tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpC
 		HWND focus = GetActiveWindow();
 		if ((focus != NULL) && (focus != hMainWnd) && IsDialogMessage(focus, &msg))
 			continue;
-		if (MaskKeyboard || !TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) 
+		if (MaskKeyboard || !TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
@@ -175,50 +206,50 @@ int APIENTRY	_tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpC
 }
 
 //
-//  FUNCTION: MyRegisterClass()
+// FUNCTION: MyRegisterClass()
 //
-//  PURPOSE: Registers the window class.
+// PURPOSE: Registers the window class.
 //
-//  COMMENTS:
+// COMMENTS:
 //
-//    This function and its usage is only necessary if you want this code
-//    to be compatible with Win32 systems prior to the 'RegisterClassEx'
-//    function that was added to Windows 95. It is important to call this function
-//    so that the application will get 'well formed' small icons associated
-//    with it.
+// This function and its usage is only necessary if you want this code
+// to be compatible with Win32 systems prior to the 'RegisterClassEx'
+// function that was added to Windows 95. It is important to call this function
+// so that the application will get 'well formed' small icons associated
+// with it.
 //
-ATOM	MyRegisterClass (HINSTANCE hInstance)
+ATOM MyRegisterClass (HINSTANCE hInstance)
 {
 	WNDCLASSEX wcex;
 
-	wcex.cbSize = sizeof(WNDCLASSEX); 
+	wcex.cbSize = sizeof(WNDCLASSEX);
 
-	wcex.style		= CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc	= WndProc;
-	wcex.cbClsExtra		= 0;
-	wcex.cbWndExtra		= 0;
-	wcex.hInstance		= hInstance;
-	wcex.hIcon		= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_NINTENDULATOR));
-	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
-	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
-	wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_NINTENDULATOR);
-	wcex.lpszClassName	= szWindowClass;
-	wcex.hIconSm		= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SMALL));
+	wcex.style = CS_HREDRAW | CS_VREDRAW;
+	wcex.lpfnWndProc = WndProc;
+	wcex.cbClsExtra = 0;
+	wcex.cbWndExtra = 0;
+	wcex.hInstance = hInstance;
+	wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_NINTENDULATOR));
+	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
+	wcex.lpszMenuName = MAKEINTRESOURCE(IDC_NINTENDULATOR);
+	wcex.lpszClassName = szWindowClass;
+	wcex.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
 	return RegisterClassEx(&wcex);
 }
 
 //
-//   FUNCTION: InitInstance(HANDLE, int)
+// FUNCTION: InitInstance(HANDLE, int)
 //
-//   PURPOSE: Saves instance handle and creates main window
+// PURPOSE: Saves instance handle and creates main window
 //
-//   COMMENTS:
+// COMMENTS:
 //
-//        In this function, we save the instance handle in a global variable and
-//        create and display the main program window.
+// In this function, we save the instance handle in a global variable and
+// create and display the main program window.
 //
-BOOL	InitInstance (HINSTANCE hInstance, int nCmdShow)
+BOOL InitInstance (HINSTANCE hInstance, int nCmdShow)
 {
 	GFX::DirectDraw = NULL;	// gotta do this so we don't paint from nothing
 	hInst = hInstance;
@@ -236,16 +267,16 @@ BOOL	InitInstance (HINSTANCE hInstance, int nCmdShow)
 }
 
 //
-//  FUNCTION: WndProc(HWND, unsigned, WORD, LONG)
+// FUNCTION: WndProc(HWND, unsigned, WORD, LONG)
 //
-//  PURPOSE:  Processes messages for the main window.
+// PURPOSE: Processes messages for the main window.
 //
-//  WM_COMMAND	- process the application menu
-//  WM_PAINT	- Paint the main window
-//  WM_DESTROY	- post a quit message and return
+// WM_COMMAND - process the application menu
+// WM_PAINT - Paint the main window
+// WM_DESTROY - post a quit message and return
 //
 //
-LRESULT CALLBACK	WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
 	PAINTSTRUCT ps;
@@ -254,11 +285,11 @@ LRESULT CALLBACK	WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	OPENFILENAME ofn;
 	BOOL running = NES::Running;
 
-	switch (message) 
+	switch (message)
 	{
 	case WM_COMMAND:
-		wmId    = LOWORD(wParam); 
-		wmEvent = HIWORD(wParam); 
+		wmId = LOWORD(wParam);
+		wmEvent = HIWORD(wParam);
 		// Parse the menu selections:
 		switch (wmId)
 		{
@@ -271,17 +302,17 @@ LRESULT CALLBACK	WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			ofn.lStructSize = sizeof(ofn);
 			ofn.hwndOwner = hMainWnd;
 			ofn.hInstance = hInst;
-			ofn.lpstrFilter =	_T("All supported files (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)\0")
-							_T("*.NES;*.UNIF;*.UNF;*.FDS;*.NSF\0")
-						_T("iNES ROM Images (*.NES)\0")
-							_T("*.NES\0")
-						_T("Universal NES Interchange Format ROM files (*.UNIF, *.UNF)\0")
-							_T("*.UNF;*.UNIF\0")
-						_T("Famicom Disk System Disk Images (*.FDS)\0")
-							_T("*.FDS\0")
-						_T("NES Sound Files (*.NSF)\0")
-							_T("*.NSF\0")
-						_T("\0");
+			ofn.lpstrFilter = _T("All supported files (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)\\0")
+				_T("*.NES;*.UNIF;*.UNF;*.FDS;*.NSF\\0")
+				_T("iNES ROM Images (*.NES)\\0")
+				_T("*.NES\\0")
+				_T("Universal NES Interchange Format ROM files (*.UNIF, *.UNF)\\0")
+				_T("*.UNF;*.UNIF\\0")
+				_T("Famicom Disk System Disk Images (*.FDS)\\0")
+				_T("*.FDS\\0")
+				_T("NES Sound Files (*.NSF)\\0")
+				_T("*.NSF\\0")
+				_T("\\0");
 			ofn.lpstrCustomFilter = NULL;
 			ofn.nFilterIndex = 1;
 			ofn.lpstrFile = FileName;
@@ -313,7 +344,7 @@ LRESULT CALLBACK	WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			ofn.lStructSize = sizeof(ofn);
 			ofn.hwndOwner = hMainWnd;
 			ofn.hInstance = hInst;
-			ofn.lpstrFilter = _T("iNES ROM Images (*.NES)\0") _T("*.NES\0") _T("\0");
+			ofn.lpstrFilter = _T("iNES ROM Images (*.NES)\\0") _T("*.NES\\0") _T("\\0");
 			ofn.lpstrCustomFilter = NULL;
 			ofn.nFilterIndex = 1;
 			ofn.lpstrFile = FileName;
@@ -349,7 +380,7 @@ LRESULT CALLBACK	WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			NES::Start(FALSE);
 			break;
 		case ID_CPU_STEP:
-			NES::Stop();		// need to stop first
+			NES::Stop();	// need to stop first
 			NES::Start(TRUE);	// so the 'start' makes it through
 			break;
 		case ID_CPU_STOP:
@@ -382,10 +413,10 @@ LRESULT CALLBACK	WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			NES::Pause(FALSE);
 			States::LoadState();
 			if (running)	NES::Resume();
-#ifdef	ENABLE_DEBUGGER
+#ifdef ENABLE_DEBUGGER
 			else if (Debugger::Enabled)
 				Debugger::Update(Debugger::Mode);
-#endif	/* ENABLE_DEBUGGER */
+#endif /* ENABLE_DEBUGGER */
 			break;
 		case ID_CPU_PREVSTATE:
 			States::SelSlot += 9;
@@ -569,14 +600,14 @@ LRESULT CALLBACK	WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			Controllers::OpenConfig();
 			if (running)	NES::Start(FALSE);
 			break;
-#ifdef	ENABLE_DEBUGGER
+#ifdef ENABLE_DEBUGGER
 		case ID_DEBUG_CPU:
 			Debugger::SetMode(Debugger::Mode ^ DEBUG_MODE_CPU);
 			break;
 		case ID_DEBUG_PPU:
 			Debugger::SetMode(Debugger::Mode ^ DEBUG_MODE_PPU);
 			break;
-#endif	/* ENABLE_DEBUGGER */
+#endif /* ENABLE_DEBUGGER */
 		case ID_DEBUG_STATWND:
 			dbgVisible = !dbgVisible;
 			if (dbgVisible)
@@ -605,7 +636,27 @@ LRESULT CALLBACK	WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case ID_HELP_ABOUT:
 			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
 			break;
-		default:return DefWindowProc(hWnd, message, wParam, lParam);
+		default:
+			if (LOWORD(wParam) >= IDM_LANGUAGE_BASE &&
+			    LOWORD(wParam) <= IDM_LANGUAGE_MAX)
+			{
+				int idx = LOWORD(wParam) - IDM_LANGUAGE_BASE;
+				const auto &langs = Lang::GetLanguageList();
+				if (idx < (int)langs.size())
+				{
+					Lang::Load(langs[idx].c_str());
+					Lang::SaveToRegistry(langs[idx].c_str());
+					HMENU hM = GetMenu(hWnd);
+					Lang::UpdateMenu(hM);
+					BuildLanguageMenu(hM);
+					MessageBox(hWnd,
+						Lang::GetString(LANG_LANG_CHANGED_MSG),
+						Lang::GetString(LANG_LANG_CHANGED),
+						MB_ICONINFORMATION | MB_OK);
+				}
+			}
+			else
+				return DefWindowProc(hWnd, message, wParam, lParam);
 			break;
 		}
 		break;
@@ -644,14 +695,14 @@ LRESULT CALLBACK	WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-INT_PTR CALLBACK	About (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK About (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
 	case WM_INITDIALOG:
 		return TRUE;
 	case WM_COMMAND:
-		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL) 
+		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
 		{
 			EndDialog(hDlg, LOWORD(wParam));
 			return TRUE;
@@ -661,7 +712,7 @@ INT_PTR CALLBACK	About (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 	return FALSE;
 }
 
-INT_PTR CALLBACK	DebugWnd (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK DebugWnd (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
@@ -684,7 +735,7 @@ INT_PTR CALLBACK	DebugWnd (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam
 	}
 	return FALSE;
 }
-void	AddDebug (const TCHAR *txt)
+void AddDebug (const TCHAR *txt)
 {
 	int dbglen = GetWindowTextLength(GetDlgItem(hDebug, IDC_DEBUGTEXT));
 //	if (!dbgVisible)
@@ -697,12 +748,12 @@ void	AddDebug (const TCHAR *txt)
 }
 
 // Shortcut for browsing to folders (though it could be used to run anything else, it's only ever called with folder names)
-void	BrowseFolder (const TCHAR *dir)
+void BrowseFolder (const TCHAR *dir)
 {
 	ShellExecute(hMainWnd, NULL, dir, NULL, NULL, SW_SHOWNORMAL);
 }
 
-BOOL	ProcessMessages (void)
+BOOL ProcessMessages (void)
 {
 	MSG msg;
 	BOOL gotMessage = PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE);
@@ -728,7 +779,7 @@ BOOL	ProcessMessages (void)
 	return gotMessage;
 }
 
-void	UpdateTitlebar (void)
+void UpdateTitlebar (void)
 {
 	TCHAR titlebar[256];
 	if (NES::Running)
@@ -746,7 +797,7 @@ void	UpdateTitlebar (void)
 	}
 	SetWindowText(hMainWnd, titlebar);
 }
-void	__cdecl	PrintTitlebar (const TCHAR *Text, ...)
+void __cdecl PrintTitlebar (const TCHAR *Text, ...)
 {
 	va_list marker;
 	va_start(marker, Text);
