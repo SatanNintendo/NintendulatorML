@@ -15,6 +15,7 @@
 #include "Controllers.h"
 #include "GFX.h"
 #include "Genie.h"
+#include "Lang.h"
 
 namespace States
 {
@@ -180,7 +181,7 @@ void	SaveState (void)
 	fwrite(&flen, 4, 1, out);
 	fclose(out);
 
-	PrintTitlebar(_T("State saved: %i"), SelSlot);
+		PrintTitlebar(Lang::GetString(LANG_MSG_STATE_SAVED), SelSlot);
 	Movie::ShowFrame();
 }
 
@@ -331,9 +332,9 @@ void	LoadState (void)
 	NES::GameGenie = FALSE;			// If the savestate uses it, it'll turn back on shortly
 	CheckMenuItem(hMenu, ID_CPU_GAMEGENIE, MF_UNCHECKED);
 
-	if (LoadData(in, flen, version_id))
-		PrintTitlebar(_T("%s loaded: %i"), (version_id == STATES_CUR_VERSION) ? _T("State") : _T("Old state"), SelSlot);
-	else	PrintTitlebar(_T("%s loaded with errors: %i"), (version_id == STATES_CUR_VERSION) ? _T("State") : _T("Old state"), SelSlot);
+		if (LoadData(in, flen, version_id))
+		PrintTitlebar(Lang::GetString(LANG_MSG_STATE_LOADED), SelSlot);
+	else	PrintTitlebar(Lang::GetString(LANG_ERR_STATE_LOAD), SelSlot);
 	Movie::ShowFrame();
 	fclose(in);
 }
