@@ -17,6 +17,7 @@
 #include "Movie.h"
 #include "Controllers.h"
 #include "Genie.h"
+#include "Lang.h"
 #include <shellapi.h>
 
 #pragma comment(lib, "shlwapi.lib")
@@ -122,7 +123,7 @@ void	OpenFile (TCHAR *filename)
 
 	if (!data)
 	{
-		MessageBox(hMainWnd, _T("Unable to open file!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_ROM_OPEN), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		CloseFile();
 		return;
 	}
@@ -137,12 +138,12 @@ void	OpenFile (TCHAR *filename)
 		LoadRet = OpenFileUNIF(data);
 	else if (!_tcsicmp(filename + len - 4, _T(".FDS")))
 		LoadRet = OpenFileFDS(data);
-	else	LoadRet = _T("File type not recognized!");
+	else	LoadRet = Lang::GetString(LANG_ERR_ROM_INVALID);
 	fclose(data);
 
 	if (LoadRet)
 	{
-		MessageBox(hMainWnd, LoadRet, _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, LoadRet, Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		CloseFile();
 		return;
 	}
@@ -424,13 +425,13 @@ const TCHAR *	OpenFileiNES (FILE *in)
 
 	fread(Header, 1, 16, in);
 	if (*(unsigned long *)Header != MKID('NES\x1A'))
-		return _T("iNES header signature not found!");
+		return Lang::GetString(LANG_ERR_ROM_INVALID);
 
 	if ((Header[7] & 0x0C) == 0x04)
-		return _T("Header is corrupted by \"DiskDude!\" - please repair it and try again.");
+		return Lang::GetString(LANG_ERR_ROM_INVALID);
 
 	if ((Header[7] & 0x0C) == 0x0C)
-		return _T("Header format not recognized - please repair it and try again.");
+		return Lang::GetString(LANG_ERR_ROM_INVALID);
 
 	RI.ROMType = ROM_INES;
 
@@ -456,9 +457,9 @@ const TCHAR *	OpenFileiNES (FILE *in)
 		RI.INES2_VSDATA = Header[13];
 
 		if (((RI.INES2_PRGRAM & 0xF) == 0xF) || ((RI.INES2_PRGRAM & 0xF0) == 0xF0))
-			return _T("Invalid PRG RAM size specified!");
+			return Lang::GetString(LANG_ERR_ROM_INVALID);
 		if (((RI.INES2_CHRRAM & 0xF) == 0xF) || ((RI.INES2_CHRRAM & 0xF0) == 0xF0))
-			return _T("Invalid CHR RAM size specified!");
+			return Lang::GetString(LANG_ERR_ROM_INVALID);
 		if (RI.INES2_CHRRAM & 0xF0)
 			EI.DbgOut(_T("This ROM uses battery-backed CHR RAM, which is not yet supported!"));
 		if (Header[14])
@@ -477,7 +478,7 @@ const TCHAR *	OpenFileiNES (FILE *in)
 	}
 
 	if (RI.INES_Flags & 0x04)
-		return _T("Trained ROMs are unsupported!");
+		return Lang::GetString(LANG_ERR_ROM_INVALID);
 
 	PRGSizeROM = RI.INES_PRGSize * 0x4;
 	CHRSizeROM = RI.INES_CHRSize * 0x8;
@@ -492,7 +493,7 @@ const TCHAR *	OpenFileiNES (FILE *in)
 		{
 			// Flat-out refuse to deal with excessively large ROM sizes
 			if ((RI.INES_PRGSize & 0xFC) >= 0xA0)
-				return _T("NES 2.0 PRG ROM size exceeds 1 TB!");
+				return Lang::GetString(LANG_ERR_ROM_INVALID);
 
 			PRGBytes = (((RI.INES_PRGSize << 1) | 1) & 0x7) << ((RI.INES_PRGSize >> 2) & 0x3F);
 
@@ -511,7 +512,7 @@ const TCHAR *	OpenFileiNES (FILE *in)
 		{
 			// Flat-out refuse to deal with excessively large ROM sizes
 			if ((RI.INES_CHRSize & 0xFC) >= 0xA0)
-				return _T("NES 2.0 CHR ROM size exceeds 1 TB!");
+				return Lang::GetString(LANG_ERR_ROM_INVALID);
 
 			CHRBytes = (((RI.INES_CHRSize << 1) | 1) & 0x7) << ((RI.INES_CHRSize >> 2) & 0x3F);
 
@@ -530,18 +531,18 @@ const TCHAR *	OpenFileiNES (FILE *in)
 	if (PRGSizeROM > MAX_PRGROM_SIZE)
 	{
 		EI.DbgOut(_T("Error - PRG ROM size is %i KB, which exceeds the current limit of %i KB"), PRGSizeROM * 4, MAX_PRGROM_SIZE * 4);
-		return _T("PRG ROM is too large! Increase MAX_PRGROM_SIZE and recompile!");
+		return Lang::GetString(LANG_ERR_ROM_INVALID);
 	}
 
 	if (CHRSizeROM > MAX_CHRROM_SIZE)
 	{
 		EI.DbgOut(_T("Error - CHR ROM size is %i KB, which exceeds the current limit of %i KB"), CHRSizeROM, MAX_CHRROM_SIZE);
-		return _T("CHR ROM is too large! Increase MAX_CHRROM_SIZE and recompile!");
+		return Lang::GetString(LANG_ERR_ROM_INVALID);
 	}
 	if (!PRGBytes)
 	{
 		EI.DbgOut(_T("Error - PRG ROM size is zero!"));
-		return _T("No PRG ROM is present!");
+		return Lang::GetString(LANG_ERR_ROM_INVALID);
 	}
 
 	fread(PRG_ROM, 1, PRGBytes, in);
@@ -585,7 +586,7 @@ const TCHAR *	OpenFileiNES (FILE *in)
 		if (RI.INES2_PRGRAM & 0xF0)
 			PRGSizeRAM += 64 << ((RI.INES2_PRGRAM & 0xF0) >> 4);
 		if (PRGSizeRAM > MAX_PRGRAM_SIZE * 0x1000)
-			return _T("PRG RAM is too large! Increase MAX_PRGRAM_SIZE and recompile!");
+			return Lang::GetString(LANG_ERR_ROM_INVALID);
 		PRGSizeRAM = (PRGSizeRAM / 0x1000) + ((PRGSizeRAM % 0x1000) ? 1 : 0);
 
 		// Hack: mapper 19 images can specify Battery and zero RAM
@@ -600,7 +601,7 @@ const TCHAR *	OpenFileiNES (FILE *in)
 		if (RI.INES2_CHRRAM & 0xF0)
 			CHRSizeRAM += 64 << ((RI.INES2_CHRRAM & 0xF0) >> 4);
 		if (CHRSizeRAM > MAX_CHRRAM_SIZE * 0x400)
-			return _T("CHR RAM is too large! Increase MAX_CHRRAM_SIZE and recompile!");
+			return Lang::GetString(LANG_ERR_ROM_INVALID);
 		CHRSizeRAM = (CHRSizeRAM / 0x400) + ((CHRSizeRAM % 0x400) ? 1 : 0);
 	}
 	else
@@ -612,7 +613,7 @@ const TCHAR *	OpenFileiNES (FILE *in)
 	if (!MapperInterface::LoadMapper(&RI))
 	{
 		static TCHAR err[256];
-		_stprintf(err, _T("Mapper %i not supported!"), RI.INES_MapperNum);
+		_stprintf(err, Lang::GetString(LANG_ERR_ROM_MAPPER), RI.INES_MapperNum);
 		return err;
 	}
 	EI.DbgOut(_T("iNES ROM image loaded: mapper %i (%s) - %s"), RI.INES_MapperNum, MI->Description, MapperInterface::CompatLevel[MI->Compatibility]);
@@ -659,19 +660,19 @@ const TCHAR *	OpenFileiNES (FILE *in)
 			EI.DbgOut(_T("Warning - selected ROM image specified Extended Console Type of 'PlayChoice-10'!"));
 			RI.INES_Flags &= ~0x10; // turn off the Vs flag
 			break;
-		case 0x3:	return _T("Selected ROM requires Decimal mode, which is not supported");
-		case 0x4:	return _T("Selected ROM requires VT01 (monochrome), which is not supported");
-		case 0x5:	return _T("Selected ROM requires VT01 (STN), which is not supported");
-		case 0x6:	return _T("Selected ROM requires VT02, which is not supported");
-		case 0x7:	return _T("Selected ROM requires VT03, which is not supported");
-		case 0x8:	return _T("Selected ROM requires VT09, which is not supported");
-		case 0x9:	return _T("Selected ROM requires VT32, which is not supported");
-		case 0xA:	return _T("Selected ROM requires VT369, which is not supported");
-		case 0xB:	return _T("Selected ROM requires UMC UM6578, which is not supported");
-		case 0xC:	return _T("Unrecognized Extended Console Type 0xC");
-		case 0xD:	return _T("Unrecognized Extended Console Type 0xD");
-		case 0xE:	return _T("Unrecognized Extended Console Type 0xE");
-		case 0xF:	return _T("Unrecognized Extended Console Type 0xF");
+		case 0x3:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0x4:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0x5:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0x6:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0x7:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0x8:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0x9:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0xA:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0xB:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0xC:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0xD:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0xE:	return Lang::GetString(LANG_ERR_ROM_INVALID);
+		case 0xF:	return Lang::GetString(LANG_ERR_ROM_INVALID);
 		}
 	}
 
@@ -739,7 +740,7 @@ const TCHAR *	OpenFileUNIF (FILE *in)
 
 	fread(&Signature, 4, 1, in);
 	if (Signature != MKID('UNIF'))
-		return _T("UNIF header signature not found!");
+		return Lang::GetString(LANG_ERR_ROM_UNIF);
 
 	fseek(in, 28, SEEK_CUR);	// skip "expansion area"
 
@@ -840,10 +841,10 @@ const TCHAR *	OpenFileUNIF (FILE *in)
 	// check for size overflow, but don't immediately return
 	// since we need to clean up after this other stuff too
 	if (PRGsize > MAX_PRGROM_SIZE * 0x1000)
-		error = _T("PRG ROM is too large! Increase MAX_PRGROM_SIZE and recompile!");
+		error = Lang::GetString(LANG_ERR_ROM_INVALID);
 
 	if (CHRsize > MAX_CHRROM_SIZE * 0x400)
-		error = _T("CHR ROM is too large! Increase MAX_CHRROM_SIZE and recompile!");
+		error = Lang::GetString(LANG_ERR_ROM_INVALID);
 
 	PRGSizeROM = (PRGsize / 0x1000) + ((PRGsize % 0x1000) ? 1 : 0);
 	CHRSizeROM = (CHRsize / 0x400) + ((CHRsize % 0x400) ? 1 : 0);
@@ -878,7 +879,7 @@ const TCHAR *	OpenFileUNIF (FILE *in)
 	if (!MapperInterface::LoadMapper(&RI))
 	{
 		static TCHAR err[1024];
-		_stprintf(err, _T("UNIF boardset \"%hs\" not supported!"), RI.UNIF_BoardName);
+		_stprintf(err, Lang::GetString(LANG_ERR_ROM_MAPPER), 0);
 		return err;
 	}
 
@@ -907,7 +908,7 @@ const TCHAR *	OpenFileFDS (FILE *in)
 
 	fread(&Header, 4, 1, in);
 	if (Header != MKID('FDS\x1a'))
-		return _T("FDS header signature not found!");
+		return Lang::GetString(LANG_ERR_ROM_FDS_HEADER);
 	fread(&numSides, 1, 1, in);
 	fseek(in, 11, SEEK_CUR);
 
@@ -916,7 +917,7 @@ const TCHAR *	OpenFileFDS (FILE *in)
 
 	// pre-divide by 2, because the upper half of PRG ROM is used to store the backup copy for saving changes
 	if (RI.FDS_NumSides > (MAX_PRGROM_SIZE >> 1) / 16)
-		return _T("FDS image is too large! Increase MAX_PRGROM_SIZE and recompile!");
+		return Lang::GetString(LANG_ERR_ROM_INVALID);
 
 	for (i = 0; i < numSides; i++)
 		fread(PRG_ROM[i << 4], 1, 65500, in);
@@ -929,7 +930,7 @@ const TCHAR *	OpenFileFDS (FILE *in)
 	CHRSizeRAM = 0x8; // and 8KB of CHR RAM
 
 	if (!MapperInterface::LoadMapper(&RI))
-		return _T("Famicom Disk System support not found!");
+		return Lang::GetString(LANG_ERR_MAPPER_NOTFOUND);
 
 	EI.DbgOut(_T("FDS file loaded: %s - %s"), MI->Description, MapperInterface::CompatLevel[MI->Compatibility]);
 	EI.DbgOut(_T("Data length: %i disk side(s)"), RI.FDS_NumSides);
@@ -948,9 +949,9 @@ const TCHAR *	OpenFileNSF (FILE *in)
 	fseek(in, 0, SEEK_SET);
 	fread(Header, 1, 128, in);
 	if (memcmp(Header, "NESM\x1a", 5))
-		return _T("NSF header signature not found!");
+		return Lang::GetString(LANG_ERR_ROM_NSF);
 	if (Header[5] != 1)
-		return _T("This NSF version is not supported!");
+		return Lang::GetString(LANG_ERR_ROM_NSF);
 
 	RI.ROMType = ROM_NSF;
 	RI.NSF_DataSize = ROMlen;
@@ -975,7 +976,7 @@ const TCHAR *	OpenFileNSF (FILE *in)
 	RI.NSF_Copyright[31] = 0;
 
 	if (ROMlen > MAX_PRGROM_SIZE * 0x1000)
-		return _T("NSF is too large! Increase MAX_PRGROM_SIZE and recompile!");
+		return Lang::GetString(LANG_ERR_ROM_INVALID);
 
 	if (memcmp(RI.NSF_InitBanks, "\0\0\0\0\0\0\0\0", 8))
 	{
@@ -1007,7 +1008,7 @@ const TCHAR *	OpenFileNSF (FILE *in)
 	}
 
 	if (!MapperInterface::LoadMapper(&RI))
-		return _T("NSF support not found!");
+		return Lang::GetString(LANG_ERR_ROM_NSF);
 	EI.DbgOut(_T("NSF loaded: %s - %s"), MI->Description, MapperInterface::CompatLevel[MI->Compatibility]);
 	EI.DbgOut(_T("Data length: %iKB"), RI.NSF_DataSize >> 10);
 	return NULL;
