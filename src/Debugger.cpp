@@ -17,6 +17,7 @@
 #include "Genie.h"
 #include "States.h"
 #include <vector>
+#include "Lang.h"
 #include <algorithm>
 
 #ifdef	ENABLE_DEBUGGER
@@ -38,48 +39,76 @@ struct tBreakpoint
 	{
 		switch (type)
 		{
-		case DEBUG_BREAK_EXEC:
+				case DEBUG_BREAK_EXEC:
 			if (addr_start == addr_end)
-				_stprintf(desc, _T("Exec: $%04X"), addr_start);
-			else	_stprintf(desc, _T("Exec: $%04X-$%04X"), addr_start, addr_end);
+				_stprintf(desc, Lang::GetString(LANG_DBG_BREAK_EXEC), addr_start);
+			else
+			{
+				TCHAR fmt[64];
+				_stprintf(fmt, _T("%s-%s"),
+					Lang::GetString(LANG_DBG_BREAK_EXEC),
+					_T("$%04X"));
+				_stprintf(desc, fmt, addr_start, addr_end);
+			}
 			break;
-		case DEBUG_BREAK_READ:
+				case DEBUG_BREAK_READ:
 			if (addr_start == addr_end)
-				_stprintf(desc, _T("Read: $%04X"), addr_start);
-			else	_stprintf(desc, _T("Read: $%04X-$%04X"), addr_start, addr_end);
+				_stprintf(desc, Lang::GetString(LANG_DBG_BREAK_READ), addr_start);
+			else
+			{
+				TCHAR fmt[64];
+				_stprintf(fmt, _T("%s-%s"),
+					Lang::GetString(LANG_DBG_BREAK_READ),
+					_T("$%04X"));
+				_stprintf(desc, fmt, addr_start, addr_end);
+			}
 			break;
-		case DEBUG_BREAK_WRITE:
+				case DEBUG_BREAK_WRITE:
 			if (addr_start == addr_end)
-				_stprintf(desc, _T("Write: $%04X"), addr_start);
-			else	_stprintf(desc, _T("Write: $%04X-$%04X"), addr_start, addr_end);
+				_stprintf(desc, Lang::GetString(LANG_DBG_BREAK_WRITE), addr_start);
+			else
+			{
+				TCHAR fmt[64];
+				_stprintf(fmt, _T("%s-%s"),
+					Lang::GetString(LANG_DBG_BREAK_WRITE),
+					_T("$%04X"));
+				_stprintf(desc, fmt, addr_start, addr_end);
+			}
 			break;
-		case DEBUG_BREAK_READ | DEBUG_BREAK_WRITE:
+				case DEBUG_BREAK_READ | DEBUG_BREAK_WRITE:
 			if (addr_start == addr_end)
-				_stprintf(desc, _T("Access: $%04X"), addr_start);
-			else	_stprintf(desc, _T("Access: $%04X-$%04X"), addr_start, addr_end);
+				_stprintf(desc, Lang::GetString(LANG_DBG_BREAK_ACCESS), addr_start);
+			else
+			{
+				TCHAR fmt[64];
+				_stprintf(fmt, _T("%s-%s"),
+					Lang::GetString(LANG_DBG_BREAK_ACCESS),
+					_T("$%04X"));
+				_stprintf(desc, fmt, addr_start, addr_end);
+			}
 			break;
-		case DEBUG_BREAK_OPCODE:
-			_stprintf(desc, _T("Opcode: $%02X"), opcode);
+				case DEBUG_BREAK_OPCODE:
+			_stprintf(desc, Lang::GetString(LANG_DBG_BREAK_OPCODE), opcode);
 			break;
-		case DEBUG_BREAK_NMI:
-			_stprintf(desc, _T("Interrupt: NMI"));
+				case DEBUG_BREAK_NMI:
+			_stprintf(desc, _T("%s"), Lang::GetString(LANG_DBG_BREAK_NMI));
 			break;
-		case DEBUG_BREAK_IRQ:
-			_stprintf(desc, _T("Interrupt: IRQ"));
+				case DEBUG_BREAK_IRQ:
+			_stprintf(desc, _T("%s"), Lang::GetString(LANG_DBG_BREAK_IRQ));
 			break;
-		case DEBUG_BREAK_BRK:
-			_stprintf(desc, _T("Interrupt: BRK"));
+				case DEBUG_BREAK_BRK:
+			_stprintf(desc, _T("%s"), Lang::GetString(LANG_DBG_BREAK_BRK));
 			break;
-		case DEBUG_BREAK_SCANLINE:
-			_stprintf(desc, _T("Scanline: %i"), scanline - 1);
+				case DEBUG_BREAK_SCANLINE:
+			_stprintf(desc, Lang::GetString(LANG_DBG_BREAK_SCANLINE), scanline - 1);
 			break;
-		default:
-			_stprintf(desc, _T("UNDEFINED"));
+				default:
+			_stprintf(desc, _T("%s"), Lang::GetString(LANG_DBG_BREAK_UNDEF));
 			break;
 		}
-		if (enabled)
-			_tcscat(desc, _T(" (+)"));
-		else	_tcscat(desc, _T(" (-)"));
+				if (enabled)
+			_tcscat(desc, Lang::GetString(LANG_DBG_BREAK_ENABLED));
+		else	_tcscat(desc, Lang::GetString(LANG_DBG_BREAK_DISABLED));
 	}
 };
 	
