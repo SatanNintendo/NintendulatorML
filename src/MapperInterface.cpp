@@ -17,6 +17,7 @@
 # include "GFX.h"
 # include "Genie.h"
 # include "Debugger.h"
+# include "Lang.h"
 #endif	/* NSFPLAYER */
 
 EmulatorInterface EI;
@@ -549,7 +550,7 @@ void	Init (void)
 			ThisDLL->dInst = LoadLibrary(Tmp);
 			if (!ThisDLL->dInst)
 			{
-				DbgOut(_T("Failed to load %s - not a valid DLL file!"), Data.cFileName);
+				DbgOut(Lang::GetString(LANG_ERR_MAPPER_LOAD), Data.cFileName);
 				continue;
 			}
 			ThisDLL->LoadDLL = (FLoadMapperDLL)GetProcAddress(ThisDLL->dInst, "LoadMapperDLL");
@@ -566,13 +567,13 @@ void	Init (void)
 				}
 				else
 				{
-					DbgOut(_T("Failed to load mapper pack %s - version mismatch!"), Data.cFileName);
+					DbgOut(Lang::GetString(LANG_ERR_MAPPER_VERSION), Data.cFileName);
 					FreeLibrary(ThisDLL->dInst);
 				}
 			}
 			else
 			{
-				DbgOut(_T("Failed to load %s - not a valid mapper pack!"), Data.cFileName);
+				DbgOut(Lang::GetString(LANG_ERR_MAPPER_LOAD), Data.cFileName);
 				FreeLibrary(ThisDLL->dInst);
 			}
 		}	while (FindNextFile(Handle, &Data));
@@ -580,7 +581,7 @@ void	Init (void)
 	}
 	delete ThisDLL;
 	if (MapperDLLs == NULL)
-		MessageBox(hMainWnd, _T("Fatal error: unable to locate any mapper DLLs!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MAPPER_NOTFOUND), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 #else	/* NSFPLAYER */
 	DI = NULL;
 	dInst = LoadLibrary(_T("Plugins\\nsf.dll"));
@@ -593,19 +594,19 @@ void	Init (void)
 			DI = LoadDLL(mod.hMainWindow, &EI, CurrentMapperInterface);
 			if (!DI)
 			{
-				MessageBox(mod.hMainWindow, _T("Fatal error: NSF.DLL reported version mismatch!"), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
+				MessageBox(mod.hMainWindow, Lang::GetString(LANG_ERR_MAPPER_VERSION), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
 				FreeLibrary(dInst);
 				dInst = NULL;
 			}
 		}
 		else
 		{
-			MessageBox(mod.hMainWindow, _T("Fatal error: NSF.DLL is not a valid mapper pack!"), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(mod.hMainWindow, Lang::GetString(LANG_ERR_MAPPER_LOAD), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
 			FreeLibrary(dInst);
 			dInst = NULL;
 		}
 	}
-	else	MessageBox(mod.hMainWindow, _T("Fatal error: unable to load NSF.DLL!"), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
+	else	MessageBox(mod.hMainWindow, Lang::GetString(LANG_ERR_MAPPER_LOAD), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
 #endif	/* !NSFPLAYER */
 	ZeroMemory(&EI, sizeof(EI));
 	ZeroMemory(&RI, sizeof(RI));
