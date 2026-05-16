@@ -2,6 +2,7 @@
  * Copyright (C) QMT Productions
  */
 
+#include "Lang.h"
 #include "stdafx.h"
 #include "Nintendulator.h"
 #include "resource.h"
@@ -100,14 +101,14 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Data = _tfopen(filename, _T("rb"));
 			if (Data == NULL)
 			{
-				MessageBox(hDlg, _T("Unable to open movie file!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_OPEN), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 				break;
 			}
 
 			fread(buf, 1, 4, Data);
 			if (memcmp(buf, "NSS\x1a", 4))
 			{
-				MessageBox(hDlg, _T("Invalid movie file selected!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_INVALID), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 				fclose(Data);
 				break;
 			}
@@ -115,7 +116,7 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 			version_id = States::LoadVersion(Data);
 			if ((version_id < STATES_MIN_VERSION) || (version_id > STATES_CUR_VERSION))
 			{
-				MessageBox(hDlg, _T("Invalid or unsupported movie version!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_VERSION), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 				fclose(Data);
 				break;
 			}
@@ -124,7 +125,7 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 			fread(buf, 1, 4, Data);
 			if (memcmp(buf, "NMOV", 4))
 			{
-				MessageBox(hDlg, _T("This is not a valid Nintendulator movie file!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_INVALID), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 				fclose(Data);
 				break;
 			}
@@ -183,7 +184,7 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 					EndDialog(hDlg, 2);
 				else	EndDialog(hDlg, 1);
 			}
-			else	MessageBox(hDlg, _T("Unable to open movie file!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			else	MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_OPEN), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			return TRUE;
 		case IDCANCEL:
 			EndDialog(hDlg, 0);
@@ -221,7 +222,7 @@ void	Play (void)
 	fread(buf, 1, 4, Data);
 	if (memcmp(buf, "NSS\x1a", 4))
 	{
-		MessageBox(hMainWnd, _T("Invalid movie file selected!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_INVALID), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 		fclose(Data);
 		return;
 	}
@@ -229,7 +230,7 @@ void	Play (void)
 	int version_id = States::LoadVersion(Data);
 	if ((version_id < STATES_MIN_VERSION) || (version_id > STATES_CUR_VERSION))
 	{
-		MessageBox(hMainWnd, _T("Invalid or unsupported movie version!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_VERSION), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 		fclose(Data);
 		return;
 	}
@@ -238,7 +239,7 @@ void	Play (void)
 
 	if (memcmp(buf, "NMOV", 4))
 	{
-		MessageBox(hMainWnd, _T("This is not a valid Nintendulator movie recording!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_INVALID), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 		fclose(Data);
 		return;
 	}
@@ -474,7 +475,7 @@ INT_PTR	CALLBACK	MovieRecordProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lP
 					EndDialog(hDlg, 2);
 				else	EndDialog(hDlg, 1);
 			}
-			else	MessageBox(hDlg, _T("Unable to create movie file!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			else	MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_OPEN), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			return TRUE;
 		case IDCANCEL:
 			EndDialog(hDlg, 0);
@@ -708,7 +709,7 @@ unsigned char	LoadInput (void)
 	if (Pos >= Len)
 	{
 		if (Pos == Len)
-			PrintTitlebar(_T("Movie stopped."));
+			PrintTitlebar(Lang::GetString(LANG_MSG_MOVIE_STOPPED));
 		else	PrintTitlebar(_T("Unexpected EOF in movie!"));
 		EndMovie();
 	}
