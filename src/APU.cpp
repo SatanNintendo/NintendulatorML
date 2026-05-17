@@ -1060,7 +1060,7 @@ void	Start (void)
 	if (FAILED(DirectSound->CreateSoundBuffer(&DSBD, &PrimaryBuffer, NULL)))
 	{
 		Stop();
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, _T("Sound buffer error!"), _T("Nintendulator"), MB_OK);
 		return;
 	}
 
@@ -1074,13 +1074,13 @@ void	Start (void)
 	if (FAILED(PrimaryBuffer->SetFormat(&WFX)))
 	{
 		Stop();
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_FORMAT), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, _T("Sound format error!"), _T("Nintendulator"), MB_OK);
 		return;
 	}
 	if (FAILED(PrimaryBuffer->Play(0, 0, DSBPLAY_LOOPING)))
 	{
 		Stop();
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, _T("Sound buffer error!"), _T("Nintendulator"), MB_OK);
 		return;
 	}
 
@@ -1091,10 +1091,10 @@ void	Start (void)
 	if (FAILED(DirectSound->CreateSoundBuffer(&DSBD, &Buffer, NULL)))
 	{
 		Stop();
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, _T("Sound buffer error!"), _T("Nintendulator"), MB_OK);
 		return;
 	}
-	EI.DbgOut(Lang::GetString(LANG_MSG_APU_DISABLED));
+	EI.DbgOut(_T("APU disabled."));
 #endif	/* !NSFPLAYER */
 }
 
