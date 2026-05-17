@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-2022   # самый стабильный сейчас
 
     strategy:
       matrix:
@@ -18,23 +18,24 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
-    - name: Build Win32 + x64
+    - name: Retarget and Build
       run: |
-        echo "Building ${{ matrix.platform }}..."
-        
-        msbuild msvc140/Nintendulator.vcxproj /t:Rebuild /m:2 `
+        # Принудительно ставим рабочий SDK
+        $projPath = "msvc140/Nintendulator.vcxproj"
+        (Get-Content $projPath) -replace '<WindowsTargetPlatformVersion>.*?</WindowsTargetPlatformVersion>', '<WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>' | Set-Content $projPath
+        (Get-Content $projPath) -replace 'v140', 'v143' | Set-Content $projPath
+
+        msbuild msvc140/Nintendulator.vcxproj /t:Rebuild `
           /p:Configuration=Release `
           /p:Platform=${{ matrix.platform }} `
-          /p:PlatformToolset=v140 `
-          /p:WindowsTargetPlatformVersion=10.0 `
-          /p:UseMultiToolTask=true `
-          /verbosity:normal
+          /p:PlatformToolset=v143 `
+          /p:WindowsTargetPlatformVersion=10.0.22621.0
 
     - name: Prepare release
       run: |
         New-Item -ItemType Directory -Force -Path release
         Copy-Item "msvc140/${{ matrix.platform }}/Release/*.exe" release/ -Force
-        Get-ChildItem -Recurse -Filter *.dll | Copy-Item -Destination release/ -Force
+        Get-ChildItem -Recurse *.dll | Copy-Item -Destination release/ -Force
         Copy-Item Lang release/Lang -Recurse -Force
 
     - name: Upload artifact
