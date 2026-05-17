@@ -1,8 +1,7 @@
 name: Build NintendulatorML
 
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,16 +26,24 @@ jobs:
           /p:PlatformToolset=v143 `
           /p:WindowsTargetPlatformVersion=10.0
 
-    - name: Show generated files
+    - name: Create release folder
       run: |
-        Get-ChildItem -Recurse *.exe
-        Get-ChildItem -Recurse *.dll
+        New-Item -ItemType Directory -Force -Path release
+
+    - name: Copy executable
+      run: |
+        Copy-Item "msvc140/${{ matrix.platform }}/Release/*.exe" release/ -Force
+
+    - name: Copy DLL files
+      run: |
+        Get-ChildItem -Recurse *.dll | Copy-Item -Destination release/ -Force
+
+    - name: Copy Lang folder
+      run: |
+        Copy-Item Lang release/Lang -Recurse -Force
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: NintendulatorML-${{ matrix.platform }}
-        path: |
-          **/*.exe
-          **/*.dll
-          Lang/*.lng
+        path: release
