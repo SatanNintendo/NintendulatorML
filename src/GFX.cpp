@@ -56,7 +56,6 @@ HWND hGFX;
 HDC hDC;
 
 int NTSChue;
-int NTSChue;
 
 void	Init (void)
 {
