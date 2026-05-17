@@ -940,7 +940,7 @@ int	MAPINT	IntRead (int Bank, int Addr)
 		if (FAILED(action))\
 		{\
 			SoundOFF();\
-						MessageBox(hMainWnd, errormsg, Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);\
+			MessageBox(hMainWnd, errormsg, Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);\
 			return;\
 		}\
 	}\
@@ -982,7 +982,7 @@ void	SetRegion (void)
 		Frame::CycleTable = FrameCyclesNTSC;
 		break;
 	default:
-		EI.DbgOut(_T("Invalid APU region selected!"));
+		EI.DbgOut(Lang::GetString(LANG_ERR_APU_FORMAT));
 		break;
 	}
 #ifndef	NSFPLAYER
@@ -1020,13 +1020,13 @@ void	Init (void)
 	if (FAILED(DirectSoundCreate(&DSDEVID_DefaultPlayback, &DirectSound, NULL)))
 	{
 		Destroy();
-				MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_DIRECTSOUND), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_DIRECTSOUND), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 	if (FAILED(DirectSound->SetCooperativeLevel(hMainWnd, DSSCL_PRIORITY)))
 	{
 		Destroy();
-				MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_DIRECTSOUND), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_DIRECTSOUND), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 #endif	/* !NSFPLAYER */
@@ -1060,7 +1060,7 @@ void	Start (void)
 	if (FAILED(DirectSound->CreateSoundBuffer(&DSBD, &PrimaryBuffer, NULL)))
 	{
 		Stop();
-				MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 
@@ -1074,13 +1074,13 @@ void	Start (void)
 	if (FAILED(PrimaryBuffer->SetFormat(&WFX)))
 	{
 		Stop();
-				MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_FORMAT), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 	if (FAILED(PrimaryBuffer->Play(0, 0, DSBPLAY_LOOPING)))
 	{
 		Stop();
-				MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 
@@ -1091,10 +1091,10 @@ void	Start (void)
 	if (FAILED(DirectSound->CreateSoundBuffer(&DSBD, &Buffer, NULL)))
 	{
 		Stop();
-				MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
-	EI.DbgOut(_T("Created %iHz %i bit audio buffer, %i frames (%i bytes per frame)"), WFX.nSamplesPerSec, WFX.wBitsPerSample, DSBD.dwBufferBytes / LockSize, LockSize);
+	EI.DbgOut(Lang::GetString(LANG_MSG_APU_DISABLED));
 #endif	/* !NSFPLAYER */
 }
 
@@ -1176,11 +1176,11 @@ void	SoundON (void)
 		if (!Buffer)
 			return;
 	}
-	Try(Buffer->Lock(0, 0, &bufPtr, &bufBytes, NULL, 0, DSBLOCK_ENTIREBUFFER), _T("Error locking sound buffer (Clear)"));
+	Try(Buffer->Lock(0, 0, &bufPtr, &bufBytes, NULL, 0, DSBLOCK_ENTIREBUFFER), Lang::GetString(LANG_ERR_APU_BUFFER));
 	ZeroMemory(bufPtr, bufBytes);
-	Try(Buffer->Unlock(bufPtr, bufBytes, NULL, 0), _T("Error unlocking sound buffer (Clear)"));
+	Try(Buffer->Unlock(bufPtr, bufBytes, NULL, 0), Lang::GetString(LANG_ERR_APU_BUFFER));
 	isEnabled = TRUE;
-	Try(Buffer->Play(0, 0, DSBPLAY_LOOPING), _T("Unable to start playing buffer"));
+	Try(Buffer->Play(0, 0, DSBPLAY_LOOPING), Lang::GetString(LANG_ERR_APU_BUFFER));
 	next_pos = 0;
 }
 
@@ -1503,7 +1503,7 @@ void	Run (void)
 			if (!isEnabled)
 				break;
 			Sleep(1);
-			Try(Buffer->GetCurrentPosition(&rpos, &wpos), _T("Error getting audio position"));
+			Try(Buffer->GetCurrentPosition(&rpos, &wpos), Lang::GetString(LANG_ERR_APU_BUFFER));
 			rpos /= LockSize;
 			wpos /= LockSize;
 			if (wpos < rpos)
@@ -1511,9 +1511,9 @@ void	Run (void)
 		} while ((rpos <= next_pos) && (next_pos <= wpos));
 		if (isEnabled)
 		{
-			Try(Buffer->Lock(next_pos * LockSize, LockSize, &bufPtr, &bufBytes, NULL, 0, 0), _T("Error locking sound buffer"));
+			Try(Buffer->Lock(next_pos * LockSize, LockSize, &bufPtr, &bufBytes, NULL, 0, 0), Lang::GetString(LANG_ERR_APU_BUFFER));
 			memcpy(bufPtr, buffer, bufBytes);
-			Try(Buffer->Unlock(bufPtr, bufBytes, NULL, 0), _T("Error unlocking sound buffer"));
+			Try(Buffer->Unlock(bufPtr, bufBytes, NULL, 0), Lang::GetString(LANG_ERR_APU_BUFFER));
 			next_pos = (next_pos + 1) % FRAMEBUF;
 		}
 	}
