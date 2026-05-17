@@ -5,22 +5,22 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-2022   # ← более доступный раннер
 
     strategy:
       matrix:
         platform: [Win32, x64]
 
     steps:
-    - name: Checkout
+    - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
-    - name: Build with VS2015 toolset
+    - name: Build project
       run: |
-        msbuild msvc140/Nintendulator.vcxproj /t:Rebuild /m `
+        msbuild msvc140/Nintendulator.vcxproj /t:Rebuild `
           /p:Configuration=Release `
           /p:Platform=${{ matrix.platform }} `
           /p:PlatformToolset=v140 `
@@ -33,7 +33,7 @@ jobs:
         Get-ChildItem -Recurse *.dll | Copy-Item -Destination release/ -Force
         Copy-Item Lang release/Lang -Recurse -Force
 
-    - name: Upload
+    - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: NintendulatorML-${{ matrix.platform }}
