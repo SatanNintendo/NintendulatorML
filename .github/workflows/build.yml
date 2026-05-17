@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2019  # v141_xp уже установлен на этом образе
 
     steps:
     - name: Checkout code
@@ -14,31 +14,18 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
-    - name: Install v141_xp toolset (Windows XP/7 support)
-      shell: powershell
-      run: |
-        # Устанавливаем компонент поддержки XP/7 через VS installer
-        $installer = "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe"
-        & $installer modify `
-          --installPath "C:\Program Files\Microsoft Visual Studio\2022\Enterprise" `
-          --add Microsoft.VisualStudio.Component.WinXP `
-          --quiet --norestart
-        # Даём время завершиться
-        Start-Sleep -Seconds 30
-
-    - name: Build project (Windows 7 compatible)
+    - name: Build project
       run: |
         msbuild msvc140/Nintendulator.vcxproj `
           /p:Configuration=Release `
           /p:Platform=Win32 `
           /p:PlatformToolset=v141_xp `
-          /p:WindowsTargetPlatformVersion=8.1 `
-          /p:PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_WIN32_WINNT=0x0601;_CRT_SECURE_NO_WARNINGS;_CRT_NON_CONFORMING_SWPRINTFS"
+          /p:WindowsTargetPlatformVersion=8.1
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: NintendulatorML-Win7Compatible
+        name: NintendulatorML
         path: |
           Win32/Release/*.exe
           Win32/Release/*.dll
