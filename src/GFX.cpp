@@ -189,7 +189,7 @@ void	Start (void)
 {
 	if (FAILED(DirectDrawCreateEx(NULL, (LPVOID *)&DirectDraw, IID_IDirectDraw7, NULL)))
 	{
-		MessageBox(hMainWnd, _T("Failed to initialize DirectDraw 7"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, _T("Failed to initialize DirectDraw 7"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 		return;
 	}
 	if (Fullscreen)
@@ -221,7 +221,7 @@ void	Start (void)
 		if (!widths_ok[0])
 		{
 			// no need to Stop() here, since we didn't start anything yet
-			MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			Fullscreen = FALSE;
 			Start();
 			return;
@@ -230,7 +230,7 @@ void	Start (void)
 		if (FAILED(DirectDraw->SetCooperativeLevel(hMainWnd, DDSCL_EXCLUSIVE | DDSCL_FULLSCREEN | DDSCL_NOWINDOWCHANGES)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to set fullscreen cooperative level! Returning to Windowed mode..."), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, _T("Failed to set fullscreen cooperative level! Returning to Windowed mode..."), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			Fullscreen = FALSE;
 			Start();
 			return;
@@ -247,7 +247,7 @@ void	Start (void)
 				{
 					// not even 640x480 worked!
 					Stop();
-					MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device! Reverting to Windowed mode..."), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+					MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device! Reverting to Windowed mode..."), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 					Fullscreen = FALSE;
 					// drop to windowed
 					Start();
@@ -266,7 +266,7 @@ void	Start (void)
 		if (FAILED(DirectDraw->SetCooperativeLevel(hMainWnd, DDSCL_NORMAL)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to set DirectDraw cooperative level"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, _T("Failed to set DirectDraw cooperative level"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			return;
 		}
 	}
@@ -283,7 +283,7 @@ void	Start (void)
 		if (FAILED(DirectDraw->CreateSurface(&SurfDesc, &PrimarySurf, NULL)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to create primary surface"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, _T("Failed to create primary surface"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			return;
 		}
 
@@ -291,7 +291,7 @@ void	Start (void)
 		if (FAILED(PrimarySurf->GetAttachedSurface(&SurfDesc.ddsCaps, &SecondarySurf)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to get secondary surface"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, _T("Failed to get secondary surface"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			return;
 		}
 	}
@@ -303,7 +303,7 @@ void	Start (void)
 		if (FAILED(DirectDraw->CreateSurface(&SurfDesc, &PrimarySurf, NULL)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to create primary surface"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, _T("Failed to create primary surface"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			return;
 		}
 
@@ -323,7 +323,7 @@ void	Start (void)
 		if (FAILED(DirectDraw->CreateSurface(&SurfDesc, &SecondarySurf, NULL)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to create secondary surface"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, _T("Failed to create secondary surface"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			return;
 		}
 	}
@@ -333,21 +333,21 @@ void	Start (void)
 		if (FAILED(DirectDraw->CreateClipper(0, &Clipper, NULL)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to create clipper"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, _T("Failed to create clipper"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			return;
 		}
 
 		if (FAILED(Clipper->SetHWnd(0, hMainWnd)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to set clipper window"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, _T("Failed to set clipper window"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			return;
 		}
 
 		if (FAILED(PrimarySurf->SetClipper(Clipper)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to assign clipper to primary surface"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, _T("Failed to assign clipper to primary surface"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 			return;
 		}
 	}
@@ -358,7 +358,7 @@ void	Start (void)
 	if (FAILED(SecondarySurf->GetSurfaceDesc(&SurfDesc)))
 	{
 		Stop();
-		MessageBox(hMainWnd, _T("Failed to retrieve surface description"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, _T("Failed to retrieve surface description"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 		return;
 	}
 
@@ -373,7 +373,7 @@ void	Start (void)
 	case 32:Depth = 32;		break;
 	default:
 		Stop();
-		MessageBox(hMainWnd, _T("Invalid bit depth detected!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, _T("Invalid bit depth detected!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 		return;			break;
 	}
 
