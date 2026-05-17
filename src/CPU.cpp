@@ -17,6 +17,8 @@
 # include "APU.h"
 #endif	/* NSFPLAYER */
 
+#include "Lang.h"   //
+
 namespace CPU
 {
 FCPURead	ReadHandler[0x10];
@@ -929,7 +931,7 @@ __forceinline	void	IV_HLT (void)
 	// And neither is this, considering it's going to be followed immediately by a message box
 	EI.DbgOut(_T("HLT opcode $%02X encountered at $%04X; CPU locked"), Opcode, OpAddr);
 #ifndef	NSFPLAYER
-	MessageBox(hMainWnd, _T("Bad opcode, CPU locked"), _T("Nintendulator"), MB_OK);
+	MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CPU_BAD_OPCODE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 	NES::DoStop = STOPMODE_NOW | STOPMODE_BREAK;
 #endif	/* !NSFPLAYER */
 }
