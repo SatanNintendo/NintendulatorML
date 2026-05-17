@@ -43,9 +43,9 @@ void	SetSlot (int Slot)
 	if (tmp)
 	{
 		fclose(tmp);
-		PrintTitlebar(_T("State Selected: %i (occupied)"), Slot);
+		PrintTitlebar(Lang::GetString(LANG_MSG_STATE_SLOT), Slot);
 	}
-	else	PrintTitlebar(_T("State Selected: %i (empty)"), Slot);
+	else	PrintTitlebar(Lang::GetString(LANG_MSG_STATE_SLOT), Slot);
 }
 
 int	SaveData (FILE *out)
@@ -159,7 +159,7 @@ void	SaveState (void)
 
 	if (Genie::CodeStat & 0x80)
 	{
-		PrintTitlebar(_T("Cannot save state at the Game Genie code entry screen!"));
+		PrintTitlebar(Lang::GetString(LANG_ERR_GENIE_INVALID));
 		return;
 	}
 
@@ -181,7 +181,7 @@ void	SaveState (void)
 	fwrite(&flen, 4, 1, out);
 	fclose(out);
 
-		PrintTitlebar(Lang::GetString(LANG_MSG_STATE_SAVED), SelSlot);
+	PrintTitlebar(Lang::GetString(LANG_MSG_STATE_SAVED), SelSlot);
 	Movie::ShowFrame();
 }
 
@@ -229,7 +229,7 @@ BOOL	LoadData (FILE *in, int flen, int version_id)
 		{
 			if (RI.ROMType == ROM_FDS)
 				clen -= NES::FDSLoad(in, version_id);
-			else	EI.DbgOut(_T("Error - DISK save block found for non-FDS game!"));
+			else	EI.DbgOut(Lang::GetString(LANG_ERR_STATE_CORRUPT));
 		}
 		else if (!memcmp(csig, "MAPR", 4))
 		{
@@ -245,10 +245,10 @@ BOOL	LoadData (FILE *in, int flen, int version_id)
 		}
 		else if (!memcmp(csig, "NMOV", 4))
 			clen -= Movie::Load(in, version_id);
-		else	EI.DbgOut(_T("Unknown savestate block '%c%c%c%c' encountered!"), csig[0], csig[1], csig[2], csig[3]);
+		else	EI.DbgOut(Lang::GetString(LANG_ERR_STATE_CORRUPT));
 		if (clen != 0)
 		{
-			EI.DbgOut(_T("Savestate block '%c%c%c%c' had wrong size, off by %i!"), csig[0], csig[1], csig[2], csig[3], clen);
+			EI.DbgOut(Lang::GetString(LANG_ERR_STATE_VERSION));
 			SSOK = FALSE;			// too much, or too little
 			fseek(in, clen, SEEK_CUR);	// seek back to the block boundary
 		}
@@ -273,7 +273,7 @@ void	LoadState (void)
 	in = _tfopen(tps, _T("rb"));
 	if (!in)
 	{
-		PrintTitlebar(_T("No such save state: %i"), SelSlot);
+		PrintTitlebar(Lang::GetString(LANG_ERR_STATE_LOAD), SelSlot);
 		return;
 	}
 
@@ -281,7 +281,7 @@ void	LoadState (void)
 	if (memcmp(tpc, "NSS\x1a", 4))
 	{
 		fclose(in);
-		PrintTitlebar(_T("Not a valid savestate file: %i"), SelSlot);
+		PrintTitlebar(Lang::GetString(LANG_ERR_STATE_CORRUPT), SelSlot);
 		return;
 	}
 	version_id = LoadVersion(in);
@@ -289,7 +289,7 @@ void	LoadState (void)
 	{
 		fclose(in);
 		tpc[4] = 0;
-		PrintTitlebar(_T("Invalid or unsupported savestate version (%i): %i"), version_id, SelSlot);
+		PrintTitlebar(Lang::GetString(LANG_ERR_STATE_VERSION), version_id, SelSlot);
 		return;
 	}
 	fread(&flen, 4, 1, in);
@@ -298,7 +298,7 @@ void	LoadState (void)
 	if (!memcmp(tpc, "NMOV", 4))
 	{
 		fclose(in);
-		PrintTitlebar(_T("Selected savestate (%i) is a movie file - cannot load!"), SelSlot);
+		PrintTitlebar(Lang::GetString(LANG_ERR_MOVIE_INVALID), SelSlot);
 		return;
 	}
 	else if (!memcmp(tpc, "NREC", 4))
@@ -311,7 +311,7 @@ void	LoadState (void)
 		if (Movie::Mode)
 		{
 			fclose(in);
-			PrintTitlebar(_T("Selected savestate (%i) does not contain movie data!"), SelSlot);
+			PrintTitlebar(Lang::GetString(LANG_ERR_MOVIE_VERSION), SelSlot);
 			return;
 		}
 	}
@@ -319,7 +319,7 @@ void	LoadState (void)
 	{
 		fclose(in);
 		tpc[4] = 0;
-		PrintTitlebar(_T("Selected savestate (%i) has unknown type! (%hs)"), SelSlot, tpc);
+		PrintTitlebar(Lang::GetString(LANG_ERR_STATE_CORRUPT), SelSlot, tpc);
 		return;
 	}
 
@@ -332,7 +332,7 @@ void	LoadState (void)
 	NES::GameGenie = FALSE;			// If the savestate uses it, it'll turn back on shortly
 	CheckMenuItem(hMenu, ID_CPU_GAMEGENIE, MF_UNCHECKED);
 
-		if (LoadData(in, flen, version_id))
+	if (LoadData(in, flen, version_id))
 		PrintTitlebar(Lang::GetString(LANG_MSG_STATE_LOADED), SelSlot);
 	else	PrintTitlebar(Lang::GetString(LANG_ERR_STATE_LOAD), SelSlot);
 	Movie::ShowFrame();
