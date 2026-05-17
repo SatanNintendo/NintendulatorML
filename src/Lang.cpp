@@ -4,6 +4,7 @@
  */
 #include "stdafx.h"
 #include "Lang.h"
+#include "Nintendulator.h"
 #include <fstream>
 #include <algorithm>
 
@@ -154,9 +155,6 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     // Language
     _T("Language Changed"),
     _T("Language has been changed. Some elements will update on restart."),
-
-    // CPU
-    _T("Bad opcode, CPU locked"),
 };
 
 // ============================================================
@@ -321,8 +319,7 @@ static const KeyMapping KeyMap[] =
     { L"ABOUT_TEXT",                LANG_ABOUT_TEXT },
     { L"LANG_CHANGED",              LANG_LANG_CHANGED },
     { L"LANG_CHANGED_MSG",          LANG_LANG_CHANGED_MSG },
-    { L"ERR_CPU_BAD_OPCODE",        LANG_ERR_CPU_BAD_OPCODE },
-        { NULL, LANG_STRING_COUNT }
+    { NULL, LANG_STRING_COUNT }
 };
 
 // ============================================================
