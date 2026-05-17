@@ -118,9 +118,9 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Game Genie code applied"),
 
     // Маппер
-    _T("Failed to load mapper DLL"),
+    _T("Failed to load %s - not a valid DLL file!"),
     _T("Mapper not found"),
-    _T("Mapper version mismatch"),
+    _T("Failed to load mapper pack %s - version mismatch!"),
 
     // Отладчик
     _T("Exec: $%04X"),
