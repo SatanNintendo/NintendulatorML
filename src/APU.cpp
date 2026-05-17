@@ -1193,7 +1193,9 @@ INT_PTR	CALLBACK	VolumeConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM l
 
 	switch (uMsg)
 	{
-	case WM_INITDIALOG:
+		case WM_INITDIALOG:
+		SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_SOUND));
+		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_OK));
 		for (i = 0; i < 7; i++)
 		{
 			SendDlgItemMessage(hDlg, vol_sliders[i], TBM_SETRANGE, FALSE, MAKELONG(0, 100));
