@@ -113,9 +113,9 @@ ERR_GENIE_TOO_MANY=Too many Game Genie codes (maximum 3)
 MSG_GENIE_APPLIED=Game Genie code applied
 
 # === Mapper ===
-ERR_MAPPER_LOAD=Failed to load mapper DLL
+ERR_MAPPER_LOAD=Failed to load %s - not a valid DLL file!
 ERR_MAPPER_NOTFOUND=Mapper not found
-ERR_MAPPER_VERSION=Mapper version mismatch
+ERR_MAPPER_VERSION=Failed to load mapper pack %s - version mismatch!
 
 # === Debugger breakpoints ===
 DBG_BREAK_EXEC=Exec: $%04X
