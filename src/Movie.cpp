@@ -876,12 +876,12 @@ int	Load (FILE *in, int version_id)
 			if (Controllers::Port2->MovLen)
 			{
 				readArray(Controllers::Port2->MovData, Controllers::Port2->MovLen);
-				tpi -= Controllers::Port2::MovLen;
+				tpi -= Controllers::Port2->MovLen;
 			}
 			if (Controllers::PortExp->MovLen)
 			{
-				readArray(Controllers::PortExp::MovData, Controllers::PortExp::MovLen);
-				tpi -= Controllers::PortExp::MovLen;
+				readArray(Controllers::PortExp->MovData, Controllers::PortExp->MovLen);
+				tpi -= Controllers::PortExp->MovLen;
 			}
 			if (NES::HasMenu)
 			{
@@ -893,7 +893,7 @@ int	Load (FILE *in, int version_id)
 		Controllers::Port2->Frame(MOV_PLAY);
 		Controllers::PortExp->Frame(MOV_PLAY);
 		if ((Cmd) && (MI) && (MI->Config))
-			MI::Config(CFG_CMD,Cmd);
+			MI->Config(CFG_CMD,Cmd);
 	}
 	else
 	{
