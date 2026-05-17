@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019    # ← Важно! Здесь ещё есть v140
+    runs-on: windows-2022
 
     strategy:
       matrix:
@@ -18,28 +18,23 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
-    - name: Build project
+    - name: Build project (v143)
       run: |
         msbuild msvc140/Nintendulator.vcxproj `
           /p:Configuration=Release `
           /p:Platform=${{ matrix.platform }} `
-          /p:PlatformToolset=v140 `
-          /p:WindowsTargetPlatformVersion=10.0
+          /p:PlatformToolset=v143 `
+          /p:WindowsTargetPlatformVersion=10.0 `
+          /p:UseEnv=true
 
     - name: Create release folder
       run: |
         New-Item -ItemType Directory -Force -Path release
 
-    - name: Copy executable
+    - name: Copy executable + files
       run: |
         Copy-Item "msvc140/${{ matrix.platform }}/Release/*.exe" release/ -Force
-
-    - name: Copy DLL files
-      run: |
         Get-ChildItem -Recurse *.dll | Copy-Item -Destination release/ -Force
-
-    - name: Copy Lang folder
-      run: |
         Copy-Item Lang release/Lang -Recurse -Force
 
     - name: Upload artifact
