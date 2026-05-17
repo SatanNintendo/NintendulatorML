@@ -550,7 +550,7 @@ void	Init (void)
 			ThisDLL->dInst = LoadLibrary(Tmp);
 			if (!ThisDLL->dInst)
 			{
-				DbgOut(Lang::GetString(LANG_ERR_MAPPER_LOAD), Data.cFileName);
+				DbgOut(_T("Error loading mapper DLL!"), Data.cFileName);
 				continue;
 			}
 			ThisDLL->LoadDLL = (FLoadMapperDLL)GetProcAddress(ThisDLL->dInst, "LoadMapperDLL");
@@ -567,13 +567,13 @@ void	Init (void)
 				}
 				else
 				{
-					DbgOut(Lang::GetString(LANG_ERR_MAPPER_VERSION), Data.cFileName);
+					DbgOut(_T("Incorrect mapper DLL version!"), Data.cFileName);
 					FreeLibrary(ThisDLL->dInst);
 				}
 			}
 			else
 			{
-				DbgOut(Lang::GetString(LANG_ERR_MAPPER_LOAD), Data.cFileName);
+				DbgOut(_T("Error loading mapper DLL!"), Data.cFileName);
 				FreeLibrary(ThisDLL->dInst);
 			}
 		}	while (FindNextFile(Handle, &Data));
@@ -581,7 +581,7 @@ void	Init (void)
 	}
 	delete ThisDLL;
 	if (MapperDLLs == NULL)
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MAPPER_NOTFOUND), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, _T("No mapper DLLs found!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 #else	/* NSFPLAYER */
 	DI = NULL;
 	dInst = LoadLibrary(_T("Plugins\\nsf.dll"));
@@ -594,19 +594,19 @@ void	Init (void)
 			DI = LoadDLL(mod.hMainWindow, &EI, CurrentMapperInterface);
 			if (!DI)
 			{
-				MessageBox(mod.hMainWindow, Lang::GetString(LANG_ERR_MAPPER_VERSION), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
+				MessageBox(mod.hMainWindow, _T("Incorrect mapper DLL version!"), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
 				FreeLibrary(dInst);
 				dInst = NULL;
 			}
 		}
 		else
 		{
-			MessageBox(mod.hMainWindow, Lang::GetString(LANG_ERR_MAPPER_LOAD), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(mod.hMainWindow, _T("Error loading mapper DLL!"), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
 			FreeLibrary(dInst);
 			dInst = NULL;
 		}
 	}
-	else	MessageBox(mod.hMainWindow, Lang::GetString(LANG_ERR_MAPPER_LOAD), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
+	else	MessageBox(mod.hMainWindow, _T("Error loading mapper DLL!"), _T("in_nintendulator"), MB_OK | MB_ICONERROR);
 #endif	/* !NSFPLAYER */
 	ZeroMemory(&EI, sizeof(EI));
 	ZeroMemory(&RI, sizeof(RI));
