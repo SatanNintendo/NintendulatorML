@@ -111,12 +111,12 @@ void	Start (void)
 	{
 		if (FAILED(hr = DirectDraw->SetCooperativeLevel(hMainWnd, DDSCL_EXCLUSIVE | DDSCL_FULLSCREEN)))
 		{
-			MessageBox(hMainWnd, _T("Failed to set fullscreen cooperative level!\n\nError code: 0x%08X"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_DIRECTDRAW), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 		if (FAILED(hr = DirectDraw->SetDisplayMode(640, 480, 16, 0, 0)))
 		{
-			MessageBox(hMainWnd, _T("Failed to initialize DirectDraw 7"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_DIRECTDRAW), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 		memset(&ddsd, 0, sizeof(ddsd));
@@ -126,14 +126,14 @@ void	Start (void)
 		ddsd.dwBackBufferCount = 1;
 		if (FAILED(hr = DirectDraw->CreateSurface(&ddsd, &PrimarySurface, NULL)))
 		{
-			MessageBox(hMainWnd, _T("Failed to create primary surface"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_SURFACE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 		memset(&ddscaps, 0, sizeof(ddscaps));
 		ddscaps.dwCaps = DDSCAPS_BACKBUFFER;
 		if (FAILED(hr = PrimarySurface->GetAttachedSurface(&ddscaps, &SecondarySurface)))
 		{
-			MessageBox(hMainWnd, _T("Failed to get secondary surface"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_SURFACE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 	}
@@ -141,7 +141,7 @@ void	Start (void)
 	{
 		if (FAILED(hr = DirectDraw->SetCooperativeLevel(hMainWnd, DDSCL_NORMAL)))
 		{
-			MessageBox(hMainWnd, _T("Failed to set DirectDraw cooperative level"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_DIRECTDRAW), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 		memset(&ddsd, 0, sizeof(ddsd));
@@ -150,7 +150,7 @@ void	Start (void)
 		ddsd.ddsCaps.dwCaps = DDSCAPS_PRIMARYSURFACE;
 		if (FAILED(hr = DirectDraw->CreateSurface(&ddsd, &PrimarySurface, NULL)))
 		{
-			MessageBox(hMainWnd, _T("Failed to create primary surface"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_SURFACE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 		memset(&ddsd, 0, sizeof(ddsd));
@@ -161,22 +161,22 @@ void	Start (void)
 		ddsd.dwHeight = 240 * SizeMult;
 		if (FAILED(hr = DirectDraw->CreateSurface(&ddsd, &SecondarySurface, NULL)))
 		{
-			MessageBox(hMainWnd, _T("Failed to create secondary surface"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_SURFACE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 		if (FAILED(hr = DirectDraw->CreateClipper(0, &Clipper, NULL)))
 		{
-			MessageBox(hMainWnd, _T("Failed to create clipper"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_SURFACE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 		if (FAILED(hr = Clipper->SetHWnd(0, hMainWnd)))
 		{
-			MessageBox(hMainWnd, _T("Failed to set clipper window"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_SURFACE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 		if (FAILED(hr = PrimarySurface->SetClipper(Clipper)))
 		{
-			MessageBox(hMainWnd, _T("Failed to assign clipper to primary surface"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_SURFACE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 	}
@@ -184,13 +184,13 @@ void	Start (void)
 	ddpf.dwSize = sizeof(ddpf);
 	if (FAILED(hr = SecondarySurface->GetPixelFormat(&ddpf)))
 	{
-		MessageBox(hMainWnd, _T("Failed to retrieve surface description"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_SURFACE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return;
 	}
 	Depth = ddpf.dwRGBBitCount;
 	if ((Depth != 16) && (Depth != 24) && (Depth != 32))
 	{
-		MessageBox(hMainWnd, _T("Invalid bit depth detected!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_MODE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return;
 	}
 	if (Fullscreen)
@@ -248,7 +248,7 @@ void	Repaint (void)
 		{
 			if (FAILED(hr = PrimarySurface->Flip(NULL, DDFLIP_WAIT)))
 			{
-				MessageBox(hMainWnd, _T("Failed to flip to primary surface!\n\nError code: 0x%08X"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+				MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_RENDER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 				return;
 			}
 		}
@@ -256,7 +256,7 @@ void	Repaint (void)
 		{
 			if (FAILED(hr = PrimarySurface->Blt(&DrawRect, SecondarySurface, NULL, DDBLT_WAIT, NULL)))
 			{
-				MessageBox(hMainWnd, _T("Failed to flip to primary surface!\n\nError code: 0x%08X"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+				MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_RENDER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 				return;
 			}
 		}
@@ -269,13 +269,13 @@ void	Try (void)
 	hDDraw = LoadLibrary(_T("ddraw.dll"));
 	if (!hDDraw)
 	{
-		MessageBox(hMainWnd, _T("Fatal error: unable to load DirectDraw DLL!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_DIRECTDRAW), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return;
 	}
 	DirectDrawCreateEx = (HRESULT (WINAPI *)(GUID *, LPVOID *, REFIID, IUnknown *))GetProcAddress(hDDraw, "DirectDrawCreateEx");
 	if (!DirectDrawCreateEx)
 	{
-		MessageBox(hMainWnd, _T("Fatal error: unable to locate entry point for DirectDrawCreateEx!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_DIRECTDRAW), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return;
 	}
 	if (FAILED(DirectDrawCreateEx(NULL, (void **)&DirectDraw, IID_IDirectDraw7, NULL)))
@@ -333,11 +333,11 @@ void	LoadPalette (PALETTE NewPal)
 	}
 	else	if (NewPal < PALETTE_MAX)
 	{
-		_stprintf(filename, _T("%s\%s.pal"), ProgPath, PaletteNames[NewPal]);
+		_stprintf(filename, _T("%s\\%s.pal"), ProgPath, PaletteNames[NewPal]);
 		PalFile = _tfopen(filename, _T("rb"));
 		if (!PalFile)
 		{
-			MessageBox(hMainWnd, _T("Unable to load the specified palette!\n\nError code: 0x%08X"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_PALETTE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 		fread(Palette[NewPal], 1, 192, PalFile);
@@ -357,7 +357,7 @@ void	SavePalette (PALETTE PalNum)
 	TCHAR filename[MAX_PATH];
 	if ((PalNum < 0) || (PalNum > 7))
 		return;
-	_stprintf(filename, _T("%s\%s.pal"), ProgPath, PaletteNames[PalNum]);
+	_stprintf(filename, _T("%s\\%s.pal"), ProgPath, PaletteNames[PalNum]);
 	PalFile = _tfopen(filename, _T("wb"));
 	if (!PalFile)
 		return;
@@ -525,7 +525,7 @@ INT_PTR	CALLBACK	PaletteConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM 
 						GenerateRGB(PalIdx);
 						LoadPalette(PalIdx);
 					}
-					else	MessageBox(hDlg, _T("Selected file is not a valid palette!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+					else	MessageBox(hDlg, Lang::GetString(LANG_ERR_GFX_PALETTE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 					fclose(in);
 				}
 			}
@@ -563,7 +563,7 @@ INT_PTR	CALLBACK	VideoConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lP
 	switch (uMsg)
 	{
 	case WM_INITDIALOG:
-		    SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_VIDEO));
+		SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_VIDEO));
 		for (i = 0; i < 4; i++)
 		{
 			SendDlgItemMessage(hDlg, IDC_VID_MODE, CB_ADDSTRING, 0, (LPARAM)Modes[i]);
