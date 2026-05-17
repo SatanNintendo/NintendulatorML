@@ -18,20 +18,25 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
-    - name: Build project (v143 + compatible SDK)
+    - name: Retarget project to available SDK
+      run: |
+        # Force available SDK version
+        $proj = "msvc140/Nintendulator.vcxproj"
+        (Get-Content $proj) -replace '10\.0\.\d+', '10.0.22621.0' | Set-Content $proj
+        (Get-Content $proj) -replace 'v140', 'v143' | Set-Content $proj
+
+    - name: Build project
       run: |
         msbuild msvc140/Nintendulator.vcxproj `
           /p:Configuration=Release `
           /p:Platform=${{ matrix.platform }} `
           /p:PlatformToolset=v143 `
-          /p:WindowsTargetPlatformVersion=10.0.22621.0 `
-          /p:UseEnv=true
+          /p:WindowsTargetPlatformVersion=10.0.22621.0
 
     - name: Create release folder
-      run: |
-        New-Item -ItemType Directory -Force -Path release
+      run: New-Item -ItemType Directory -Force -Path release
 
-    - name: Copy files to release
+    - name: Copy files
       run: |
         Copy-Item "msvc140/${{ matrix.platform }}/Release/*.exe" release/ -Force
         Get-ChildItem -Recurse *.dll | Copy-Item -Destination release/ -Force
