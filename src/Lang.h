@@ -158,6 +158,8 @@ enum LangStringID
     LANG_LANG_CHANGED,
     LANG_LANG_CHANGED_MSG,
 
+    // ---------- CPU ----------
+    LANG_ERR_CPU_BAD_OPCODE,
     LANG_STRING_COUNT   // ← всегда последним!
 };
 
