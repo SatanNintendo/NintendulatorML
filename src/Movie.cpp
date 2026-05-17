@@ -43,13 +43,13 @@ void	FindBlock (void)
 		fread(&len, 4, 1, Data);
 	}
 	if (feof(Data))
-		EI.DbgOut(_T("ERROR - Failed to locate movie data block!"));
+		EI.DbgOut(Lang::GetString(LANG_ERR_MOVIE_OPEN));
 }
 
 void	ShowFrame (void)
 {
 	if (Mode)
-		EI.StatusOut(_T("Frame %i"), Pos / FrameLen);
+		EI.StatusOut(Lang::GetString(LANG_MSG_MOVIE_PLAYING), Pos / FrameLen);
 }
 
 INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -78,7 +78,7 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 			ofn.lStructSize = sizeof(ofn);
 			ofn.hwndOwner = hDlg;
 			ofn.hInstance = hInst;
-			ofn.lpstrFilter = _T("Nintendulator Movie (*.NMV)\0") _T("*.NMV\0") _T("\0");
+			ofn.lpstrFilter = Lang::GetString(LANG_OPEN_ROM_FILTER);
 			ofn.lpstrCustomFilter = NULL;
 			ofn.nFilterIndex = 1;
 			ofn.lpstrFile = filename;
@@ -101,14 +101,14 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 			Data = _tfopen(filename, _T("rb"));
 			if (Data == NULL)
 			{
-				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_OPEN), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_OPEN), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 				break;
 			}
 
 			fread(buf, 1, 4, Data);
 			if (memcmp(buf, "NSS\x1a", 4))
 			{
-				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_INVALID), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_INVALID), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 				fclose(Data);
 				break;
 			}
@@ -116,7 +116,7 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 			version_id = States::LoadVersion(Data);
 			if ((version_id < STATES_MIN_VERSION) || (version_id > STATES_CUR_VERSION))
 			{
-				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_VERSION), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_VERSION), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 				fclose(Data);
 				break;
 			}
@@ -125,7 +125,7 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 			fread(buf, 1, 4, Data);
 			if (memcmp(buf, "NMOV", 4))
 			{
-				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_INVALID), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+				MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_INVALID), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 				fclose(Data);
 				break;
 			}
@@ -166,7 +166,7 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 			}
 			fread(&Len, 4, 1, Data);
 			SetDlgItemInt(hDlg, IDC_MOVIE_PLAY_FRAMES, Len, FALSE);
-			_stprintf(str, _T("Length: %i:%02i.%02i"), Len / 3600, (Len % 3600) / 60, Len % 60);
+			_stprintf(str, Lang::GetString(LANG_MSG_MOVIE_PLAYING), Len / 3600, (Len % 3600) / 60, Len % 60);
 			SetDlgItemText(hDlg, IDC_MOVIE_PLAY_LENGTH, str);
 
 			fclose(Data);
@@ -184,7 +184,7 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 					EndDialog(hDlg, 2);
 				else	EndDialog(hDlg, 1);
 			}
-			else	MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_OPEN), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			else	MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_OPEN), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return TRUE;
 		case IDCANCEL:
 			EndDialog(hDlg, 0);
@@ -203,7 +203,7 @@ void	Play (void)
 
 	if (Mode)
 	{
-		MessageBox(hMainWnd, _T("A movie is already open!"), _T("Nintendulator"), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_MSG_MOVIE_RECORDING), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 
@@ -222,7 +222,7 @@ void	Play (void)
 	fread(buf, 1, 4, Data);
 	if (memcmp(buf, "NSS\x1a", 4))
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_INVALID), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_INVALID), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		fclose(Data);
 		return;
 	}
@@ -230,7 +230,7 @@ void	Play (void)
 	int version_id = States::LoadVersion(Data);
 	if ((version_id < STATES_MIN_VERSION) || (version_id > STATES_CUR_VERSION))
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_VERSION), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_VERSION), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		fclose(Data);
 		return;
 	}
@@ -239,7 +239,7 @@ void	Play (void)
 
 	if (memcmp(buf, "NMOV", 4))
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_INVALID), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_INVALID), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		fclose(Data);
 		return;
 	}
@@ -284,7 +284,7 @@ void	Play (void)
 	// load savestate BEFORE enabling playback, so we don't try to load the NMOV block
 	if (!States::LoadData(Data, len, version_id))
 	{
-		MessageBox(hMainWnd, _T("Failed to load movie!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_OPEN), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		fclose(Data);
 		return;
 	}
@@ -329,7 +329,7 @@ void	Play (void)
 	if (NES::HasMenu)
 		FrameLen++;
 	if (FrameLen != (buf[3] & 0x3F))
-		MessageBox(hMainWnd, _T("The frame size specified in this movie is incorrect! This movie may not play properly!"), _T("Nintendulator"), MB_OK | MB_ICONWARNING);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_VERSION), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONWARNING);
 
 	fread(&ReRecords, 4, 1, Data);
 	fread(&len, 4, 1, Data);
@@ -344,7 +344,7 @@ void	Play (void)
 		if (Description)
 		{
 			MultiByteToWideChar(CP_UTF8, 0, desc, len, Description, len2);
-			EI.DbgOut(_T("Description: \"%s\""), Description);
+			EI.DbgOut(Lang::GetString(LANG_MSG_MOVIE_PLAYING), Description);
 			delete[] Description;
 			Description = NULL;
 		}
@@ -353,10 +353,10 @@ void	Play (void)
 #endif	 /* UNICODE */
 		delete[] desc;
 	}
-	EI.DbgOut(_T("Re-record count: %i"), ReRecords);
+	EI.DbgOut(Lang::GetString(LANG_MSG_MOVIE_RECORDING), ReRecords);
 	Pos = 0;
 	fread(&Len, 4, 1, Data);
-	EI.DbgOut(_T("Length: %i:%02i.%02i"), Len / 3600, (Len % 3600) / 60, Len % 60);
+	EI.DbgOut(Lang::GetString(LANG_MSG_MOVIE_PLAYING), Len / 3600, (Len % 3600) / 60, Len % 60);
 
 	EnableMenuItem(hMenu, ID_MISC_PLAYMOVIE, MF_GRAYED);
 	EnableMenuItem(hMenu, ID_MISC_RECORDMOVIE, MF_GRAYED);
@@ -414,7 +414,7 @@ INT_PTR	CALLBACK	MovieRecordProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lP
 			ofn.lStructSize = sizeof(ofn);
 			ofn.hwndOwner = hDlg;
 			ofn.hInstance = hInst;
-			ofn.lpstrFilter = _T("Nintendulator Movie (*.NMV)\0") _T("*.NMV\0") _T("\0");
+			ofn.lpstrFilter = Lang::GetString(LANG_OPEN_ROM_FILTER);
 			ofn.lpstrCustomFilter = NULL;
 			ofn.nFilterIndex = 1;
 			ofn.lpstrFile = filename;
@@ -475,7 +475,7 @@ INT_PTR	CALLBACK	MovieRecordProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lP
 					EndDialog(hDlg, 2);
 				else	EndDialog(hDlg, 1);
 			}
-			else	MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_OPEN), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			else	MessageBox(hDlg, Lang::GetString(LANG_ERR_MOVIE_OPEN), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return TRUE;
 		case IDCANCEL:
 			EndDialog(hDlg, 0);
@@ -493,13 +493,13 @@ void	Record (void)
 
 	if (Mode)
 	{
-		MessageBox(hMainWnd, _T("A movie is already open!"), _T("Nintendulator"), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_MSG_MOVIE_RECORDING), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 
 	if ((NES::CurRegion != NES::REGION_NTSC) && (NES::CurRegion != NES::REGION_PAL))
 	{
-		MessageBox(hMainWnd, _T("Invalid region selected - movies currently support only NTSC and PAL timing"), _T("Nintendulator"), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MOVIE_VERSION), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 
@@ -613,7 +613,7 @@ void	EndMovie (void)
 {
 	if (!Mode)
 	{
-		MessageBox(hMainWnd, _T("No movie is currently active!"), _T("Nintendulator"), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_MSG_MOVIE_STOPPED), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 	if (Mode & MOV_RECORD)
@@ -646,7 +646,7 @@ void	EndMovie (void)
 		fread(tps, 4, 1, Data);		len -= 4;	// read movie data len
 		fseek(Data, -4, SEEK_CUR);		// rewind
 		if (len != Pos)
-			EI.DbgOut(_T("Error - movie length mismatch!"));
+			EI.DbgOut(Lang::GetString(LANG_ERR_MOVIE_VERSION));
 		fwrite(&len, 4, 1, Data);		// 3: terminate the movie data
 		// fseek(Data, len, SEEK_CUR);
 		// TODO - truncate the file to this point
@@ -654,9 +654,9 @@ void	EndMovie (void)
 	fclose(Data);
 
 	if (Mode & MOV_PLAY)
-		EI.DbgOut(_T("Movie playback stopped."));
+		EI.DbgOut(Lang::GetString(LANG_MSG_MOVIE_STOPPED));
 	if (Mode & MOV_RECORD)
-		EI.DbgOut(_T("Movie recording stopped."));
+		EI.DbgOut(Lang::GetString(LANG_MSG_MOVIE_STOPPED));
 
 	Mode = 0;
 
@@ -710,7 +710,7 @@ unsigned char	LoadInput (void)
 	{
 		if (Pos == Len)
 			PrintTitlebar(Lang::GetString(LANG_MSG_MOVIE_STOPPED));
-		else	PrintTitlebar(_T("Unexpected EOF in movie!"));
+		else	PrintTitlebar(Lang::GetString(LANG_ERR_MOVIE_INVALID));
 		EndMovie();
 	}
 	if (Controllers::Port1->MovLen)
