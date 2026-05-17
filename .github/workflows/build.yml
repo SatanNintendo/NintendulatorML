@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019  # v141_xp уже установлен на этом образе
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -19,8 +19,8 @@ jobs:
         msbuild msvc140/Nintendulator.vcxproj `
           /p:Configuration=Release `
           /p:Platform=Win32 `
-          /p:PlatformToolset=v141_xp `
-          /p:WindowsTargetPlatformVersion=8.1
+          /p:PlatformToolset=v143 `
+          /p:WindowsTargetPlatformVersion=10.0
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
