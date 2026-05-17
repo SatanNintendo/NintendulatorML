@@ -8,6 +8,10 @@ jobs:
   build:
     runs-on: windows-2022
 
+    strategy:
+      matrix:
+        platform: [Win32, x64]
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -19,19 +23,19 @@ jobs:
       run: |
         msbuild msvc140/Nintendulator.vcxproj `
           /p:Configuration=Release `
-          /p:Platform=Win32 `
+          /p:Platform=${{ matrix.platform }} `
           /p:PlatformToolset=v143 `
           /p:WindowsTargetPlatformVersion=10.0
 
     - name: Show generated files
       run: |
-        dir /s *.exe
-        dir /s *.dll
+        Get-ChildItem -Recurse *.exe
+        Get-ChildItem -Recurse *.dll
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: NintendulatorML
+        name: NintendulatorML-${{ matrix.platform }}
         path: |
           **/*.exe
           **/*.dll
