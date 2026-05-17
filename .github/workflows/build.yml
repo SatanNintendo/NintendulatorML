@@ -1,14 +1,15 @@
 name: Build NintendulatorML
 
 on:
-  workflow_dispatch:  # ← только ручной запуск!
+  push:
+  pull_request:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Setup MSBuild
@@ -16,17 +17,22 @@ jobs:
 
     - name: Build project
       run: |
-        msbuild msvc140/Nintendulator.vcxproj `
-          /p:Configuration=Release `
-          /p:Platform=Win32 `
-          /p:PlatformToolset=v143 `
+        msbuild msvc140/Nintendulator.vcxproj ^
+          /p:Configuration=Release ^
+          /p:Platform=Win32 ^
+          /p:PlatformToolset=v143 ^
           /p:WindowsTargetPlatformVersion=10.0
+
+    - name: Show generated files
+      run: |
+        dir /s *.exe
+        dir /s *.dll
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: NintendulatorML
         path: |
-          Win32/Release/*.exe
-          Win32/Release/*.dll
+          **/*.exe
+          **/*.dll
           Lang/*.lng
