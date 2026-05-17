@@ -12,7 +12,7 @@
 
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
-// Target Windows 7 and later (required for Windows 7 compatibility)
+// Target Windows 7 and later
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0601
 #endif
@@ -20,13 +20,14 @@
 #define WINVER 0x0601
 #endif
 
-#pragma warning(disable:4100)	// "unreferenced formal parameter" - functions which don't use every parameter (mostly controllers)
-#pragma warning(disable:4127)	// "conditional expression is constant" - do { ... } while (false);
-#pragma warning(disable:4201)	// "nonstandard extension used : nameless struct/union" - used everywhere in DirectX
-#pragma warning(disable:4244)	// "conversion from 'foo' to 'bar', possible loss of data" - I/O handlers all pass 'int' values and get crammed into bytes/shorts
+#pragma warning(disable:4100)	// "unreferenced formal parameter"
+#pragma warning(disable:4127)	// "conditional expression is constant"
+#pragma warning(disable:4201)	// "nonstandard extension used : nameless struct/union"
+#pragma warning(disable:4244)	// "conversion from 'foo' to 'bar', possible loss of data"
 
 // Windows Header Files:
 #include <windows.h>
+#include <shellapi.h>
 #include <shlobj.h>
 #include <shlwapi.h>
 
@@ -37,7 +38,6 @@
 #include <tchar.h>
 
 // Local Header Files
-
 #include <stdio.h>
 #include <commdlg.h>
 #include <time.h>
