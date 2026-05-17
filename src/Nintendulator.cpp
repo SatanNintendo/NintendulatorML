@@ -699,7 +699,9 @@ INT_PTR CALLBACK About (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
-	case WM_INITDIALOG:
+		case WM_INITDIALOG:
+		SetWindowText(hDlg, Lang::GetString(LANG_ABOUT_TITLE));
+		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_OK));
 		return TRUE;
 	case WM_COMMAND:
 		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
