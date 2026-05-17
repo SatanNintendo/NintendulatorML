@@ -49,7 +49,7 @@ void	FindBlock (void)
 void	ShowFrame (void)
 {
 	if (Mode)
-		EI.StatusOut(Lang::GetString(LANG_MSG_MOVIE_PLAYING), Pos / FrameLen);
+		EI.StatusOut(_T("Frame %i"), Pos / FrameLen);
 }
 
 INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -78,7 +78,7 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 			ofn.lStructSize = sizeof(ofn);
 			ofn.hwndOwner = hDlg;
 			ofn.hInstance = hInst;
-			ofn.lpstrFilter = Lang::GetString(LANG_OPEN_ROM_FILTER);
+			ofn.lpstrFilter = _T("Nintendulator Movie (*.NMV)\0") _T("*.NMV\0") _T("\0");
 			ofn.lpstrCustomFilter = NULL;
 			ofn.nFilterIndex = 1;
 			ofn.lpstrFile = filename;
@@ -166,7 +166,7 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 			}
 			fread(&Len, 4, 1, Data);
 			SetDlgItemInt(hDlg, IDC_MOVIE_PLAY_FRAMES, Len, FALSE);
-			_stprintf(str, Lang::GetString(LANG_MSG_MOVIE_PLAYING), Len / 3600, (Len % 3600) / 60, Len % 60);
+			_stprintf(str, _T("Length: %i:%02i.%02i"), Len / 3600, (Len % 3600) / 60, Len % 60);
 			SetDlgItemText(hDlg, IDC_MOVIE_PLAY_LENGTH, str);
 
 			fclose(Data);
@@ -344,7 +344,7 @@ void	Play (void)
 		if (Description)
 		{
 			MultiByteToWideChar(CP_UTF8, 0, desc, len, Description, len2);
-			EI.DbgOut(Lang::GetString(LANG_MSG_MOVIE_PLAYING), Description);
+			EI.DbgOut(_T("Description: \"%s\""), Description);
 			delete[] Description;
 			Description = NULL;
 		}
@@ -353,10 +353,10 @@ void	Play (void)
 #endif	 /* UNICODE */
 		delete[] desc;
 	}
-	EI.DbgOut(Lang::GetString(LANG_MSG_MOVIE_RECORDING), ReRecords);
+	EI.DbgOut(_T("Re-record count: %i"), ReRecords);
 	Pos = 0;
 	fread(&Len, 4, 1, Data);
-	EI.DbgOut(Lang::GetString(LANG_MSG_MOVIE_PLAYING), Len / 3600, (Len % 3600) / 60, Len % 60);
+	EI.DbgOut(_T("Length: %i:%02i.%02i"), Len / 3600, (Len % 3600) / 60, Len % 60);
 
 	EnableMenuItem(hMenu, ID_MISC_PLAYMOVIE, MF_GRAYED);
 	EnableMenuItem(hMenu, ID_MISC_RECORDMOVIE, MF_GRAYED);
@@ -414,7 +414,7 @@ INT_PTR	CALLBACK	MovieRecordProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lP
 			ofn.lStructSize = sizeof(ofn);
 			ofn.hwndOwner = hDlg;
 			ofn.hInstance = hInst;
-			ofn.lpstrFilter = Lang::GetString(LANG_OPEN_ROM_FILTER);
+			ofn.lpstrFilter = _T("Nintendulator Movie (*.NMV)\0") _T("*.NMV\0") _T("\0");
 			ofn.lpstrCustomFilter = NULL;
 			ofn.nFilterIndex = 1;
 			ofn.lpstrFile = filename;
@@ -710,7 +710,7 @@ unsigned char	LoadInput (void)
 	{
 		if (Pos == Len)
 			PrintTitlebar(Lang::GetString(LANG_MSG_MOVIE_STOPPED));
-		else	PrintTitlebar(Lang::GetString(LANG_ERR_MOVIE_INVALID));
+		else	PrintTitlebar(_T("Unexpected EOF in movie!"));
 		EndMovie();
 	}
 	if (Controllers::Port1->MovLen)
@@ -876,12 +876,12 @@ int	Load (FILE *in, int version_id)
 			if (Controllers::Port2->MovLen)
 			{
 				readArray(Controllers::Port2->MovData, Controllers::Port2->MovLen);
-				tpi -= Controllers::Port2->MovLen;
+				tpi -= Controllers::Port2::MovLen;
 			}
 			if (Controllers::PortExp->MovLen)
 			{
-				readArray(Controllers::PortExp->MovData, Controllers::PortExp->MovLen);
-				tpi -= Controllers::PortExp->MovLen;
+				readArray(Controllers::PortExp::MovData, Controllers::PortExp::MovLen);
+				tpi -= Controllers::PortExp::MovLen;
 			}
 			if (NES::HasMenu)
 			{
@@ -893,7 +893,7 @@ int	Load (FILE *in, int version_id)
 		Controllers::Port2->Frame(MOV_PLAY);
 		Controllers::PortExp->Frame(MOV_PLAY);
 		if ((Cmd) && (MI) && (MI->Config))
-			MI->Config(CFG_CMD,Cmd);
+			MI::Config(CFG_CMD,Cmd);
 	}
 	else
 	{
