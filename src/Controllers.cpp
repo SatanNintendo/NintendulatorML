@@ -137,7 +137,9 @@ INT_PTR	CALLBACK	ControllerProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 	int i;
 	switch (uMsg)
 	{
-	case WM_INITDIALOG:
+		case WM_INITDIALOG:
+		SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_CONTROLLERS));
+		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_OK));
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT1, CB_RESETCONTENT, 0, 0);
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT2, CB_RESETCONTENT, 0, 0);
 		for (i = 0; i < STD_MAX; i++)
