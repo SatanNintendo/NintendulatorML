@@ -10,6 +10,7 @@
 #include "CPU.h"
 #include "PPU.h"
 #include "Genie.h"
+#include "Lang.h"
 
 namespace Genie
 {
