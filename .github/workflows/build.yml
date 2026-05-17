@@ -17,10 +17,10 @@ jobs:
 
     - name: Build project
       run: |
-        msbuild msvc140/Nintendulator.vcxproj ^
-          /p:Configuration=Release ^
-          /p:Platform=Win32 ^
-          /p:PlatformToolset=v143 ^
+        msbuild msvc140/Nintendulator.vcxproj `
+          /p:Configuration=Release `
+          /p:Platform=Win32 `
+          /p:PlatformToolset=v143 `
           /p:WindowsTargetPlatformVersion=10.0
 
     - name: Show generated files
