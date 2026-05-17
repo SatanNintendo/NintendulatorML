@@ -76,7 +76,10 @@ int TitlebarDelay;
 void BuildLanguageMenu(HMENU hMainMenu)
 {
 	int cnt = GetMenuItemCount(hMainMenu);
-	HMENU hLangMenu = GetSubMenu(hMainMenu, cnt - 2); // Language before Help
+		int langPos = GetMenuItemCount(hMainMenu) - 2;
+	HMENU hLangMenu = GetSubMenu(hMainMenu, langPos);
+	if (!hLangMenu)
+		hLangMenu = GetSubMenu(hMainMenu, GetMenuItemCount(hMainMenu) - 1); // fallback
 	if (!hLangMenu) return;
 
 	while (GetMenuItemCount(hLangMenu) > 0)
@@ -128,12 +131,15 @@ int APIENTRY _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpC
 	if (!InitInstance (hInstance, nCmdShow))
 		return FALSE;
 
-	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_NINTENDULATOR));
+		hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_NINTENDULATOR));
 
 	// Initialize language system
 	Lang::Init(hInstance);
-	BuildLanguageMenu(GetMenu(hMainWnd));
-	Lang::UpdateMenu(GetMenu(hMainWnd));
+	
+	// IMPORTANT FIX: Wait until window is fully created
+	UpdateWindow(hMainWnd);
+	BuildLanguageMenu(hMenu);           // используем глобальную hMenu
+	Lang::UpdateMenu(hMenu);
 
 	timeBeginPeriod(1);
 
