@@ -11,13 +11,13 @@
 #include "NES.h"
 #include "APU.h"
 #include "Debugger.h"
+#include "Lang.h"
 #include "CPU.h"
 #include "PPU.h"
 #include "GFX.h"
 #include "Genie.h"
 #include "States.h"
 #include <vector>
-#include "Lang.h"
 #include <algorithm>
 
 #ifdef	ENABLE_DEBUGGER
@@ -1758,7 +1758,7 @@ INT_PTR CALLBACK BreakpointProc (HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM 
 					(addr2 < 0x0000) || (addr2 > 0xFFFF) ||
 					(addr1 > addr2))
 				{
-					MessageBox(hwndDlg, _T("Invalid address range specified!"), _T("Breakpoint"), MB_ICONERROR);
+					MessageBox(hwndDlg, _T("Invalid address range specified!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_ICONERROR);
 					break;
 				}
 			}
@@ -1766,7 +1766,7 @@ INT_PTR CALLBACK BreakpointProc (HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM 
 			{
 				if ((opcode < 0x00) || (opcode > 0xFF))
 				{
-					MessageBox(hwndDlg, _T("Invalid opcode specified!"), _T("Breakpoint"), MB_ICONERROR);
+					MessageBox(hwndDlg, _T("Invalid opcode specified!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_ICONERROR);
 					break;
 				}
 			}
@@ -1774,7 +1774,7 @@ INT_PTR CALLBACK BreakpointProc (HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM 
 			{
 				if ((scanline < -1) || (scanline >= PPU::SLEndFrame))
 				{
-					MessageBox(hwndDlg, _T("Invalid scanline specified!"), _T("Breakpoint"), MB_ICONERROR);
+					MessageBox(hwndDlg, _T("Invalid scanline specified!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_ICONERROR);
 					break;
 				}
 				// End-of-frame scanline is converted to -1 so we don't
