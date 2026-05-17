@@ -563,6 +563,7 @@ INT_PTR	CALLBACK	VideoConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lP
 	switch (uMsg)
 	{
 	case WM_INITDIALOG:
+		    SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_VIDEO));
 		for (i = 0; i < 4; i++)
 		{
 			SendDlgItemMessage(hDlg, IDC_VID_MODE, CB_ADDSTRING, 0, (LPARAM)Modes[i]);
