@@ -12,6 +12,14 @@
 
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
+// Target Windows 7 and later (required for Windows 7 compatibility)
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0601
+#endif
+#ifndef WINVER
+#define WINVER 0x0601
+#endif
+
 #pragma warning(disable:4100)	// "unreferenced formal parameter" - functions which don't use every parameter (mostly controllers)
 #pragma warning(disable:4127)	// "conditional expression is constant" - do { ... } while (false);
 #pragma warning(disable:4201)	// "nonstandard extension used : nameless struct/union" - used everywhere in DirectX
@@ -37,4 +45,4 @@
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
-#endif /. !defined(AFX_STDAFX_H__A9DB83DB_A9FD_11D0_BFD1_444553540000__INCLUDED_)
+#endif // !defined(AFX_STDAFX_H__A9DB83DB_A9FD_11D0_BFD1_444553540000__INCLUDED_)
