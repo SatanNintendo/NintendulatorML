@@ -449,7 +449,7 @@ void Lang::UpdateMenu(HMENU hMenu)
     ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_DEBUG));
     ModifyMenu(hMenu, 5, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_LANGUAGE));
     ModifyMenu(hMenu, 6, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_HELP));
-    DrawMenuBar(GetForegroundWindow());
+    DrawMenuBar(hMainWnd);
 }
 
 void Lang::SaveToRegistry(const TCHAR *langName)
