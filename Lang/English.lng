@@ -149,3 +149,6 @@ ABOUT_TEXT=Nintendulator\nNES Emulator\n\nCopyright (C) QMT Productions
 # === Language ===
 LANG_CHANGED=Language Changed
 LANG_CHANGED_MSG=Language has been changed. Some elements will update on restart.
+
+# === CPU ===
+ERR_CPU_BAD_OPCODE=Bad opcode, CPU locked
