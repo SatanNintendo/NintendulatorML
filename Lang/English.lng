@@ -161,6 +161,7 @@ CTRL_UDLR_TEXT=&Allow simultaneous Left+Right and Up+Down
 CTRL_POV_TEXT=Configure &POV triggers as 8-way buttons
 CTRL_CONFIG=&Config
 CTRL_CLOSE=Close
+
 # === Titlebar ===
 TITLEBAR_STOPPED=Nintendulator - Stopped
 TITLEBAR_FPS_NOSKIP=Nintendulator - %i FPS (No FSkip)
@@ -195,11 +196,13 @@ OPEN_ROM_TITLE2=Load ROM
 OPEN_ROM_FILTER2=All supported files (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)\0*.NES;*.UNIF;*.UNF;*.FDS;*.NSF\0iNES ROM Images (*.NES)\0*.NES\0UNIF ROM files (*.UNIF, *.UNF)\0*.UNF;*.UNIF\0FDS Disk Images (*.FDS)\0*.FDS\0NES Sound Files (*.NSF)\0*.NSF\0\0
 OPEN_HEADER_TITLE=Edit Header
 MSG_NO_LANGUAGES=(No languages found)
+
 # === APU errors (дополнительные) ===
 ERR_APU_INIT=Failed to initialize DirectSound!
 ERR_APU_BUFFER2=Sound buffer error!
 ERR_APU_FORMAT2=Sound format error!
 MSG_APU_DISABLED2=APU disabled.
+
 # === AVI errors ===
 ERR_AVI_ERROR=AVI error %s (%08x) at %s
 ERR_AVI_NOT_RECORDING=No AVI capture is currently in progress!
@@ -209,6 +212,7 @@ ERR_AVI_FRAME_NOT_RECORDING=Error! AVI frame capture attempted while not recordi
 ERR_AVI_WRITE_VIDEO=Failed to write video to AVI!
 ERR_AVI_AUDIO_NOT_RECORDING=Error! AVI audio capture attempted while not recording!
 ERR_AVI_WRITE_AUDIO=Failed to write audio to AVI!
+
 # === NES messages ===
 MSG_NES_RELOCATE=Nintendulator was unable to fully relocate its data files to "%s".\nPlease delete the folder "%s" after relocating its contents.
 MSG_NES_LOADING=Loading file '%s'...
@@ -217,3 +221,38 @@ MSG_NES_ROM_UNLOADED=ROM unloaded.
 MSG_NES_RESET_HARD=Performing hard reset...
 MSG_NES_RESET_SOFT=Performing soft reset...
 MSG_NES_RESET_DONE=Reset complete.
+
+# === HeaderEdit dialog ===
+HDR_EDITOR_TITLE=iNES Editor
+HDR_ERR_REOPEN=Unable to reopen file! Discard changes?
+HDR_ERR_OPEN=Unable to open ROM!
+HDR_ERR_NOT_INES=Selected file is not an iNES ROM image!
+HDR_ERR_DISKDUDE=Selected ROM appears to have been corrupted by "DiskDude!" - cleaning...
+HDR_ERR_DIRTY=Unrecognized or inconsistent data detected in ROM header! Do you wish to clean it?
+
+# === Controllers ===
+CTRL_STD_UNCONNECTED=Unconnected
+CTRL_STD_STDCONTROLLER=Standard Controller
+CTRL_STD_ZAPPER=Zapper
+CTRL_STD_ARKANOID=Arkanoid Paddle
+CTRL_STD_POWERPAD=Power Pad
+CTRL_STD_FOURSCORE=Four Score (port 1 only)
+CTRL_STD_SNES=SNES Controller
+CTRL_STD_VSZAPPER=VS Unisystem Zapper
+CTRL_STD_SNESMOUSE=SNES Mouse
+CTRL_STD_FOURSCORE2=Four Score (port 2 only)
+CTRL_EXP_UNCONNECTED=Unconnected
+CTRL_EXP_FAMI4PLAY=Famicom 4-Player Adapter
+CTRL_EXP_ARKANOID=Famicom Arkanoid Paddle
+CTRL_EXP_FBKEY=Family Basic Keyboard
+CTRL_EXP_SUBORKEY=Subor Keyboard
+CTRL_EXP_FAMTRAINER=Family Trainer
+CTRL_EXP_TABLET=Oeka Kids Tablet
+ERR_CTRL_INVALID_KEY=Error - encountered invalid keyboard key ID!
+ERR_CTRL_INVALID_MOUSE=Error - encountered invalid mouse button ID!
+ERR_CTRL_DINPUT=Unable to initialize DirectInput!
+ERR_CTRL_KEYBOARD=Failed to initialize keyboard!
+ERR_CTRL_MOUSE=Failed to initialize mouse!
+ERR_CTRL_JOYSTICK=Failed to initialize joysticks!
+ERR_CTRL_COOP_MODIFY=Unable to modify device input cooperative level!
+ERR_CTRL_COOP_RESTORE=Unable to restore device input cooperative level!
