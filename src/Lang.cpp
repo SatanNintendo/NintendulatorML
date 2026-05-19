@@ -84,6 +84,14 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Unsupported audio format"),
     _T("Sound disabled"),
 
+    // Controllers dialog
+    _T("Controller Port &1:"),
+    _T("Controller Port &2:"),
+    _T("&Expansion Port:"),
+    _T("&Config"),
+    _T("&Allow simultaneous Left+Right and Up+Down"),
+    _T("Configure &POV triggers as 8-way buttons"),
+    
     // Контроллеры
     _T("Unable to initialize keyboard input device!"),
     _T("Unable to set keyboard input data format!"),
@@ -268,6 +276,12 @@ static const KeyMapping KeyMap[] =
     { L"ERR_APU_BUFFER",            LANG_ERR_APU_BUFFER },
     { L"ERR_APU_FORMAT",            LANG_ERR_APU_FORMAT },
     { L"MSG_APU_DISABLED",          LANG_MSG_APU_DISABLED },
+    { L"CONT_LABEL_PORT1",          LANG_CONT_LABEL_PORT1 },
+    { L"CONT_LABEL_PORT2",          LANG_CONT_LABEL_PORT2 },
+    { L"CONT_LABEL_EXP",            LANG_CONT_LABEL_EXP },
+    { L"CONT_CONFIG",               LANG_CONT_CONFIG },
+    { L"CONT_UDLR",                 LANG_CONT_UDLR },
+    { L"CONT_POV",                  LANG_CONT_POV },    
     { L"ERR_CTRL_KEYBOARD_INIT",    LANG_ERR_CTRL_KEYBOARD_INIT },
     { L"ERR_CTRL_KEYBOARD_FORMAT",  LANG_ERR_CTRL_KEYBOARD_FORMAT },
     { L"ERR_CTRL_KEYBOARD_LEVEL",   LANG_ERR_CTRL_KEYBOARD_LEVEL },
