@@ -332,7 +332,13 @@ static const KeyMapping KeyMap[] =
     { L"ABOUT_TEXT",                LANG_ABOUT_TEXT },
     { L"LANG_CHANGED",              LANG_LANG_CHANGED },
     { L"LANG_CHANGED_MSG",          LANG_LANG_CHANGED_MSG },
-    { L"ERR_CPU_BAD_OPCODE",        LANG_ERR_CPU_BAD_OPCODE },   // ← Добавлено
+    { L"CTRL_PORT1_LABEL",          LANG_CTRL_PORT1_LABEL },
+    { L"CTRL_PORT2_LABEL",          LANG_CTRL_PORT2_LABEL },
+    { L"CTRL_EXP_LABEL",            LANG_CTRL_EXP_LABEL },
+    { L"CTRL_UDLR",                 LANG_CTRL_UDLR },
+    { L"CTRL_POV",                  LANG_CTRL_POV },
+    { L"CTRL_CONFIG",               LANG_CTRL_CONFIG },
+    { L"CTRL_CLOSE",                LANG_CTRL_CLOSE },
     { NULL, LANG_STRING_COUNT }
 };
 
