@@ -212,6 +212,12 @@ enum LangStringID
     LANG_MSG_APU_DISABLED2,
 
     LANG_STRING_COUNT   // ← всегда последним!
+    LANG_ERR_APU_INIT,
+    LANG_ERR_APU_BUFFER2,
+    LANG_ERR_APU_FORMAT2,
+    LANG_MSG_APU_DISABLED2,
+
+    LANG_STRING_COUNT   // ← всегда последним!
 };
 
 #define LANG_MAX_STRING 1024
