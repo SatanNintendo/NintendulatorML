@@ -274,7 +274,7 @@ namespace Lang
 {
     void Init(HINSTANCE hInst);
     bool Load(const TCHAR *langName);
-    const TCHAR* GetString(LangStringID id);
+    const wchar_t* GetString(LangStringID id);
     const std::vector<std::wstring>& GetLanguageList();
     const TCHAR* GetCurrentLanguage();
     void UpdateMenu(HMENU hMenu);
