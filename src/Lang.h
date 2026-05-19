@@ -160,6 +160,16 @@ enum LangStringID
 
     // ---------- CPU ----------
     LANG_ERR_CPU_BAD_OPCODE,
+
+    // ---------- Controllers dialog labels ----------
+    LANG_CTRL_PORT1_LABEL,
+    LANG_CTRL_PORT2_LABEL,
+    LANG_CTRL_EXP_LABEL,
+    LANG_CTRL_UDLR_TEXT,
+    LANG_CTRL_POV_TEXT,
+    LANG_CTRL_CONFIG,
+    LANG_CTRL_CLOSE,
+
     LANG_STRING_COUNT   // ← всегда последним!
 };
 
