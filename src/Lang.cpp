@@ -740,12 +740,63 @@ const TCHAR* Lang::GetCurrentLanguage()
 void Lang::UpdateMenu(HMENU hMenu)
 {
     if (!hMenu) return;
+
+    // Обновляем названия основных пунктов меню
     ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_STRING | MF_POPUP,
                (UINT_PTR)GetSubMenu(hMenu, 0), GetString(LANG_MENU_FILE));
+    
+    ModifyMenu(hMenu, 1, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 1), GetString(LANG_MENU_CPU));
+    
+    ModifyMenu(hMenu, 2, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 2), GetString(LANG_MENU_PPU));
+    
+    ModifyMenu(hMenu, 3, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 3), GetString(LANG_MENU_SOUND));
+    
+    ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 4), GetString(LANG_MENU_INPUT));
+    
+    ModifyMenu(hMenu, 5, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 5), GetString(LANG_MENU_DEBUG));
+    
+    ModifyMenu(hMenu, 6, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 6), GetString(LANG_MENU_GAME));
+    
+    ModifyMenu(hMenu, 7, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 7), GetString(LANG_MENU_MISC));
+
     ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING | MF_POPUP,
                (UINT_PTR)GetSubMenu(hMenu, 8), GetString(LANG_MENU_LANGUAGE));
+    
     ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING | MF_POPUP,
                (UINT_PTR)GetSubMenu(hMenu, 9), GetString(LANG_MENU_HELP));
+
+    // === Подменю File ===
+    HMENU hFile = GetSubMenu(hMenu, 0);
+    if (hFile)
+    {
+        ModifyMenu(hFile, ID_FILE_OPEN,        MF_BYCOMMAND, ID_FILE_OPEN,        GetString(LANG_MENU_FILE_OPEN_ROM));
+        ModifyMenu(hFile, ID_FILE_HEADER,      MF_BYCOMMAND, ID_FILE_HEADER,      GetString(LANG_MENU_FILE_EDIT_HEADER));
+        ModifyMenu(hFile, ID_FILE_AUTORUN,     MF_BYCOMMAND, ID_FILE_AUTORUN,     GetString(LANG_MENU_FILE_AUTORUN));
+        ModifyMenu(hFile, ID_FILE_BROWSESAVES, MF_BYCOMMAND, ID_FILE_BROWSESAVES, GetString(LANG_MENU_FILE_BROWSE_SAVES));
+    }
+
+    // === Подменю CPU ===
+    HMENU hCPU = GetSubMenu(hMenu, 1);
+    if (hCPU)
+    {
+        ModifyMenu(hCPU, ID_CPU_RUN,         MF_BYCOMMAND, ID_CPU_RUN,        GetString(LANG_MENU_CPU_RUN));
+        ModifyMenu(hCPU, ID_CPU_STEP,        MF_BYCOMMAND, ID_CPU_STEP,       GetString(LANG_MENU_CPU_STEP));
+        ModifyMenu(hCPU, ID_CPU_STOP,        MF_BYCOMMAND, ID_CPU_STOP,       GetString(LANG_MENU_CPU_STOP));
+        ModifyMenu(hCPU, ID_CPU_SOFTRESET,   MF_BYCOMMAND, ID_CPU_SOFTRESET,  GetString(LANG_MENU_CPU_SOFTRESET));
+        ModifyMenu(hCPU, ID_CPU_HARDRESET,   MF_BYCOMMAND, ID_CPU_HARDRESET,  GetString(LANG_MENU_CPU_HARDRESET));
+        ModifyMenu(hCPU, ID_CPU_SAVESTATE,   MF_BYCOMMAND, ID_CPU_SAVESTATE,  GetString(LANG_MENU_CPU_SAVESTATE));
+        ModifyMenu(hCPU, ID_CPU_LOADSTATE,   MF_BYCOMMAND, ID_CPU_LOADSTATE,  GetString(LANG_MENU_CPU_LOADSTATE));
+        ModifyMenu(hCPU, ID_CPU_GAMEGENIE,   MF_BYCOMMAND, ID_CPU_GAMEGENIE,  GetString(LANG_MENU_CPU_GAMEGENIE));
+        ModifyMenu(hCPU, ID_CPU_BADOPS,      MF_BYCOMMAND, ID_CPU_BADOPS,     GetString(LANG_MENU_CPU_BADOPS));
+    }
+
     DrawMenuBar(hMainWnd);
 }
 
