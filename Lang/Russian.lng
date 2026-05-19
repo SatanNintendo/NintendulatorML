@@ -195,3 +195,8 @@ OPEN_ROM_TITLE2=Загрузить ROM
 OPEN_ROM_FILTER2=Все поддерживаемые файлы (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)\0*.NES;*.UNIF;*.UNF;*.FDS;*.NSF\0iNES ROM (*.NES)\0*.NES\0UNIF ROM (*.UNIF, *.UNF)\0*.UNF;*.UNIF\0FDS образы (*.FDS)\0*.FDS\0NSF файлы (*.NSF)\0*.NSF\0\0
 OPEN_HEADER_TITLE=Редактировать заголовок
 MSG_NO_LANGUAGES=Языки не найдены
+# === APU errors (дополнительные) ===
+ERR_APU_INIT=Не удалось инициализировать DirectSound!
+ERR_APU_BUFFER2=Ошибка звукового буфера!
+ERR_APU_FORMAT2=Ошибка формата звука!
+MSG_APU_DISABLED2=APU отключён.
