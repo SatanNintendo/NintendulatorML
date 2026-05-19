@@ -256,3 +256,50 @@ ERR_CTRL_MOUSE=Не удалось инициализировать мышь!
 ERR_CTRL_JOYSTICK=Не удалось инициализировать джойстики!
 ERR_CTRL_COOP_MODIFY=Не удалось изменить уровень совместного доступа устройства ввода!
 ERR_CTRL_COOP_RESTORE=Не удалось восстановить уровень совместного доступа устройства ввода!
+# === Дополнительные пункты главного меню ===
+MENU_FILE_OPEN_ROM=&Открыть ROM...
+MENU_FILE_EDIT_HEADER=Редактировать iNES &заголовок
+MENU_FILE_AUTORUN=&Автозапуск
+MENU_FILE_BROWSE_SAVES=&Просмотреть файлы сохранений
+
+MENU_CPU=&CPU
+MENU_CPU_RUN=&Запуск\tF5
+MENU_CPU_STEP=&Шаг\tF11
+MENU_CPU_STOP=&Остановить\tF12
+MENU_CPU_SOFTRESET=Мягкий &сброс
+MENU_CPU_HARDRESET=&Полный сброс
+MENU_CPU_SAVESTATE=Сохранить &состояние
+MENU_CPU_LOADSTATE=&Загрузить состояние
+MENU_CPU_PREVSTATE=Предыдущее состояние
+MENU_CPU_NEXTSTATE=Следующее состояние
+MENU_CPU_GAMEGENIE=&Game Genie...
+MENU_CPU_BADOPS=Останавливаться на &неверных опкодах
+
+MENU_PPU=&PPU
+MENU_PPU_FRAMESKIP=&Пропуск кадров
+MENU_PPU_SIZE=&Размер
+MENU_PPU_MODE=&Режим
+MENU_PPU_PALETTE=Палит&ра...
+MENU_PPU_SLOWDOWN=Замедление
+MENU_PPU_FULLSCREEN=&Полноэкранный режим\tAlt+Enter
+MENU_PPU_SCANLINES=Сканлайны
+
+MENU_SOUND=&Звук
+MENU_SOUND_ENABLED=Звук &включён
+MENU_SOUND_VOLUME=&Громкость...
+
+MENU_INPUT=&Управление
+MENU_INPUT_SETUP=&Настройка...
+
+MENU_DEBUG_STATWND=Окно &статуса
+MENU_DEBUG_DISASM=&Отладчик CPU
+MENU_DEBUG_PPUDEBUG=Отладчик &PPU
+
+MENU_GAME=&Игра
+
+MENU_MISC=&Разное
+MENU_MISC_STARTAVI=Начать захват &AVI
+MENU_MISC_STOPAVI=Остановить захват AVI
+MENU_MISC_RECORDMOVIE=&Записать муви...
+MENU_MISC_PLAYMOVIE=&Воспроизвести муви...
+MENU_MISC_STOPMOVIE=&Остановить муви
