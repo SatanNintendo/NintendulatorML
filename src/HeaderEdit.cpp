@@ -209,7 +209,7 @@ bool	SaveROM (HWND hDlg)
 	FILE *ROM = _tfopen(filename, _T("r+b"));
 	if (ROM == NULL)
 	{
-		int result = MessageBox(hDlg, _T("Unable to reopen file! Discard changes?"), _T("iNES Editor"), MB_YESNO | MB_ICONQUESTION);
+		int result = MessageBox(hDlg, Lang::GetString(LANG_HDR_ERR_REOPEN), Lang::GetString(LANG_HDR_EDITOR_TITLE), MB_YESNO | MB_ICONQUESTION);
 		return (result == IDYES);
 	}
 	// ensure the header is in a consistent state - zero out all unused bits
@@ -225,23 +225,23 @@ bool	OpenROM (void)
 	FILE *rom = _tfopen(filename, _T("rb"));
 	if (!rom)
 	{
-		MessageBox(hMainWnd, _T("Unable to open ROM!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_HDR_ERR_OPEN), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return false;
 	}
 	fread(header, 16, 1, rom);
 	fclose(rom);
 	if (memcmp(header, "NES\x1A", 4))
 	{
-		MessageBox(hMainWnd, _T("Selected file is not an iNES ROM image!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_HDR_ERR_NOT_INES), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return false;
 	}
 	if ((header[7] & 0x0C) == 0x04)
 	{
-		MessageBox(hMainWnd, _T("Selected ROM appears to have been corrupted by \"DiskDude!\" - cleaning..."), _T("Nintendulator"), MB_OK | MB_ICONWARNING);
+		MessageBox(hMainWnd, Lang::GetString(LANG_HDR_ERR_DISKDUDE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONWARNING);
 		memset(header+7, 0, 9);
 	}
 	else if (CheckHeader(false) && 
-		(MessageBox(hMainWnd, _T("Unrecognized or inconsistent data detected in ROM header! Do you wish to clean it?"), _T("Nintendulator"), MB_YESNO | MB_ICONQUESTION) == IDYES))
+		(MessageBox(hMainWnd, Lang::GetString(LANG_HDR_ERR_DIRTY), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_YESNO | MB_ICONQUESTION) == IDYES))
 	{
 		CheckHeader(true);
 	}
