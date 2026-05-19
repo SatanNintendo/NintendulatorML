@@ -158,111 +158,7 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Language has been changed. Some elements will update on restart."),
 
     // === CPU ===
-   _T("Bad opcode, CPU locked"),
-
-   // Controllers dialog labels
-    _T("Controller Port &1:"),
-    _T("Controller Port &2:"),
-    _T("&Expansion Port:"),
-    _T("&Allow simultaneous Left+Right and Up+Down"),
-    _T("Configure &POV triggers as 8-way buttons"),
-    _T("&Config"),
-    _T("Close"),
-
-    // Titlebar
-    _T("Nintendulator - Stopped"),
-    _T("Nintendulator - %i FPS (No FSkip)"),
-    _T("Nintendulator - %i FPS (%i %sFSkip)"),
-    _T("Auto"),
-
-    // GFX errors (дополнительные)
-    _T("Failed to determine performance counter frequency!"),
-    _T("Fatal error: unable to load DirectDraw DLL!"),
-    _T("Fatal error: unable to locate entry point for DirectDrawCreateEx!"),
-    _T("Invalid GFX region selected!"),
-    _T("Failed to initialize DirectDraw 7"),
-    _T("No fullscreen resolutions are supported on your display device!"),
-    _T("Failed to set fullscreen cooperative level! Returning to Windowed mode..."),
-    _T("No fullscreen resolutions are supported on your display device! Reverting to Windowed mode..."),
-    _T("Failed to set DirectDraw cooperative level"),
-    _T("Failed to create primary surface"),
-    _T("Failed to get secondary surface"),
-    _T("Failed to create primary surface"),
-    _T("Failed to create secondary surface"),
-    _T("Failed to create clipper"),
-    _T("Failed to set clipper window"),
-    _T("Failed to assign clipper to primary surface"),
-    _T("Failed to retrieve surface description"),
-    _T("Invalid bit depth detected!"),
-    _T("Created %ix%i %i-bit display surface (%s)"),
-    _T("fullscreen"),
-    _T("windowed"),
-
-    // File dialogs (дополнительные)
-    _T("Load ROM"),
-    _T("All supported files (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)\0*.NES;*.UNIF;*.UNF;*.FDS;*.NSF\0iNES ROM Images (*.NES)\0*.NES\0UNIF ROM files (*.UNIF, *.UNF)\0*.UNF;*.UNIF\0FDS Disk Images (*.FDS)\0*.FDS\0NES Sound Files (*.NSF)\0*.NSF\0\0"),
-    _T("Edit Header"),
-    _T("(No languages found)"),
-
-    // APU errors (дополнительные)
-    _T("Failed to initialize DirectSound!"),
-    _T("Sound buffer error!"),
-    _T("Sound format error!"),
-    _T("APU disabled."),
-
-    // AVI errors
-    _T("AVI error %s (%08x) at %s"),
-    _T("No AVI capture is currently in progress!"),
-    _T("An AVI capture is already in progress!"),
-    _T("Failed to configure AVI compression!"),
-    _T("Error! AVI frame capture attempted while not recording!"),
-    _T("Failed to write video to AVI!"),
-    _T("Error! AVI audio capture attempted while not recording!"),
-    _T("Failed to write audio to AVI!"),
-
-    // NES messages
-    _T("Nintendulator was unable to fully relocate its data files to \"%s\".\nPlease delete the folder \"%s\" after relocating its contents."),
-    _T("Loading file '%s'..."),
-    _T("Loaded successfully!"),
-    _T("ROM unloaded."),
-    _T("Performing hard reset..."),
-    _T("Performing soft reset..."),
-    _T("Reset complete."),
-
-    // HeaderEdit dialog
-    _T("iNES Editor"),
-    _T("Unable to reopen file! Discard changes?"),
-    _T("Unable to open ROM!"),
-    _T("Selected file is not an iNES ROM image!"),
-    _T("Selected ROM appears to have been corrupted by \"DiskDude!\" - cleaning..."),
-    _T("Unrecognized or inconsistent data detected in ROM header! Do you wish to clean it?"),
-
-    // Controllers
-    _T("Unconnected"),
-    _T("Standard Controller"),
-    _T("Zapper"),
-    _T("Arkanoid Paddle"),
-    _T("Power Pad"),
-    _T("Four Score (port 1 only)"),
-    _T("SNES Controller"),
-    _T("VS Unisystem Zapper"),
-    _T("SNES Mouse"),
-    _T("Four Score (port 2 only)"),
-    _T("Unconnected"),
-    _T("Famicom 4-Player Adapter"),
-    _T("Famicom Arkanoid Paddle"),
-    _T("Family Basic Keyboard"),
-    _T("Subor Keyboard"),
-    _T("Family Trainer"),
-    _T("Oeka Kids Tablet"),
-    _T("Error - encountered invalid keyboard key ID!"),
-    _T("Error - encountered invalid mouse button ID!"),
-    _T("Unable to initialize DirectInput!"),
-    _T("Failed to initialize keyboard!"),
-    _T("Failed to initialize mouse!"),
-    _T("Failed to initialize joysticks!"),
-    _T("Unable to modify device input cooperative level!"),
-    _T("Unable to restore device input cooperative level!"),
+    _T("Bad opcode, CPU locked")   // ← Эта строка была пропущена
 };
 
 // ============================================================
@@ -427,102 +323,7 @@ static const KeyMapping KeyMap[] =
     { L"ABOUT_TEXT",                LANG_ABOUT_TEXT },
     { L"LANG_CHANGED",              LANG_LANG_CHANGED },
     { L"LANG_CHANGED_MSG",          LANG_LANG_CHANGED_MSG },
-    { L"ERR_CPU_BAD_OPCODE",        LANG_ERR_CPU_BAD_OPCODE },
-    { L"CTRL_PORT1_LABEL",          LANG_CTRL_PORT1_LABEL },
-    { L"CTRL_PORT2_LABEL",          LANG_CTRL_PORT2_LABEL },
-    { L"CTRL_EXP_LABEL",            LANG_CTRL_EXP_LABEL },
-    { L"CTRL_UDLR_TEXT",            LANG_CTRL_UDLR_TEXT },
-    { L"CTRL_POV_TEXT",             LANG_CTRL_POV_TEXT },
-    { L"CTRL_CONFIG",               LANG_CTRL_CONFIG },
-    { L"CTRL_CLOSE",                LANG_CTRL_CLOSE },
-
-    { L"TITLEBAR_STOPPED",          LANG_TITLEBAR_STOPPED },
-    { L"TITLEBAR_FPS_NOSKIP",       LANG_TITLEBAR_FPS_NOSKIP },
-    { L"TITLEBAR_FPS_SKIP",         LANG_TITLEBAR_FPS_SKIP },
-    { L"TITLEBAR_AUTO",             LANG_TITLEBAR_AUTO },
-
-    { L"ERR_GFX_PERF_COUNTER",      LANG_ERR_GFX_PERF_COUNTER },
-    { L"ERR_GFX_DDRAW_DLL",         LANG_ERR_GFX_DDRAW_DLL },
-    { L"ERR_GFX_DDRAW_ENTRY",       LANG_ERR_GFX_DDRAW_ENTRY },
-    { L"ERR_GFX_REGION",            LANG_ERR_GFX_REGION },
-    { L"ERR_GFX_INIT",              LANG_ERR_GFX_INIT },
-    { L"ERR_GFX_NO_FULLSCREEN",     LANG_ERR_GFX_NO_FULLSCREEN },
-    { L"ERR_GFX_COOP_LEVEL",        LANG_ERR_GFX_COOP_LEVEL },
-    { L"ERR_GFX_COOP_LEVEL2",       LANG_ERR_GFX_COOP_LEVEL2 },
-    { L"ERR_GFX_COOP_WINDOWED",     LANG_ERR_GFX_COOP_WINDOWED },
-    { L"ERR_GFX_PRIMARY",           LANG_ERR_GFX_PRIMARY },
-    { L"ERR_GFX_SECONDARY",         LANG_ERR_GFX_SECONDARY },
-    { L"ERR_GFX_PRIMARY2",          LANG_ERR_GFX_PRIMARY2 },
-    { L"ERR_GFX_SECONDARY2",        LANG_ERR_GFX_SECONDARY2 },
-    { L"ERR_GFX_CLIPPER",           LANG_ERR_GFX_CLIPPER },
-    { L"ERR_GFX_CLIPPER_WND",       LANG_ERR_GFX_CLIPPER_WND },
-    { L"ERR_GFX_CLIPPER_SURF",      LANG_ERR_GFX_CLIPPER_SURF },
-    { L"ERR_GFX_SURF_DESC",         LANG_ERR_GFX_SURF_DESC },
-    { L"ERR_GFX_BIT_DEPTH",         LANG_ERR_GFX_BIT_DEPTH },
-    { L"MSG_GFX_DISPLAY",           LANG_MSG_GFX_DISPLAY },
-    { L"MSG_GFX_FULLSCREEN",        LANG_MSG_GFX_FULLSCREEN },
-    { L"MSG_GFX_WINDOWED",          LANG_MSG_GFX_WINDOWED },
-
-    { L"OPEN_ROM_TITLE2",           LANG_OPEN_ROM_TITLE2 },
-    { L"OPEN_ROM_FILTER2",          LANG_OPEN_ROM_FILTER2 },
-    { L"OPEN_HEADER_TITLE",         LANG_OPEN_HEADER_TITLE },
-    { L"MSG_NO_LANGUAGES",          LANG_MSG_NO_LANGUAGES },
-
-    { L"ERR_APU_INIT",              LANG_ERR_APU_INIT },
-    { L"ERR_APU_BUFFER2",           LANG_ERR_APU_BUFFER2 },
-    { L"ERR_APU_FORMAT2",           LANG_ERR_APU_FORMAT2 },
-    { L"MSG_APU_DISABLED2",         LANG_MSG_APU_DISABLED2 },
-
-    { L"ERR_AVI_ERROR",             LANG_ERR_AVI_ERROR },
-    { L"ERR_AVI_NOT_RECORDING",     LANG_ERR_AVI_NOT_RECORDING },
-    { L"ERR_AVI_ALREADY_RECORDING", LANG_ERR_AVI_ALREADY_RECORDING },
-    { L"ERR_AVI_COMPRESSION",       LANG_ERR_AVI_COMPRESSION },
-    { L"ERR_AVI_FRAME_NOT_RECORDING", LANG_ERR_AVI_FRAME_NOT_RECORDING },
-    { L"ERR_AVI_WRITE_VIDEO",       LANG_ERR_AVI_WRITE_VIDEO },
-    { L"ERR_AVI_AUDIO_NOT_RECORDING", LANG_ERR_AVI_AUDIO_NOT_RECORDING },
-    { L"ERR_AVI_WRITE_AUDIO",       LANG_ERR_AVI_WRITE_AUDIO },
-
-    { L"MSG_NES_RELOCATE",          LANG_MSG_NES_RELOCATE },
-    { L"MSG_NES_LOADING",           LANG_MSG_NES_LOADING },
-    { L"MSG_NES_LOADED",            LANG_MSG_NES_LOADED },
-    { L"MSG_NES_ROM_UNLOADED",      LANG_MSG_NES_ROM_UNLOADED },
-    { L"MSG_NES_RESET_HARD",        LANG_MSG_NES_RESET_HARD },
-    { L"MSG_NES_RESET_SOFT",        LANG_MSG_NES_RESET_SOFT },
-    { L"MSG_NES_RESET_DONE",        LANG_MSG_NES_RESET_DONE },
-
-    { L"HDR_EDITOR_TITLE",          LANG_HDR_EDITOR_TITLE },
-    { L"HDR_ERR_REOPEN",            LANG_HDR_ERR_REOPEN },
-    { L"HDR_ERR_OPEN",              LANG_HDR_ERR_OPEN },
-    { L"HDR_ERR_NOT_INES",          LANG_HDR_ERR_NOT_INES },
-    { L"HDR_ERR_DISKDUDE",          LANG_HDR_ERR_DISKDUDE },
-    { L"HDR_ERR_DIRTY",             LANG_HDR_ERR_DIRTY },
-
-    { L"CTRL_STD_UNCONNECTED",      LANG_CTRL_STD_UNCONNECTED },
-    { L"CTRL_STD_STDCONTROLLER",    LANG_CTRL_STD_STDCONTROLLER },
-    { L"CTRL_STD_ZAPPER",           LANG_CTRL_STD_ZAPPER },
-    { L"CTRL_STD_ARKANOID",         LANG_CTRL_STD_ARKANOID },
-    { L"CTRL_STD_POWERPAD",         LANG_CTRL_STD_POWERPAD },
-    { L"CTRL_STD_FOURSCORE",        LANG_CTRL_STD_FOURSCORE },
-    { L"CTRL_STD_SNES",             LANG_CTRL_STD_SNES },
-    { L"CTRL_STD_VSZAPPER",         LANG_CTRL_STD_VSZAPPER },
-    { L"CTRL_STD_SNESMOUSE",        LANG_CTRL_STD_SNESMOUSE },
-    { L"CTRL_STD_FOURSCORE2",       LANG_CTRL_STD_FOURSCORE2 },
-    { L"CTRL_EXP_UNCONNECTED",      LANG_CTRL_EXP_UNCONNECTED },
-    { L"CTRL_EXP_FAMI4PLAY",        LANG_CTRL_EXP_FAMI4PLAY },
-    { L"CTRL_EXP_ARKANOID",         LANG_CTRL_EXP_ARKANOID },
-    { L"CTRL_EXP_FBKEY",            LANG_CTRL_EXP_FBKEY },
-    { L"CTRL_EXP_SUBORKEY",         LANG_CTRL_EXP_SUBORKEY },
-    { L"CTRL_EXP_FAMTRAINER",       LANG_CTRL_EXP_FAMTRAINER },
-    { L"CTRL_EXP_TABLET",           LANG_CTRL_EXP_TABLET },
-    { L"ERR_CTRL_INVALID_KEY",      LANG_ERR_CTRL_INVALID_KEY },
-    { L"ERR_CTRL_INVALID_MOUSE",    LANG_ERR_CTRL_INVALID_MOUSE },
-    { L"ERR_CTRL_DINPUT",           LANG_ERR_CTRL_DINPUT },
-    { L"ERR_CTRL_KEYBOARD",         LANG_ERR_CTRL_KEYBOARD },
-    { L"ERR_CTRL_MOUSE",            LANG_ERR_CTRL_MOUSE },
-    { L"ERR_CTRL_JOYSTICK",         LANG_ERR_CTRL_JOYSTICK },
-    { L"ERR_CTRL_COOP_MODIFY",      LANG_ERR_CTRL_COOP_MODIFY },
-    { L"ERR_CTRL_COOP_RESTORE",     LANG_ERR_CTRL_COOP_RESTORE },
-
+    { L"ERR_CPU_BAD_OPCODE",        LANG_ERR_CPU_BAD_OPCODE },   // ← Добавлено
     { NULL, LANG_STRING_COUNT }
 };
 
@@ -644,12 +445,13 @@ const TCHAR* Lang::GetCurrentLanguage()
 void Lang::UpdateMenu(HMENU hMenu)
 {
     if (!hMenu) return;
-    ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_STRING | MF_POPUP,
-               (UINT_PTR)GetSubMenu(hMenu, 0), GetString(LANG_MENU_FILE));
-    ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING | MF_POPUP,
-               (UINT_PTR)GetSubMenu(hMenu, 8), GetString(LANG_MENU_LANGUAGE));
-    ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING | MF_POPUP,
-               (UINT_PTR)GetSubMenu(hMenu, 9), GetString(LANG_MENU_HELP));
+    ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_FILE));
+    ModifyMenu(hMenu, 1, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_NES));
+    ModifyMenu(hMenu, 2, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_SETTINGS));
+    ModifyMenu(hMenu, 3, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_MOVIE));
+    ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_DEBUG));
+    ModifyMenu(hMenu, 5, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_LANGUAGE));
+    ModifyMenu(hMenu, 6, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_HELP));
     DrawMenuBar(hMainWnd);
 }
 
