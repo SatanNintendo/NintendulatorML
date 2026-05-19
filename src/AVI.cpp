@@ -322,8 +322,8 @@ public:
 		}
 
 		TCHAR buf[256];	// long enough for all of the above errors
-		_stprintf(buf, Lang::GetString(LANG_ERR_AVI_ERROR), msg, code, location);
-		MessageBox(hMainWnd, buf, Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		_stprintf(buf, _T("AVI error %s (%08x) at %s"), msg, code, location);
+		MessageBox(hMainWnd, buf, _T("Nintendulator"), MB_OK);
 	}
 };
 
@@ -349,7 +349,7 @@ void	End (void)
 {
 	if (!IsActive())
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_AVI_NOT_RECORDING), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, _T("No AVI capture is currently in progress!"), _T("Nintendulator"), MB_OK);
 		return;
 	}
 	BOOL running = NES::Running;
@@ -375,7 +375,7 @@ void	Start (void)
 
 	if (IsActive())
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_AVI_ALREADY_RECORDING), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, _T("An AVI capture is already in progress!"), _T("Nintendulator"), MB_OK);
 		return;
 	}
 
@@ -443,7 +443,7 @@ void	Start (void)
 
 	if (!handle->SetCompression(hbm))
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_AVI_COMPRESSION), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, _T("Failed to configure AVI compression!"), _T("Nintendulator"), MB_OK);
 		End();
 		if (running)
 			NES::Start(FALSE);
@@ -460,7 +460,7 @@ void	AddVideo (void)
 {
 	if (!handle)
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_AVI_FRAME_NOT_RECORDING), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, _T("Error! AVI frame capture attempted while not recording!"), _T("Nintendulator"), MB_OK);
 		return;
 	}
 	register unsigned short *src = PPU::DrawArray;
@@ -474,7 +474,7 @@ void	AddVideo (void)
 	}
 	if (!handle->AddVideo(hbm))
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_AVI_WRITE_VIDEO), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, _T("Failed to write video to AVI!"), _T("Nintendulator"), MB_OK);
 		NES::DoStop = STOPMODE_NOW;
 	}
 }
@@ -483,12 +483,12 @@ void	AddAudio (void)
 {
 	if (!handle)
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_AVI_AUDIO_NOT_RECORDING), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, _T("Error! AVI audio capture attempted while not recording!"), _T("Nintendulator"), MB_OK);
 		return;
 	}
 	if (!handle->AddAudio(APU::buffer, APU::LockSize))
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_AVI_WRITE_AUDIO), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, _T("Failed to write audio to AVI!"), _T("Nintendulator"), MB_OK);
 		NES::DoStop = STOPMODE_NOW;
 	}
 }
