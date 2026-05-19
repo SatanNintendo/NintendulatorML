@@ -83,7 +83,7 @@ void	StdPort_SetControllerType (StdPort *&Port, STDCONT_TYPE Type, DWORD *button
 	case STD_FOURSCORE2:		Port = new StdPort_FourScore2(buttons);		break;
 	}
 }
-const wchar_t *StdPort_Mappings[STD_MAX];
+const TCHAR	*StdPort_Mappings[STD_MAX];
 void	StdPort_SetMappings (void)
 {
 	StdPort_Mappings[STD_UNCONNECTED] = Lang::GetString(LANG_CTRL_STD_UNCONNECTED);
@@ -117,7 +117,7 @@ void    ExpPort_SetControllerType (ExpPort *&Port, EXPCONT_TYPE Type, DWORD *but
         case EXP_TABLET:		Port = new ExpPort_Tablet(buttons);			break;
         }
 }
-const wchar_t *ExpPort_Mappings[EXP_MAX];
+const TCHAR	*ExpPort_Mappings[EXP_MAX];
 void	ExpPort_SetMappings (void)
 {
 	ExpPort_Mappings[EXP_UNCONNECTED] = Lang::GetString(LANG_CTRL_EXP_UNCONNECTED);
@@ -151,17 +151,17 @@ INT_PTR	CALLBACK	ControllerProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT1, CB_RESETCONTENT, 0, 0);
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT2, CB_RESETCONTENT, 0, 0);
 		for (i = 0; i < STD_MAX; i++)
-{
-        SendDlgItemMessage(hDlg, IDC_CONT_SPORT1, CB_ADDSTRING, 0, (LPARAM)StdPort_Mappings[i]);
-        SendDlgItemMessage(hDlg, IDC_CONT_SPORT2, CB_ADDSTRING, 0, (LPARAM)StdPort_Mappings[i]);
-}
+		{
+			SendDlgItemMessage(hDlg, IDC_CONT_SPORT1, CB_ADDSTRING, 0, (LPARAM)StdPort_Mappings[i]);
+			SendDlgItemMessage(hDlg, IDC_CONT_SPORT2, CB_ADDSTRING, 0, (LPARAM)StdPort_Mappings[i]);
+		}
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT1, CB_SETCURSEL, Port1->Type, 0);
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT2, CB_SETCURSEL, Port2->Type, 0);
 
 		SendDlgItemMessage(hDlg, IDC_CONT_SEXPPORT, CB_RESETCONTENT, 0, 0);
 		for (i = 0; i < EXP_MAX; i++)
-            SendDlgItemMessage(hDlg, IDC_CONT_SEXPPORT, CB_ADDSTRING, 0, (LPARAM)ExpPort_Mappings[i]);
-		    SendDlgItemMessage(hDlg, IDC_CONT_SEXPPORT, CB_SETCURSEL, PortExp->Type, 0);
+			SendDlgItemMessage(hDlg, IDC_CONT_SEXPPORT, CB_ADDSTRING, 0, (LPARAM)ExpPort_Mappings[i]);
+		SendDlgItemMessage(hDlg, IDC_CONT_SEXPPORT, CB_SETCURSEL, PortExp->Type, 0);
 		if (Movie::Mode)
 		{
 			EnableWindow(GetDlgItem(hDlg, IDC_CONT_SPORT1), FALSE);
