@@ -209,6 +209,16 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Sound buffer error!"),
     _T("Sound format error!"),
     _T("APU disabled."),
+
+    // AVI errors
+    _T("AVI error %s (%08x) at %s"),
+    _T("No AVI capture is currently in progress!"),
+    _T("An AVI capture is already in progress!"),
+    _T("Failed to configure AVI compression!"),
+    _T("Error! AVI frame capture attempted while not recording!"),
+    _T("Failed to write video to AVI!"),
+    _T("Error! AVI audio capture attempted while not recording!"),
+    _T("Failed to write audio to AVI!"),
 };
 
 // ============================================================
@@ -418,6 +428,15 @@ static const KeyMapping KeyMap[] =
     { L"ERR_APU_BUFFER2",           LANG_ERR_APU_BUFFER2 },
     { L"ERR_APU_FORMAT2",           LANG_ERR_APU_FORMAT2 },
     { L"MSG_APU_DISABLED2",         LANG_MSG_APU_DISABLED2 },
+
+    { L"ERR_AVI_ERROR",             LANG_ERR_AVI_ERROR },
+    { L"ERR_AVI_NOT_RECORDING",     LANG_ERR_AVI_NOT_RECORDING },
+    { L"ERR_AVI_ALREADY_RECORDING", LANG_ERR_AVI_ALREADY_RECORDING },
+    { L"ERR_AVI_COMPRESSION",       LANG_ERR_AVI_COMPRESSION },
+    { L"ERR_AVI_FRAME_NOT_RECORDING", LANG_ERR_AVI_FRAME_NOT_RECORDING },
+    { L"ERR_AVI_WRITE_VIDEO",       LANG_ERR_AVI_WRITE_VIDEO },
+    { L"ERR_AVI_AUDIO_NOT_RECORDING", LANG_ERR_AVI_AUDIO_NOT_RECORDING },
+    { L"ERR_AVI_WRITE_AUDIO",       LANG_ERR_AVI_WRITE_AUDIO },
 
     { NULL, LANG_STRING_COUNT }
 };
