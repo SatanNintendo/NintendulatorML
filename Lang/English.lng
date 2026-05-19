@@ -209,3 +209,11 @@ ERR_AVI_FRAME_NOT_RECORDING=Error! AVI frame capture attempted while not recordi
 ERR_AVI_WRITE_VIDEO=Failed to write video to AVI!
 ERR_AVI_AUDIO_NOT_RECORDING=Error! AVI audio capture attempted while not recording!
 ERR_AVI_WRITE_AUDIO=Failed to write audio to AVI!
+# === NES messages ===
+MSG_NES_RELOCATE=Nintendulator was unable to fully relocate its data files to "%s".\nPlease delete the folder "%s" after relocating its contents.
+MSG_NES_LOADING=Loading file '%s'...
+MSG_NES_LOADED=Loaded successfully!
+MSG_NES_ROM_UNLOADED=ROM unloaded.
+MSG_NES_RESET_HARD=Performing hard reset...
+MSG_NES_RESET_SOFT=Performing soft reset...
+MSG_NES_RESET_DONE=Reset complete.
