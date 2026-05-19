@@ -161,3 +161,37 @@ CTRL_UDLR_TEXT=&Allow simultaneous Left+Right and Up+Down
 CTRL_POV_TEXT=Configure &POV triggers as 8-way buttons
 CTRL_CONFIG=&Config
 CTRL_CLOSE=Close
+# === Titlebar ===
+TITLEBAR_STOPPED=Nintendulator - Stopped
+TITLEBAR_FPS_NOSKIP=Nintendulator - %i FPS (No FSkip)
+TITLEBAR_FPS_SKIP=Nintendulator - %i FPS (%i %sFSkip)
+TITLEBAR_AUTO=Auto
+
+# === GFX errors ===
+ERR_GFX_PERF_COUNTER=Failed to determine performance counter frequency!
+ERR_GFX_DDRAW_DLL=Fatal error: unable to load DirectDraw DLL!
+ERR_GFX_DDRAW_ENTRY=Fatal error: unable to locate entry point for DirectDrawCreateEx!
+ERR_GFX_REGION=Invalid GFX region selected!
+ERR_GFX_INIT=Failed to initialize DirectDraw 7
+ERR_GFX_NO_FULLSCREEN=No fullscreen resolutions are supported on your display device!
+ERR_GFX_COOP_LEVEL=Failed to set fullscreen cooperative level! Returning to Windowed mode...
+ERR_GFX_COOP_LEVEL2=No fullscreen resolutions are supported on your display device! Reverting to Windowed mode...
+ERR_GFX_COOP_WINDOWED=Failed to set DirectDraw cooperative level
+ERR_GFX_PRIMARY=Failed to create primary surface
+ERR_GFX_SECONDARY=Failed to get secondary surface
+ERR_GFX_PRIMARY2=Failed to create primary surface
+ERR_GFX_SECONDARY2=Failed to create secondary surface
+ERR_GFX_CLIPPER=Failed to create clipper
+ERR_GFX_CLIPPER_WND=Failed to set clipper window
+ERR_GFX_CLIPPER_SURF=Failed to assign clipper to primary surface
+ERR_GFX_SURF_DESC=Failed to retrieve surface description
+ERR_GFX_BIT_DEPTH=Invalid bit depth detected!
+MSG_GFX_DISPLAY=Created %ix%i %i-bit display surface (%s)
+MSG_GFX_FULLSCREEN=fullscreen
+MSG_GFX_WINDOWED=windowed
+
+# === File dialog ===
+OPEN_ROM_TITLE2=Load ROM
+OPEN_ROM_FILTER2=All supported files (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)\0*.NES;*.UNIF;*.UNF;*.FDS;*.NSF\0iNES ROM Images (*.NES)\0*.NES\0UNIF ROM files (*.UNIF, *.UNF)\0*.UNF;*.UNIF\0FDS Disk Images (*.FDS)\0*.FDS\0NES Sound Files (*.NSF)\0*.NSF\0\0
+OPEN_HEADER_TITLE=Edit Header
+MSG_NO_LANGUAGES=(No languages found)
