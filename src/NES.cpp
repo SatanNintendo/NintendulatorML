@@ -118,7 +118,7 @@ void	OpenFile (TCHAR *filename)
 	if (ROMLoaded)
 		CloseFile();
 
-	EI.DbgOut(_T("Loading file '%s'..."), filename);
+	EI.DbgOut(Lang::GetString(LANG_MSG_NES_LOADING), filename);
 	data = _tfopen(filename, _T("rb"));
 
 	if (!data)
@@ -157,7 +157,7 @@ void	OpenFile (TCHAR *filename)
 	// if the ROM loaded without errors, drop the filename into ROMInfo
 	RI.Filename = _tcsdup(filename);
 	ROMLoaded = TRUE;
-	EI.DbgOut(_T("Loaded successfully!"));
+	EI.DbgOut(Lang::GetString(LANG_MSG_NES_LOADED));
 	States::SetFilename(filename);
 
 	HasMenu = FALSE;
@@ -344,7 +344,7 @@ void	CloseFile (void)
 	{
 		MapperInterface::UnloadMapper();
 		ROMLoaded = FALSE;
-		EI.DbgOut(_T("ROM unloaded."));
+		EI.DbgOut(Lang::GetString(LANG_MSG_NES_ROM_UNLOADED));
 	}
 	// Need to do this after UnloadMapper in order to
 	// handle saving internal chip state data to SRAM
@@ -1106,7 +1106,7 @@ void	Reset (RESET_TYPE ResetType)
 	switch (ResetType)
 	{
 	case RESET_HARD:
-		EI.DbgOut(_T("Performing hard reset..."));
+		EI.DbgOut(Lang::GetString(LANG_MSG_NES_RESET_HARD));
 		ZeroMemory((unsigned char *)PRG_RAM+SRAM_Size, sizeof(PRG_RAM)-SRAM_Size);
 		ZeroMemory(CHR_RAM, sizeof(CHR_RAM));
 		if (MI2)
@@ -1123,7 +1123,7 @@ void	Reset (RESET_TYPE ResetType)
 			MI->Reset(RESET_HARD);
 		break;
 	case RESET_SOFT:
-		EI.DbgOut(_T("Performing soft reset..."));
+		EI.DbgOut(Lang::GetString(LANG_MSG_NES_RESET_SOFT));
 		if (MI2)
 		{
 			MI = MI2;
@@ -1152,7 +1152,7 @@ void	Reset (RESET_TYPE ResetType)
 		Debugger::Update(Debugger::Mode);
 #endif	/* ENABLE_DEBUGGER */
 	Scanline = FALSE;
-	EI.DbgOut(_T("Reset complete."));
+	EI.DbgOut(Lang::GetString(LANG_MSG_NES_RESET_DONE));
 }
 
 DWORD	WINAPI	Thread (void *param)
@@ -1661,8 +1661,8 @@ void	RelocateSaveData_Progdir (void)
 	else
 	{
 		TCHAR str[MAX_PATH * 2 + 256];
-		_stprintf(str, _T("Nintendulator was unable to fully relocate its data files to \"%s\".\nPlease delete the folder \"%s\" after relocating its contents."), DataPath, filename);
-		MessageBox(NULL, str, _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		_stprintf(str, Lang::GetString(LANG_MSG_NES_RELOCATE), DataPath, filename);
+		MessageBox(NULL, str, Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		BrowseFolder(filename);
 	}
 }
@@ -1771,8 +1771,8 @@ void	RelocateSaveData_Mydocs (void)
 	else
 	{
 		TCHAR str[MAX_PATH * 2 + 256];
-		_stprintf(str, _T("Nintendulator was unable to fully relocate its data files to \"%s\".\nPlease delete the folder \"%s\" after relocating its contents."), DataPath, oldPath);
-		MessageBox(NULL, str, _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		_stprintf(str, Lang::GetString(LANG_MSG_NES_RELOCATE), DataPath, oldPath);
+		MessageBox(NULL, str, Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		BrowseFolder(oldPath);
 	}
 }
