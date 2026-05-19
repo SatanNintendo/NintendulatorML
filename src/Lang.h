@@ -141,6 +141,14 @@ enum LangStringID
     LANG_MSG_DBG_LOG_STARTED,
     LANG_MSG_DBG_LOG_STOPPED,
 
+    // ---------- Controllers dialog ----------
+    LANG_CONT_LABEL_PORT1,
+    LANG_CONT_LABEL_PORT2,
+    LANG_CONT_LABEL_EXP,
+    LANG_CONT_CONFIG,
+    LANG_CONT_UDLR,
+    LANG_CONT_POV,
+    
     // ---------- Общие диалоги ----------
     LANG_DLG_OK,
     LANG_DLG_CANCEL,
