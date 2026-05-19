@@ -200,3 +200,12 @@ ERR_APU_INIT=Не удалось инициализировать DirectSound!
 ERR_APU_BUFFER2=Ошибка звукового буфера!
 ERR_APU_FORMAT2=Ошибка формата звука!
 MSG_APU_DISABLED2=APU отключён.
+# === AVI errors ===
+ERR_AVI_ERROR=Ошибка AVI %s (%08x) в %s
+ERR_AVI_NOT_RECORDING=Запись AVI не ведётся!
+ERR_AVI_ALREADY_RECORDING=Запись AVI уже ведётся!
+ERR_AVI_COMPRESSION=Не удалось настроить сжатие AVI!
+ERR_AVI_FRAME_NOT_RECORDING=Ошибка! Захват кадра AVI при отсутствии записи!
+ERR_AVI_WRITE_VIDEO=Не удалось записать видео в AVI!
+ERR_AVI_AUDIO_NOT_RECORDING=Ошибка! Захват аудио AVI при отсутствии записи!
+ERR_AVI_WRITE_AUDIO=Не удалось записать аудио в AVI!
