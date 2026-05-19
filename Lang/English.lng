@@ -200,3 +200,12 @@ ERR_APU_INIT=Failed to initialize DirectSound!
 ERR_APU_BUFFER2=Sound buffer error!
 ERR_APU_FORMAT2=Sound format error!
 MSG_APU_DISABLED2=APU disabled.
+# === AVI errors ===
+ERR_AVI_ERROR=AVI error %s (%08x) at %s
+ERR_AVI_NOT_RECORDING=No AVI capture is currently in progress!
+ERR_AVI_ALREADY_RECORDING=An AVI capture is already in progress!
+ERR_AVI_COMPRESSION=Failed to configure AVI compression!
+ERR_AVI_FRAME_NOT_RECORDING=Error! AVI frame capture attempted while not recording!
+ERR_AVI_WRITE_VIDEO=Failed to write video to AVI!
+ERR_AVI_AUDIO_NOT_RECORDING=Error! AVI audio capture attempted while not recording!
+ERR_AVI_WRITE_AUDIO=Failed to write audio to AVI!
