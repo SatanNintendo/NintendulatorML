@@ -203,6 +203,12 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("All supported files (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)\0*.NES;*.UNIF;*.UNF;*.FDS;*.NSF\0iNES ROM Images (*.NES)\0*.NES\0UNIF ROM files (*.UNIF, *.UNF)\0*.UNF;*.UNIF\0FDS Disk Images (*.FDS)\0*.FDS\0NES Sound Files (*.NSF)\0*.NSF\0\0"),
     _T("Edit Header"),
     _T("(No languages found)"),
+
+    // APU errors (дополнительные)
+    _T("Failed to initialize DirectSound!"),
+    _T("Sound buffer error!"),
+    _T("Sound format error!"),
+    _T("APU disabled."),
 };
 
 // ============================================================
@@ -407,6 +413,11 @@ static const KeyMapping KeyMap[] =
     { L"OPEN_ROM_FILTER2",          LANG_OPEN_ROM_FILTER2 },
     { L"OPEN_HEADER_TITLE",         LANG_OPEN_HEADER_TITLE },
     { L"MSG_NO_LANGUAGES",          LANG_MSG_NO_LANGUAGES },
+
+    { L"ERR_APU_INIT",              LANG_ERR_APU_INIT },
+    { L"ERR_APU_BUFFER2",           LANG_ERR_APU_BUFFER2 },
+    { L"ERR_APU_FORMAT2",           LANG_ERR_APU_FORMAT2 },
+    { L"MSG_APU_DISABLED2",         LANG_MSG_APU_DISABLED2 },
 
     { NULL, LANG_STRING_COUNT }
 };
