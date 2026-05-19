@@ -158,7 +158,16 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Language has been changed. Some elements will update on restart."),
 
     // === CPU ===
-    _T("Bad opcode, CPU locked")   // ← Эта строка была пропущена
+   _T("Bad opcode, CPU locked"),
+
+    // Controllers dialog labels
+    _T("Controller Port &1:"),
+    _T("Controller Port &2:"),
+    _T("&Expansion Port:"),
+    _T("&Allow simultaneous Left+Right and Up+Down"),
+    _T("Configure &POV triggers as 8-way buttons"),
+    _T("&Config"),
+    _T("Close"),
 };
 
 // ============================================================
