@@ -409,6 +409,10 @@
 #define IDM_LANGUAGE_BASE   5000
 #define IDM_LANGUAGE_MAX    5099
 
+#define IDC_CONT_LABEL_PORT1    1308
+#define IDC_CONT_LABEL_PORT2    1309
+#define IDC_CONT_LABEL_EXP      1310
+  
 // Next default values for new objects
 //
 #ifdef APSTUDIO_INVOKED
@@ -416,10 +420,7 @@
 #define _APS_NO_MFC 1
 #define _APS_NEXT_RESOURCE_VALUE 155
 #define _APS_NEXT_COMMAND_VALUE 32829
-#define _APS_NEXT_CONTROL_VALUE 1308
+#define _APS_NEXT_CONTROL_VALUE 1311
 #define _APS_NEXT_SYMED_VALUE 107
-#define IDC_CONT_LABEL_PORT1    1200
-#define IDC_CONT_LABEL_PORT2    1201
-#define IDC_CONT_LABEL_EXP      1202
 #endif
 #endif
