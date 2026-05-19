@@ -78,6 +78,12 @@ ERR_APU_FORMAT=Unsupported audio format
 MSG_APU_DISABLED=Sound disabled
 
 # === Controllers ===
+CONT_LABEL_PORT1=Controller Port &1:
+CONT_LABEL_PORT2=Controller Port &2:
+CONT_LABEL_EXP=&Expansion Port:
+CONT_CONFIG=&Config
+CONT_UDLR=&Allow simultaneous Left+Right and Up+Down
+CONT_POV=Configure &POV triggers as 8-way buttons
 ERR_CTRL_KEYBOARD_INIT=Unable to initialize keyboard input device!
 ERR_CTRL_KEYBOARD_FORMAT=Unable to set keyboard input data format!
 ERR_CTRL_KEYBOARD_LEVEL=Unable to set keyboard input cooperative level!
