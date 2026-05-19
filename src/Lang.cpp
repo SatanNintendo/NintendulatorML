@@ -160,7 +160,7 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     // === CPU ===
    _T("Bad opcode, CPU locked"),
 
-    // Controllers dialog labels
+   // Controllers dialog labels
     _T("Controller Port &1:"),
     _T("Controller Port &2:"),
     _T("&Expansion Port:"),
@@ -168,6 +168,41 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Configure &POV triggers as 8-way buttons"),
     _T("&Config"),
     _T("Close"),
+
+    // Titlebar
+    _T("Nintendulator - Stopped"),
+    _T("Nintendulator - %i FPS (No FSkip)"),
+    _T("Nintendulator - %i FPS (%i %sFSkip)"),
+    _T("Auto"),
+
+    // GFX errors (дополнительные)
+    _T("Failed to determine performance counter frequency!"),
+    _T("Fatal error: unable to load DirectDraw DLL!"),
+    _T("Fatal error: unable to locate entry point for DirectDrawCreateEx!"),
+    _T("Invalid GFX region selected!"),
+    _T("Failed to initialize DirectDraw 7"),
+    _T("No fullscreen resolutions are supported on your display device!"),
+    _T("Failed to set fullscreen cooperative level! Returning to Windowed mode..."),
+    _T("No fullscreen resolutions are supported on your display device! Reverting to Windowed mode..."),
+    _T("Failed to set DirectDraw cooperative level"),
+    _T("Failed to create primary surface"),
+    _T("Failed to get secondary surface"),
+    _T("Failed to create primary surface"),
+    _T("Failed to create secondary surface"),
+    _T("Failed to create clipper"),
+    _T("Failed to set clipper window"),
+    _T("Failed to assign clipper to primary surface"),
+    _T("Failed to retrieve surface description"),
+    _T("Invalid bit depth detected!"),
+    _T("Created %ix%i %i-bit display surface (%s)"),
+    _T("fullscreen"),
+    _T("windowed"),
+
+    // File dialogs (дополнительные)
+    _T("Load ROM"),
+    _T("All supported files (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)\0*.NES;*.UNIF;*.UNF;*.FDS;*.NSF\0iNES ROM Images (*.NES)\0*.NES\0UNIF ROM files (*.UNIF, *.UNF)\0*.UNF;*.UNIF\0FDS Disk Images (*.FDS)\0*.FDS\0NES Sound Files (*.NSF)\0*.NSF\0\0"),
+    _T("Edit Header"),
+    _T("(No languages found)"),
 };
 
 // ============================================================
