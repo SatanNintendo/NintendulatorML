@@ -46,54 +46,6 @@ enum LangStringID
     LANG_MENU_HELP,
     LANG_MENU_HELP_ABOUT,
 
-    // === Дополнительные пункты главного меню ===
-    LANG_MENU_FILE_OPEN_ROM,
-    LANG_MENU_FILE_EDIT_HEADER,
-    LANG_MENU_FILE_AUTORUN,
-    LANG_MENU_FILE_BROWSE_SAVES,
-
-    LANG_MENU_CPU,
-    LANG_MENU_CPU_RUN,
-    LANG_MENU_CPU_STEP,
-    LANG_MENU_CPU_STOP,
-    LANG_MENU_CPU_SOFTRESET,
-    LANG_MENU_CPU_HARDRESET,
-    LANG_MENU_CPU_SAVESTATE,
-    LANG_MENU_CPU_LOADSTATE,
-    LANG_MENU_CPU_PREVSTATE,
-    LANG_MENU_CPU_NEXTSTATE,
-    LANG_MENU_CPU_GAMEGENIE,
-    LANG_MENU_CPU_BADOPS,
-
-    LANG_MENU_PPU,
-    LANG_MENU_PPU_FRAMESKIP,
-    LANG_MENU_PPU_SIZE,
-    LANG_MENU_PPU_MODE,
-    LANG_MENU_PPU_PALETTE,
-    LANG_MENU_PPU_SLOWDOWN,
-    LANG_MENU_PPU_FULLSCREEN,
-    LANG_MENU_PPU_SCANLINES,
-
-    LANG_MENU_SOUND,
-    LANG_MENU_SOUND_ENABLED,
-    LANG_MENU_SOUND_VOLUME,
-
-    LANG_MENU_INPUT,
-    LANG_MENU_INPUT_SETUP,
-
-    LANG_MENU_DEBUG_STATWND,     // Status Window
-    LANG_MENU_DEBUG_DISASM,      // CPU Debugger (если отдельно)
-    LANG_MENU_DEBUG_PPUDEBUG,    // PPU Debugger
-
-    LANG_MENU_GAME,
-
-    LANG_MENU_MISC,
-    LANG_MENU_MISC_STARTAVI,
-    LANG_MENU_MISC_STOPAVI,
-    LANG_MENU_MISC_RECORDMOVIE,
-    LANG_MENU_MISC_PLAYMOVIE,
-    LANG_MENU_MISC_STOPMOVIE,
-
     // ---------- Заголовок окна ----------
     LANG_WINDOW_TITLE,
     LANG_WINDOW_TITLE_PAUSED,
@@ -314,6 +266,12 @@ enum LangStringID
     LANG_ERR_CTRL_COOP_RESTORE,
 
     LANG_STRING_COUNT   // ← всегда последним!
+    LANG_ERR_APU_INIT,
+    LANG_ERR_APU_BUFFER2,
+    LANG_ERR_APU_FORMAT2,
+    LANG_MSG_APU_DISABLED2,
+
+    LANG_STRING_COUNT   // ← всегда последним!
 };
 
 #define LANG_MAX_STRING 1024
@@ -322,7 +280,7 @@ namespace Lang
 {
     void Init(HINSTANCE hInst);
     bool Load(const TCHAR *langName);
-    const wchar_t* GetString(LangStringID id);
+    const TCHAR* GetString(LangStringID id);
     const std::vector<std::wstring>& GetLanguageList();
     const TCHAR* GetCurrentLanguage();
     void UpdateMenu(HMENU hMenu);
