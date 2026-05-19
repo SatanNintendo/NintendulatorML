@@ -219,6 +219,15 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Failed to write video to AVI!"),
     _T("Error! AVI audio capture attempted while not recording!"),
     _T("Failed to write audio to AVI!"),
+
+    // NES messages
+    _T("Nintendulator was unable to fully relocate its data files to \"%s\".\nPlease delete the folder \"%s\" after relocating its contents."),
+    _T("Loading file '%s'..."),
+    _T("Loaded successfully!"),
+    _T("ROM unloaded."),
+    _T("Performing hard reset..."),
+    _T("Performing soft reset..."),
+    _T("Reset complete."),
 };
 
 // ============================================================
@@ -437,6 +446,14 @@ static const KeyMapping KeyMap[] =
     { L"ERR_AVI_WRITE_VIDEO",       LANG_ERR_AVI_WRITE_VIDEO },
     { L"ERR_AVI_AUDIO_NOT_RECORDING", LANG_ERR_AVI_AUDIO_NOT_RECORDING },
     { L"ERR_AVI_WRITE_AUDIO",       LANG_ERR_AVI_WRITE_AUDIO },
+
+    { L"MSG_NES_RELOCATE",          LANG_MSG_NES_RELOCATE },
+    { L"MSG_NES_LOADING",           LANG_MSG_NES_LOADING },
+    { L"MSG_NES_LOADED",            LANG_MSG_NES_LOADED },
+    { L"MSG_NES_ROM_UNLOADED",      LANG_MSG_NES_ROM_UNLOADED },
+    { L"MSG_NES_RESET_HARD",        LANG_MSG_NES_RESET_HARD },
+    { L"MSG_NES_RESET_SOFT",        LANG_MSG_NES_RESET_SOFT },
+    { L"MSG_NES_RESET_DONE",        LANG_MSG_NES_RESET_DONE },
 
     { NULL, LANG_STRING_COUNT }
 };
