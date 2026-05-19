@@ -152,3 +152,12 @@ LANG_CHANGED_MSG=Language has been changed. Some elements will update on restart
 
 # === CPU ===
 ERR_CPU_BAD_OPCODE=Bad opcode, CPU locked
+
+# === Controllers dialog ===
+CTRL_PORT1_LABEL=Controller Port &1:
+CTRL_PORT2_LABEL=Controller Port &2:
+CTRL_EXP_LABEL=&Expansion Port:
+CTRL_UDLR_TEXT=&Allow simultaneous Left+Right and Up+Down
+CTRL_POV_TEXT=Configure &POV triggers as 8-way buttons
+CTRL_CONFIG=&Config
+CTRL_CLOSE=Close
