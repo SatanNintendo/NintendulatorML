@@ -86,7 +86,7 @@ void BuildLanguageMenu(HMENU hMainMenu)
 	if (langs.empty())
 	{
 		AppendMenu(hLangMenu, MF_STRING | MF_GRAYED, IDM_LANGUAGE_BASE,
-Lang::GetString(LANG_MSG_NO_LANGUAGES));
+			_T("(No languages found)"));
 		return;
 	}
 
@@ -320,7 +320,7 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			ofn.lpstrFileTitle = NULL;
 			ofn.nMaxFileTitle = 0;
 			ofn.lpstrInitialDir = Path_ROM;
-		    ofn.lpstrTitle = Lang::GetString(LANG_OPEN_ROM_TITLE2);
+			ofn.lpstrTitle = _T("Load ROM");
 			ofn.Flags = OFN_FILEMUSTEXIST;
 			ofn.lpstrDefExt = NULL;
 			ofn.lCustData = 0;
@@ -352,7 +352,7 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			ofn.lpstrFileTitle = NULL;
 			ofn.nMaxFileTitle = 0;
 			ofn.lpstrInitialDir = Path_ROM;
-		    ofn.lpstrTitle = Lang::GetString(LANG_OPEN_HEADER_TITLE);
+			ofn.lpstrTitle = _T("Edit Header");
 			ofn.Flags = OFN_FILEMUSTEXIST;
 			ofn.lpstrDefExt = NULL;
 			ofn.lCustData = 0;
@@ -784,13 +784,13 @@ BOOL ProcessMessages (void)
 void UpdateTitlebar (void)
 {
 	TCHAR titlebar[256];
-if (NES::Running)
+	if (NES::Running)
 	{
 		if (GFX::forceNoSkip)
-			_stprintf(titlebar, Lang::GetString(LANG_TITLEBAR_FPS_NOSKIP), GFX::FPSnum);
-		else	_stprintf(titlebar, Lang::GetString(LANG_TITLEBAR_FPS_SKIP), GFX::FPSnum, GFX::FSkip, GFX::aFSkip?Lang::GetString(LANG_TITLEBAR_AUTO):_T(""));
+			_stprintf(titlebar, _T("Nintendulator - %i FPS (No FSkip)"), GFX::FPSnum);
+		else	_stprintf(titlebar, _T("Nintendulator - %i FPS (%i %sFSkip)"), GFX::FPSnum, GFX::FSkip, GFX::aFSkip?_T("Auto"):_T(""));
 	}
-	else	_tcscpy(titlebar, Lang::GetString(LANG_TITLEBAR_STOPPED));
+	else	_tcscpy(titlebar, _T("Nintendulator - Stopped"));
 	if (TitlebarDelay > 0)
 	{
 		TitlebarDelay--;
