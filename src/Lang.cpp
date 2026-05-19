@@ -263,54 +263,6 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Failed to initialize joysticks!"),
     _T("Unable to modify device input cooperative level!"),
     _T("Unable to restore device input cooperative level!"),
-
-    // === Дополнительные пункты главного меню ===
-    _T("&Open ROM..."),                    // LANG_MENU_FILE_OPEN_ROM
-    _T("Edit iNES &Header"),               // LANG_MENU_FILE_EDIT_HEADER
-    _T("&Auto-Run"),                       // LANG_MENU_FILE_AUTORUN
-    _T("&Browse Save Files"),              // LANG_MENU_FILE_BROWSE_SAVES
-
-    _T("&CPU"),                            // LANG_MENU_CPU
-    _T("&Run\tF5"),                        // LANG_MENU_CPU_RUN
-    _T("&Step\tF11"),                      // LANG_MENU_CPU_STEP
-    _T("S&top\tF12"),                      // LANG_MENU_CPU_STOP
-    _T("Soft &Reset"),                     // LANG_MENU_CPU_SOFTRESET
-    _T("&Hard Reset"),                     // LANG_MENU_CPU_HARDRESET
-    _T("Save &State"),                     // LANG_MENU_CPU_SAVESTATE
-    _T("&Load State"),                     // LANG_MENU_CPU_LOADSTATE
-    _T("Previous State"),                  // LANG_MENU_CPU_PREVSTATE
-    _T("Next State"),                      // LANG_MENU_CPU_NEXTSTATE
-    _T("&Game Genie..."),                  // LANG_MENU_CPU_GAMEGENIE
-    _T("Break on &Bad Opcodes"),           // LANG_MENU_CPU_BADOPS
-
-    _T("&PPU"),                            // LANG_MENU_PPU
-    _T("Frame&skip"),                      // LANG_MENU_PPU_FRAMESKIP
-    _T("&Size"),                           // LANG_MENU_PPU_SIZE
-    _T("&Mode"),                           // LANG_MENU_PPU_MODE
-    _T("Pa&lette..."),                     // LANG_MENU_PPU_PALETTE
-    _T("Sl&owdown"),                       // LANG_MENU_PPU_SLOWDOWN
-    _T("&Fullscreen\tAlt+Enter"),          // LANG_MENU_PPU_FULLSCREEN
-    _T("Scan&lines"),                      // LANG_MENU_PPU_SCANLINES
-
-    _T("&Sound"),                          // LANG_MENU_SOUND
-    _T("Sound &Enabled"),                  // LANG_MENU_SOUND_ENABLED
-    _T("&Volume..."),                      // LANG_MENU_SOUND_VOLUME
-
-    _T("&Input"),                          // LANG_MENU_INPUT
-    _T("&Setup..."),                       // LANG_MENU_INPUT_SETUP
-
-    _T("Status &Window"),                  // LANG_MENU_DEBUG_STATWND
-    _T("CPU &Debugger"),                   // LANG_MENU_DEBUG_DISASM
-    _T("PPU De&bugger"),                   // LANG_MENU_DEBUG_PPUDEBUG
-
-    _T("&Game"),                           // LANG_MENU_GAME
-
-    _T("&Misc"),                           // LANG_MENU_MISC
-    _T("Start &AVI Capture"),              // LANG_MENU_MISC_STARTAVI
-    _T("Stop AVI Capture"),                // LANG_MENU_MISC_STOPAVI
-    _T("&Record Movie..."),                // LANG_MENU_MISC_RECORDMOVIE
-    _T("&Play Movie..."),                  // LANG_MENU_MISC_PLAYMOVIE
-    _T("&Stop Movie"),                     // LANG_MENU_MISC_STOPMOVIE
 };
 
 // ============================================================
@@ -571,54 +523,6 @@ static const KeyMapping KeyMap[] =
     { L"ERR_CTRL_COOP_MODIFY",      LANG_ERR_CTRL_COOP_MODIFY },
     { L"ERR_CTRL_COOP_RESTORE",     LANG_ERR_CTRL_COOP_RESTORE },
 
-    // === Дополнительные пункты главного меню ===
-    { L"MENU_FILE_OPEN_ROM",       LANG_MENU_FILE_OPEN_ROM },
-    { L"MENU_FILE_EDIT_HEADER",    LANG_MENU_FILE_EDIT_HEADER },
-    { L"MENU_FILE_AUTORUN",        LANG_MENU_FILE_AUTORUN },
-    { L"MENU_FILE_BROWSE_SAVES",   LANG_MENU_FILE_BROWSE_SAVES },
-
-    { L"MENU_CPU",                 LANG_MENU_CPU },
-    { L"MENU_CPU_RUN",             LANG_MENU_CPU_RUN },
-    { L"MENU_CPU_STEP",            LANG_MENU_CPU_STEP },
-    { L"MENU_CPU_STOP",            LANG_MENU_CPU_STOP },
-    { L"MENU_CPU_SOFTRESET",       LANG_MENU_CPU_SOFTRESET },
-    { L"MENU_CPU_HARDRESET",       LANG_MENU_CPU_HARDRESET },
-    { L"MENU_CPU_SAVESTATE",       LANG_MENU_CPU_SAVESTATE },
-    { L"MENU_CPU_LOADSTATE",       LANG_MENU_CPU_LOADSTATE },
-    { L"MENU_CPU_PREVSTATE",       LANG_MENU_CPU_PREVSTATE },
-    { L"MENU_CPU_NEXTSTATE",       LANG_MENU_CPU_NEXTSTATE },
-    { L"MENU_CPU_GAMEGENIE",       LANG_MENU_CPU_GAMEGENIE },
-    { L"MENU_CPU_BADOPS",          LANG_MENU_CPU_BADOPS },
-
-    { L"MENU_PPU",                 LANG_MENU_PPU },
-    { L"MENU_PPU_FRAMESKIP",       LANG_MENU_PPU_FRAMESKIP },
-    { L"MENU_PPU_SIZE",            LANG_MENU_PPU_SIZE },
-    { L"MENU_PPU_MODE",            LANG_MENU_PPU_MODE },
-    { L"MENU_PPU_PALETTE",         LANG_MENU_PPU_PALETTE },
-    { L"MENU_PPU_SLOWDOWN",        LANG_MENU_PPU_SLOWDOWN },
-    { L"MENU_PPU_FULLSCREEN",      LANG_MENU_PPU_FULLSCREEN },
-    { L"MENU_PPU_SCANLINES",       LANG_MENU_PPU_SCANLINES },
-
-    { L"MENU_SOUND",               LANG_MENU_SOUND },
-    { L"MENU_SOUND_ENABLED",       LANG_MENU_SOUND_ENABLED },
-    { L"MENU_SOUND_VOLUME",        LANG_MENU_SOUND_VOLUME },
-
-    { L"MENU_INPUT",               LANG_MENU_INPUT },
-    { L"MENU_INPUT_SETUP",         LANG_MENU_INPUT_SETUP },
-
-    { L"MENU_DEBUG_STATWND",       LANG_MENU_DEBUG_STATWND },
-    { L"MENU_DEBUG_DISASM",        LANG_MENU_DEBUG_DISASM },
-    { L"MENU_DEBUG_PPUDEBUG",      LANG_MENU_DEBUG_PPUDEBUG },
-
-    { L"MENU_GAME",                LANG_MENU_GAME },
-
-    { L"MENU_MISC",                LANG_MENU_MISC },
-    { L"MENU_MISC_STARTAVI",       LANG_MENU_MISC_STARTAVI },
-    { L"MENU_MISC_STOPAVI",        LANG_MENU_MISC_STOPAVI },
-    { L"MENU_MISC_RECORDMOVIE",    LANG_MENU_MISC_RECORDMOVIE },
-    { L"MENU_MISC_PLAYMOVIE",      LANG_MENU_MISC_PLAYMOVIE },
-    { L"MENU_MISC_STOPMOVIE",      LANG_MENU_MISC_STOPMOVIE },
-
     { NULL, LANG_STRING_COUNT }
 };
 
@@ -721,7 +625,7 @@ bool Lang::Load(const TCHAR *langName)
     return true;
 }
 
-const wchar_t* Lang::GetString(LangStringID id)
+const TCHAR* Lang::GetString(LangStringID id)
 {
     if (id < 0 || id >= LANG_STRING_COUNT) return _T("");
     return Strings[id].c_str();
@@ -740,63 +644,12 @@ const TCHAR* Lang::GetCurrentLanguage()
 void Lang::UpdateMenu(HMENU hMenu)
 {
     if (!hMenu) return;
-
-    // Обновляем названия основных пунктов меню
     ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_STRING | MF_POPUP,
                (UINT_PTR)GetSubMenu(hMenu, 0), GetString(LANG_MENU_FILE));
-    
-    ModifyMenu(hMenu, 1, MF_BYPOSITION | MF_STRING | MF_POPUP,
-               (UINT_PTR)GetSubMenu(hMenu, 1), GetString(LANG_MENU_CPU));
-    
-    ModifyMenu(hMenu, 2, MF_BYPOSITION | MF_STRING | MF_POPUP,
-               (UINT_PTR)GetSubMenu(hMenu, 2), GetString(LANG_MENU_PPU));
-    
-    ModifyMenu(hMenu, 3, MF_BYPOSITION | MF_STRING | MF_POPUP,
-               (UINT_PTR)GetSubMenu(hMenu, 3), GetString(LANG_MENU_SOUND));
-    
-    ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_STRING | MF_POPUP,
-               (UINT_PTR)GetSubMenu(hMenu, 4), GetString(LANG_MENU_INPUT));
-    
-    ModifyMenu(hMenu, 5, MF_BYPOSITION | MF_STRING | MF_POPUP,
-               (UINT_PTR)GetSubMenu(hMenu, 5), GetString(LANG_MENU_DEBUG));
-    
-    ModifyMenu(hMenu, 6, MF_BYPOSITION | MF_STRING | MF_POPUP,
-               (UINT_PTR)GetSubMenu(hMenu, 6), GetString(LANG_MENU_GAME));
-    
-    ModifyMenu(hMenu, 7, MF_BYPOSITION | MF_STRING | MF_POPUP,
-               (UINT_PTR)GetSubMenu(hMenu, 7), GetString(LANG_MENU_MISC));
-
     ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING | MF_POPUP,
                (UINT_PTR)GetSubMenu(hMenu, 8), GetString(LANG_MENU_LANGUAGE));
-    
     ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING | MF_POPUP,
                (UINT_PTR)GetSubMenu(hMenu, 9), GetString(LANG_MENU_HELP));
-
-    // === Подменю File ===
-    HMENU hFile = GetSubMenu(hMenu, 0);
-    if (hFile)
-    {
-        ModifyMenu(hFile, ID_FILE_OPEN,        MF_BYCOMMAND, ID_FILE_OPEN,        GetString(LANG_MENU_FILE_OPEN_ROM));
-        ModifyMenu(hFile, ID_FILE_HEADER,      MF_BYCOMMAND, ID_FILE_HEADER,      GetString(LANG_MENU_FILE_EDIT_HEADER));
-        ModifyMenu(hFile, ID_FILE_AUTORUN,     MF_BYCOMMAND, ID_FILE_AUTORUN,     GetString(LANG_MENU_FILE_AUTORUN));
-        ModifyMenu(hFile, ID_FILE_BROWSESAVES, MF_BYCOMMAND, ID_FILE_BROWSESAVES, GetString(LANG_MENU_FILE_BROWSE_SAVES));
-    }
-
-    // === Подменю CPU ===
-    HMENU hCPU = GetSubMenu(hMenu, 1);
-    if (hCPU)
-    {
-        ModifyMenu(hCPU, ID_CPU_RUN,         MF_BYCOMMAND, ID_CPU_RUN,        GetString(LANG_MENU_CPU_RUN));
-        ModifyMenu(hCPU, ID_CPU_STEP,        MF_BYCOMMAND, ID_CPU_STEP,       GetString(LANG_MENU_CPU_STEP));
-        ModifyMenu(hCPU, ID_CPU_STOP,        MF_BYCOMMAND, ID_CPU_STOP,       GetString(LANG_MENU_CPU_STOP));
-        ModifyMenu(hCPU, ID_CPU_SOFTRESET,   MF_BYCOMMAND, ID_CPU_SOFTRESET,  GetString(LANG_MENU_CPU_SOFTRESET));
-        ModifyMenu(hCPU, ID_CPU_HARDRESET,   MF_BYCOMMAND, ID_CPU_HARDRESET,  GetString(LANG_MENU_CPU_HARDRESET));
-        ModifyMenu(hCPU, ID_CPU_SAVESTATE,   MF_BYCOMMAND, ID_CPU_SAVESTATE,  GetString(LANG_MENU_CPU_SAVESTATE));
-        ModifyMenu(hCPU, ID_CPU_LOADSTATE,   MF_BYCOMMAND, ID_CPU_LOADSTATE,  GetString(LANG_MENU_CPU_LOADSTATE));
-        ModifyMenu(hCPU, ID_CPU_GAMEGENIE,   MF_BYCOMMAND, ID_CPU_GAMEGENIE,  GetString(LANG_MENU_CPU_GAMEGENIE));
-        ModifyMenu(hCPU, ID_CPU_BADOPS,      MF_BYCOMMAND, ID_CPU_BADOPS,     GetString(LANG_MENU_CPU_BADOPS));
-    }
-
     DrawMenuBar(hMainWnd);
 }
 
