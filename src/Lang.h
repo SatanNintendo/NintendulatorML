@@ -205,6 +205,12 @@ enum LangStringID
     LANG_OPEN_HEADER_TITLE,
     LANG_MSG_NO_LANGUAGES,
 
+    // ---------- APU errors (дополнительные) ----------
+    LANG_ERR_APU_INIT,
+    LANG_ERR_APU_BUFFER2,
+    LANG_ERR_APU_FORMAT2,
+    LANG_MSG_APU_DISABLED2,
+
     LANG_STRING_COUNT   // ← всегда последним!
 };
 
