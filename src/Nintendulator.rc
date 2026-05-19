@@ -247,8 +247,8 @@ BEGIN
     CONTROL         "&Allow simultaneous Left+Right and Up+Down",IDC_CONT_UDLR,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,60,236,8
     CONTROL         "Configure &POV triggers as 8-way buttons",IDC_CONT_POV,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,68,236,8
-    DEFPUSHBUTTON   "Close",IDOK,198,70,48,16
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,70,236,8
+    DEFPUSHBUTTON   "Close",IDOK,198,80,48,16
 END
 
 IDD_STDPORT_ZAPPER DIALOGEX 0, 0, 244, 56
