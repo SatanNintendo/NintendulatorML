@@ -86,16 +86,16 @@ void	StdPort_SetControllerType (StdPort *&Port, STDCONT_TYPE Type, DWORD *button
 const TCHAR	*StdPort_Mappings[STD_MAX];
 void	StdPort_SetMappings (void)
 {
-	StdPort_Mappings[STD_UNCONNECTED] = Lang::GetString(LANG_CTRL_STD_UNCONNECTED);
-	StdPort_Mappings[STD_STDCONTROLLER] = Lang::GetString(LANG_CTRL_STD_STDCONTROLLER);
-	StdPort_Mappings[STD_ZAPPER] = Lang::GetString(LANG_CTRL_STD_ZAPPER);
-	StdPort_Mappings[STD_ARKANOIDPADDLE] = Lang::GetString(LANG_CTRL_STD_ARKANOID);
-	StdPort_Mappings[STD_POWERPAD] = Lang::GetString(LANG_CTRL_STD_POWERPAD);
-	StdPort_Mappings[STD_FOURSCORE] = Lang::GetString(LANG_CTRL_STD_FOURSCORE);
-	StdPort_Mappings[STD_SNESCONTROLLER] = Lang::GetString(LANG_CTRL_STD_SNES);
-	StdPort_Mappings[STD_VSZAPPER] = Lang::GetString(LANG_CTRL_STD_VSZAPPER);
-	StdPort_Mappings[STD_SNESMOUSE] = Lang::GetString(LANG_CTRL_STD_SNESMOUSE);
-	StdPort_Mappings[STD_FOURSCORE2] = Lang::GetString(LANG_CTRL_STD_FOURSCORE2);
+	StdPort_Mappings[STD_UNCONNECTED] = _T("Unconnected");
+	StdPort_Mappings[STD_STDCONTROLLER] = _T("Standard Controller");
+	StdPort_Mappings[STD_ZAPPER] = _T("Zapper");
+	StdPort_Mappings[STD_ARKANOIDPADDLE] = _T("Arkanoid Paddle");
+	StdPort_Mappings[STD_POWERPAD] = _T("Power Pad");
+	StdPort_Mappings[STD_FOURSCORE] = _T("Four Score (port 1 only)");
+	StdPort_Mappings[STD_SNESCONTROLLER] = _T("SNES Controller");
+	StdPort_Mappings[STD_VSZAPPER] = _T("VS Unisystem Zapper");
+	StdPort_Mappings[STD_SNESMOUSE] = _T("SNES Mouse");
+	StdPort_Mappings[STD_FOURSCORE2] = _T("Four Score (port 2 only)");
 }
 
 void    ExpPort_SetControllerType (ExpPort *&Port, EXPCONT_TYPE Type, DWORD *buttons)
@@ -120,13 +120,13 @@ void    ExpPort_SetControllerType (ExpPort *&Port, EXPCONT_TYPE Type, DWORD *but
 const TCHAR	*ExpPort_Mappings[EXP_MAX];
 void	ExpPort_SetMappings (void)
 {
-	ExpPort_Mappings[EXP_UNCONNECTED] = Lang::GetString(LANG_CTRL_EXP_UNCONNECTED);
-	ExpPort_Mappings[EXP_FAMI4PLAY] = Lang::GetString(LANG_CTRL_EXP_FAMI4PLAY);
-	ExpPort_Mappings[EXP_ARKANOIDPADDLE] = Lang::GetString(LANG_CTRL_EXP_ARKANOID);
-	ExpPort_Mappings[EXP_FAMILYBASICKEYBOARD] = Lang::GetString(LANG_CTRL_EXP_FBKEY);
-	ExpPort_Mappings[EXP_SUBORKEYBOARD] = Lang::GetString(LANG_CTRL_EXP_SUBORKEY);
-	ExpPort_Mappings[EXP_FAMTRAINER] = Lang::GetString(LANG_CTRL_EXP_FAMTRAINER);
-	ExpPort_Mappings[EXP_TABLET] = Lang::GetString(LANG_CTRL_EXP_TABLET);
+	ExpPort_Mappings[EXP_UNCONNECTED] = _T("Unconnected");
+	ExpPort_Mappings[EXP_FAMI4PLAY] = _T("Famicom 4-Player Adapter");
+	ExpPort_Mappings[EXP_ARKANOIDPADDLE] = _T("Famicom Arkanoid Paddle");
+	ExpPort_Mappings[EXP_FAMILYBASICKEYBOARD] = _T("Family Basic Keyboard");
+	ExpPort_Mappings[EXP_SUBORKEYBOARD] = _T("Subor Keyboard");
+	ExpPort_Mappings[EXP_FAMTRAINER] = _T("Family Trainer");
+	ExpPort_Mappings[EXP_TABLET] = _T("Oeka Kids Tablet");
 }
 
 BOOL	POVAxis = TRUE;
@@ -137,17 +137,9 @@ INT_PTR	CALLBACK	ControllerProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 	int i;
 	switch (uMsg)
 	{
-	case WM_INITDIALOG:
+		case WM_INITDIALOG:
 		SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_CONTROLLERS));
-		SetDlgItemText(hDlg, IDC_CONT_LABEL_PORT1, Lang::GetString(LANG_CTRL_PORT1_LABEL));
-		SetDlgItemText(hDlg, IDC_CONT_LABEL_PORT2, Lang::GetString(LANG_CTRL_PORT2_LABEL));
-		SetDlgItemText(hDlg, IDC_CONT_LABEL_EXP,   Lang::GetString(LANG_CTRL_EXP_LABEL));
-		SetDlgItemText(hDlg, IDC_CONT_UDLR,        Lang::GetString(LANG_CTRL_UDLR_TEXT));
-		SetDlgItemText(hDlg, IDC_CONT_POV,         Lang::GetString(LANG_CTRL_POV_TEXT));
-		SetDlgItemText(hDlg, IDC_CONT_CPORT1,      Lang::GetString(LANG_CTRL_CONFIG));
-		SetDlgItemText(hDlg, IDC_CONT_CPORT2,      Lang::GetString(LANG_CTRL_CONFIG));
-		SetDlgItemText(hDlg, IDC_CONT_CEXPPORT,    Lang::GetString(LANG_CTRL_CONFIG));
-		SetDlgItemText(hDlg, IDOK,                 Lang::GetString(LANG_CTRL_CLOSE));
+		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_OK));
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT1, CB_RESETCONTENT, 0, 0);
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT2, CB_RESETCONTENT, 0, 0);
 		for (i = 0; i < STD_MAX; i++)
@@ -296,7 +288,7 @@ BOOL CALLBACK	EnumKeyboardObjectsCallback (LPCDIDEVICEOBJECTINSTANCE lpddoi, LPV
 		ItemNum = lpddoi->dwOfs;
 		if ((ItemNum >= 0) && (ItemNum < 256))
 			dev.ButtonNames[ItemNum] = _tcsdup(lpddoi->tszName);
-		else	MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_INVALID_KEY), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		else	MessageBox(hMainWnd, _T("Error - encountered invalid keyboard key ID!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 	}
 	return DIENUM_CONTINUE;
 }
@@ -325,7 +317,7 @@ BOOL CALLBACK	EnumMouseObjectsCallback (LPCDIDEVICEOBJECTINSTANCE lpddoi, LPVOID
 		ItemNum = (lpddoi->dwOfs - FIELD_OFFSET(DIMOUSESTATE2, rgbButtons)) / sizeof(dev.MouseState.rgbButtons[0]);
 		if ((ItemNum >= 0) && (ItemNum < 8))
 			dev.ButtonNames[ItemNum] = _tcsdup(lpddoi->tszName);
-		else	MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_INVALID_MOUSE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		else	MessageBox(hMainWnd, _T("Error - encountered invalid mouse button ID!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 	}
 
 	return DIENUM_CONTINUE;
@@ -561,18 +553,18 @@ void	Init (void)
 	
 	if (FAILED(DirectInput8Create(hInst, DIRECTINPUT_VERSION, IID_IDirectInput8, (LPVOID *)&DirectInput, NULL)))
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_DINPUT), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, _T("Unable to initialize DirectInput!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 		return;
 	}
 
 	if (!InitKeyboard())
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_KEYBOARD), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONWARNING);
+		MessageBox(hMainWnd, _T("Failed to initialize keyboard!"), _T("Nintendulator"), MB_OK | MB_ICONWARNING);
 	if (!InitMouse())
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_MOUSE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONWARNING);
+		MessageBox(hMainWnd, _T("Failed to initialize mouse!"), _T("Nintendulator"), MB_OK | MB_ICONWARNING);
 
 	NumDevices = 2;	// joysticks start at slot 2
 	if (FAILED(DirectInput->EnumDevices(DI8DEVCLASS_GAMECTRL, EnumJoysticksCallback, NULL, DIEDFL_ALLDEVICES)))
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_JOYSTICK), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, _T("Failed to initialize joysticks!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 
 	Movie::Mode = 0;
 }
@@ -1047,7 +1039,7 @@ int	GetConfigButton (HWND hWnd, int DevNum, BOOL AxesOnly = FALSE)
 
 	if (FAILED(dev.DIDevice->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE)))
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_COOP_MODIFY), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, _T("Unable to modify device input cooperative level!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 		return Key;
 	}
 
@@ -1164,7 +1156,7 @@ int	GetConfigButton (HWND hWnd, int DevNum, BOOL AxesOnly = FALSE)
 	dev.DIDevice->Unacquire();
 	if (FAILED(dev.DIDevice->SetCooperativeLevel(hMainWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE)))
 	{
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_COOP_RESTORE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, _T("Unable to restore device input cooperative level!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
 		return Key;
 	}
 	return Key;
