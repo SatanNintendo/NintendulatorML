@@ -444,14 +444,14 @@ const TCHAR* Lang::GetCurrentLanguage()
 
 void Lang::UpdateMenu(HMENU hMenu)
 {
-    if (!hMenu) return;
-    ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_FILE));
-    ModifyMenu(hMenu, 1, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_NES));
-    ModifyMenu(hMenu, 2, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_SETTINGS));
-    ModifyMenu(hMenu, 3, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_MOVIE));
-    ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_DEBUG));
-    ModifyMenu(hMenu, 5, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_LANGUAGE));
-    ModifyMenu(hMenu, 6, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_HELP));
+   if (!hMenu) return;
+    // Позиции соответствуют реальному меню в Nintendulator.rc:
+    // 0=File, 1=CPU, 2=PPU, 3=Sound, 4=Input, 5=Debug, 6=Game, 7=Misc, 8=Language, 9=Help
+    ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 0), GetString(LANG_MENU_FILE));
+    // CPU, PPU, Sound, Input, Debug — при желании добавить свои LANG_MENU_CPU и т.д.
+    // Пока меняем только Language и Help, т.к. они точно есть:
+    ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 8), GetString(LANG_MENU_LANGUAGE));
+    ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 9), GetString(LANG_MENU_HELP));
     DrawMenuBar(hMainWnd);
 }
 
