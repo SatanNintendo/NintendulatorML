@@ -625,7 +625,7 @@ bool Lang::Load(const TCHAR *langName)
     return true;
 }
 
-const TCHAR* Lang::GetString(LangStringID id)
+const wchar_t* Lang::GetString(LangStringID id)
 {
     if (id < 0 || id >= LANG_STRING_COUNT) return _T("");
     return Strings[id].c_str();
