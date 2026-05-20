@@ -78,6 +78,22 @@ ERR_APU_FORMAT=Unsupported audio format
 MSG_APU_DISABLED=Sound disabled
 
 # === Controllers ===
+CONT_UNCONNECTED=Unconnected
+CONT_STDCONTROLLER=Standard Controller
+CONT_ZAPPER=Zapper
+CONT_ARKANOIDPADDLE=Arkanoid Paddle
+CONT_POWERPAD=Power Pad
+CONT_FOURSCORE1=Four Score (port 1 only)
+CONT_SNESCONTROLLER=SNES Controller
+CONT_VSZAPPER=VS Unisystem Zapper
+CONT_SNESMOUSE=SNES Mouse
+CONT_FOURSCORE2=Four Score (port 2 only)
+CONT_FAMI4PLAY=Famicom 4-Player Adapter
+CONT_EXP_ARKANOIDPADDLE=Famicom Arkanoid Paddle
+CONT_FAMILYBASICKEYBOARD=Family Basic Keyboard
+CONT_SUBORKEYBOARD=Subor Keyboard
+CONT_FAMTRAINER=Family Trainer
+CONT_TABLET=Oeka Kids Tablet
 CONT_LABEL_PORT1=Controller Port &1:
 CONT_LABEL_PORT2=Controller Port &2:
 CONT_LABEL_EXP=&Expansion Port:
