@@ -493,8 +493,18 @@ const TCHAR* Lang::GetCurrentLanguage()
 void Lang::UpdateMenu(HMENU hMenu)
 {
     if (!hMenu) return;
-    ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_LANGUAGE));
-    ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_HELP));
+    // Позиции 0–9 — все пункты главного меню
+    ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 0), GetString(LANG_MENU_FILE));
+    ModifyMenu(hMenu, 1, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 1), GetString(LANG_MENU_CPU));
+    ModifyMenu(hMenu, 2, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 2), GetString(LANG_MENU_PPU));
+    ModifyMenu(hMenu, 3, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 3), GetString(LANG_MENU_SOUND));
+    ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 4), GetString(LANG_MENU_INPUT));
+    ModifyMenu(hMenu, 5, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 5), GetString(LANG_MENU_DEBUG));
+    // Позиция 6 — MENUITEM "&Game" (не POPUP), обновляем иначе
+    ModifyMenu(hMenu, 6, MF_BYPOSITION | MF_STRING, ID_GAME, GetString(LANG_MENU_GAME));
+    ModifyMenu(hMenu, 7, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 7), GetString(LANG_MENU_MISC));
+    ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 8), GetString(LANG_MENU_LANGUAGE));
+    ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 9), GetString(LANG_MENU_HELP));
     DrawMenuBar(hMainWnd);
 }
 
