@@ -158,6 +158,7 @@ INT_PTR	CALLBACK	ControllerProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 		SetDlgItemText(hDlg, IDC_CONT_POV,          Lang::GetString(LANG_CONT_POV));
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT1, CB_RESETCONTENT, 0, 0);
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT2, CB_RESETCONTENT, 0, 0);
+		StdPort_SetMappings();
 		for (i = 0; i < STD_MAX; i++)
 		{
 			SendDlgItemMessage(hDlg, IDC_CONT_SPORT1, CB_ADDSTRING, 0, (LPARAM)StdPort_Mappings[i]);
@@ -167,6 +168,7 @@ INT_PTR	CALLBACK	ControllerProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT2, CB_SETCURSEL, Port2->Type, 0);
 
 		SendDlgItemMessage(hDlg, IDC_CONT_SEXPPORT, CB_RESETCONTENT, 0, 0);
+		ExpPort_SetMappings();
 		for (i = 0; i < EXP_MAX; i++)
 			SendDlgItemMessage(hDlg, IDC_CONT_SEXPPORT, CB_ADDSTRING, 0, (LPARAM)ExpPort_Mappings[i]);
 		SendDlgItemMessage(hDlg, IDC_CONT_SEXPPORT, CB_SETCURSEL, PortExp->Type, 0);
