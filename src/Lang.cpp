@@ -493,8 +493,9 @@ const TCHAR* Lang::GetCurrentLanguage()
 void Lang::UpdateMenu(HMENU hMenu)
 {
     if (!hMenu) return;
-    ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_LANGUAGE));
-    ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_HELP));
+    int cnt = GetMenuItemCount(hMenu);
+    ModifyMenu(hMenu, cnt - 2, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, cnt - 2), GetString(LANG_MENU_LANGUAGE));
+    ModifyMenu(hMenu, cnt - 1, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, cnt - 1), GetString(LANG_MENU_HELP));
     DrawMenuBar(hMainWnd);
 }
 
