@@ -495,27 +495,41 @@ void Lang::UpdateMenu(HMENU hMenu)
     if (!hMenu)
         return;
 
-    // Главное меню
-    ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_STRING | MF_POPUP,
-        (UINT_PTR)GetSubMenu(hMenu, 0), GetString(LANG_MENU_FILE));
+    struct MENU_TRANSLATION
+    {
+        int Pos;
+        LANGID_STRING LangID;
+    };
 
-    ModifyMenu(hMenu, 1, MF_BYPOSITION | MF_STRING | MF_POPUP,
-        (UINT_PTR)GetSubMenu(hMenu, 1), GetString(LANG_MENU_NES));
+    static const MENU_TRANSLATION MainMenuMap[] =
+    {
+        {0, LANG_MENU_FILE},
+        {1, LANG_MENU_CPU},
+        {2, LANG_MENU_PPU},
+        {3, LANG_MENU_SOUND},
+        {4, LANG_MENU_INPUT},
+        {5, LANG_MENU_DEBUG},
+        {6, LANG_MENU_GAME},
+        {7, LANG_MENU_MISC},
+        {8, LANG_MENU_LANGUAGE},
+        {9, LANG_MENU_HELP},
+    };
 
-    ModifyMenu(hMenu, 2, MF_BYPOSITION | MF_STRING | MF_POPUP,
-        (UINT_PTR)GetSubMenu(hMenu, 2), GetString(LANG_MENU_SETTINGS));
+    for (const auto &item : MainMenuMap)
+    {
+        HMENU hSub = GetSubMenu(hMenu, item.Pos);
 
-    ModifyMenu(hMenu, 3, MF_BYPOSITION | MF_STRING | MF_POPUP,
-        (UINT_PTR)GetSubMenu(hMenu, 3), GetString(LANG_MENU_MOVIE));
-
-    ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_STRING | MF_POPUP,
-        (UINT_PTR)GetSubMenu(hMenu, 4), GetString(LANG_MENU_DEBUG));
-
-    ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING | MF_POPUP,
-        (UINT_PTR)GetSubMenu(hMenu, 8), GetString(LANG_MENU_LANGUAGE));
-
-    ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING | MF_POPUP,
-        (UINT_PTR)GetSubMenu(hMenu, 9), GetString(LANG_MENU_HELP));
+        if (hSub)
+        {
+            ModifyMenu(
+                hMenu,
+                item.Pos,
+                MF_BYPOSITION | MF_POPUP | MF_STRING,
+                (UINT_PTR)hSub,
+                GetString(item.LangID)
+            );
+        }
+    }
 
     DrawMenuBar(hMainWnd);
 }
