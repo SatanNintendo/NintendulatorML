@@ -12,65 +12,15 @@
 // ============================================================
 // СТРОКИ ПО УМОЛЧАНИЮ (английские)
 // ============================================================
-// Меню — File
+static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
+{
+    // Меню
     _T("&File"),
-    _T("&Open...\tCtrl+O"),
+    _T("&Open ROM..."),
     _T("&Close"),
     _T("Recent &Files"),
     _T("&Clear Recent Files"),
-    _T("E&xit\tAlt+F4"),
-    // Меню — CPU
-    _T("&CPU"),
-    _T("&Run\tF2"),
-    _T("&Step\tShift+F2"),
-    _T("S&top\tF3"),
-    _T("So&ft Reset\tF4"),
-    _T("H&ard Reset\tShift+F4"),
-    _T("Sa&ve State\tF5"),
-    _T("&Load State\tF8"),
-    _T("&Prev State\tF6"),
-    _T("&Next State\tF7"),
-    _T("&Game Genie\tCtrl+G"),
-    _T("L&og Invalid Opcodes"),
-    _T("Fra&me Step"),
-    _T("&Enabled\tCtrl+F"),
-    _T("&Step\tSpace"),
-    // Меню — PPU
-    _T("&PPU"),
-    _T("&Frameskip"),
-    _T("&Size"),
-    _T("&Fix Aspect"),
-    _T("&Mode"),
-    _T("P&alette..."),
-    _T("Sl&owdown"),
-    _T("&Enabled\tTab"),
-    _T("F&ullscreen\tAlt+Enter"),
-    _T("S&canlines"),
-    // Меню — Sound
-    _T("&Sound"),
-    _T("&Enabled\tCtrl+S"),
-    _T("&Volume"),
-    // Меню — Input
-    _T("&Input"),
-    _T("&Setup..."),
-    // Меню — Debug
-    _T("&Debug"),
-    _T("Dis&assembly\tCtrl+F1"),
-    _T("&Video\tCtrl+F2"),
-    _T("S&tatus Window"),
-    // Меню — Game/Misc
-    _T("&Game"),
-    _T("&Misc"),
-    _T("S&tart AVI Capture..."),
-    _T("St&op AVI Capture"),
-    _T("P&lay Movie..."),
-    _T("&Record Movie..."),
-    _T("Sto&p Movie"),
-    // Language / Help
-    _T("&Language"),
-    _T("&Help"),
-    _T("&About..."),
-    // Старые NES/Settings/Movie (для совместимости)
+    _T("E&xit"),
     _T("&NES"),
     _T("&Run"),
     _T("&Pause"),
@@ -88,6 +38,12 @@
     _T("&Record..."),
     _T("&Play..."),
     _T("&Stop"),
+    _T("&Debug"),
+    _T("&CPU Debugger"),
+    _T("&PPU Debugger"),
+    _T("&Language"),
+    _T("&Help"),
+    _T("&About..."),
 
     // Заголовок окна
     _T("Nintendulator"),
@@ -280,74 +236,34 @@ namespace
 struct KeyMapping { const wchar_t *key; LangStringID id; };
 static const KeyMapping KeyMap[] =
 {
-    { L"MENU_FILE",                  LANG_MENU_FILE },
-    { L"MENU_FILE_OPEN",             LANG_MENU_FILE_OPEN },
-    { L"MENU_FILE_CLOSE",            LANG_MENU_FILE_CLOSE },
-    { L"MENU_FILE_RECENT",           LANG_MENU_FILE_RECENT },
-    { L"MENU_FILE_RECENT_CLEAR",     LANG_MENU_FILE_RECENT_CLEAR },
-    { L"MENU_FILE_EXIT",             LANG_MENU_FILE_EXIT },
-    { L"MENU_CPU",                   LANG_MENU_CPU },
-    { L"MENU_CPU_RUN",               LANG_MENU_CPU_RUN },
-    { L"MENU_CPU_STEP",              LANG_MENU_CPU_STEP },
-    { L"MENU_CPU_STOP",              LANG_MENU_CPU_STOP },
-    { L"MENU_CPU_SOFTRESET",         LANG_MENU_CPU_SOFTRESET },
-    { L"MENU_CPU_HARDRESET",         LANG_MENU_CPU_HARDRESET },
-    { L"MENU_CPU_SAVESTATE",         LANG_MENU_CPU_SAVESTATE },
-    { L"MENU_CPU_LOADSTATE",         LANG_MENU_CPU_LOADSTATE },
-    { L"MENU_CPU_PREVSTATE",         LANG_MENU_CPU_PREVSTATE },
-    { L"MENU_CPU_NEXTSTATE",         LANG_MENU_CPU_NEXTSTATE },
-    { L"MENU_CPU_GAMEGENIE",         LANG_MENU_CPU_GAMEGENIE },
-    { L"MENU_CPU_BADOPS",            LANG_MENU_CPU_BADOPS },
-    { L"MENU_CPU_FRAMESTEP",         LANG_MENU_CPU_FRAMESTEP },
-    { L"MENU_CPU_FRAMESTEP_ENABLED", LANG_MENU_CPU_FRAMESTEP_ENABLED },
-    { L"MENU_CPU_FRAMESTEP_STEP",    LANG_MENU_CPU_FRAMESTEP_STEP },
-    { L"MENU_PPU",                   LANG_MENU_PPU },
-    { L"MENU_PPU_FRAMESKIP",         LANG_MENU_PPU_FRAMESKIP },
-    { L"MENU_PPU_SIZE",              LANG_MENU_PPU_SIZE },
-    { L"MENU_PPU_SIZE_ASPECT",       LANG_MENU_PPU_SIZE_ASPECT },
-    { L"MENU_PPU_MODE",              LANG_MENU_PPU_MODE },
-    { L"MENU_PPU_PALETTE",           LANG_MENU_PPU_PALETTE },
-    { L"MENU_PPU_SLOWDOWN",          LANG_MENU_PPU_SLOWDOWN },
-    { L"MENU_PPU_SLOWDOWN_ENABLED",  LANG_MENU_PPU_SLOWDOWN_ENABLED },
-    { L"MENU_PPU_FULLSCREEN",        LANG_MENU_PPU_FULLSCREEN },
-    { L"MENU_PPU_SCANLINES",         LANG_MENU_PPU_SCANLINES },
-    { L"MENU_SOUND",                 LANG_MENU_SOUND },
-    { L"MENU_SOUND_ENABLED",         LANG_MENU_SOUND_ENABLED },
-    { L"MENU_SOUND_VOLUME",          LANG_MENU_SOUND_VOLUME },
-    { L"MENU_INPUT",                 LANG_MENU_INPUT },
-    { L"MENU_INPUT_SETUP",           LANG_MENU_INPUT_SETUP },
-    { L"MENU_DEBUG",                 LANG_MENU_DEBUG },
-    { L"MENU_DEBUG_CPU",             LANG_MENU_DEBUG_CPU },
-    { L"MENU_DEBUG_PPU",             LANG_MENU_DEBUG_PPU },
-    { L"MENU_DEBUG_STATWND",         LANG_MENU_DEBUG_STATWND },
-    { L"MENU_GAME",                  LANG_MENU_GAME },
-    { L"MENU_MISC",                  LANG_MENU_MISC },
-    { L"MENU_MISC_STARTAVI",         LANG_MENU_MISC_STARTAVI },
-    { L"MENU_MISC_STOPAVI",          LANG_MENU_MISC_STOPAVI },
-    { L"MENU_MISC_PLAYMOVIE",        LANG_MENU_MISC_PLAYMOVIE },
-    { L"MENU_MISC_RECORDMOVIE",      LANG_MENU_MISC_RECORDMOVIE },
-    { L"MENU_MISC_STOPMOVIE",        LANG_MENU_MISC_STOPMOVIE },
-    { L"MENU_LANGUAGE",              LANG_MENU_LANGUAGE },
-    { L"MENU_HELP",                  LANG_MENU_HELP },
-    { L"MENU_HELP_ABOUT",            LANG_MENU_HELP_ABOUT },
-    // Старые ключи для совместимости
-    { L"MENU_NES",                   LANG_MENU_NES },
-    { L"MENU_NES_RUN",               LANG_MENU_NES_RUN },
-    { L"MENU_NES_PAUSE",             LANG_MENU_NES_PAUSE },
-    { L"MENU_NES_RESET",             LANG_MENU_NES_RESET },
-    { L"MENU_NES_POWER",             LANG_MENU_NES_POWER },
-    { L"MENU_NES_STOP",              LANG_MENU_NES_STOP },
-    { L"MENU_SETTINGS",              LANG_MENU_SETTINGS },
-    { L"MENU_SETTINGS_VIDEO",        LANG_MENU_SETTINGS_VIDEO },
-    { L"MENU_SETTINGS_SOUND",        LANG_MENU_SETTINGS_SOUND },
-    { L"MENU_SETTINGS_CONTROLLERS",  LANG_MENU_SETTINGS_CONTROLLERS },
-    { L"MENU_SETTINGS_GAMEGENIE",    LANG_MENU_SETTINGS_GAMEGENIE },
-    { L"MENU_SETTINGS_PATHS",        LANG_MENU_SETTINGS_PATHS },
-    { L"MENU_SETTINGS_CLOCK",        LANG_MENU_SETTINGS_CLOCK },
-    { L"MENU_MOVIE",                 LANG_MENU_MOVIE },
-    { L"MENU_MOVIE_RECORD",          LANG_MENU_MOVIE_RECORD },
-    { L"MENU_MOVIE_PLAY",            LANG_MENU_MOVIE_PLAY },
-    { L"MENU_MOVIE_STOP",            LANG_MENU_MOVIE_STOP },
+    { L"MENU_FILE",                 LANG_MENU_FILE },
+    { L"MENU_FILE_OPEN",            LANG_MENU_FILE_OPEN },
+    { L"MENU_FILE_CLOSE",           LANG_MENU_FILE_CLOSE },
+    { L"MENU_FILE_RECENT",          LANG_MENU_FILE_RECENT },
+    { L"MENU_FILE_RECENT_CLEAR",    LANG_MENU_FILE_RECENT_CLEAR },
+    { L"MENU_FILE_EXIT",            LANG_MENU_FILE_EXIT },
+    { L"MENU_NES",                  LANG_MENU_NES },
+    { L"MENU_NES_RUN",              LANG_MENU_NES_RUN },
+    { L"MENU_NES_PAUSE",            LANG_MENU_NES_PAUSE },
+    { L"MENU_NES_RESET",            LANG_MENU_NES_RESET },
+    { L"MENU_NES_POWER",            LANG_MENU_NES_POWER },
+    { L"MENU_NES_STOP",             LANG_MENU_NES_STOP },
+    { L"MENU_SETTINGS",             LANG_MENU_SETTINGS },
+    { L"MENU_SETTINGS_VIDEO",       LANG_MENU_SETTINGS_VIDEO },
+    { L"MENU_SETTINGS_SOUND",       LANG_MENU_SETTINGS_SOUND },
+    { L"MENU_SETTINGS_CONTROLLERS", LANG_MENU_SETTINGS_CONTROLLERS },
+    { L"MENU_SETTINGS_GAMEGENIE",   LANG_MENU_SETTINGS_GAMEGENIE },
+    { L"MENU_SETTINGS_PATHS",       LANG_MENU_SETTINGS_PATHS },
+    { L"MENU_SETTINGS_CLOCK",       LANG_MENU_SETTINGS_CLOCK },
+    { L"MENU_MOVIE",                LANG_MENU_MOVIE },
+    { L"MENU_MOVIE_RECORD",         LANG_MENU_MOVIE_RECORD },
+    { L"MENU_MOVIE_PLAY",           LANG_MENU_MOVIE_PLAY },
+    { L"MENU_MOVIE_STOP",           LANG_MENU_MOVIE_STOP },
+    { L"MENU_DEBUG",                LANG_MENU_DEBUG },
+    { L"MENU_DEBUG_CPU",            LANG_MENU_DEBUG_CPU },
+    { L"MENU_DEBUG_PPU",            LANG_MENU_DEBUG_PPU },
+    { L"MENU_LANGUAGE",             LANG_MENU_LANGUAGE },
+    { L"MENU_HELP",                 LANG_MENU_HELP },
     { L"MENU_HELP_ABOUT",           LANG_MENU_HELP_ABOUT },
     { L"WINDOW_TITLE",              LANG_WINDOW_TITLE },
     { L"WINDOW_TITLE_PAUSED",       LANG_WINDOW_TITLE_PAUSED },
@@ -577,18 +493,8 @@ const TCHAR* Lang::GetCurrentLanguage()
 void Lang::UpdateMenu(HMENU hMenu)
 {
     if (!hMenu) return;
-    // Позиции 0–9 — все пункты главного меню
-    ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 0), GetString(LANG_MENU_FILE));
-    ModifyMenu(hMenu, 1, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 1), GetString(LANG_MENU_CPU));
-    ModifyMenu(hMenu, 2, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 2), GetString(LANG_MENU_PPU));
-    ModifyMenu(hMenu, 3, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 3), GetString(LANG_MENU_SOUND));
-    ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 4), GetString(LANG_MENU_INPUT));
-    ModifyMenu(hMenu, 5, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 5), GetString(LANG_MENU_DEBUG));
-    // Позиция 6 — MENUITEM "&Game" (не POPUP), обновляем иначе
-    ModifyMenu(hMenu, 6, MF_BYPOSITION | MF_STRING, ID_GAME, GetString(LANG_MENU_GAME));
-    ModifyMenu(hMenu, 7, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 7), GetString(LANG_MENU_MISC));
-    ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 8), GetString(LANG_MENU_LANGUAGE));
-    ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_POPUP | MF_STRING, (UINT_PTR)GetSubMenu(hMenu, 9), GetString(LANG_MENU_HELP));
+    ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_LANGUAGE));
+    ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_HELP));
     DrawMenuBar(hMainWnd);
 }
 
