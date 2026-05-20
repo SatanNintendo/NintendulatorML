@@ -492,9 +492,31 @@ const TCHAR* Lang::GetCurrentLanguage()
 
 void Lang::UpdateMenu(HMENU hMenu)
 {
-    if (!hMenu) return;
-    ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_LANGUAGE));
-    ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING, 0, GetString(LANG_MENU_HELP));
+    if (!hMenu)
+        return;
+
+    // Главное меню
+    ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_STRING | MF_POPUP,
+        (UINT_PTR)GetSubMenu(hMenu, 0), GetString(LANG_MENU_FILE));
+
+    ModifyMenu(hMenu, 1, MF_BYPOSITION | MF_STRING | MF_POPUP,
+        (UINT_PTR)GetSubMenu(hMenu, 1), GetString(LANG_MENU_NES));
+
+    ModifyMenu(hMenu, 2, MF_BYPOSITION | MF_STRING | MF_POPUP,
+        (UINT_PTR)GetSubMenu(hMenu, 2), GetString(LANG_MENU_SETTINGS));
+
+    ModifyMenu(hMenu, 3, MF_BYPOSITION | MF_STRING | MF_POPUP,
+        (UINT_PTR)GetSubMenu(hMenu, 3), GetString(LANG_MENU_MOVIE));
+
+    ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_STRING | MF_POPUP,
+        (UINT_PTR)GetSubMenu(hMenu, 4), GetString(LANG_MENU_DEBUG));
+
+    ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING | MF_POPUP,
+        (UINT_PTR)GetSubMenu(hMenu, 8), GetString(LANG_MENU_LANGUAGE));
+
+    ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING | MF_POPUP,
+        (UINT_PTR)GetSubMenu(hMenu, 9), GetString(LANG_MENU_HELP));
+
     DrawMenuBar(hMainWnd);
 }
 
