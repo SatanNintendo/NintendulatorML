@@ -139,15 +139,7 @@ INT_PTR	CALLBACK	ControllerProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 	{
 		case WM_INITDIALOG:
 		SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_CONTROLLERS));
-		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_OK));
-		SetDlgItemText(hDlg, IDC_CONT_LABEL_PORT1,  Lang::GetString(LANG_CONT_LABEL_PORT1));
-		SetDlgItemText(hDlg, IDC_CONT_LABEL_PORT2,  Lang::GetString(LANG_CONT_LABEL_PORT2));
-		SetDlgItemText(hDlg, IDC_CONT_LABEL_EXP,    Lang::GetString(LANG_CONT_LABEL_EXP));
-		SetDlgItemText(hDlg, IDC_CONT_CPORT1,       Lang::GetString(LANG_CONT_CONFIG));
-		SetDlgItemText(hDlg, IDC_CONT_CPORT2,       Lang::GetString(LANG_CONT_CONFIG));
-		SetDlgItemText(hDlg, IDC_CONT_CEXPPORT,     Lang::GetString(LANG_CONT_CONFIG));
-		SetDlgItemText(hDlg, IDC_CONT_UDLR,         Lang::GetString(LANG_CONT_UDLR));
-		SetDlgItemText(hDlg, IDC_CONT_POV,          Lang::GetString(LANG_CONT_POV));
+		SetDlgItemText(hDlg, IDOK,               Lang::GetString(LANG_DLG_OK));
 		SetDlgItemText(hDlg, IDC_CONT_LABEL_PORT1,  Lang::GetString(LANG_CONT_LABEL_PORT1));
 		SetDlgItemText(hDlg, IDC_CONT_LABEL_PORT2,  Lang::GetString(LANG_CONT_LABEL_PORT2));
 		SetDlgItemText(hDlg, IDC_CONT_LABEL_EXP,    Lang::GetString(LANG_CONT_LABEL_EXP));
