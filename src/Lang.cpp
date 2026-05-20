@@ -5,10 +5,10 @@
 
 #include "stdafx.h"
 #include "Lang.h"
+#include "resource.h"
 #include "Nintendulator.h"
 #include <fstream>
 #include <algorithm>
-#include "resource.h"
 
 // ============================================================
 // СТРОКИ ПО УМОЛЧАНИЮ (английские)
