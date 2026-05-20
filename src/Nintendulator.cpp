@@ -75,27 +75,44 @@ int TitlebarDelay;
 
 void BuildLanguageMenu(HMENU hMainMenu)
 {
-	int cnt = GetMenuItemCount(hMainMenu);
-	HMENU hLangMenu = GetSubMenu(hMainMenu, cnt - 2); // Language before Help
-	if (!hLangMenu) return;
+	if (!hMainMenu)
+		return;
+
+	// Language menu is fixed at position 8
+	HMENU hLangMenu = GetSubMenu(hMainMenu, 8);
+
+	if (!hLangMenu)
+		return;
 
 	while (GetMenuItemCount(hLangMenu) > 0)
 		DeleteMenu(hLangMenu, 0, MF_BYPOSITION);
 
 	const std::vector<std::wstring> &langs = Lang::GetLanguageList();
+
 	if (langs.empty())
 	{
-		AppendMenu(hLangMenu, MF_STRING | MF_GRAYED, IDM_LANGUAGE_BASE,
-			_T("(No languages found)"));
+		AppendMenu(
+			hLangMenu,
+			MF_STRING | MF_GRAYED,
+			IDM_LANGUAGE_BASE,
+			_T("(No languages found)")
+		);
 		return;
 	}
 
 	for (int i = 0; i < (int)langs.size() && i < 100; i++)
 	{
 		UINT flags = MF_STRING;
+
 		if (langs[i] == Lang::GetCurrentLanguage())
 			flags |= MF_CHECKED;
-		AppendMenu(hLangMenu, flags, IDM_LANGUAGE_BASE + i, langs[i].c_str());
+
+		AppendMenu(
+			hLangMenu,
+			flags,
+			IDM_LANGUAGE_BASE + i,
+			langs[i].c_str()
+		);
 	}
 }
 
