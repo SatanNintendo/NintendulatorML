@@ -149,6 +149,7 @@ BEGIN
         END
         MENUITEM "F&ullscreen\tAlt+Enter",      ID_PPU_FULLSCREEN
         MENUITEM "S&canlines",                  ID_PPU_SCANLINES
+        MENUITEM "&Bilinear Filter",            ID_PPU_BILINEAR
     END
     POPUP "&Sound"
     BEGIN
