@@ -1,0 +1,76 @@
+# NintendulatorML Language File - Russian
+# Format: KEY=Value  |  # = comment  |  \n = newline in value
+
+[Info]
+Language=Russian
+Author=Твой ник / Community
+Version=1.0
+
+[Strings]
+# === Главное меню ===
+MENU_FILE=&Файл
+MENU_FILE_OPEN=&Открыть ROM...
+MENU_FILE_CLOSE=&Закрыть
+MENU_FILE_RECENT=Недавние &файлы
+MENU_FILE_RECENT_CLEAR=&Очистить список недавних
+MENU_FILE_EXIT=В&ыход
+MENU_NES=&NES
+MENU_NES_RUN=&Запуск
+MENU_NES_PAUSE=&Пауза
+MENU_NES_RESET=&Сброс
+MENU_NES_POWER=Цикл &питания
+MENU_NES_STOP=&Стоп
+MENU_SETTINGS=&Настройки
+MENU_SETTINGS_VIDEO=&Видео...
+MENU_SETTINGS_SOUND=&Звук...
+MENU_SETTINGS_CONTROLLERS=&Контроллеры...
+MENU_SETTINGS_GAMEGENIE=&Game Genie...
+MENU_SETTINGS_PATHS=&Пути...
+MENU_SETTINGS_CLOCK=&Скорость тактов...
+MENU_MOVIE=&Запись
+MENU_MOVIE_RECORD=&Записать...
+MENU_MOVIE_PLAY=&Воспроизвести...
+MENU_MOVIE_STOP=&Остановить
+MENU_DEBUG=&Отладка
+MENU_DEBUG_CPU=&CPU Отладчик
+MENU_DEBUG_PPU=&PPU Отладчик
+MENU_LANGUAGE=&Язык
+MENU_HELP=&Справка
+MENU_HELP_ABOUT=&О программе...
+
+# === Заголовок окна ===
+WINDOW_TITLE=Nintendulator
+WINDOW_TITLE_PAUSED=Nintendulator [Пауза]
+WINDOW_TITLE_FPS=Nintendulator - %s - %d FPS
+
+# === Диалоги файлов ===
+OPEN_ROM_TITLE=Открыть ROM
+OPEN_ROM_FILTER=NES ROMs (*.nes;*.unif;*.fds;*.nsf)\0*.nes;*.unif;*.fds;*.nsf\0Все файлы (*.*)\0*.*\0
+OPEN_MOVIE_TITLE=Открыть запись
+SAVE_MOVIE_TITLE=Сохранить запись
+OPEN_PALETTE_TITLE=Открыть палитру
+SAVE_AVI_TITLE=Сохранить AVI
+
+# === Контроллеры (уже должно работать) ===
+CONT_UNCONNECTED=Не подключено
+CONT_STDCONTROLLER=Стандартный контроллер
+CONT_ZAPPER=Zapper
+CONT_ARKANOIDPADDLE=Arkanoid Paddle
+CONT_POWERPAD=Power Pad
+CONT_FOURSCORE1=Four Score (только порт 1)
+CONT_SNESCONTROLLER=SNES контроллер
+CONT_VSZAPPER=VS Unisystem Zapper
+CONT_SNESMOUSE=SNES Mouse
+CONT_FOURSCORE2=Four Score (только порт 2)
+CONT_FAMI4PLAY=Famicom 4-Player Adapter
+CONT_EXP_ARKANOIDPADDLE=Famicom Arkanoid Paddle
+CONT_FAMILYBASICKEYBOARD=Family Basic Keyboard
+CONT_SUBORKEYBOARD=Subor Keyboard
+CONT_FAMTRAINER=Family Trainer
+CONT_TABLET=Oeka Kids Tablet
+CONT_LABEL_PORT1=Порт контроллера &1:
+CONT_LABEL_PORT2=Порт контроллера &2:
+CONT_LABEL_EXP=Порт &расширения:
+CONT_CONFIG=&Настроить
+CONT_UDLR=&Разрешить одновременные Left+Right и Up+Down
+CONT_POV=Настроить POV-триггеры как 8-позиционные кнопки
