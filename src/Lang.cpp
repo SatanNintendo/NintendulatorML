@@ -503,9 +503,15 @@ const TCHAR* Lang::GetCurrentLanguage()
 void Lang::UpdateMenu(HMENU hMenu)
 {
     if (!hMenu) return;
-    int cnt = GetMenuItemCount(hMenu);
-    ModifyMenu(hMenu, cnt - 2, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, cnt - 2), GetString(LANG_MENU_LANGUAGE));
-    ModifyMenu(hMenu, cnt - 1, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, cnt - 1), GetString(LANG_MENU_HELP));
+    ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 0), GetString(LANG_MENU_FILE));
+    ModifyMenu(hMenu, 1, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 1), GetString(LANG_MENU_CPU));
+    ModifyMenu(hMenu, 2, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 2), GetString(LANG_MENU_PPU));
+    ModifyMenu(hMenu, 3, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 3), GetString(LANG_MENU_SOUND));
+    ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 4), GetString(LANG_MENU_INPUT));
+    ModifyMenu(hMenu, 5, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 5), GetString(LANG_MENU_DEBUG));
+    ModifyMenu(hMenu, 7, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 7), GetString(LANG_MENU_MISC));
+    ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 8), GetString(LANG_MENU_LANGUAGE));
+    ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 9), GetString(LANG_MENU_HELP));
     DrawMenuBar(hMainWnd);
 }
 
