@@ -177,10 +177,10 @@ BEGIN
         MENUITEM "&Record Movie...",            ID_MISC_RECORDMOVIE
         MENUITEM "Sto&p Movie",                 ID_MISC_STOPMOVIE, GRAYED
     END
-        POPUP "&Language"
-        BEGIN
-            MENUITEM "(scanning...)",   IDM_LANGUAGE_BASE, GRAYED
-        END
+    POPUP "&Language"
+    BEGIN
+        MENUITEM "(scanning...)",   IDM_LANGUAGE_BASE, GRAYED
+    END
     POPUP "&Help"
     BEGIN
         MENUITEM "&About...",                   ID_HELP_ABOUT
