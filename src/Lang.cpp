@@ -495,41 +495,24 @@ void Lang::UpdateMenu(HMENU hMenu)
     if (!hMenu)
         return;
 
-    struct MENU_TRANSLATION
-    {
-        int Pos;
-        LANGID_STRING LangID;
-    };
+    ModifyMenu(
+        hMenu,
+        8,
+        MF_BYPOSITION | MF_POPUP | MF_STRING,
+        (UINT_PTR)GetSubMenu(hMenu, 8),
+        GetString(LANG_MENU_LANGUAGE)
+    );
 
-    static const MENU_TRANSLATION MainMenuMap[] =
-    {
-        {0, LANG_MENU_FILE},
-        {1, LANG_MENU_CPU},
-        {2, LANG_MENU_PPU},
-        {3, LANG_MENU_SOUND},
-        {4, LANG_MENU_INPUT},
-        {5, LANG_MENU_DEBUG},
-        {6, LANG_MENU_GAME},
-        {7, LANG_MENU_MISC},
-        {8, LANG_MENU_LANGUAGE},
-        {9, LANG_MENU_HELP},
-    };
+    ModifyMenu(
+        hMenu,
+        9,
+        MF_BYPOSITION | MF_POPUP | MF_STRING,
+        (UINT_PTR)GetSubMenu(hMenu, 9),
+        GetString(LANG_MENU_HELP)
+    );
 
-    for (const auto &item : MainMenuMap)
-    {
-        HMENU hSub = GetSubMenu(hMenu, item.Pos);
-
-        if (hSub)
-        {
-            ModifyMenu(
-                hMenu,
-                item.Pos,
-                MF_BYPOSITION | MF_POPUP | MF_STRING,
-                (UINT_PTR)hSub,
-                GetString(item.LangID)
-            );
-        }
-    }
+    DrawMenuBar(hMainWnd);
+}
 
     DrawMenuBar(hMainWnd);
 }
