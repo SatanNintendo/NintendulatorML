@@ -492,64 +492,79 @@ const TCHAR* Lang::GetCurrentLanguage()
 
 void Lang::UpdateMenu(HMENU hMenu)
 {
-    if (!hMenu)
-        return;
+    if (!hMenu) return;
 
-    ModifyMenu(
-        hMenu,
-        0,
-        MF_BYPOSITION | MF_POPUP | MF_STRING,
-        (UINT_PTR)GetSubMenu(hMenu, 0),
-        GetString(LANG_MENU_FILE)
-    );
+    // === Топ-уровневые меню (по позиции) ===
+    ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 0), GetString(LANG_MENU_FILE));
 
-    ModifyMenu(
-        hMenu,
-        1,
-        MF_BYPOSITION | MF_POPUP | MF_STRING,
-        (UINT_PTR)GetSubMenu(hMenu, 1),
-        GetString(LANG_MENU_NES)
-    );
+    // NES
+    ModifyMenu(hMenu, 1, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 1), GetString(LANG_MENU_NES));
 
-    ModifyMenu(
-        hMenu,
-        2,
-        MF_BYPOSITION | MF_POPUP | MF_STRING,
-        (UINT_PTR)GetSubMenu(hMenu, 2),
-        GetString(LANG_MENU_SETTINGS)
-    );
+    // Settings
+    ModifyMenu(hMenu, 2, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 2), GetString(LANG_MENU_SETTINGS));
 
-    ModifyMenu(
-        hMenu,
-        3,
-        MF_BYPOSITION | MF_POPUP | MF_STRING,
-        (UINT_PTR)GetSubMenu(hMenu, 3),
-        GetString(LANG_MENU_MOVIE)
-    );
+    // Movie
+    ModifyMenu(hMenu, 3, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 3), GetString(LANG_MENU_MOVIE));
 
-    ModifyMenu(
-        hMenu,
-        4,
-        MF_BYPOSITION | MF_POPUP | MF_STRING,
-        (UINT_PTR)GetSubMenu(hMenu, 4),
-        GetString(LANG_MENU_DEBUG)
-    );
+    // Debug
+    ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 4), GetString(LANG_MENU_DEBUG));
 
-    ModifyMenu(
-        hMenu,
-        8,
-        MF_BYPOSITION | MF_POPUP | MF_STRING,
-        (UINT_PTR)GetSubMenu(hMenu, 8),
-        GetString(LANG_MENU_LANGUAGE)
-    );
+    // Language
+    ModifyMenu(hMenu, 5, MF_BYPOSITION | MF_STRING | MF_POPUP,  // позиция может варьироваться
+               (UINT_PTR)GetSubMenu(hMenu, 5), GetString(LANG_MENU_LANGUAGE));
 
-    ModifyMenu(
-        hMenu,
-        9,
-        MF_BYPOSITION | MF_POPUP | MF_STRING,
-        (UINT_PTR)GetSubMenu(hMenu, 9),
-        GetString(LANG_MENU_HELP)
-    );
+    // Help
+    ModifyMenu(hMenu, 6, MF_BYPOSITION | MF_STRING | MF_POPUP,
+               (UINT_PTR)GetSubMenu(hMenu, 6), GetString(LANG_MENU_HELP));
+
+    // === Обновляем пункты внутри подменю ===
+
+    HMENU hFile = GetSubMenu(hMenu, 0);
+    if (hFile)
+    {
+        ModifyMenu(hFile, ID_FILE_OPEN,          MF_BYCOMMAND, ID_FILE_OPEN,          GetString(LANG_MENU_FILE_OPEN));
+        ModifyMenu(hFile, ID_FILE_CLOSE,         MF_BYCOMMAND, ID_FILE_CLOSE,         GetString(LANG_MENU_FILE_CLOSE));
+        ModifyMenu(hFile, ID_FILE_RECENT,        MF_BYCOMMAND, ID_FILE_RECENT,        GetString(LANG_MENU_FILE_RECENT));  // если есть
+        ModifyMenu(hFile, ID_FILE_RECENT_CLEAR,  MF_BYCOMMAND, ID_FILE_RECENT_CLEAR,  GetString(LANG_MENU_FILE_RECENT_CLEAR));
+        ModifyMenu(hFile, ID_FILE_EXIT,          MF_BYCOMMAND, ID_FILE_EXIT,          GetString(LANG_MENU_FILE_EXIT));
+    }
+
+    HMENU hNES = GetSubMenu(hMenu, 1);
+    if (hNES)
+    {
+        ModifyMenu(hNES, ID_CPU_RUN,       MF_BYCOMMAND, ID_CPU_RUN,       GetString(LANG_MENU_NES_RUN));
+        ModifyMenu(hNES, ID_CPU_PAUSE,     MF_BYCOMMAND, ID_CPU_PAUSE,     GetString(LANG_MENU_NES_PAUSE));   // проверь ID
+        ModifyMenu(hNES, ID_CPU_SOFTRESET, MF_BYCOMMAND, ID_CPU_SOFTRESET, GetString(LANG_MENU_NES_RESET));
+        ModifyMenu(hNES, ID_CPU_HARDRESET, MF_BYCOMMAND, ID_CPU_HARDRESET, GetString(LANG_MENU_NES_POWER));
+        ModifyMenu(hNES, ID_CPU_STOP,      MF_BYCOMMAND, ID_CPU_STOP,      GetString(LANG_MENU_NES_STOP));
+    }
+
+    HMENU hMovie = GetSubMenu(hMenu, 3);
+    if (hMovie)
+    {
+        ModifyMenu(hMovie, ID_MISC_RECORDMOVIE, MF_BYCOMMAND, ID_MISC_RECORDMOVIE, GetString(LANG_MENU_MOVIE_RECORD));
+        ModifyMenu(hMovie, ID_MISC_PLAYMOVIE,   MF_BYCOMMAND, ID_MISC_PLAYMOVIE,   GetString(LANG_MENU_MOVIE_PLAY));
+        ModifyMenu(hMovie, ID_MISC_STOPMOVIE,   MF_BYCOMMAND, ID_MISC_STOPMOVIE,   GetString(LANG_MENU_MOVIE_STOP));
+    }
+
+    HMENU hDebug = GetSubMenu(hMenu, 4);
+    if (hDebug)
+    {
+        ModifyMenu(hDebug, ID_DEBUG_CPU, MF_BYCOMMAND, ID_DEBUG_CPU, GetString(LANG_MENU_DEBUG_CPU));
+        ModifyMenu(hDebug, ID_DEBUG_PPU, MF_BYCOMMAND, ID_DEBUG_PPU, GetString(LANG_MENU_DEBUG_PPU));
+    }
+
+    HMENU hSettings = GetSubMenu(hMenu, 2);
+    if (hSettings)
+    {
+        ModifyMenu(hSettings, ID_INPUT_SETUP,          MF_BYCOMMAND, ID_INPUT_SETUP,          GetString(LANG_MENU_SETTINGS_CONTROLLERS));
+        // добавь остальные по необходимости
+    }
 
     DrawMenuBar(hMainWnd);
 }
