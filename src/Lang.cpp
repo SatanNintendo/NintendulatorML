@@ -497,6 +497,46 @@ void Lang::UpdateMenu(HMENU hMenu)
 
     ModifyMenu(
         hMenu,
+        0,
+        MF_BYPOSITION | MF_POPUP | MF_STRING,
+        (UINT_PTR)GetSubMenu(hMenu, 0),
+        GetString(LANG_MENU_FILE)
+    );
+
+    ModifyMenu(
+        hMenu,
+        1,
+        MF_BYPOSITION | MF_POPUP | MF_STRING,
+        (UINT_PTR)GetSubMenu(hMenu, 1),
+        GetString(LANG_MENU_NES)
+    );
+
+    ModifyMenu(
+        hMenu,
+        2,
+        MF_BYPOSITION | MF_POPUP | MF_STRING,
+        (UINT_PTR)GetSubMenu(hMenu, 2),
+        GetString(LANG_MENU_SETTINGS)
+    );
+
+    ModifyMenu(
+        hMenu,
+        3,
+        MF_BYPOSITION | MF_POPUP | MF_STRING,
+        (UINT_PTR)GetSubMenu(hMenu, 3),
+        GetString(LANG_MENU_MOVIE)
+    );
+
+    ModifyMenu(
+        hMenu,
+        4,
+        MF_BYPOSITION | MF_POPUP | MF_STRING,
+        (UINT_PTR)GetSubMenu(hMenu, 4),
+        GetString(LANG_MENU_DEBUG)
+    );
+
+    ModifyMenu(
+        hMenu,
         8,
         MF_BYPOSITION | MF_POPUP | MF_STRING,
         (UINT_PTR)GetSubMenu(hMenu, 8),
