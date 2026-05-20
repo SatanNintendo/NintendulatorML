@@ -86,16 +86,16 @@ void	StdPort_SetControllerType (StdPort *&Port, STDCONT_TYPE Type, DWORD *button
 const TCHAR	*StdPort_Mappings[STD_MAX];
 void	StdPort_SetMappings (void)
 {
-	StdPort_Mappings[STD_UNCONNECTED] = _T("Unconnected");
-	StdPort_Mappings[STD_STDCONTROLLER] = _T("Standard Controller");
-	StdPort_Mappings[STD_ZAPPER] = _T("Zapper");
-	StdPort_Mappings[STD_ARKANOIDPADDLE] = _T("Arkanoid Paddle");
-	StdPort_Mappings[STD_POWERPAD] = _T("Power Pad");
-	StdPort_Mappings[STD_FOURSCORE] = _T("Four Score (port 1 only)");
-	StdPort_Mappings[STD_SNESCONTROLLER] = _T("SNES Controller");
-	StdPort_Mappings[STD_VSZAPPER] = _T("VS Unisystem Zapper");
-	StdPort_Mappings[STD_SNESMOUSE] = _T("SNES Mouse");
-	StdPort_Mappings[STD_FOURSCORE2] = _T("Four Score (port 2 only)");
+	StdPort_Mappings[STD_UNCONNECTED] = Lang::GetString(LANG_CONT_UNCONNECTED);
+	StdPort_Mappings[STD_STDCONTROLLER] = Lang::GetString(LANG_CONT_STDCONTROLLER);
+	StdPort_Mappings[STD_ZAPPER] = Lang::GetString(LANG_CONT_ZAPPER);
+	StdPort_Mappings[STD_ARKANOIDPADDLE] = Lang::GetString(LANG_CONT_ARKANOIDPADDLE);
+	StdPort_Mappings[STD_POWERPAD] = Lang::GetString(LANG_CONT_POWERPAD);
+	StdPort_Mappings[STD_FOURSCORE] = Lang::GetString(LANG_CONT_FOURSCORE1);
+	StdPort_Mappings[STD_SNESCONTROLLER] = Lang::GetString(LANG_CONT_SNESCONTROLLER);
+	StdPort_Mappings[STD_VSZAPPER] = Lang::GetString(LANG_CONT_VSZAPPER);
+	StdPort_Mappings[STD_SNESMOUSE] = Lang::GetString(LANG_CONT_SNESMOUSE);
+	StdPort_Mappings[STD_FOURSCORE2] = Lang::GetString(LANG_CONT_FOURSCORE2);
 }
 
 void    ExpPort_SetControllerType (ExpPort *&Port, EXPCONT_TYPE Type, DWORD *buttons)
@@ -120,13 +120,13 @@ void    ExpPort_SetControllerType (ExpPort *&Port, EXPCONT_TYPE Type, DWORD *but
 const TCHAR	*ExpPort_Mappings[EXP_MAX];
 void	ExpPort_SetMappings (void)
 {
-	ExpPort_Mappings[EXP_UNCONNECTED] = _T("Unconnected");
-	ExpPort_Mappings[EXP_FAMI4PLAY] = _T("Famicom 4-Player Adapter");
-	ExpPort_Mappings[EXP_ARKANOIDPADDLE] = _T("Famicom Arkanoid Paddle");
-	ExpPort_Mappings[EXP_FAMILYBASICKEYBOARD] = _T("Family Basic Keyboard");
-	ExpPort_Mappings[EXP_SUBORKEYBOARD] = _T("Subor Keyboard");
-	ExpPort_Mappings[EXP_FAMTRAINER] = _T("Family Trainer");
-	ExpPort_Mappings[EXP_TABLET] = _T("Oeka Kids Tablet");
+	ExpPort_Mappings[EXP_UNCONNECTED] = Lang::GetString(LANG_CONT_UNCONNECTED);
+	ExpPort_Mappings[EXP_FAMI4PLAY] = Lang::GetString(LANG_CONT_FAMI4PLAY);
+	ExpPort_Mappings[EXP_ARKANOIDPADDLE] = Lang::GetString(LANG_CONT_EXP_ARKANOIDPADDLE);
+	ExpPort_Mappings[EXP_FAMILYBASICKEYBOARD] = Lang::GetString(LANG_CONT_FAMILYBASICKEYBOARD);
+	ExpPort_Mappings[EXP_SUBORKEYBOARD] = Lang::GetString(LANG_CONT_SUBORKEYBOARD);
+	ExpPort_Mappings[EXP_FAMTRAINER] = Lang::GetString(LANG_CONT_FAMTRAINER);
+	ExpPort_Mappings[EXP_TABLET] = Lang::GetString(LANG_CONT_TABLET);
 }
 
 BOOL	POVAxis = TRUE;
