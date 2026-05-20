@@ -37,7 +37,7 @@ unsigned short Palette15[512];
 unsigned short Palette16[512];
 unsigned long Palette32[512];
 char Depth;
-BOOL Fullscreen, Scanlines;
+BOOL Fullscreen, Scanlines, Bilinear;
 
 LARGE_INTEGER ClockFreq;
 LARGE_INTEGER LastClockVal;
@@ -126,6 +126,7 @@ void	Init (void)
 	PALsat = 50;
 	PC10compat = FALSE;
 	Fullscreen = FALSE;
+	Bilinear = FALSE;
 	InError = FALSE;
 
 	if (!QueryPerformanceFrequency(&ClockFreq))
@@ -424,6 +425,7 @@ void	SaveSettings (HKEY SettingsBase)
 {
 	RegSetValueEx(SettingsBase, _T("aFSkip")      , 0, REG_DWORD, (LPBYTE)&aFSkip     , sizeof(BOOL));
 	RegSetValueEx(SettingsBase, _T("Scanlines")   , 0, REG_DWORD, (LPBYTE)&Scanlines  , sizeof(BOOL));
+	RegSetValueEx(SettingsBase, _T("Bilinear")    , 0, REG_DWORD, (LPBYTE)&Bilinear   , sizeof(BOOL));
 
 	RegSetValueEx(SettingsBase, _T("FSkip")       , 0, REG_DWORD, (LPBYTE)&FSkip      , sizeof(DWORD));
 	RegSetValueEx(SettingsBase, _T("NTSChue")     , 0, REG_DWORD, (LPBYTE)&NTSChue    , sizeof(DWORD));
@@ -461,6 +463,7 @@ void	LoadSettings (HKEY SettingsBase)
 	CheckMenuRadioItem(hMenu, ID_PPU_SLOWDOWN_2, ID_PPU_SLOWDOWN_20, ID_PPU_SLOWDOWN_2, MF_BYCOMMAND);
 
 	Size = sizeof(BOOL);	RegQueryValueEx(SettingsBase, _T("Scanlines")   , 0, NULL, (LPBYTE)&Scanlines  , &Size);
+	Size = sizeof(BOOL);	RegQueryValueEx(SettingsBase, _T("Bilinear")    , 0, NULL, (LPBYTE)&Bilinear   , &Size);
 	Size = sizeof(BOOL);	RegQueryValueEx(SettingsBase, _T("aFSkip")      , 0, NULL, (LPBYTE)&aFSkip     , &Size);
 
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("FSkip")       , 0, NULL, (LPBYTE)&FSkip      , &Size);
@@ -481,6 +484,8 @@ void	LoadSettings (HKEY SettingsBase)
 
 	if (Scanlines)
 		CheckMenuItem(hMenu, ID_PPU_SCANLINES, MF_CHECKED);
+	if (Bilinear)
+		CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
 }
 
 int TitleDelay = 0;
@@ -571,6 +576,63 @@ BOOL	NeedSkip (void)
 	if (forceNoSkip)
 		return FALSE;
 	return FPSCnt < FSkip;
+}
+
+// Вспомогательная функция: смешивает два 32-битных цвета в пропорции t (0..255)
+static inline unsigned long BlendColors32(unsigned long c1, unsigned long c2, int t)
+{
+	int it = 255 - t;
+	unsigned long r = ((c1 >> 16 & 0xFF) * it + (c2 >> 16 & 0xFF) * t) / 255;
+	unsigned long g = ((c1 >>  8 & 0xFF) * it + (c2 >>  8 & 0xFF) * t) / 255;
+	unsigned long b = ((c1       & 0xFF) * it + (c2       & 0xFF) * t) / 255;
+	return (r << 16) | (g << 8) | b;
+}
+
+// Отрисовка с билинейной интерполяцией (32-битный цвет, масштаб 2x)
+void	DrawBilinear2x (void)
+{
+	// src — исходный массив пикселей NES (256x240, индексы в таблицу Palette32)
+	unsigned short *src = PPU::DrawArray;
+	int x, y;
+
+	for (y = 0; y < 480; y++)
+	{
+		unsigned long *dst = (unsigned long *)((unsigned char *)SurfDesc.lpSurface + y * Pitch);
+
+		// Координата в исходном изображении (с дробной частью)
+		// y идёт от 0 до 479, маппируем на 0..239
+		int srcY0 = y / 2;
+		int srcY1 = (srcY0 + 1 < 240) ? srcY0 + 1 : 239;
+		int ty = (y & 1) ? 128 : 0; // дробная часть: 0 или 0.5 * 256
+
+		if (Fullscreen)
+		{
+			for (x = 0; x < FullscreenBorder; x++)
+				*dst++ = 0x000000;
+		}
+
+		for (x = 0; x < 512; x++)
+		{
+			int srcX0 = x / 2;
+			int srcX1 = (srcX0 + 1 < 256) ? srcX0 + 1 : 255;
+			int tx = (x & 1) ? 128 : 0;
+
+			unsigned long c00 = Palette32[src[srcY0 * 256 + srcX0]];
+			unsigned long c10 = Palette32[src[srcY0 * 256 + srcX1]];
+			unsigned long c01 = Palette32[src[srcY1 * 256 + srcX0]];
+			unsigned long c11 = Palette32[src[srcY1 * 256 + srcX1]];
+
+			unsigned long top    = BlendColors32(c00, c10, tx);
+			unsigned long bottom = BlendColors32(c01, c11, tx);
+			*dst++ = BlendColors32(top, bottom, ty);
+		}
+
+		if (Fullscreen)
+		{
+			for (x = 0; x < FullscreenBorder; x++)
+				*dst++ = 0x000000;
+		}
+	}
 }
 
 void	Draw2x (void)
@@ -741,7 +803,9 @@ void	Update (void)
 		return;
 	Try(SecondarySurf->Lock(NULL, &SurfDesc, DDLOCK_WAIT | DDLOCK_NOSYSLOCK | DDLOCK_WRITEONLY | DDLOCK_SURFACEMEMORYPTR, NULL), _T("Failed to lock secondary surface"));
 
-	if (Fullscreen || Scanlines)
+	if (Bilinear && Depth == 32)
+		DrawBilinear2x();
+	else if (Fullscreen || Scanlines)
 		Draw2x();
 	else	Draw1x();
 
