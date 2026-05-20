@@ -514,9 +514,6 @@ void Lang::UpdateMenu(HMENU hMenu)
     DrawMenuBar(hMainWnd);
 }
 
-    DrawMenuBar(hMainWnd);
-}
-
 void Lang::SaveToRegistry(const TCHAR *langName)
 {
     HKEY hk;
