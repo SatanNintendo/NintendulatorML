@@ -577,6 +577,12 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				CheckMenuItem(hMenu, ID_PPU_SCANLINES, MF_CHECKED);
 			else	CheckMenuItem(hMenu, ID_PPU_SCANLINES, MF_UNCHECKED);
 			break;
+			case ID_PPU_BILINEAR:
+			GFX::Bilinear = !GFX::Bilinear;
+			if (GFX::Bilinear)
+				CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
+			else	CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_UNCHECKED);
+			break;
 		case ID_SOUND_ENABLED:
 			NES::SoundEnabled = !NES::SoundEnabled;
 			if (NES::SoundEnabled)
