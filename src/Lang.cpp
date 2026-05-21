@@ -200,6 +200,16 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("&Enabled"),
     _T("&Step"),    
     
+    // Sound подменю
+    _T("&Enabled"),
+
+    // Debug подменю
+    _T("&Status Window"),
+
+    // Misc подменю
+    _T("&Start AVI Capture..."),
+    _T("St&op AVI Capture"),    
+
     // PPU подменю
     _T("&Frameskip"),
     _T("&Size"),
