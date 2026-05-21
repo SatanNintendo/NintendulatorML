@@ -525,10 +525,12 @@ void Lang::UpdateMenu(HMENU hMenu)
 
     // === CPU подменю ===
     HMENU hCPU = GetSubMenu(hMenu, 1);
-    ModifyMenu(hCPU, ID_CPU_RUN,           MF_BYCOMMAND | MF_STRING, ID_CPU_RUN,          GetString(LANG_MENU_NES_RUN));
-    ModifyMenu(hCPU, ID_CPU_STEP,          MF_BYCOMMAND | MF_STRING, ID_CPU_STEP,         GetString(LANG_MENU_NES_PAUSE));
-    ModifyMenu(hCPU, ID_CPU_STOP,          MF_BYCOMMAND | MF_STRING, ID_CPU_STOP,         GetString(LANG_MENU_NES_STOP));
-    ModifyMenu(hCPU, ID_CPU_GAMEGENIE,     MF_BYCOMMAND | MF_STRING, ID_CPU_GAMEGENIE,    GetString(LANG_MENU_SETTINGS_GAMEGENIE));
+    ModifyMenu(hCPU, ID_CPU_RUN,           MF_BYCOMMAND | MF_STRING, ID_CPU_RUN,           GetString(LANG_MENU_NES_RUN));
+    ModifyMenu(hCPU, ID_CPU_STEP,          MF_BYCOMMAND | MF_STRING, ID_CPU_STEP,          GetString(LANG_MENU_NES_PAUSE));
+    ModifyMenu(hCPU, ID_CPU_STOP,          MF_BYCOMMAND | MF_STRING, ID_CPU_STOP,          GetString(LANG_MENU_NES_STOP));
+    ModifyMenu(hCPU, ID_CPU_SOFTRESET,     MF_BYCOMMAND | MF_STRING, ID_CPU_SOFTRESET,     GetString(LANG_MENU_NES_RESET));
+    ModifyMenu(hCPU, ID_CPU_HARDRESET,     MF_BYCOMMAND | MF_STRING, ID_CPU_HARDRESET,     GetString(LANG_MENU_NES_POWER));
+    ModifyMenu(hCPU, ID_CPU_GAMEGENIE,     MF_BYCOMMAND | MF_STRING, ID_CPU_GAMEGENIE,     GetString(LANG_MENU_SETTINGS_GAMEGENIE));
 
     // === Sound подменю ===
     HMENU hSound = GetSubMenu(hMenu, 3);
