@@ -550,6 +550,22 @@ void Lang::UpdateMenu(HMENU hMenu)
     ModifyMenu(hCPU, ID_CPU_HARDRESET,     MF_BYCOMMAND | MF_STRING, ID_CPU_HARDRESET,     GetString(LANG_MENU_NES_POWER));
     ModifyMenu(hCPU, ID_CPU_GAMEGENIE,     MF_BYCOMMAND | MF_STRING, ID_CPU_GAMEGENIE,     GetString(LANG_MENU_SETTINGS_GAMEGENIE));
 
+    // === PPU подменю ===
+    HMENU hPPU = GetSubMenu(hMenu, 2);
+    ModifyMenu(hPPU, ID_PPU_PALETTE,       MF_BYCOMMAND | MF_STRING, ID_PPU_PALETTE,      GetString(LANG_MENU_PPU_PALETTE));
+    ModifyMenu(hPPU, ID_PPU_FULLSCREEN,    MF_BYCOMMAND | MF_STRING, ID_PPU_FULLSCREEN,   GetString(LANG_MENU_PPU_FULLSCREEN));
+    ModifyMenu(hPPU, ID_PPU_SCANLINES,     MF_BYCOMMAND | MF_STRING, ID_PPU_SCANLINES,    GetString(LANG_MENU_PPU_SCANLINES));
+    ModifyMenu(hPPU, ID_PPU_BILINEAR,      MF_BYCOMMAND | MF_STRING, ID_PPU_BILINEAR,     GetString(LANG_MENU_PPU_BILINEAR));
+    // Подпункты Frameskip, Size, Mode, Slowdown — вложенные popup, обновляем заголовки
+    HMENU hFrameskip = GetSubMenu(hPPU, 0);
+    if (hFrameskip) ModifyMenu(hPPU, 0, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hFrameskip, GetString(LANG_MENU_PPU_FRAMESKIP));
+    HMENU hSize = GetSubMenu(hPPU, 1);
+    if (hSize) ModifyMenu(hPPU, 1, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hSize, GetString(LANG_MENU_PPU_SIZE));
+    HMENU hMode = GetSubMenu(hPPU, 2);
+    if (hMode) ModifyMenu(hPPU, 2, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hMode, GetString(LANG_MENU_PPU_MODE));
+    HMENU hSlowdown = GetSubMenu(hPPU, 4);
+    if (hSlowdown) ModifyMenu(hPPU, 4, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hSlowdown, GetString(LANG_MENU_PPU_SLOWDOWN));
+
     // === Sound подменю ===
     HMENU hSound = GetSubMenu(hMenu, 3);
     ModifyMenu(hSound, ID_SOUND_VOLUME,    MF_BYCOMMAND | MF_STRING, ID_SOUND_VOLUME,     GetString(LANG_MENU_SETTINGS_SOUND));
