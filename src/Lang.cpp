@@ -6,6 +6,7 @@
 #include "stdafx.h"
 #include "Lang.h"
 #include "Nintendulator.h"
+#include "resource.h"
 #include <fstream>
 #include <algorithm>
 
