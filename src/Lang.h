@@ -184,6 +184,16 @@ enum LangStringID
     LANG_ABOUT_TITLE,
     LANG_ABOUT_TEXT,
 
+    // ---------- PPU подменю ----------
+    LANG_MENU_PPU_FRAMESKIP,
+    LANG_MENU_PPU_SIZE,
+    LANG_MENU_PPU_MODE,
+    LANG_MENU_PPU_PALETTE,
+    LANG_MENU_PPU_SLOWDOWN,
+    LANG_MENU_PPU_FULLSCREEN,
+    LANG_MENU_PPU_SCANLINES,
+    LANG_MENU_PPU_BILINEAR,
+
     // ---------- Language menu ----------
     LANG_LANG_CHANGED,
     LANG_LANG_CHANGED_MSG,
