@@ -182,6 +182,14 @@ MENU_PPU_SLOWDOWN=Sl&owdown
 MENU_PPU_FULLSCREEN=F&ullscreen
 MENU_PPU_SCANLINES=S&canlines
 MENU_PPU_BILINEAR=&Bilinear Filter
+MENU_CPU_SAVESTATE=Sa&ve State
+MENU_CPU_LOADSTATE=&Load State
+MENU_CPU_PREVSTATE=&Prev State
+MENU_CPU_NEXTSTATE=&Next State
+MENU_CPU_BADOPS=L&og Invalid Opcodes
+MENU_CPU_FRAMESTEP=Fra&me Step
+MENU_CPU_FRAMESTEP_ENABLED=&Enabled
+MENU_CPU_FRAMESTEP_STEP=&Step
 LANG_CHANGED=Language Changed
 LANG_CHANGED_MSG=Language has been changed. Some elements will update on restart.
 
