@@ -190,6 +190,13 @@ MENU_CPU_BADOPS=L&og Invalid Opcodes
 MENU_CPU_FRAMESTEP=Fra&me Step
 MENU_CPU_FRAMESTEP_ENABLED=&Enabled
 MENU_CPU_FRAMESTEP_STEP=&Step
+MENU_FILE_HEADER=Edit iNES &Header
+MENU_FILE_AUTORUN=&Auto-Run
+MENU_FILE_BROWSESAVES=&Browse Save Files
+MENU_SOUND_ENABLED=&Enabled
+MENU_DEBUG_STATWND=&Status Window
+MENU_MISC_STARTAVI=&Start AVI Capture...
+MENU_MISC_STOPAVI=St&op AVI Capture
 LANG_CHANGED=Language Changed
 LANG_CHANGED_MSG=Language has been changed. Some elements will update on restart.
 
