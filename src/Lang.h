@@ -184,6 +184,11 @@ enum LangStringID
     LANG_ABOUT_TITLE,
     LANG_ABOUT_TEXT,
 
+    // ---------- File подменю ----------
+    LANG_MENU_FILE_HEADER,
+    LANG_MENU_FILE_AUTORUN,
+    LANG_MENU_FILE_BROWSESAVES,    
+
     // ---------- CPU подменю ----------
     LANG_MENU_CPU_SAVESTATE,
     LANG_MENU_CPU_LOADSTATE,
