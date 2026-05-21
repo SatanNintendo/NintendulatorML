@@ -185,6 +185,11 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("About Nintendulator"),
     _T("Nintendulator\nNES Emulator\n\nCopyright (C) QMT Productions"),
 
+    // File подменю
+    _T("Edit iNES &Header"),
+    _T("&Auto-Run"),
+    _T("&Browse Save Files"),    
+
     // CPU подменю
     _T("Sa&ve State"),
     _T("&Load State"),
