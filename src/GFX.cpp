@@ -308,7 +308,7 @@ void	Start (void)
 			return;
 		}
 
-		if (Scanlines)
+		if (Scanlines || Bilinear)
 		{
 			SurfDesc.dwWidth = 512;
 			SurfDesc.dwHeight = 480;
