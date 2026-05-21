@@ -572,12 +572,18 @@ void Lang::UpdateMenu(HMENU hMenu)
     ModifyMenu(hCPU, ID_CPU_NEXTSTATE,         MF_BYCOMMAND | MF_STRING, ID_CPU_NEXTSTATE,         GetString(LANG_MENU_CPU_NEXTSTATE));
     ModifyMenu(hCPU, ID_CPU_GAMEGENIE,         MF_BYCOMMAND | MF_STRING, ID_CPU_GAMEGENIE,         GetString(LANG_MENU_SETTINGS_GAMEGENIE));
     ModifyMenu(hCPU, ID_CPU_BADOPS,            MF_BYCOMMAND | MF_STRING, ID_CPU_BADOPS,            GetString(LANG_MENU_CPU_BADOPS));
-    HMENU hFrameStep = GetSubMenu(hCPU, 13);
-    if (hFrameStep) ModifyMenu(hCPU, 13, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hFrameStep, GetString(LANG_MENU_CPU_FRAMESTEP));
-    if (hFrameStep)
+    // Frame Step — ищем по всем позициям
+    int cntCPU = GetMenuItemCount(hCPU);
+    for (int i = 0; i < cntCPU; i++)
     {
-        ModifyMenu(hFrameStep, ID_CPU_FRAMESTEP_ENABLED, MF_BYCOMMAND | MF_STRING, ID_CPU_FRAMESTEP_ENABLED, GetString(LANG_MENU_CPU_FRAMESTEP_ENABLED));
-        ModifyMenu(hFrameStep, ID_CPU_FRAMESTEP_STEP,    MF_BYCOMMAND | MF_STRING, ID_CPU_FRAMESTEP_STEP,    GetString(LANG_MENU_CPU_FRAMESTEP_STEP));
+        HMENU hFrameStep = GetSubMenu(hCPU, i);
+        if (hFrameStep)
+        {
+            ModifyMenu(hCPU, i, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hFrameStep, GetString(LANG_MENU_CPU_FRAMESTEP));
+            ModifyMenu(hFrameStep, ID_CPU_FRAMESTEP_ENABLED, MF_BYCOMMAND | MF_STRING, ID_CPU_FRAMESTEP_ENABLED, GetString(LANG_MENU_CPU_FRAMESTEP_ENABLED));
+            ModifyMenu(hFrameStep, ID_CPU_FRAMESTEP_STEP,    MF_BYCOMMAND | MF_STRING, ID_CPU_FRAMESTEP_STEP,    GetString(LANG_MENU_CPU_FRAMESTEP_STEP));
+            break;
+        }
     }
 
     // === PPU подменю ===
