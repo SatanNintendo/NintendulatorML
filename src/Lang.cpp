@@ -503,15 +503,55 @@ const TCHAR* Lang::GetCurrentLanguage()
 void Lang::UpdateMenu(HMENU hMenu)
 {
     if (!hMenu) return;
+
+    // === Верхний уровень меню ===
     ModifyMenu(hMenu, 0, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 0), GetString(LANG_MENU_FILE));
     ModifyMenu(hMenu, 1, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 1), GetString(LANG_MENU_CPU));
     ModifyMenu(hMenu, 2, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 2), GetString(LANG_MENU_PPU));
     ModifyMenu(hMenu, 3, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 3), GetString(LANG_MENU_SOUND));
     ModifyMenu(hMenu, 4, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 4), GetString(LANG_MENU_INPUT));
     ModifyMenu(hMenu, 5, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 5), GetString(LANG_MENU_DEBUG));
+    // Позиция 6 = Game — пропускаем (MENUITEM без подменю)
     ModifyMenu(hMenu, 7, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 7), GetString(LANG_MENU_MISC));
     ModifyMenu(hMenu, 8, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 8), GetString(LANG_MENU_LANGUAGE));
     ModifyMenu(hMenu, 9, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)GetSubMenu(hMenu, 9), GetString(LANG_MENU_HELP));
+
+    // === File подменю ===
+    HMENU hFile = GetSubMenu(hMenu, 0);
+    ModifyMenu(hFile, ID_FILE_OPEN,        MF_BYCOMMAND | MF_STRING, ID_FILE_OPEN,        GetString(LANG_MENU_FILE_OPEN));
+    ModifyMenu(hFile, ID_FILE_CLOSE,       MF_BYCOMMAND | MF_STRING, ID_FILE_CLOSE,       GetString(LANG_MENU_FILE_CLOSE));
+    ModifyMenu(hFile, ID_FILE_EXIT,        MF_BYCOMMAND | MF_STRING, ID_FILE_EXIT,        GetString(LANG_MENU_FILE_EXIT));
+
+    // === CPU подменю ===
+    HMENU hCPU = GetSubMenu(hMenu, 1);
+    ModifyMenu(hCPU, ID_CPU_RUN,           MF_BYCOMMAND | MF_STRING, ID_CPU_RUN,          GetString(LANG_MENU_NES_RUN));
+    ModifyMenu(hCPU, ID_CPU_STEP,          MF_BYCOMMAND | MF_STRING, ID_CPU_STEP,         GetString(LANG_MENU_NES_PAUSE));
+    ModifyMenu(hCPU, ID_CPU_STOP,          MF_BYCOMMAND | MF_STRING, ID_CPU_STOP,         GetString(LANG_MENU_NES_STOP));
+    ModifyMenu(hCPU, ID_CPU_GAMEGENIE,     MF_BYCOMMAND | MF_STRING, ID_CPU_GAMEGENIE,    GetString(LANG_MENU_SETTINGS_GAMEGENIE));
+
+    // === Sound подменю ===
+    HMENU hSound = GetSubMenu(hMenu, 3);
+    ModifyMenu(hSound, ID_SOUND_VOLUME,    MF_BYCOMMAND | MF_STRING, ID_SOUND_VOLUME,     GetString(LANG_MENU_SETTINGS_SOUND));
+
+    // === Input подменю ===
+    HMENU hInput = GetSubMenu(hMenu, 4);
+    ModifyMenu(hInput, ID_INPUT_SETUP,     MF_BYCOMMAND | MF_STRING, ID_INPUT_SETUP,      GetString(LANG_MENU_SETTINGS_CONTROLLERS));
+
+    // === Debug подменю ===
+    HMENU hDebug = GetSubMenu(hMenu, 5);
+    ModifyMenu(hDebug, ID_DEBUG_CPU,       MF_BYCOMMAND | MF_STRING, ID_DEBUG_CPU,        GetString(LANG_MENU_DEBUG_CPU));
+    ModifyMenu(hDebug, ID_DEBUG_PPU,       MF_BYCOMMAND | MF_STRING, ID_DEBUG_PPU,        GetString(LANG_MENU_DEBUG_PPU));
+
+    // === Misc подменю ===
+    HMENU hMisc = GetSubMenu(hMenu, 7);
+    ModifyMenu(hMisc, ID_MISC_PLAYMOVIE,   MF_BYCOMMAND | MF_STRING, ID_MISC_PLAYMOVIE,   GetString(LANG_MENU_MOVIE_PLAY));
+    ModifyMenu(hMisc, ID_MISC_RECORDMOVIE, MF_BYCOMMAND | MF_STRING, ID_MISC_RECORDMOVIE, GetString(LANG_MENU_MOVIE_RECORD));
+    ModifyMenu(hMisc, ID_MISC_STOPMOVIE,   MF_BYCOMMAND | MF_STRING, ID_MISC_STOPMOVIE,   GetString(LANG_MENU_MOVIE_STOP));
+
+    // === Help подменю ===
+    HMENU hHelp = GetSubMenu(hMenu, 9);
+    ModifyMenu(hHelp, ID_HELP_ABOUT,       MF_BYCOMMAND | MF_STRING, ID_HELP_ABOUT,       GetString(LANG_MENU_HELP_ABOUT));
+
     DrawMenuBar(hMainWnd);
 }
 
