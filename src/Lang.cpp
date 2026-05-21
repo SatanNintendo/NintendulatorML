@@ -185,6 +185,16 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("About Nintendulator"),
     _T("Nintendulator\nNES Emulator\n\nCopyright (C) QMT Productions"),
 
+    // PPU подменю
+    _T("&Frameskip"),
+    _T("&Size"),
+    _T("&Mode"),
+    _T("P&alette..."),
+    _T("Sl&owdown"),
+    _T("F&ullscreen"),
+    _T("S&canlines"),
+    _T("&Bilinear Filter"),
+
     // Language
     _T("Language Changed"),
     _T("Language has been changed. Some elements will update on restart."),
