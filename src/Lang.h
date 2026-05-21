@@ -193,6 +193,7 @@ enum LangStringID
     LANG_MENU_CPU_FRAMESTEP,
     LANG_MENU_CPU_FRAMESTEP_ENABLED,
     LANG_MENU_CPU_FRAMESTEP_STEP,    
+    
     // ---------- PPU подменю ----------
     LANG_MENU_PPU_FRAMESKIP,
     LANG_MENU_PPU_SIZE,
