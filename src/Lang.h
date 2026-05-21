@@ -199,6 +199,16 @@ enum LangStringID
     LANG_MENU_CPU_FRAMESTEP_ENABLED,
     LANG_MENU_CPU_FRAMESTEP_STEP,    
     
+    // ---------- Sound подменю ----------
+    LANG_MENU_SOUND_ENABLED,
+
+    // ---------- Debug подменю ----------
+    LANG_MENU_DEBUG_STATWND,
+
+    // ---------- Misc подменю ----------
+    LANG_MENU_MISC_STARTAVI,
+    LANG_MENU_MISC_STOPAVI,    
+
     // ---------- PPU подменю ----------
     LANG_MENU_PPU_FRAMESKIP,
     LANG_MENU_PPU_SIZE,
