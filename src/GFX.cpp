@@ -968,9 +968,17 @@ void	SetCursorPos (int x, int y)
 	pos.y = y;
 	if (Fullscreen)
 	{
-		pos.x *= 2;
-		pos.y *= 2;
-		pos.x += FullscreenBorder;
+		if (IntegerScale)
+		{
+			pos.x = pos.x * ISMult + ISBorderX;
+			pos.y = pos.y * ISMult + ISBorderY;
+		}
+		else
+		{
+			pos.x *= 2;
+			pos.y *= 2;
+			pos.x += FullscreenBorder;
+		}
 	}
 	else
 	{
