@@ -211,6 +211,7 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("St&op AVI Capture"),    
 
     // PPU подменю
+    _T("&Fix Aspect"),
     _T("&Frameskip"),
     _T("&Size"),
     _T("&Mode"),
