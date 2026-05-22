@@ -629,6 +629,7 @@ void Lang::UpdateMenu(HMENU hMenu)
 
     // === Sound подменю ===
     HMENU hSound = GetSubMenu(hMenu, 3);
+    ModifyMenu(hSound, ID_SOUND_ENABLED,   MF_BYCOMMAND | MF_STRING, ID_SOUND_ENABLED,    GetString(LANG_MENU_SOUND_ENABLED));
     ModifyMenu(hSound, ID_SOUND_VOLUME,    MF_BYCOMMAND | MF_STRING, ID_SOUND_VOLUME,     GetString(LANG_MENU_SETTINGS_SOUND));
 
     // === Input подменю ===
