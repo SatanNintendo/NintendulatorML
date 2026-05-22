@@ -640,6 +640,110 @@ void	Draw2x (void)
 {
 	int x, y;
 	register unsigned short *src = PPU::DrawArray;
+
+	// Если включено Integer Scaling и мы в fullscreen —
+	// рисуем картинку по центру с максимальным целым множителем
+	if (IntegerScale && Fullscreen && Depth == 32)
+	{
+		// Размер поверхности: ширина = 512 + 2*FullscreenBorder, высота = 480
+		int surfW = 512 + FullscreenBorder * 2;
+		int surfH = 480;
+
+		// Ищем наибольший целый множитель вмещающийся в поверхность
+		int mult = 1;
+		for (int m = 2; m <= 8; m++)
+		{
+			if (256 * m <= surfW && 240 * m <= surfH)
+				mult = m;
+			else
+				break;
+		}
+
+		// Размер картинки NES при этом множителе
+		int nesW = 256 * mult;
+		int nesH = 240 * mult;
+
+		// Отступы для центрирования
+		int offX = (surfW - nesW) / 2;
+		int offY = (surfH - nesH) / 2;
+
+		// Рисуем построчно
+		register unsigned long *dst;
+		for (y = 0; y < surfH; y++)
+		{
+			dst = (unsigned long *)((unsigned char *)SurfDesc.lpSurface + y * Pitch);
+
+			// Строка выше или ниже картинки — сплошной чёрный
+			if (y < offY || y >= offY + nesH)
+			{
+				for (x = 0; x < surfW; x++)
+					*dst++ = 0x000000;
+				continue;
+			}
+
+			// Какая строка NES соответствует этой строке экрана
+			int srcY = (y - offY) / mult;
+			register unsigned short *srcRow = PPU::DrawArray + srcY * 256;
+
+			// Левая чёрная полоса
+			for (x = 0; x < offX; x++)
+				*dst++ = 0x000000;
+
+			// Пиксели NES, каждый повторяется mult раз по горизонтали
+			for (x = 0; x < 256; x++)
+			{
+				unsigned long color = Palette32[srcRow[x]];
+				for (int px = 0; px < mult; px++)
+					*dst++ = color;
+			}
+
+			// Правая чёрная полоса
+			int drawn = offX + nesW;
+			for (x = drawn; x < surfW; x++)
+				*dst++ = 0x000000;
+		}
+		return;
+	}
+
+	// --- Стандартный Draw2x (без Integer Scaling) ---
+	if (Depth == 32)
+	{
+		register unsigned long *dst;
+		for (y = 0; y < 480; y++)
+		{
+			dst = (unsigned long *)((unsigned char *)SurfDesc.lpSurface + y * Pitch);
+			if (Fullscreen)
+			{
+				for (x = 0; x < FullscreenBorder; x++)
+					*dst++ = 0x000000;
+			}
+			if ((y >= 16 && y < 464) || !Scanlines || !(y & 1))
+			{
+				for (x = 0; x < 256; x++)
+				{
+					*dst++ = Palette32[*src];
+					*dst++ = Palette32[*src];
+					src++;
+				}
+			}
+			else
+			{
+				for (x = 0; x < 256; x++)
+				{
+					*dst++ = 0x000000;
+					*dst++ = 0x000000;
+				}
+				src += 256;
+			}
+			if (Fullscreen)
+			{
+				for (x = 0; x < FullscreenBorder; x++)
+					*dst++ = 0x000000;
+			}
+			if (!(y & 1))
+				src -= 256;
+		}
+	}
 	if (Depth == 32)
 	{
 		register unsigned long *dst;
