@@ -7,48 +7,85 @@ Author=Nintendulator Dev Team
 Version=1.0
 
 [Strings]
-# === Main Menu ===
+# === Главное меню — верхний уровень ===
 MENU_FILE=&File
-MENU_FILE_OPEN=&Open ROM...
-MENU_FILE_CLOSE=&Close
-MENU_FILE_RECENT=Recent &Files
-MENU_FILE_RECENT_CLEAR=&Clear Recent Files
-MENU_FILE_EXIT=E&xit
-MENU_NES=&NES
-MENU_NES_RUN=&Run
-MENU_NES_PAUSE=&Pause
-MENU_NES_RESET=&Reset
-MENU_NES_POWER=Power &Cycle
-MENU_NES_STOP=&Stop
-MENU_SETTINGS=&Settings
-MENU_SETTINGS_VIDEO=&Video...
-MENU_SETTINGS_SOUND=&Sound...
-MENU_SETTINGS_CONTROLLERS=&Controllers...
-MENU_SETTINGS_GAMEGENIE=&Game Genie...
-MENU_SETTINGS_PATHS=&Paths...
-MENU_SETTINGS_CLOCK=&Clock speed...
-MENU_MOVIE=&Movie
-MENU_MOVIE_RECORD=&Record...
-MENU_MOVIE_PLAY=&Play...
-MENU_MOVIE_STOP=&Stop
 MENU_CPU=&CPU
 MENU_PPU=&PPU
 MENU_SOUND=&Sound
 MENU_INPUT=&Input
 MENU_DEBUG=&Debug
-MENU_DEBUG_CPU=&CPU Debugger
-MENU_DEBUG_PPU=&PPU Debugger
 MENU_MISC=&Misc
 MENU_LANGUAGE=&Language
 MENU_HELP=&Help
+
+# === File подменю ===
+MENU_FILE_OPEN=&Open ROM...
+MENU_FILE_CLOSE=&Close
+MENU_FILE_RECENT=Recent &Files
+MENU_FILE_RECENT_CLEAR=&Clear Recent Files
+MENU_FILE_HEADER=Edit iNES &Header
+MENU_FILE_AUTORUN=&Auto-Run
+MENU_FILE_BROWSESAVES=&Browse Save Files
+MENU_FILE_EXIT=E&xit
+
+# === CPU подменю ===
+MENU_NES_RUN=&Run
+MENU_NES_PAUSE=&Step
+MENU_NES_STOP=S&top
+MENU_NES_RESET=So&ft Reset
+MENU_NES_POWER=H&ard Reset
+MENU_CPU_SAVESTATE=Sa&ve State
+MENU_CPU_LOADSTATE=&Load State
+MENU_CPU_PREVSTATE=&Prev State
+MENU_CPU_NEXTSTATE=&Next State
+MENU_SETTINGS_GAMEGENIE=&Game Genie...
+MENU_CPU_BADOPS=L&og Invalid Opcodes
+MENU_CPU_FRAMESTEP=Fra&me Step
+MENU_CPU_FRAMESTEP_ENABLED=&Enabled
+MENU_CPU_FRAMESTEP_STEP=&Step
+
+# === PPU подменю ===
+MENU_PPU_FRAMESKIP=&Frameskip
+MENU_PPU_FRAMESKIP_AUTO=&Auto
+MENU_PPU_SIZE=&Size
+MENU_PPU_FIXASPECT=&Fix Aspect
+MENU_PPU_MODE=&Mode
+MENU_PPU_MODE_HYBRID=&Hybrid
+MENU_PPU_PALETTE=P&alette...
+MENU_PPU_SLOWDOWN=Sl&owdown
+MENU_PPU_SLOWDOWN_ENABLED=&Enabled
+MENU_PPU_FULLSCREEN=F&ullscreen
+MENU_PPU_SCANLINES=S&canlines
+MENU_PPU_BILINEAR=&Bilinear Filter
+
+# === Sound подменю ===
+MENU_SOUND_ENABLED=&Enabled
+MENU_SETTINGS_SOUND=&Volume...
+
+# === Input подменю ===
+MENU_SETTINGS_CONTROLLERS=&Setup...
+
+# === Debug подменю ===
+MENU_DEBUG_CPU=&CPU Debugger
+MENU_DEBUG_PPU=&PPU Debugger
+MENU_DEBUG_STATWND=&Status Window
+
+# === Misc подменю ===
+MENU_MISC_STARTAVI=&Start AVI Capture...
+MENU_MISC_STOPAVI=St&op AVI Capture
+MENU_MOVIE_PLAY=P&lay Movie...
+MENU_MOVIE_RECORD=&Record Movie...
+MENU_MOVIE_STOP=Sto&p Movie
+
+# === Help подменю ===
 MENU_HELP_ABOUT=&About...
 
-# === Window title ===
+# === Заголовок окна ===
 WINDOW_TITLE=Nintendulator
 WINDOW_TITLE_PAUSED=Nintendulator [Paused]
 WINDOW_TITLE_FPS=Nintendulator - %s - %d FPS
 
-# === File dialogs ===
+# === Диалоги файлов ===
 OPEN_ROM_TITLE=Open ROM
 OPEN_ROM_FILTER=NES ROMs (*.nes;*.unif;*.fds;*.nsf)\0*.nes;*.unif;*.fds;*.nsf\0All Files (*.*)\0*.*\0
 OPEN_MOVIE_TITLE=Open Movie
@@ -56,33 +93,7 @@ SAVE_MOVIE_TITLE=Save Movie
 OPEN_PALETTE_TITLE=Open Palette
 SAVE_AVI_TITLE=Save AVI
 
-# === ROM errors ===
-ERR_ROM_OPEN=Failed to open ROM file
-ERR_ROM_INVALID=Invalid ROM file format
-ERR_ROM_MAPPER=Unsupported mapper
-ERR_ROM_UNIF=Invalid UNIF ROM
-ERR_ROM_FDS_HEADER=Invalid FDS header
-ERR_ROM_FDS_DISKSIDE=Invalid FDS disk side
-ERR_ROM_NSF=Invalid NSF file
-MSG_ROM_LOADED=ROM loaded: %s
-MSG_ROM_CLOSED=ROM closed
-MSG_ROM_ALREADY_LOADED=A ROM is already loaded. Close it first.
-
-# === Video ===
-ERR_GFX_DIRECTDRAW=Failed to initialize DirectDraw
-ERR_GFX_SURFACE=Failed to create DirectDraw surface
-ERR_GFX_PALETTE=Failed to set DirectDraw palette
-ERR_GFX_RENDER=DirectDraw render error
-ERR_GFX_MODE=Unsupported video mode
-MSG_GFX_SCREENSHOT=Screenshot saved: %s
-
-# === Sound ===
-ERR_APU_DIRECTSOUND=Failed to initialize DirectSound
-ERR_APU_BUFFER=Failed to create DirectSound buffer
-ERR_APU_FORMAT=Unsupported audio format
-MSG_APU_DISABLED=Sound disabled
-
-# === Controllers ===
+# === Контроллеры — список устройств ===
 CONT_UNCONNECTED=Unconnected
 CONT_STDCONTROLLER=Standard Controller
 CONT_ZAPPER=Zapper
@@ -99,12 +110,16 @@ CONT_FAMILYBASICKEYBOARD=Family Basic Keyboard
 CONT_SUBORKEYBOARD=Subor Keyboard
 CONT_FAMTRAINER=Family Trainer
 CONT_TABLET=Oeka Kids Tablet
+
+# === Контроллеры — диалог ===
 CONT_LABEL_PORT1=Controller Port &1:
 CONT_LABEL_PORT2=Controller Port &2:
 CONT_LABEL_EXP=&Expansion Port:
 CONT_CONFIG=&Config
 CONT_UDLR=&Allow simultaneous Left+Right and Up+Down
 CONT_POV=Configure &POV triggers as 8-way buttons
+
+# === Ошибки контроллеров ===
 ERR_CTRL_KEYBOARD_INIT=Unable to initialize keyboard input device!
 ERR_CTRL_KEYBOARD_FORMAT=Unable to set keyboard input data format!
 ERR_CTRL_KEYBOARD_LEVEL=Unable to set keyboard input cooperative level!
@@ -114,7 +129,33 @@ ERR_CTRL_JOY_LEVEL=Unable to restore joystick input cooperative level!
 ERR_CTRL_INVALID_STD=Error: selected invalid controller type for standard port!
 ERR_CTRL_INVALID_EXP=Error: selected invalid controller type for expansion port!
 
-# === Save states ===
+# === Ошибки ROM ===
+ERR_ROM_OPEN=Failed to open ROM file
+ERR_ROM_INVALID=Invalid ROM file format
+ERR_ROM_MAPPER=Unsupported mapper
+ERR_ROM_UNIF=Invalid UNIF ROM
+ERR_ROM_FDS_HEADER=Invalid FDS header
+ERR_ROM_FDS_DISKSIDE=Invalid FDS disk side
+ERR_ROM_NSF=Invalid NSF file
+MSG_ROM_LOADED=ROM loaded: %s
+MSG_ROM_CLOSED=ROM closed
+MSG_ROM_ALREADY_LOADED=A ROM is already loaded. Close it first.
+
+# === Видео ===
+ERR_GFX_DIRECTDRAW=Failed to initialize DirectDraw
+ERR_GFX_SURFACE=Failed to create DirectDraw surface
+ERR_GFX_PALETTE=Failed to set DirectDraw palette
+ERR_GFX_RENDER=DirectDraw render error
+ERR_GFX_MODE=Unsupported video mode
+MSG_GFX_SCREENSHOT=Screenshot saved: %s
+
+# === Звук ===
+ERR_APU_DIRECTSOUND=Failed to initialize DirectSound
+ERR_APU_BUFFER=Failed to create DirectSound buffer
+ERR_APU_FORMAT=Unsupported audio format
+MSG_APU_DISABLED=Sound disabled
+
+# === Состояния сохранения ===
 MSG_STATE_SAVED=State saved to slot %d
 MSG_STATE_LOADED=State loaded from slot %d
 ERR_STATE_SAVE=Failed to save state
@@ -123,7 +164,7 @@ ERR_STATE_VERSION=State file version mismatch
 ERR_STATE_CORRUPT=State file is corrupted
 MSG_STATE_SLOT=Slot %d
 
-# === Movie recording ===
+# === Запись ===
 MSG_MOVIE_RECORDING=Recording movie...
 MSG_MOVIE_PLAYING=Playing movie...
 MSG_MOVIE_STOPPED=Movie stopped
@@ -139,12 +180,12 @@ ERR_GENIE_INVALID=Invalid Game Genie code
 ERR_GENIE_TOO_MANY=Too many Game Genie codes (maximum 3)
 MSG_GENIE_APPLIED=Game Genie code applied
 
-# === Mapper ===
+# === Маппер ===
 ERR_MAPPER_LOAD=Failed to load %s - not a valid DLL file!
 ERR_MAPPER_NOTFOUND=Mapper not found
 ERR_MAPPER_VERSION=Failed to load mapper pack %s - version mismatch!
 
-# === Debugger breakpoints ===
+# === Отладчик ===
 DBG_BREAK_EXEC=Exec: $%04X
 DBG_BREAK_READ=Read: $%04X
 DBG_BREAK_WRITE=Write: $%04X
@@ -160,7 +201,10 @@ DBG_BREAK_DISABLED= (-)
 MSG_DBG_LOG_STARTED=Logging started
 MSG_DBG_LOG_STOPPED=Logging stopped
 
-# === Dialogs ===
+# === CPU ===
+ERR_CPU_BAD_OPCODE=Bad opcode, CPU locked
+
+# === Общие диалоги ===
 DLG_OK=OK
 DLG_CANCEL=Cancel
 DLG_YES=Yes
@@ -173,35 +217,17 @@ DLG_NINTENDULATOR=Nintendulator
 ABOUT_TITLE=About Nintendulator
 ABOUT_TEXT=Nintendulator\nNES Emulator\n\nCopyright (C) QMT Productions
 
-# === Language ===
-MENU_PPU_FRAMESKIP=&Frameskip
-MENU_PPU_SIZE=&Size
-MENU_PPU_MODE=&Mode
-MENU_PPU_PALETTE=P&alette...
-MENU_PPU_SLOWDOWN=Sl&owdown
-MENU_PPU_FULLSCREEN=F&ullscreen
-MENU_PPU_SCANLINES=S&canlines
-MENU_PPU_BILINEAR=&Bilinear Filter
-MENU_CPU_SAVESTATE=Sa&ve State
-MENU_CPU_LOADSTATE=&Load State
-MENU_CPU_PREVSTATE=&Prev State
-MENU_CPU_NEXTSTATE=&Next State
-MENU_CPU_BADOPS=L&og Invalid Opcodes
-MENU_CPU_FRAMESTEP=Fra&me Step
-MENU_CPU_FRAMESTEP_ENABLED=&Enabled
-MENU_CPU_FRAMESTEP_STEP=&Step
-MENU_FILE_HEADER=Edit iNES &Header
-MENU_FILE_AUTORUN=&Auto-Run
-MENU_FILE_BROWSESAVES=&Browse Save Files
-MENU_SOUND_ENABLED=&Enabled
-MENU_DEBUG_STATWND=&Status Window
-MENU_MISC_STARTAVI=&Start AVI Capture...
-MENU_MISC_STOPAVI=St&op AVI Capture
+# === Смена языка ===
 LANG_CHANGED=Language Changed
 LANG_CHANGED_MSG=Language has been changed. Some elements will update on restart.
 
-# === CPU ===
-ERR_CPU_BAD_OPCODE=Bad opcode, CPU locked
-MENU_PPU_FRAMESKIP_AUTO=&Auto
-MENU_PPU_SLOWDOWN_ENABLED=&Enabled
-MENU_PPU_MODE_HYBRID=&Hybrid
+# === Устаревшие/неиспользуемые ===
+MENU_NES=&NES
+MENU_SETTINGS=&Settings
+MENU_SETTINGS_VIDEO=&Video...
+MENU_SETTINGS_PATHS=&Paths...
+MENU_SETTINGS_CLOCK=&Clock speed...
+MENU_MOVIE=&Movie
+MENU_MOVIE_RECORD=&Record...
+MENU_MOVIE_PLAY=&Play...
+MENU_MOVIE_STOP=&Stop
