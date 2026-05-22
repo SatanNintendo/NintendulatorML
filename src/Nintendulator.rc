@@ -150,6 +150,7 @@ BEGIN
         MENUITEM "F&ullscreen\tAlt+Enter / F11", ID_PPU_FULLSCREEN
         MENUITEM "S&canlines",                  ID_PPU_SCANLINES
         MENUITEM "&Bilinear Filter\tCtrl+B",    ID_PPU_BILINEAR
+        MENUITEM "&Integer Scaling",            ID_PPU_INTSCALE
     END
     POPUP "&Sound"
     BEGIN
