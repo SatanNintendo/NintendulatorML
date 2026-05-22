@@ -577,6 +577,17 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				CheckMenuItem(hMenu, ID_PPU_SCANLINES, MF_CHECKED);
 			else	CheckMenuItem(hMenu, ID_PPU_SCANLINES, MF_UNCHECKED);
 			break;
+			case ID_PPU_INTSCALE:
+			NES::Stop();
+			GFX::Stop();
+			GFX::IntegerScale = !GFX::IntegerScale;
+			GFX::Start();
+			if (running)
+				NES::Start(FALSE);
+			if (GFX::IntegerScale)
+				CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
+			else	CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
+			break;
 			case ID_PPU_BILINEAR:
 			NES::Stop();
 			GFX::Stop();
