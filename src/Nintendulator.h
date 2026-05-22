@@ -23,6 +23,7 @@ extern	BOOL		dbgVisible;	/* whether or not the Debug window is open */
 
 extern	int		SizeMult;	/* window size multiplier */
 extern	BOOL		FixAspect;	/* whether to adjust aspect ratio */
+extern	BOOL		IntegerScale;	/* whether to use integer-only scaling */
 extern	TCHAR		ProgPath[MAX_PATH];	/* program path */
 extern	TCHAR		DataPath[MAX_PATH];	/* data path */
 
