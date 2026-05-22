@@ -49,6 +49,7 @@ HMENU hMenu; // main window menu
 HACCEL hAccelTable; // accelerators
 int SizeMult; // size multiplier
 BOOL FixAspect; // fix aspect ratio for NTSC/PAL
+BOOL IntegerScale; // integer-only pixel scaling
 TCHAR ProgPath[MAX_PATH]; // program path
 TCHAR Path_ROM[MAX_PATH]; // current ROM directory
 TCHAR Path_NMV[MAX_PATH]; // current movie directory
