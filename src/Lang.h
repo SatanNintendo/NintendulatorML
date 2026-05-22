@@ -162,7 +162,16 @@ enum LangStringID
     LANG_CONT_SUBORKEYBOARD,
     LANG_CONT_FAMTRAINER,
     LANG_CONT_TABLET,
-    
+
+    // ---------- Controllers — дополнительные сообщения ----------
+    LANG_CONT_NO_CONFIG,
+    LANG_CONT_ERR_DIRECTINPUT,
+    LANG_CONT_ERR_KEYBOARD,
+    LANG_CONT_ERR_MOUSE,
+    LANG_CONT_ERR_JOYSTICK,
+    LANG_CONT_ERR_KEY_ID,
+    LANG_CONT_ERR_MOUSE_ID,
+
     // ---------- Controllers dialog ----------
     LANG_CONT_LABEL_PORT1,
     LANG_CONT_LABEL_PORT2,
