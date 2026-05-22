@@ -49,7 +49,6 @@ HMENU hMenu; // main window menu
 HACCEL hAccelTable; // accelerators
 int SizeMult; // size multiplier
 BOOL FixAspect; // fix aspect ratio for NTSC/PAL
-BOOL IntegerScale; // integer-only pixel scaling
 TCHAR ProgPath[MAX_PATH]; // program path
 TCHAR Path_ROM[MAX_PATH]; // current ROM directory
 TCHAR Path_NMV[MAX_PATH]; // current movie directory
@@ -510,13 +509,6 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			if (FixAspect)
 				CheckMenuItem(hMenu, ID_PPU_SIZE_ASPECT, MF_CHECKED);
 			else	CheckMenuItem(hMenu, ID_PPU_SIZE_ASPECT, MF_UNCHECKED);
-			break;
-			case ID_PPU_INTSCALE:
-			IntegerScale = !IntegerScale;
-			NES::UpdateInterface();
-			if (IntegerScale)
-				CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
-			else	CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
 			break;
 		case ID_PPU_MODE_NTSC:
 			NES::Stop();
