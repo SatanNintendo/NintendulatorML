@@ -202,3 +202,6 @@ LANG_CHANGED_MSG=Language has been changed. Some elements will update on restart
 
 # === CPU ===
 ERR_CPU_BAD_OPCODE=Bad opcode, CPU locked
+MENU_PPU_FRAMESKIP_AUTO=&Auto
+MENU_PPU_SLOWDOWN_ENABLED=&Enabled
+MENU_PPU_MODE_HYBRID=&Hybrid
