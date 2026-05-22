@@ -623,7 +623,11 @@ void Lang::UpdateMenu(HMENU hMenu)
     HMENU hFrameskip = GetSubMenu(hPPU, 0);
     if (hFrameskip) ModifyMenu(hPPU, 0, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hFrameskip, GetString(LANG_MENU_PPU_FRAMESKIP));
     HMENU hSize = GetSubMenu(hPPU, 1);
-    if (hSize) ModifyMenu(hPPU, 1, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hSize, GetString(LANG_MENU_PPU_SIZE));
+    if (hSize)
+    {
+        ModifyMenu(hPPU, 1, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hSize, GetString(LANG_MENU_PPU_SIZE));
+        ModifyMenu(hSize, ID_PPU_SIZE_ASPECT, MF_BYCOMMAND | MF_STRING, ID_PPU_SIZE_ASPECT, GetString(LANG_MENU_PPU_FIXASPECT));
+    }
     HMENU hMode = GetSubMenu(hPPU, 2);
     if (hMode) ModifyMenu(hPPU, 2, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hMode, GetString(LANG_MENU_PPU_MODE));
     HMENU hSlowdown = GetSubMenu(hPPU, 4);
