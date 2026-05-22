@@ -204,35 +204,6 @@ void	Start (void)
 		// Examine the current screen resolution and try to figure out the current aspect ratio
 		// We'll support 4:3, 16:10, and 16:9
 		double ratio = (double)GetSystemMetrics(SM_CXSCREEN) / (double)GetSystemMetrics(SM_CYSCREEN);
-		// Not all of the widescreen resolutions will work
-		// The code below will try each resolution until it finds one that works
-		static const int widths[] = {
-			640,		// 4:3 - last offset 0
-			720, 768,	// 16:10 - last offset 2
-			848, 856, 864	// 16:9 - last offset 5
-		};
-		// only try switching to a particular resolution once, and remember it as long as the program is running
-		static BOOL widths_ok[] = {
-			TRUE,
-			TRUE, TRUE,
-			TRUE, TRUE, TRUE
-		};
-		// pick a resolution with a decent aspect ratio
-		int i;
-		if (ratio < 1.4)
-			i = 0;
-		else if (ratio < 1.7)
-			i = 2;
-		else	i = 5;
-		// if the final resolution failed, then don't even allow fullscreen at all
-		if (!widths_ok[0])
-		{
-			// no need to Stop() here, since we didn't start anything yet
-			MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
-			Fullscreen = FALSE;
-			Start();
-			return;
-		}
 
 		if (FAILED(DirectDraw->SetCooperativeLevel(hMainWnd, DDSCL_EXCLUSIVE | DDSCL_FULLSCREEN | DDSCL_NOWINDOWCHANGES)))
 		{
@@ -244,25 +215,84 @@ void	Start (void)
 		}
 		if (dbgVisible)
 			ShowWindow(hDebug, SW_MINIMIZE);
-		while (1)
+
+		if (IntegerScale)
 		{
-			FullscreenBorder = (widths[i] - 512) / 2;
-			if (!widths_ok[i] || FAILED(DirectDraw->SetDisplayMode(widths[i], 480, 32, 0, 0)))
+			// Переключаемся в нативное разрешение монитора
+			int scrW = GetSystemMetrics(SM_CXSCREEN);
+			int scrH = GetSystemMetrics(SM_CYSCREEN);
+
+			if (FAILED(DirectDraw->SetDisplayMode(scrW, scrH, 32, 0, 0)))
 			{
-				widths_ok[i] = FALSE;
-				if (i == 0)
-				{
-					// not even 640x480 worked!
-					Stop();
-					MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device! Reverting to Windowed mode..."), _T("Nintendulator"), MB_OK | MB_ICONERROR);
-					Fullscreen = FALSE;
-					// drop to windowed
-					Start();
-					return;
-				}
-				else	i--;
+				// Нативное разрешение не сработало — откат к стандартному режиму
+				Stop();
+				MessageBox(hMainWnd, _T("Integer Scaling: failed to set native resolution. Reverting to Windowed mode..."), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+				Fullscreen = FALSE;
+				IntegerScale = FALSE;
+				CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
+				Start();
+				return;
 			}
-			else	break;
+
+			// Вычисляем наибольший целый множитель
+			ISMult = 1;
+			for (int m = 2; m <= 16; m++)
+			{
+				if (256 * m <= scrW && 240 * m <= scrH)
+					ISMult = m;
+				else
+					break;
+			}
+
+			// Отступы для центрирования картинки
+			ISBorderX = (scrW - 256 * ISMult) / 2;
+			ISBorderY = (scrH - 240 * ISMult) / 2;
+			FullscreenBorder = 0; // не используется в этом режиме
+		}
+		else
+		{
+			// Стандартный режим Nintendulator: 640x480 (или шире)
+			static const int widths[] = {
+				640,		// 4:3 - last offset 0
+				720, 768,	// 16:10 - last offset 2
+				848, 856, 864	// 16:9 - last offset 5
+			};
+			static BOOL widths_ok[] = {
+				TRUE,
+				TRUE, TRUE,
+				TRUE, TRUE, TRUE
+			};
+			int i;
+			if (ratio < 1.4)
+				i = 0;
+			else if (ratio < 1.7)
+				i = 2;
+			else	i = 5;
+			if (!widths_ok[0])
+			{
+				MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+				Fullscreen = FALSE;
+				Start();
+				return;
+			}
+			while (1)
+			{
+				FullscreenBorder = (widths[i] - 512) / 2;
+				if (!widths_ok[i] || FAILED(DirectDraw->SetDisplayMode(widths[i], 480, 32, 0, 0)))
+				{
+					widths_ok[i] = FALSE;
+					if (i == 0)
+					{
+						Stop();
+						MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device! Reverting to Windowed mode..."), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+						Fullscreen = FALSE;
+						Start();
+						return;
+					}
+					else	i--;
+				}
+				else	break;
+			}
 		}
 		SetWindowLongPtr(hMainWnd, GWL_STYLE, WS_POPUP);
 		SetMenu(hMainWnd, NULL);
