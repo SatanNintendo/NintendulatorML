@@ -210,6 +210,7 @@ enum LangStringID
     LANG_MENU_MISC_STOPAVI,    
 
     // ---------- PPU подменю ----------
+    LANG_MENU_PPU_FIXASPECT,
     LANG_MENU_PPU_FRAMESKIP,
     LANG_MENU_PPU_SIZE,
     LANG_MENU_PPU_MODE,
