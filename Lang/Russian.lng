@@ -104,3 +104,103 @@ CONT_LABEL_EXP=Порт &расширения:
 CONT_CONFIG=&Настроить
 CONT_UDLR=&Разрешить одновременные Left+Right и Up+Down
 CONT_POV=Настроить POV-триггеры как 8-позиционные кнопки
+# === Fix Aspect ===
+MENU_PPU_FIXASPECT=&Фиксировать соотношение сторон
+
+# === Сообщения об ошибках ROM ===
+ERR_ROM_OPEN=Не удалось открыть файл ROM
+ERR_ROM_INVALID=Неверный формат файла ROM
+ERR_ROM_MAPPER=Неподдерживаемый маппер
+ERR_ROM_UNIF=Неверный UNIF ROM
+ERR_ROM_FDS_HEADER=Неверный заголовок FDS
+ERR_ROM_FDS_DISKSIDE=Неверная сторона диска FDS
+ERR_ROM_NSF=Неверный файл NSF
+MSG_ROM_LOADED=ROM загружен: %s
+MSG_ROM_CLOSED=ROM закрыт
+MSG_ROM_ALREADY_LOADED=ROM уже загружен. Сначала закройте его.
+
+# === Видео ===
+ERR_GFX_DIRECTDRAW=Не удалось инициализировать DirectDraw
+ERR_GFX_SURFACE=Не удалось создать поверхность DirectDraw
+ERR_GFX_PALETTE=Не удалось установить палитру DirectDraw
+ERR_GFX_RENDER=Ошибка рендеринга DirectDraw
+ERR_GFX_MODE=Неподдерживаемый видеорежим
+MSG_GFX_SCREENSHOT=Скриншот сохранён: %s
+
+# === Звук ===
+ERR_APU_DIRECTSOUND=Не удалось инициализировать DirectSound
+ERR_APU_BUFFER=Не удалось создать буфер DirectSound
+ERR_APU_FORMAT=Неподдерживаемый аудиоформат
+MSG_APU_DISABLED=Звук отключён
+
+# === Ошибки контроллеров ===
+ERR_CTRL_KEYBOARD_INIT=Не удалось инициализировать клавиатуру!
+ERR_CTRL_KEYBOARD_FORMAT=Не удалось установить формат данных клавиатуры!
+ERR_CTRL_KEYBOARD_LEVEL=Не удалось установить уровень совместности клавиатуры!
+ERR_CTRL_MOUSE_INIT=Не удалось инициализировать мышь!
+ERR_CTRL_MOUSE_LEVEL=Не удалось установить уровень совместности мыши!
+ERR_CTRL_JOY_LEVEL=Не удалось восстановить уровень совместности джойстика!
+ERR_CTRL_INVALID_STD=Ошибка: неверный тип контроллера для стандартного порта!
+ERR_CTRL_INVALID_EXP=Ошибка: неверный тип контроллера для порта расширения!
+
+# === Состояния сохранения ===
+MSG_STATE_SAVED=Состояние сохранено в слот %d
+MSG_STATE_LOADED=Состояние загружено из слота %d
+ERR_STATE_SAVE=Не удалось сохранить состояние
+ERR_STATE_LOAD=Не удалось загрузить состояние
+ERR_STATE_VERSION=Версия файла состояния не совпадает
+ERR_STATE_CORRUPT=Файл состояния повреждён
+MSG_STATE_SLOT=Слот %d
+
+# === Запись ===
+MSG_MOVIE_RECORDING=Запись фильма...
+MSG_MOVIE_PLAYING=Воспроизведение фильма...
+MSG_MOVIE_STOPPED=Запись остановлена
+ERR_MOVIE_OPEN=Не удалось открыть файл записи
+ERR_MOVIE_INVALID=Неверный файл записи
+ERR_MOVIE_VERSION=Версия файла записи не совпадает
+MSG_AVI_RECORDING=Запись AVI...
+ERR_AVI_OPEN=Не удалось открыть файл AVI
+MSG_AVI_STOPPED=Запись AVI остановлена
+
+# === Game Genie ===
+ERR_GENIE_INVALID=Неверный код Game Genie
+ERR_GENIE_TOO_MANY=Слишком много кодов Game Genie (максимум 3)
+MSG_GENIE_APPLIED=Код Game Genie применён
+
+# === Маппер ===
+ERR_MAPPER_LOAD=Не удалось загрузить %s - неверный файл DLL!
+ERR_MAPPER_NOTFOUND=Маппер не найден
+ERR_MAPPER_VERSION=Не удалось загрузить пакет маппера %s - версия не совпадает!
+
+# === Отладчик ===
+DBG_BREAK_EXEC=Выполнение: $%04X
+DBG_BREAK_READ=Чтение: $%04X
+DBG_BREAK_WRITE=Запись: $%04X
+DBG_BREAK_ACCESS=Доступ: $%04X
+DBG_BREAK_OPCODE=Опкод: $%02X
+DBG_BREAK_NMI=Прерывание: NMI
+DBG_BREAK_IRQ=Прерывание: IRQ
+DBG_BREAK_BRK=Прерывание: BRK
+DBG_BREAK_SCANLINE=Сканлайн: %i
+DBG_BREAK_UNDEF=НЕОПРЕДЕЛЕНО
+DBG_BREAK_ENABLED= (+)
+DBG_BREAK_DISABLED= (-)
+MSG_DBG_LOG_STARTED=Логирование начато
+MSG_DBG_LOG_STOPPED=Логирование остановлено
+
+# === Общие диалоги ===
+DLG_OK=ОК
+DLG_CANCEL=Отмена
+DLG_YES=Да
+DLG_NO=Нет
+DLG_APPLY=Применить
+DLG_BROWSE=Обзор...
+DLG_NINTENDULATOR=Nintendulator
+
+# === About ===
+ABOUT_TITLE=О программе Nintendulator
+ABOUT_TEXT=Nintendulator\nЭмулятор NES\n\nCopyright (C) QMT Productions
+
+# === CPU ===
+ERR_CPU_BAD_OPCODE=Неверный опкод, CPU заблокирован
