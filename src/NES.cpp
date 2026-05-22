@@ -1347,39 +1347,9 @@ void	MapperConfig (void)
 void	UpdateInterface (void)
 {
 	HWND hWnd = hMainWnd;
-
-	int mult = SizeMult;
-
-	if (IntegerScale)
-	{
-		// Узнаём размер рабочей области экрана (без панели задач)
-		RECT workArea;
-		SystemParametersInfo(SPI_GETWORKAREA, 0, &workArea, 0);
-		int screenW = workArea.right - workArea.left;
-		int screenH = workArea.bottom - workArea.top;
-
-		// Примерный размер рамки и заголовка окна (для оценки)
-		int frameW = GetSystemMetrics(SM_CXSIZEFRAME) * 2;
-		int frameH = GetSystemMetrics(SM_CYSIZEFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION);
-		if (HasMenu)
-			frameH += GetSystemMetrics(SM_CYMENU);
-
-		// Подбираем наибольший целый множитель, вмещающийся на экран
-		int bestMult = 1;
-		for (int m = 1; m <= 16; m++)
-		{
-			int wTest = 256 * m + frameW;
-			int hTest = 240 * m + frameH;
-			if (wTest <= screenW && hTest <= screenH)
-				bestMult = m;
-			else
-				break;
-		}
-		mult = bestMult;
-	}
-
-	int w = 256 * mult;
-	int h = 240 * mult;
+	
+	int w = 256 * SizeMult;
+	int h = 240 * SizeMult;
 
 	if (FixAspect)
 	{
@@ -1451,7 +1421,6 @@ void	SaveSettings (void)
 
 	RegSetValueEx(SettingsBase, _T("SizeMult")    , 0, REG_DWORD, (LPBYTE)&SizeMult        , sizeof(DWORD));
 	RegSetValueEx(SettingsBase, _T("FixAspect")   , 0, REG_DWORD, (LPBYTE)&FixAspect       , sizeof(DWORD));
-	RegSetValueEx(SettingsBase, _T("IntegerScale") , 0, REG_DWORD, (LPBYTE)&IntegerScale    , sizeof(DWORD));
 	RegSetValueEx(SettingsBase, _T("PosX")        , 0, REG_DWORD, (LPBYTE)&wRect.left      , sizeof(DWORD));
 	RegSetValueEx(SettingsBase, _T("PosY")        , 0, REG_DWORD, (LPBYTE)&wRect.top       , sizeof(DWORD));
 	RegSetValueEx(SettingsBase, _T("Region")      , 0, REG_DWORD, (LPBYTE)&CurRegion       , sizeof(DWORD));
@@ -1489,7 +1458,6 @@ void	LoadSettings (void)
 	// Load Defaults
 	SizeMult = 2;
 	FixAspect = FALSE;
-	IntegerScale = FALSE;
 	SoundEnabled = TRUE;
 	dbgVisible = TRUE;
 	CPU::LogBadOps = FALSE;
@@ -1507,7 +1475,6 @@ void	LoadSettings (void)
 
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("SizeMult")    , 0, NULL, (LPBYTE)&SizeMult       , &Size);
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("FixAspect")   , 0, NULL, (LPBYTE)&FixAspect      , &Size);
-	Size = sizeof(BOOL);	RegQueryValueEx(SettingsBase, _T("IntegerScale") , 0, NULL, (LPBYTE)&IntegerScale   , &Size);
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("PosX")        , 0, NULL, (LPBYTE)&PosX           , &Size);
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("PosY")        , 0, NULL, (LPBYTE)&PosY           , &Size);
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("Region")      , 0, NULL, (LPBYTE)&MyRegion       , &Size);
@@ -1561,10 +1528,6 @@ void	LoadSettings (void)
 	if (FixAspect)
 		CheckMenuItem(hMenu, ID_PPU_SIZE_ASPECT, MF_CHECKED);
 	else	CheckMenuItem(hMenu, ID_PPU_SIZE_ASPECT, MF_UNCHECKED);
-	
-	if (IntegerScale)
-		CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
-	else	CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
 
 	SetRegion(MyRegion);
 
