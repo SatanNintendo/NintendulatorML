@@ -640,6 +640,7 @@ void Lang::UpdateMenu(HMENU hMenu)
     HMENU hDebug = GetSubMenu(hMenu, 5);
     ModifyMenu(hDebug, ID_DEBUG_CPU,       MF_BYCOMMAND | MF_STRING, ID_DEBUG_CPU,        GetString(LANG_MENU_DEBUG_CPU));
     ModifyMenu(hDebug, ID_DEBUG_PPU,       MF_BYCOMMAND | MF_STRING, ID_DEBUG_PPU,        GetString(LANG_MENU_DEBUG_PPU));
+    ModifyMenu(hDebug, ID_DEBUG_STATWND,   MF_BYCOMMAND | MF_STRING, ID_DEBUG_STATWND,    GetString(LANG_MENU_DEBUG_STATWND));
 
     // === Misc подменю ===
     HMENU hMisc = GetSubMenu(hMenu, 7);
