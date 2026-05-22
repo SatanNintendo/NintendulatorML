@@ -511,6 +511,13 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				CheckMenuItem(hMenu, ID_PPU_SIZE_ASPECT, MF_CHECKED);
 			else	CheckMenuItem(hMenu, ID_PPU_SIZE_ASPECT, MF_UNCHECKED);
 			break;
+			case ID_PPU_INTSCALE:
+			IntegerScale = !IntegerScale;
+			NES::UpdateInterface();
+			if (IntegerScale)
+				CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
+			else	CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
+			break;
 		case ID_PPU_MODE_NTSC:
 			NES::Stop();
 			NES::SetRegion(NES::REGION_NTSC);
