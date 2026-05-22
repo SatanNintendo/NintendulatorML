@@ -44,6 +44,7 @@ void	LoadSettings (HKEY);
 void	DrawScreen (void);
 void	Draw1x (void);
 void	Draw2x (void);
+void	DrawIntegerScale (void);
 void	Update (void);
 void	Repaint (void);
 void	LoadPalette (PALETTE);
