@@ -204,3 +204,7 @@ ABOUT_TEXT=Nintendulator\nЭмулятор NES\n\nCopyright (C) QMT Productions
 
 # === CPU ===
 ERR_CPU_BAD_OPCODE=Неверный опкод, CPU заблокирован
+MENU_PPU_FRAMESKIP_AUTO=&Авто
+MENU_PPU_SLOWDOWN_ENABLED=&Включить
+MENU_PPU_MODE_HYBRID=&Гибрид
+MENU_FILE_AUTORUN=&Автозапуск
