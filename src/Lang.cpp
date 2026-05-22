@@ -213,6 +213,9 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     // PPU подменю
     _T("&Fix Aspect"),
     _T("&Frameskip"),
+    _T("&Auto"),
+    _T("&Enabled"),
+    _T("&Hybrid"),
     _T("&Size"),
     _T("&Mode"),
     _T("P&alette..."),
