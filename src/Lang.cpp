@@ -108,6 +108,15 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Family Trainer"),
     _T("Oeka Kids Tablet"),
 
+    // Controllers — дополнительные сообщения
+    _T("No configuration necessary!"),
+    _T("Unable to initialize DirectInput!"),
+    _T("Failed to initialize keyboard!"),
+    _T("Failed to initialize mouse!"),
+    _T("Failed to initialize joysticks!"),
+    _T("Error - encountered invalid keyboard key ID!"),
+    _T("Error - encountered invalid mouse button ID!"),
+
     // Controllers dialog
     _T("Controller Port &1:"),
     _T("Controller Port &2:"),
