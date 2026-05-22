@@ -1476,6 +1476,7 @@ void	LoadSettings (void)
 
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("SizeMult")    , 0, NULL, (LPBYTE)&SizeMult       , &Size);
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("FixAspect")   , 0, NULL, (LPBYTE)&FixAspect      , &Size);
+	Size = sizeof(BOOL);	RegQueryValueEx(SettingsBase, _T("IntegerScale") , 0, NULL, (LPBYTE)&IntegerScale   , &Size);
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("PosX")        , 0, NULL, (LPBYTE)&PosX           , &Size);
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("PosY")        , 0, NULL, (LPBYTE)&PosY           , &Size);
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("Region")      , 0, NULL, (LPBYTE)&MyRegion       , &Size);
