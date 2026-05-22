@@ -579,6 +579,9 @@ void Lang::UpdateMenu(HMENU hMenu)
     HMENU hFile = GetSubMenu(hMenu, 0);
     ModifyMenu(hFile, ID_FILE_OPEN,        MF_BYCOMMAND | MF_STRING, ID_FILE_OPEN,        GetString(LANG_MENU_FILE_OPEN));
     ModifyMenu(hFile, ID_FILE_CLOSE,       MF_BYCOMMAND | MF_STRING, ID_FILE_CLOSE,       GetString(LANG_MENU_FILE_CLOSE));
+    ModifyMenu(hFile, ID_FILE_HEADER,      MF_BYCOMMAND | MF_STRING, ID_FILE_HEADER,      GetString(LANG_MENU_FILE_HEADER));
+    ModifyMenu(hFile, ID_FILE_AUTORUN,     MF_BYCOMMAND | MF_STRING, ID_FILE_AUTORUN,     GetString(LANG_MENU_FILE_AUTORUN));
+    ModifyMenu(hFile, ID_FILE_BROWSESAVES, MF_BYCOMMAND | MF_STRING, ID_FILE_BROWSESAVES, GetString(LANG_MENU_FILE_BROWSESAVES));
     ModifyMenu(hFile, ID_FILE_EXIT,        MF_BYCOMMAND | MF_STRING, ID_FILE_EXIT,        GetString(LANG_MENU_FILE_EXIT));
 
     // === CPU подменю ===
