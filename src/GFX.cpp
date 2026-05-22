@@ -127,7 +127,6 @@ void	Init (void)
 	PC10compat = FALSE;
 	Fullscreen = FALSE;
 	Bilinear = FALSE;
-	IntegerScale = FALSE;
 	InError = FALSE;
 
 	if (!QueryPerformanceFrequency(&ClockFreq))
