@@ -231,3 +231,12 @@ MENU_MOVIE=&Запись
 MENU_MOVIE_RECORD=&Записать...
 MENU_MOVIE_PLAY=&Воспроизвести...
 MENU_MOVIE_STOP=&Остановить
+
+# === Контроллеры — дополнительные сообщения ===
+CONT_NO_CONFIG=Настройка не требуется!
+CONT_ERR_DIRECTINPUT=Не удалось инициализировать DirectInput!
+CONT_ERR_KEYBOARD=Не удалось инициализировать клавиатуру!
+CONT_ERR_MOUSE=Не удалось инициализировать мышь!
+CONT_ERR_JOYSTICK=Не удалось инициализировать джойстики!
+CONT_ERR_KEY_ID=Ошибка - неверный ID клавиши клавиатуры!
+CONT_ERR_MOUSE_ID=Ошибка - неверный ID кнопки мыши!
