@@ -671,6 +671,49 @@ void	DrawBilinear2x (void)
 	}
 }
 
+// Рисует картинку NES с целым множителем ISMult по центру экрана.
+// Остальное заливается чёрным. Работает только в 32-битном режиме.
+void	DrawIntegerScale (void)
+{
+	int x, y;
+	int scrW = ISBorderX * 2 + 256 * ISMult;
+	int scrH = ISBorderY * 2 + 240 * ISMult;
+
+	register unsigned long *dst;
+	for (y = 0; y < scrH; y++)
+	{
+		dst = (unsigned long *)((unsigned char *)SurfDesc.lpSurface + y * Pitch);
+
+		// Строки выше или ниже картинки — чёрный
+		if (y < ISBorderY || y >= ISBorderY + 240 * ISMult)
+		{
+			for (x = 0; x < scrW; x++)
+				*dst++ = 0x000000;
+			continue;
+		}
+
+		// Какая строка NES соответствует этой строке экрана
+		int srcY = (y - ISBorderY) / ISMult;
+
+		// Левая чёрная полоса
+		for (x = 0; x < ISBorderX; x++)
+			*dst++ = 0x000000;
+
+		// Пиксели NES — каждый повторяется ISMult раз
+		register unsigned short *src = PPU::DrawArray + srcY * 256;
+		for (x = 0; x < 256; x++)
+		{
+			unsigned long color = Palette32[*src++];
+			for (int px = 0; px < ISMult; px++)
+				*dst++ = color;
+		}
+
+		// Правая чёрная полоса
+		for (x = ISBorderX + 256 * ISMult; x < scrW; x++)
+			*dst++ = 0x000000;
+	}
+}
+
 void	Draw2x (void)
 {
 	int x, y;
