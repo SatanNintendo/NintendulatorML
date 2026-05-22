@@ -1421,6 +1421,7 @@ void	SaveSettings (void)
 
 	RegSetValueEx(SettingsBase, _T("SizeMult")    , 0, REG_DWORD, (LPBYTE)&SizeMult        , sizeof(DWORD));
 	RegSetValueEx(SettingsBase, _T("FixAspect")   , 0, REG_DWORD, (LPBYTE)&FixAspect       , sizeof(DWORD));
+	RegSetValueEx(SettingsBase, _T("IntegerScale") , 0, REG_DWORD, (LPBYTE)&IntegerScale    , sizeof(DWORD));
 	RegSetValueEx(SettingsBase, _T("PosX")        , 0, REG_DWORD, (LPBYTE)&wRect.left      , sizeof(DWORD));
 	RegSetValueEx(SettingsBase, _T("PosY")        , 0, REG_DWORD, (LPBYTE)&wRect.top       , sizeof(DWORD));
 	RegSetValueEx(SettingsBase, _T("Region")      , 0, REG_DWORD, (LPBYTE)&CurRegion       , sizeof(DWORD));
