@@ -464,7 +464,6 @@ void	LoadSettings (HKEY SettingsBase)
 
 	Size = sizeof(BOOL);	RegQueryValueEx(SettingsBase, _T("Scanlines")   , 0, NULL, (LPBYTE)&Scanlines  , &Size);
 	Size = sizeof(BOOL);	RegQueryValueEx(SettingsBase, _T("Bilinear")    , 0, NULL, (LPBYTE)&Bilinear   , &Size);
-	Size = sizeof(BOOL);	RegQueryValueEx(SettingsBase, _T("IntScale")    , 0, NULL, (LPBYTE)&IntegerScale, &Size);
 	Size = sizeof(BOOL);	RegQueryValueEx(SettingsBase, _T("aFSkip")      , 0, NULL, (LPBYTE)&aFSkip     , &Size);
 
 	Size = sizeof(DWORD);	RegQueryValueEx(SettingsBase, _T("FSkip")       , 0, NULL, (LPBYTE)&FSkip      , &Size);
