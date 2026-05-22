@@ -882,7 +882,9 @@ void	Update (void)
 		return;
 	Try(SecondarySurf->Lock(NULL, &SurfDesc, DDLOCK_WAIT | DDLOCK_NOSYSLOCK | DDLOCK_WRITEONLY | DDLOCK_SURFACEMEMORYPTR, NULL), _T("Failed to lock secondary surface"));
 
-	if (Bilinear && Depth == 32)
+	if (IntegerScale && Fullscreen && Depth == 32)
+		DrawIntegerScale();
+	else if (Bilinear && Depth == 32)
 		DrawBilinear2x();
 	else if (Fullscreen || Scanlines)
 		Draw2x();
