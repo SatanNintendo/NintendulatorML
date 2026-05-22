@@ -1530,6 +1530,10 @@ void	LoadSettings (void)
 	if (FixAspect)
 		CheckMenuItem(hMenu, ID_PPU_SIZE_ASPECT, MF_CHECKED);
 	else	CheckMenuItem(hMenu, ID_PPU_SIZE_ASPECT, MF_UNCHECKED);
+	
+	if (IntegerScale)
+		CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
+	else	CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
 
 	SetRegion(MyRegion);
 
