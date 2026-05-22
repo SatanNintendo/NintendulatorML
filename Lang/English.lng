@@ -231,3 +231,12 @@ MENU_MOVIE=&Movie
 MENU_MOVIE_RECORD=&Record...
 MENU_MOVIE_PLAY=&Play...
 MENU_MOVIE_STOP=&Stop
+
+# === Controllers — additional messages ===
+CONT_NO_CONFIG=No configuration necessary!
+CONT_ERR_DIRECTINPUT=Unable to initialize DirectInput!
+CONT_ERR_KEYBOARD=Failed to initialize keyboard!
+CONT_ERR_MOUSE=Failed to initialize mouse!
+CONT_ERR_JOYSTICK=Failed to initialize joysticks!
+CONT_ERR_KEY_ID=Error - encountered invalid keyboard key ID!
+CONT_ERR_MOUSE_ID=Error - encountered invalid mouse button ID!
