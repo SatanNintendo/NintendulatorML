@@ -53,6 +53,8 @@ int forceNoSkip;
 BOOL SlowDown;
 int SlowRate;
 int FullscreenBorder;
+BOOL IntegerScale;
+int ISBorderX, ISBorderY, ISMult;  // отступы и множитель для Integer Scaling
 
 BOOL InError;
 
