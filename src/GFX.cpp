@@ -486,8 +486,6 @@ void	LoadSettings (HKEY SettingsBase)
 		CheckMenuItem(hMenu, ID_PPU_SCANLINES, MF_CHECKED);
 	if (Bilinear)
 		CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
-	if (IntegerScale)
-		CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
 }
 
 int TitleDelay = 0;
