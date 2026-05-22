@@ -13,7 +13,7 @@ enum PALETTE { PALETTE_NTSC, PALETTE_PAL, PALETTE_PC10, PALETTE_VS1, PALETTE_VS2
 
 extern unsigned char RawPalette[8][64][3];
 extern unsigned long Palette32[512];
-extern BOOL Fullscreen, Scanlines, Bilinear, IntegerScale;
+extern BOOL Fullscreen, Scanlines, Bilinear;
 
 extern int FPSnum, FPSCnt, FSkip;
 extern BOOL aFSkip;
