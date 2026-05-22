@@ -588,12 +588,6 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
 			else	CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
 			break;
-			case ID_PPU_BILINEAR:
-			NES::Stop();
-			GFX::Stop();
-			GFX::Bilinear = !GFX::Bilinear;
-			GFX::Start();
-			if (running)
 				NES::Start(FALSE);
 			if (GFX::Bilinear)
 				CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
