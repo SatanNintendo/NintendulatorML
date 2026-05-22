@@ -1459,6 +1459,7 @@ void	LoadSettings (void)
 	// Load Defaults
 	SizeMult = 2;
 	FixAspect = FALSE;
+	IntegerScale = FALSE;
 	SoundEnabled = TRUE;
 	dbgVisible = TRUE;
 	CPU::LogBadOps = FALSE;
