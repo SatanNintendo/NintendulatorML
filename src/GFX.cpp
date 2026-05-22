@@ -934,9 +934,17 @@ void	GetCursorPos (POINT *pos)
 	::GetCursorPos(pos);
 	if (Fullscreen)
 	{
-		pos->x -= FullscreenBorder;
-		pos->x /= 2;
-		pos->y /= 2;
+		if (IntegerScale)
+		{
+			pos->x = (pos->x - ISBorderX) / ISMult;
+			pos->y = (pos->y - ISBorderY) / ISMult;
+		}
+		else
+		{
+			pos->x -= FullscreenBorder;
+			pos->x /= 2;
+			pos->y /= 2;
+		}
 	}
 	else
 	{
