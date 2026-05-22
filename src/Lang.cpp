@@ -627,7 +627,11 @@ void Lang::UpdateMenu(HMENU hMenu)
     ModifyMenu(hPPU, ID_PPU_BILINEAR,      MF_BYCOMMAND | MF_STRING, ID_PPU_BILINEAR,     GetString(LANG_MENU_PPU_BILINEAR));
     // Подпункты Frameskip, Size, Mode, Slowdown — вложенные popup, обновляем заголовки
     HMENU hFrameskip = GetSubMenu(hPPU, 0);
-    if (hFrameskip) ModifyMenu(hPPU, 0, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hFrameskip, GetString(LANG_MENU_PPU_FRAMESKIP));
+    if (hFrameskip)
+    {
+        ModifyMenu(hPPU, 0, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hFrameskip, GetString(LANG_MENU_PPU_FRAMESKIP));
+        ModifyMenu(hFrameskip, ID_PPU_FRAMESKIP_AUTO, MF_BYCOMMAND | MF_STRING, ID_PPU_FRAMESKIP_AUTO, GetString(LANG_MENU_PPU_FRAMESKIP_AUTO));
+    }
     HMENU hSize = GetSubMenu(hPPU, 1);
     if (hSize)
     {
@@ -635,9 +639,17 @@ void Lang::UpdateMenu(HMENU hMenu)
         ModifyMenu(hSize, ID_PPU_SIZE_ASPECT, MF_BYCOMMAND | MF_STRING, ID_PPU_SIZE_ASPECT, GetString(LANG_MENU_PPU_FIXASPECT));
     }
     HMENU hMode = GetSubMenu(hPPU, 2);
-    if (hMode) ModifyMenu(hPPU, 2, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hMode, GetString(LANG_MENU_PPU_MODE));
+    if (hMode)
+    {
+        ModifyMenu(hPPU, 2, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hMode, GetString(LANG_MENU_PPU_MODE));
+        ModifyMenu(hMode, ID_PPU_MODE_DENDY, MF_BYCOMMAND | MF_STRING, ID_PPU_MODE_DENDY, GetString(LANG_MENU_PPU_MODE_HYBRID));
+    }
     HMENU hSlowdown = GetSubMenu(hPPU, 4);
-    if (hSlowdown) ModifyMenu(hPPU, 4, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hSlowdown, GetString(LANG_MENU_PPU_SLOWDOWN));
+    if (hSlowdown)
+    {
+        ModifyMenu(hPPU, 4, MF_BYPOSITION | MF_STRING | MF_POPUP, (UINT_PTR)hSlowdown, GetString(LANG_MENU_PPU_SLOWDOWN));
+        ModifyMenu(hSlowdown, ID_PPU_SLOWDOWN_ENABLED, MF_BYCOMMAND | MF_STRING, ID_PPU_SLOWDOWN_ENABLED, GetString(LANG_MENU_PPU_SLOWDOWN_ENABLED));
+    }
 
     // === Sound подменю ===
     HMENU hSound = GetSubMenu(hMenu, 3);
