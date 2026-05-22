@@ -128,6 +128,10 @@ void	Init (void)
 	PALsat = 50;
 	PC10compat = FALSE;
 	Fullscreen = FALSE;
+	IntegerScale = FALSE;
+	ISBorderX = 0;
+	ISBorderY = 0;
+	ISMult = 2;
 	Bilinear = FALSE;
 	InError = FALSE;
 
