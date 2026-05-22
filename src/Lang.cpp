@@ -431,6 +431,7 @@ static const KeyMapping KeyMap[] =
     { L"MENU_DEBUG_STATWND",        LANG_MENU_DEBUG_STATWND },
     { L"MENU_MISC_STARTAVI",        LANG_MENU_MISC_STARTAVI },
     { L"MENU_MISC_STOPAVI",         LANG_MENU_MISC_STOPAVI },    
+    { L"MENU_PPU_FIXASPECT",        LANG_MENU_PPU_FIXASPECT },    
     { L"MENU_PPU_FRAMESKIP",        LANG_MENU_PPU_FRAMESKIP },
     { L"MENU_PPU_SIZE",             LANG_MENU_PPU_SIZE },
     { L"MENU_PPU_MODE",             LANG_MENU_PPU_MODE },
