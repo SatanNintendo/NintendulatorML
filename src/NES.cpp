@@ -1347,9 +1347,39 @@ void	MapperConfig (void)
 void	UpdateInterface (void)
 {
 	HWND hWnd = hMainWnd;
-	
-	int w = 256 * SizeMult;
-	int h = 240 * SizeMult;
+
+	int mult = SizeMult;
+
+	if (IntegerScale)
+	{
+		// Узнаём размер рабочей области экрана (без панели задач)
+		RECT workArea;
+		SystemParametersInfo(SPI_GETWORKAREA, 0, &workArea, 0);
+		int screenW = workArea.right - workArea.left;
+		int screenH = workArea.bottom - workArea.top;
+
+		// Примерный размер рамки и заголовка окна (для оценки)
+		int frameW = GetSystemMetrics(SM_CXSIZEFRAME) * 2;
+		int frameH = GetSystemMetrics(SM_CYSIZEFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION);
+		if (HasMenu)
+			frameH += GetSystemMetrics(SM_CYMENU);
+
+		// Подбираем наибольший целый множитель, вмещающийся на экран
+		int bestMult = 1;
+		for (int m = 1; m <= 16; m++)
+		{
+			int wTest = 256 * m + frameW;
+			int hTest = 240 * m + frameH;
+			if (wTest <= screenW && hTest <= screenH)
+				bestMult = m;
+			else
+				break;
+		}
+		mult = bestMult;
+	}
+
+	int w = 256 * mult;
+	int h = 240 * mult;
 
 	if (FixAspect)
 	{
