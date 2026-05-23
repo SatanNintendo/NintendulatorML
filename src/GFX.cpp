@@ -891,7 +891,26 @@ void	Update (void)
 		if (Bilinear)
 			DrawIntegerScaleWithBilinear();   // новая функция
 		else
-			DrawIntegerScale();
+			void	Update (void)
+{
+	// ensure secondary surface exists
+	if (!SecondarySurf)
+		return;
+	// if it got lost, try to restore it
+	if (SecondarySurf->IsLost() == DDERR_SURFACELOST)
+		SecondarySurf->Restore();
+	if (InError)
+		return;
+
+	Try(SecondarySurf->Lock(NULL, &SurfDesc, DDLOCK_WAIT | DDLOCK_NOSYSLOCK | DDLOCK_WRITEONLY | DDLOCK_SURFACEMEMORYPTR, NULL), _T("Failed to lock secondary surface"));
+
+	// === ВАРИАНТ 2: Bilinear + Integer Scaling ===
+	if (IntegerScale && Fullscreen && Depth == 32)
+	{
+		if (Bilinear)
+			DrawIntegerScaleWithBilinear();   // сглаживание поверх integer
+		else
+			DrawIntegerScale();               // обычный integer
 	}
 	else if (Bilinear && Depth == 32)
 	{
