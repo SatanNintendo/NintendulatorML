@@ -559,14 +559,15 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			CheckMenuRadioItem(hMenu, ID_PPU_SLOWDOWN_2, ID_PPU_SLOWDOWN_20, ID_PPU_SLOWDOWN_20, MF_BYCOMMAND);
 			break;
 		case ID_PPU_FULLSCREEN:
-			NES::Stop();
-			GFX::Stop();
-			GFX::Fullscreen = !GFX::Fullscreen;
-			GFX::Start();
-			if (running)
-				NES::Start(FALSE);
-			break;
-		case ID_PPU_SCANLINES:
+    NES::Stop();
+    GFX::Stop();
+    GFX::Fullscreen = !GFX::Fullscreen;
+    GFX::Start();
+    if (running)
+        NES::Start(FALSE);
+    break;
+
+case ID_PPU_SCANLINES:
     NES::Stop();
     GFX::Stop();
     GFX::Scanlines = !GFX::Scanlines;
@@ -585,31 +586,41 @@ case ID_PPU_BILINEAR:
     GFX::Bilinear = !GFX::Bilinear;
     GFX::Start();
     if (running)
-       case ID_PPU_BILINEAR:
-			NES::Stop();
-			GFX::Stop();
-			GFX::Bilinear = !GFX::Bilinear;
-			GFX::Start();
-			if (running)
-				NES::Start(FALSE);
-			if (GFX::Bilinear)
-				CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
-			else
-				CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_UNCHECKED);
-			break;
+        NES::Start(FALSE);
+    if (GFX::Bilinear)
+        CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
+    else
+        CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_UNCHECKED);
+    break;
 
-		case ID_PPU_INTSCALE:
-			NES::Stop();
-			GFX::Stop();
-			GFX::IntegerScale = !GFX::IntegerScale;
-			GFX::Start();
-			if (running)
-				NES::Start(FALSE);
-			if (GFX::IntegerScale)
-				CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
-			else
-				CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
-			break;
+case ID_PPU_INTSCALE:
+    NES::Stop();
+    GFX::Stop();
+    GFX::IntegerScale = !GFX::IntegerScale;
+    GFX::Start();
+    if (running)
+        NES::Start(FALSE);
+    if (GFX::IntegerScale)
+        CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
+    else
+        CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
+    break;
+
+case ID_SOUND_ENABLED:
+    NES::SoundEnabled = !NES::SoundEnabled;
+    if (NES::SoundEnabled)
+    {
+        if (running)
+            APU::SoundON();
+        CheckMenuItem(hMenu, ID_SOUND_ENABLED, MF_CHECKED);
+    }
+    else
+    {
+        if (running)
+            APU::SoundOFF();
+        CheckMenuItem(hMenu, ID_SOUND_ENABLED, MF_UNCHECKED);
+    }
+    break;
 		case ID_SOUND_ENABLED:
 			NES::SoundEnabled = !NES::SoundEnabled;
 			if (NES::SoundEnabled)
