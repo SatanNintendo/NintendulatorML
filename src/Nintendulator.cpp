@@ -567,27 +567,43 @@ LRESULT CALLBACK WndProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				NES::Start(FALSE);
 			break;
 		case ID_PPU_SCANLINES:
-			NES::Stop();
-			GFX::Stop();
-			GFX::Scanlines = !GFX::Scanlines;
-			GFX::Start();
-			if (running)
-				NES::Start(FALSE);
-			if (GFX::Scanlines)
-				CheckMenuItem(hMenu, ID_PPU_SCANLINES, MF_CHECKED);
-			else	CheckMenuItem(hMenu, ID_PPU_SCANLINES, MF_UNCHECKED);
-			break;
-			case ID_PPU_INTSCALE:
-			NES::Stop();
-			GFX::Stop();
-			GFX::IntegerScale = !GFX::IntegerScale;
-			GFX::Start();
-			if (running)
-				NES::Start(FALSE);
-			if (GFX::IntegerScale)
-				CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
-			else	CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
-			break;
+    NES::Stop();
+    GFX::Stop();
+    GFX::Scanlines = !GFX::Scanlines;
+    GFX::Start();
+    if (running)
+        NES::Start(FALSE);
+    if (GFX::Scanlines)
+        CheckMenuItem(hMenu, ID_PPU_SCANLINES, MF_CHECKED);
+    else
+        CheckMenuItem(hMenu, ID_PPU_SCANLINES, MF_UNCHECKED);
+    break;
+
+case ID_PPU_BILINEAR:
+    NES::Stop();
+    GFX::Stop();
+    GFX::Bilinear = !GFX::Bilinear;
+    GFX::Start();
+    if (running)
+        NES::Start(FALSE);
+    if (GFX::Bilinear)
+        CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
+    else
+        CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_UNCHECKED);
+    break;
+
+case ID_PPU_INTSCALE:
+    NES::Stop();
+    GFX::Stop();
+    GFX::IntegerScale = !GFX::IntegerScale;
+    GFX::Start();
+    if (running)
+        NES::Start(FALSE);
+    if (GFX::IntegerScale)
+        CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
+    else
+        CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
+    break;
 				NES::Start(FALSE);
 			if (GFX::Bilinear)
 				CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
