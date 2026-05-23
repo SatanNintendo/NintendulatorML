@@ -914,21 +914,52 @@ void	Update (void)
 // Integer Scaling + Bilinear filtering
 void DrawIntegerScaleWithBilinear(void)
 {
-	int x, y;
-	int scrW = SurfDesc.dwWidth;
-	int scrH = SurfDesc.dwHeight;
+	int scrW = (int)SurfDesc.dwWidth;
+	int scrH = (int)SurfDesc.dwHeight;
 
-	for (y = 0; y < scrH; y++)
+	for (int y = 0; y < scrH; y++)
 	{
 		unsigned long *dst = (unsigned long *)((unsigned char *)SurfDesc.lpSurface + y * Pitch);
 
-		// Чёрные полосы сверху/снизу
 		if (y < ISBorderY || y >= ISBorderY + 240 * ISMult)
 		{
-			for (x = 0; x < scrW; x++)
+			for (int x = 0; x < scrW; x++)
 				*dst++ = 0x000000;
 			continue;
 		}
+
+		int pixY  = (y - ISBorderY) / ISMult;
+		int subY  = (y - ISBorderY) % ISMult;
+		int srcY1 = (pixY + 1 < 240) ? pixY + 1 : 239;
+		int ty    = (subY * 2 + 1) * 255 / (ISMult * 2);
+
+		unsigned short *row0 = PPU::DrawArray + pixY  * 256;
+		unsigned short *row1 = PPU::DrawArray + srcY1 * 256;
+
+		for (int x = 0; x < ISBorderX; x++)
+			*dst++ = 0x000000;
+
+		for (int x = 0; x < 256 * ISMult; x++)
+		{
+			int pixX  = x / ISMult;
+			int subX  = x % ISMult;
+			int srcX1 = (pixX + 1 < 256) ? pixX + 1 : 255;
+			int tx    = (subX * 2 + 1) * 255 / (ISMult * 2);
+
+			unsigned long c00 = Palette32[row0[pixX]];
+			unsigned long c10 = Palette32[row0[srcX1]];
+			unsigned long c01 = Palette32[row1[pixX]];
+			unsigned long c11 = Palette32[row1[srcX1]];
+
+			unsigned long top    = BlendColors32(c00, c10, tx);
+			unsigned long bottom = BlendColors32(c01, c11, tx);
+			*dst++ = BlendColors32(top, bottom, ty);
+		}
+
+		for (int x = ISBorderX + 256 * ISMult; x < scrW; x++)
+			*dst++ = 0x000000;
+	}
+}
 
 		int srcY = (y - ISBorderY) / ISMult;
 		int ty = ((y - ISBorderY) % ISMult) * 255 / ISMult;
