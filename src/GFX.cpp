@@ -928,6 +928,65 @@ void	Update (void)
 	Try(SecondarySurf->Unlock(NULL), _T("Failed to unlock secondary surface"));
 	Repaint();
 }
+		
+		// Integer Scaling + Bilinear filtering
+void DrawIntegerScaleWithBilinear(void)
+{
+	int x, y;
+	int scrW = SurfDesc.dwWidth;
+	int scrH = SurfDesc.dwHeight;
+
+	for (y = 0; y < scrH; y++)
+	{
+		unsigned long *dst = (unsigned long *)((unsigned char *)SurfDesc.lpSurface + y * Pitch);
+
+		// Чёрные полосы сверху/снизу
+		if (y < ISBorderY || y >= ISBorderY + 240 * ISMult)
+		{
+			for (x = 0; x < scrW; x++)
+				*dst++ = 0x000000;
+			continue;
+		}
+
+		int srcY = (y - ISBorderY) / ISMult;
+		int ty = ((y - ISBorderY) % ISMult) * 255 / ISMult;
+
+		// Левая чёрная полоса
+		for (x = 0; x < ISBorderX; x++)
+			*dst++ = 0x000000;
+
+		register unsigned short *srcBase = PPU::DrawArray + srcY * 256;
+
+		for (x = 0; x < 256; x++)
+		{
+			int srcX0 = x;
+			int srcX1 = (x + 1 < 256) ? x + 1 : 255;
+			int tx = (x * ISMult % ISMult) * 255 / ISMult;
+
+			unsigned long c00 = Palette32[srcBase[srcX0]];
+			unsigned long c10 = Palette32[srcBase[srcX1]];
+			unsigned long c01 = Palette32[srcBase[srcX0] + 256]; // next line
+			unsigned long c11 = Palette32[srcBase[srcX1] + 256];
+
+			if (srcY + 1 >= 240)
+			{
+				c01 = c00;
+				c11 = c10;
+			}
+
+			unsigned long top    = BlendColors32(c00, c10, tx);
+			unsigned long bottom = BlendColors32(c01, c11, tx);
+			unsigned long color  = BlendColors32(top, bottom, ty);
+
+			for (int px = 0; px < ISMult; px++)
+				*dst++ = color;
+		}
+
+		// Правая чёрная полоса
+		for (x = ISBorderX + 256 * ISMult; x < scrW; x++)
+			*dst++ = 0x000000;
+	}
+}
 
 void	Repaint (void)
 {
