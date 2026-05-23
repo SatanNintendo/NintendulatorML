@@ -916,6 +916,18 @@ void DrawIntegerScaleWithBilinear(void)
 {
 	int scrW = (int)SurfDesc.dwWidth;
 	int scrH = (int)SurfDesc.dwHeight;
+	int imgW = 256 * ISMult;
+
+	// Предварительно считаем tx и srcX1 для каждого экранного X
+	static int tx_lut[256 * 16];
+	static int srcX1_lut[256 * 16];
+	for (int x = 0; x < imgW; x++)
+	{
+		int pixX = x / ISMult;
+		int subX = x % ISMult;
+		srcX1_lut[x] = (pixX + 1 < 256) ? pixX + 1 : 255;
+		tx_lut[x] = (subX * 2 + 1) * 255 / (ISMult * 2);
+	}
 
 	for (int y = 0; y < scrH; y++)
 	{
@@ -923,8 +935,7 @@ void DrawIntegerScaleWithBilinear(void)
 
 		if (y < ISBorderY || y >= ISBorderY + 240 * ISMult)
 		{
-			for (int x = 0; x < scrW; x++)
-				*dst++ = 0x000000;
+			memset(dst, 0, scrW * sizeof(unsigned long));
 			continue;
 		}
 
@@ -932,32 +943,36 @@ void DrawIntegerScaleWithBilinear(void)
 		int subY  = (y - ISBorderY) % ISMult;
 		int srcY1 = (pixY + 1 < 240) ? pixY + 1 : 239;
 		int ty    = (subY * 2 + 1) * 255 / (ISMult * 2);
+		int ity   = 255 - ty;
 
 		unsigned short *row0 = PPU::DrawArray + pixY  * 256;
 		unsigned short *row1 = PPU::DrawArray + srcY1 * 256;
 
-		for (int x = 0; x < ISBorderX; x++)
-			*dst++ = 0x000000;
+		// Левая чёрная полоса
+		memset(dst, 0, ISBorderX * sizeof(unsigned long));
+		dst += ISBorderX;
 
-		for (int x = 0; x < 256 * ISMult; x++)
+		for (int x = 0; x < imgW; x++)
 		{
 			int pixX  = x / ISMult;
-			int subX  = x % ISMult;
-			int srcX1 = (pixX + 1 < 256) ? pixX + 1 : 255;
-			int tx    = (subX * 2 + 1) * 255 / (ISMult * 2);
+			int srcX1 = srcX1_lut[x];
+			int tx    = tx_lut[x];
+			int itx   = 255 - tx;
 
 			unsigned long c00 = Palette32[row0[pixX]];
 			unsigned long c10 = Palette32[row0[srcX1]];
 			unsigned long c01 = Palette32[row1[pixX]];
 			unsigned long c11 = Palette32[row1[srcX1]];
 
-			unsigned long top    = BlendColors32(c00, c10, tx);
-			unsigned long bottom = BlendColors32(c01, c11, tx);
-			*dst++ = BlendColors32(top, bottom, ty);
+			unsigned long r = (((c00>>16&0xFF)*itx + (c10>>16&0xFF)*tx)*ity/255 + ((c01>>16&0xFF)*itx + (c11>>16&0xFF)*tx)*ty/255) / 255;
+			unsigned long g = (((c00>> 8&0xFF)*itx + (c10>> 8&0xFF)*tx)*ity/255 + ((c01>> 8&0xFF)*itx + (c11>> 8&0xFF)*tx)*ty/255) / 255;
+			unsigned long b = (((c00     &0xFF)*itx + (c10     &0xFF)*tx)*ity/255 + ((c01     &0xFF)*itx + (c11     &0xFF)*tx)*ty/255) / 255;
+
+			*dst++ = (r << 16) | (g << 8) | b;
 		}
 
-		for (int x = ISBorderX + 256 * ISMult; x < scrW; x++)
-			*dst++ = 0x000000;
+		// Правая чёрная полоса
+		memset(dst, 0, (scrW - ISBorderX - imgW) * sizeof(unsigned long));
 	}
 }
 	
