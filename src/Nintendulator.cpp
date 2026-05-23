@@ -621,21 +621,7 @@ case ID_SOUND_ENABLED:
         CheckMenuItem(hMenu, ID_SOUND_ENABLED, MF_UNCHECKED);
     }
     break;
-		case ID_SOUND_ENABLED:
-			NES::SoundEnabled = !NES::SoundEnabled;
-			if (NES::SoundEnabled)
-			{
-				if (running)
-					APU::SoundON();
-				CheckMenuItem(hMenu, ID_SOUND_ENABLED, MF_CHECKED);
-			}
-			else
-			{
-				if (running)
-					APU::SoundOFF();
-				CheckMenuItem(hMenu, ID_SOUND_ENABLED, MF_UNCHECKED);
-			}
-			break;
+			
 		case ID_SOUND_VOLUME:
 			APU::Config();
 			break;
