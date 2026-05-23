@@ -585,35 +585,30 @@ case ID_PPU_BILINEAR:
     GFX::Bilinear = !GFX::Bilinear;
     GFX::Start();
     if (running)
-        NES::Start(FALSE);
-    if (GFX::Bilinear)
-        CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
-    else
-        CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_UNCHECKED);
-    break;
-
-case ID_PPU_INTSCALE:
-    NES::Stop();
-    GFX::Stop();
-    GFX::IntegerScale = !GFX::IntegerScale;
-    GFX::Start();
-    if (running)
-        NES::Start(FALSE);
-    if (GFX::IntegerScale)
-        CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
-    else
-        CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
-    break;
+       case ID_PPU_BILINEAR:
+			NES::Stop();
+			GFX::Stop();
+			GFX::Bilinear = !GFX::Bilinear;
+			GFX::Start();
+			if (running)
 				NES::Start(FALSE);
 			if (GFX::Bilinear)
 				CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
-			else	CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_UNCHECKED);
+			else
+				CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_UNCHECKED);
 			break;
-			case ID_PPU_INTSCALE:
+
+		case ID_PPU_INTSCALE:
+			NES::Stop();
+			GFX::Stop();
 			GFX::IntegerScale = !GFX::IntegerScale;
+			GFX::Start();
+			if (running)
+				NES::Start(FALSE);
 			if (GFX::IntegerScale)
 				CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_CHECKED);
-			else	CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
+			else
+				CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
 			break;
 		case ID_SOUND_ENABLED:
 			NES::SoundEnabled = !NES::SoundEnabled;
