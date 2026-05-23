@@ -677,6 +677,7 @@ void	DrawBilinear2x (void)
 
 // Рисует картинку NES с целым множителем ISMult по центру экрана.
 // Остальное заливается чёрным. Работает только в 32-битном режиме.
+void DrawIntegerScaleWithBilinear(void);
 void	DrawIntegerScale (void)
 {
 	int x, y;
