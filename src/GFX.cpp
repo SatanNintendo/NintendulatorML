@@ -884,15 +884,26 @@ void	Update (void)
 		SecondarySurf->Restore();
 	if (InError)
 		return;
+
 	Try(SecondarySurf->Lock(NULL, &SurfDesc, DDLOCK_WAIT | DDLOCK_NOSYSLOCK | DDLOCK_WRITEONLY | DDLOCK_SURFACEMEMORYPTR, NULL), _T("Failed to lock secondary surface"));
 
+	// Исправленная логика приоритетов рендера
 	if (IntegerScale && Fullscreen && Depth == 32)
+	{
 		DrawIntegerScale();
+	}
 	else if (Bilinear && Depth == 32)
+	{
 		DrawBilinear2x();
+	}
 	else if (Fullscreen || Scanlines)
+	{
 		Draw2x();
-	else	Draw1x();
+	}
+	else
+	{
+		Draw1x();
+	}
 
 	Try(SecondarySurf->Unlock(NULL), _T("Failed to unlock secondary surface"));
 	Repaint();
