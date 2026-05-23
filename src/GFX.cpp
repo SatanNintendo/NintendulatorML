@@ -876,10 +876,8 @@ void	Draw1x (void)
 
 void	Update (void)
 {
-	// ensure secondary surface exists
 	if (!SecondarySurf)
 		return;
-	// if it got lost, try to restore it
 	if (SecondarySurf->IsLost() == DDERR_SURFACELOST)
 		SecondarySurf->Restore();
 	if (InError)
@@ -887,10 +885,13 @@ void	Update (void)
 
 	Try(SecondarySurf->Lock(NULL, &SurfDesc, DDLOCK_WAIT | DDLOCK_NOSYSLOCK | DDLOCK_WRITEONLY | DDLOCK_SURFACEMEMORYPTR, NULL), _T("Failed to lock secondary surface"));
 
-	// Исправленная логика приоритетов рендера
+	// === НОВАЯ ЛОГИКА ===
 	if (IntegerScale && Fullscreen && Depth == 32)
 	{
-		DrawIntegerScale();
+		if (Bilinear)
+			DrawIntegerScaleWithBilinear();   // новая функция
+		else
+			DrawIntegerScale();
 	}
 	else if (Bilinear && Depth == 32)
 	{
