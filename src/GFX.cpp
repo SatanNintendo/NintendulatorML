@@ -444,18 +444,14 @@ void	Start (void)
 			return;
 		}
 
-		// КРИТИЧНО:
-		// После создания OpenGL context получаем
-		// РЕАЛЬНЫЙ размер client area
-		// и принудительно обновляем projection/viewport.
+		if (!Fullscreen)
 		{
-			RECT rc;
-			GetClientRect(hMainWnd, &rc);
-
-			GL_Resize(
+			RECT rc = { 0, 0, 256 * SizeMult, 240 * SizeMult };
+			AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, TRUE);
+			SetWindowPos(hMainWnd, NULL, 0, 0,
 				rc.right - rc.left,
-				rc.bottom - rc.top
-			);
+				rc.bottom - rc.top,
+				SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
 		}
 
 		Depth  = 32;
