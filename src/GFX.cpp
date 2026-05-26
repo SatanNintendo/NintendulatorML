@@ -172,8 +172,6 @@ static void GL_Destroy(void)
 	UsingOpenGL = FALSE;
 }
 
-static void GL_DrawFrame(void)
-
 void GL_Resize(int w, int h)
 {
 	if (!UsingOpenGL || !hGLRC || !hGLDC)
@@ -189,6 +187,8 @@ void GL_Resize(int w, int h)
 	glLoadIdentity();
 	wglMakeCurrent(NULL, NULL);
 }
+
+static void GL_DrawFrame(void)
 {
 	static unsigned long frameBuf[256 * 240];
 	unsigned short *src = PPU::DrawArray;
