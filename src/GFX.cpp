@@ -445,15 +445,30 @@ void	Start (void)
 			return;
 		}
 
-		if (!Fullscreen)
-		{
-			RECT rcAdj = { 0, 0, winW, winH };
-			AdjustWindowRect(&rcAdj, WS_OVERLAPPEDWINDOW, TRUE);
-			SetWindowPos(hMainWnd, NULL, 0, 0,
-				rcAdj.right - rcAdj.left,
-				rcAdj.bottom - rcAdj.top,
-				SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
-		}
+		if (Fullscreen)
+{
+	SetWindowLongPtr(hMainWnd, GWL_STYLE, WS_POPUP);
+	SetMenu(hMainWnd, NULL);
+	ShowWindow(hMainWnd, SW_MAXIMIZE);
+
+	if (dbgVisible)
+		ShowWindow(hDebug, SW_MINIMIZE);
+}
+else
+{
+	SetWindowLongPtr(hMainWnd, GWL_STYLE, WS_OVERLAPPEDWINDOW);
+	SetMenu(hMainWnd, hMenu);
+
+	RECT rcAdj = { 0, 0, winW, winH };
+	AdjustWindowRect(&rcAdj, WS_OVERLAPPEDWINDOW, TRUE);
+
+	SetWindowPos(hMainWnd, NULL, 0, 0,
+		rcAdj.right - rcAdj.left,
+		rcAdj.bottom - rcAdj.top,
+		SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
+
+	ShowWindow(hMainWnd, SW_RESTORE);
+}
 
 		Depth  = 32;
 		FPSCnt = FSkip;
