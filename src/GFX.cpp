@@ -295,10 +295,17 @@ static void GL_DrawFrame(void)
 	glEnd();
 	if (Scanlines)
 {
+	RECT rc;
+	GetClientRect(hMainWnd, &rc);
+
+	int width = rc.right - rc.left;
+	int height = rc.bottom - rc.top;
+
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	glOrtho(0, winW, winH, 0, -1, 1);
+
+	glOrtho(0, width, height, 0, -1, 1);
 
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -313,10 +320,10 @@ static void GL_DrawFrame(void)
 
 	glBegin(GL_LINES);
 
-	for (int y = 1; y < winH; y += 2)
+	for (int y = 1; y < height; y += 2)
 	{
 		glVertex2i(0, y);
-		glVertex2i(winW, y);
+		glVertex2i(width, y);
 	}
 
 	glEnd();
