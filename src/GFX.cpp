@@ -262,49 +262,74 @@ static void GL_DrawFrame(void)
 
 	int dstX, dstY, dstW, dstH;
 	if (IntegerScale)
+{
+	int scale = 1;
+	for (int m = 2; m <= 16; m++)
 	{
-		int scale = 1;
-		for (int m = 2; m <= 16; m++)
-		{
-			if (256 * m <= glWinW && 240 * m <= glWinH) scale = m;
-			else break;
-		}
-		dstW = 256 * scale;
-		dstH = 240 * scale;
-		dstX = (glWinW - dstW) / 2;
-		dstY = (glWinH - dstH) / 2;
-		ISMult    = scale;
-		ISBorderX = dstX;
-		ISBorderY = dstY;
+		if (256 * m <= glWinW && 240 * m <= glWinH)
+			scale = m;
+		else
+			break;
+	}
+
+	dstW = 256 * scale;
+	dstH = 240 * scale;
+	dstX = (glWinW - dstW) / 2;
+	dstY = (glWinH - dstH) / 2;
+
+	ISMult    = scale;
+	ISBorderX = dstX;
+	ISBorderY = dstY;
+}
+else
+{
+	int hw = 240 * glWinW;
+	int wh = 256 * glWinH;
+
+	if (hw > wh)
+	{
+		dstW = wh / 240;
+		dstH = glWinH;
 	}
 	else
 	{
-		int hw = 240 * glWinW;
-		int wh = 256 * glWinH;
-		if (hw > wh) { dstW = wh / 240; dstH = glWinH; }
-		else         { dstW = glWinW;   dstH = hw / 256; }
-		dstX = (glWinW - dstW) / 2;
-		dstY = (glWinH - dstH) / 2;
+		dstW = glWinW;
+		dstH = hw / 256;
 	}
 
-	glBegin(GL_QUADS);
-		glTexCoord2f(0.0f, 0.0f); glVertex2i(dstX,        dstY);
-		glTexCoord2f(1.0f, 0.0f); glVertex2i(dstX + dstW, dstY);
-		glTexCoord2f(1.0f, 1.0f); glVertex2i(dstX + dstW, dstY + dstH);
-		glTexCoord2f(0.0f, 1.0f); glVertex2i(dstX,        dstY + dstH);
-	glEnd();
-	if (Scanlines)
+	dstX = (glWinW - dstW) / 2;
+	dstY = (glWinH - dstH) / 2;
+}
+
+glEnable(GL_TEXTURE_2D);
+glBindTexture(GL_TEXTURE_2D, glTex);
+
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+	Bilinear ? GL_LINEAR : GL_NEAREST);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+	Bilinear ? GL_LINEAR : GL_NEAREST);
+
+glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+
+glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex2i(dstX,        dstY);
+	glTexCoord2f(1.0f, 0.0f); glVertex2i(dstX + dstW, dstY);
+	glTexCoord2f(1.0f, 1.0f); glVertex2i(dstX + dstW, dstY + dstH);
+	glTexCoord2f(0.0f, 1.0f); glVertex2i(dstX,        dstY + dstH);
+glEnd();
+
+if (Scanlines)
 {
 	glDisable(GL_TEXTURE_2D);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	glColor4f(0.0f, 0.0f, 0.0f, 0.30f);
+	glColor4f(0.0f, 0.0f, 0.0f, 0.25f);
 
 	glBegin(GL_LINES);
 
-	for (int y = dstY + 1; y < dstY + dstH; y += 2)
+	for (int y = dstY; y < dstY + dstH; y += 2)
 	{
 		glVertex2i(dstX, y);
 		glVertex2i(dstX + dstW, y);
@@ -316,7 +341,7 @@ static void GL_DrawFrame(void)
 
 	glEnable(GL_TEXTURE_2D);
 
-	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+	glColor4f(1,1,1,1);
 }
 
 	glEnd();
