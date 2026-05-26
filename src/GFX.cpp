@@ -1002,7 +1002,7 @@ void	DrawIntegerScale (void)
 			*dst++ = 0x000000;
 
 		// Пиксели NES — каждый повторяется ISMult раз
-		register unsigned short *src = PPU::DrawArray + srcY * 256;
+		unsigned short *src = PPU::DrawArray + srcY * 256;
 		for (x = 0; x < 256; x++)
 		{
 			unsigned long color = Palette32[*src++];
