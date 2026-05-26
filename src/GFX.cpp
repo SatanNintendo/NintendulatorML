@@ -1152,7 +1152,7 @@ void	Draw1x (void)
 	}
 	else if (Depth == 16)
 	{
-		register unsigned short *dst;
+		unsigned short *dst;
 		for (y = 0; y < 240; y++)
 		{
 			dst = (unsigned short *)((unsigned char *)SurfDesc.lpSurface + y*Pitch);
