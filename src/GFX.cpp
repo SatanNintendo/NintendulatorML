@@ -9,6 +9,8 @@
 #include "Controllers.h"
 #include "NES.h"
 #include "GFX.h"
+#define NES_WIDTH  256
+#define NES_HEIGHT 240
 #include "PPU.h"
 #include "AVI.h"
 #include <commctrl.h>
