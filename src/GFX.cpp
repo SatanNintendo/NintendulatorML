@@ -187,6 +187,9 @@ void GL_Resize(int w, int h)
 	glOrtho(0, w, h, 0, -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	SwapBuffers(hGLDC);
 	wglMakeCurrent(NULL, NULL);
 }
 
