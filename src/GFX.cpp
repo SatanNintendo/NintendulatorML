@@ -998,7 +998,7 @@ void	DrawIntegerScale (void)
 		int srcY = (y - ISBorderY) / ISMult;
 
 		// Левая чёрная полоса
-		for (x = 0; x < ISBorderX; x++)
+		unsigned short *dst;
 			*dst++ = 0x000000;
 
 		// Пиксели NES — каждый повторяется ISMult раз
