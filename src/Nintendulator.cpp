@@ -254,7 +254,17 @@ BOOL InitInstance (HINSTANCE hInstance, int nCmdShow)
 	GFX::DirectDraw = NULL;	// gotta do this so we don't paint from nothing
 	hInst = hInstance;
 	hMenu = LoadMenu(hInst, MAKEINTRESOURCE(IDR_NINTENDULATOR));
-	hMainWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, NULL, hMenu, hInstance, NULL);
+	int nesW = 256 * 3;
+	int nesH = 240 * 3;
+	RECT rc = { 0, 0, nesW, nesH };
+	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, TRUE);
+	int winW = rc.right - rc.left;
+	int winH = rc.bottom - rc.top;
+	int scrW = GetSystemMetrics(SM_CXSCREEN);
+	int scrH = GetSystemMetrics(SM_CYSCREEN);
+	int posX = (scrW - winW) / 2;
+	int posY = (scrH - winH) / 2;
+	hMainWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW, posX, posY, winW, winH, NULL, hMenu, hInstance, NULL);
 	if (!hMainWnd)
 		return FALSE;
 	ShowWindow(hMainWnd, nCmdShow);
