@@ -180,15 +180,24 @@ void GL_Resize(int w, int h)
 	if (!UsingOpenGL || !hGLRC || !hGLDC)
 		return;
 
+	// Защита от нулевого размера окна
+	if (w <= 0)
+		w = 1;
+
+	if (h <= 0)
+		h = 1;
+
 	glWinW = w;
 	glWinH = h;
 
 	wglMakeCurrent(hGLDC, hGLRC);
 
+	// Projection
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0, w, h, 0, -1, 1);
 
+	// ModelView
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
