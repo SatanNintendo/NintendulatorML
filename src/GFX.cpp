@@ -22,6 +22,7 @@
 #pragma comment(lib, "ddraw.lib")
 #endif
 #pragma comment(lib, "dxguid.lib")
+#pragma comment(lib, "opengl32.lib")
 
 #define	_USE_MATH_DEFINES
 #include <math.h>
@@ -29,6 +30,9 @@
 #ifndef M_PI
 #define M_PI	3.14159265358979323846
 #endif	/* !M_PI */
+#ifndef GL_CLAMP_TO_EDGE
+#define GL_CLAMP_TO_EDGE 0x812F
+#endif
 
 namespace GFX
 {
@@ -70,11 +74,185 @@ LPDIRECTDRAWCLIPPER	Clipper;
 DDSURFACEDESC2		SurfDesc;
 DWORD			SurfSize;
 
+// OpenGL — для Bilinear и Integer Scaling
+HGLRC hGLRC = NULL;
+HDC   hGLDC = NULL;
+static GLuint glTex  = 0;
+static int    glWinW = 0;
+static int    glWinH = 0;
+static BOOL   UsingOpenGL = FALSE;
+
 #if (_MSC_VER >= 1400)
 typedef HRESULT (WINAPI *LPDIRECTDRAWCREATEEX)(GUID FAR *, LPVOID *, REFIID,IUnknown FAR *);
 HINSTANCE dDrawInst;
 LPDIRECTDRAWCREATEEX DirectDrawCreateEx;
 #endif
+
+// ============================================================
+// OpenGL вспомогательные функции
+// ============================================================
+
+static inline BOOL UseOpenGL(void)
+{
+	return (Bilinear || IntegerScale) && Depth == 32;
+}
+
+static BOOL GL_Init(int winW, int winH)
+{
+	hGLDC = GetDC(hMainWnd);
+	if (!hGLDC) return FALSE;
+
+	PIXELFORMATDESCRIPTOR pfd = {};
+	pfd.nSize      = sizeof(pfd);
+	pfd.nVersion   = 1;
+	pfd.dwFlags    = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+	pfd.iPixelType = PFD_TYPE_RGBA;
+	pfd.cColorBits = 32;
+	pfd.iLayerType = PFD_MAIN_PLANE;
+
+	int fmt = ChoosePixelFormat(hGLDC, &pfd);
+	if (!fmt || !SetPixelFormat(hGLDC, fmt, &pfd))
+	{
+		ReleaseDC(hMainWnd, hGLDC);
+		hGLDC = NULL;
+		return FALSE;
+	}
+
+	hGLRC = wglCreateContext(hGLDC);
+	if (!hGLRC)
+	{
+		ReleaseDC(hMainWnd, hGLDC);
+		hGLDC = NULL;
+		return FALSE;
+	}
+
+	wglMakeCurrent(hGLDC, hGLRC);
+
+	glGenTextures(1, &glTex);
+	glBindTexture(GL_TEXTURE_2D, glTex);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 256, 240, 0, GL_BGRA_EXT, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	#ifndef GL_CLAMP_TO_EDGE
+#define GL_CLAMP_TO_EDGE 0x812F
+#endif
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
+
+	glWinW = winW;
+	glWinH = winH;
+	glViewport(0, 0, winW, winH);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, winW, winH, 0, -1, 1);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	wglMakeCurrent(NULL, NULL);
+	UsingOpenGL = TRUE;
+	return TRUE;
+}
+
+static void GL_Destroy(void)
+{
+	if (hGLRC)
+	{
+		wglMakeCurrent(hGLDC, hGLRC);
+		if (glTex) { glDeleteTextures(1, &glTex); glTex = 0; }
+		wglMakeCurrent(NULL, NULL);
+		wglDeleteContext(hGLRC);
+		hGLRC = NULL;
+	}
+	if (hGLDC)
+	{
+		ReleaseDC(hMainWnd, hGLDC);
+		hGLDC = NULL;
+	}
+	glWinW = glWinH = 0;
+	UsingOpenGL = FALSE;
+}
+
+static void GL_DrawFrame(void)
+
+void GL_Resize(int w, int h)
+{
+	if (!UsingOpenGL || !hGLRC || !hGLDC)
+		return;
+	glWinW = w;
+	glWinH = h;
+	wglMakeCurrent(hGLDC, hGLRC);
+	glViewport(0, 0, w, h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, w, h, 0, -1, 1);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	wglMakeCurrent(NULL, NULL);
+}
+{
+	static unsigned long frameBuf[256 * 240];
+	unsigned short *src = PPU::DrawArray;
+	for (int i = 0; i < 256 * 240; i++)
+		frameBuf[i] = Palette32[src[i]];
+
+	wglMakeCurrent(hGLDC, hGLRC);
+
+	glBindTexture(GL_TEXTURE_2D, glTex);
+	if (Bilinear)
+	{
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	}
+	else
+	{
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	}
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 256, 240, GL_BGRA_EXT, GL_UNSIGNED_BYTE, frameBuf);
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	int dstX, dstY, dstW, dstH;
+	if (IntegerScale)
+	{
+		int scale = 1;
+		for (int m = 2; m <= 16; m++)
+		{
+			if (256 * m <= glWinW && 240 * m <= glWinH) scale = m;
+			else break;
+		}
+		dstW = 256 * scale;
+		dstH = 240 * scale;
+		dstX = (glWinW - dstW) / 2;
+		dstY = (glWinH - dstH) / 2;
+		ISMult    = scale;
+		ISBorderX = dstX;
+		ISBorderY = dstY;
+	}
+	else
+	{
+		int hw = 240 * glWinW;
+		int wh = 256 * glWinH;
+		if (hw > wh) { dstW = wh / 240; dstH = glWinH; }
+		else         { dstW = glWinW;   dstH = hw / 256; }
+		dstX = (glWinW - dstW) / 2;
+		dstY = (glWinH - dstH) / 2;
+	}
+
+	glBegin(GL_QUADS);
+		glTexCoord2f(0.0f, 0.0f); glVertex2i(dstX,        dstY);
+		glTexCoord2f(1.0f, 0.0f); glVertex2i(dstX + dstW, dstY);
+		glTexCoord2f(1.0f, 1.0f); glVertex2i(dstX + dstW, dstY + dstH);
+		glTexCoord2f(0.0f, 1.0f); glVertex2i(dstX,        dstY + dstH);
+	glEnd();
+
+	SwapBuffers(hGLDC);
+	wglMakeCurrent(NULL, NULL);
+}
 
 #define	Try(action,errormsg) do {\
 	if (FAILED(action))\
@@ -132,8 +310,11 @@ void	Init (void)
 	ISBorderX = 0;
 	ISBorderY = 0;
 	ISMult = 2;
-	Bilinear = FALSE;
-	InError = FALSE;
+	Bilinear     = FALSE;
+	InError      = FALSE;
+	hGLRC        = NULL;
+	hGLDC        = NULL;
+	glTex        = 0;
 
 	if (!QueryPerformanceFrequency(&ClockFreq))
 	{
@@ -194,6 +375,46 @@ void	SetRegion (void)
 
 void	Start (void)
 {
+	// OpenGL путь — Bilinear или Integer Scaling
+	if (UseOpenGL())
+	{
+		int winW, winH;
+		if (Fullscreen)
+		{
+			winW = GetSystemMetrics(SM_CXSCREEN);
+			winH = GetSystemMetrics(SM_CYSCREEN);
+			SetWindowLongPtr(hMainWnd, GWL_STYLE, WS_POPUP);
+			SetMenu(hMainWnd, NULL);
+			SetWindowPos(hMainWnd, HWND_TOP, 0, 0, winW, winH, SWP_FRAMECHANGED);
+			ShowWindow(hMainWnd, SW_MAXIMIZE);
+			if (dbgVisible) ShowWindow(hDebug, SW_MINIMIZE);
+		}
+		else
+		{
+			RECT rc;
+			GetClientRect(hMainWnd, &rc);
+			winW = rc.right  - rc.left;
+			winH = rc.bottom - rc.top;
+			if (winW <= 0) winW = 512;
+			if (winH <= 0) winH = 480;
+		}
+		if (!GL_Init(winW, winH))
+		{
+			MessageBox(hMainWnd, _T("Failed to initialize OpenGL! Falling back to DirectDraw."), _T("Nintendulator"), MB_OK | MB_ICONWARNING);
+			Bilinear     = FALSE;
+			IntegerScale = FALSE;
+			CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_UNCHECKED);
+			CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
+			Start();
+			return;
+		}
+		Depth  = 32;
+		FPSCnt = FSkip;
+		LoadPalette(PALETTE_MAX);
+		return;
+	}
+
+	// DirectDraw путь
 	if (FAILED(DirectDrawCreateEx(NULL, (LPVOID *)&DirectDraw, IID_IDirectDraw7, NULL)))
 	{
 		MessageBox(hMainWnd, _T("Failed to initialize DirectDraw 7"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
@@ -216,83 +437,47 @@ void	Start (void)
 		if (dbgVisible)
 			ShowWindow(hDebug, SW_MINIMIZE);
 
-		if (IntegerScale)
+		// Стандартный режим Nintendulator: 640x480 (или шире)
+		static const int widths[] = {
+			640,		// 4:3 - last offset 0
+			720, 768,	// 16:10 - last offset 2
+			848, 856, 864	// 16:9 - last offset 5
+		};
+		static BOOL widths_ok[] = {
+			TRUE,
+			TRUE, TRUE,
+			TRUE, TRUE, TRUE
+		};
+		int i;
+		if (ratio < 1.4)
+			i = 0;
+		else if (ratio < 1.7)
+			i = 2;
+		else	i = 5;
+		if (!widths_ok[0])
 		{
-			// Переключаемся в нативное разрешение монитора
-			int scrW = GetSystemMetrics(SM_CXSCREEN);
-			int scrH = GetSystemMetrics(SM_CYSCREEN);
-
-			if (FAILED(DirectDraw->SetDisplayMode(scrW, scrH, 32, 0, 0)))
-			{
-				// Нативное разрешение не сработало — откат к стандартному режиму
-				Stop();
-				MessageBox(hMainWnd, _T("Integer Scaling: failed to set native resolution. Reverting to Windowed mode..."), _T("Nintendulator"), MB_OK | MB_ICONERROR);
-				Fullscreen = FALSE;
-				IntegerScale = FALSE;
-				CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
-				Start();
-				return;
-			}
-
-			// Вычисляем наибольший целый множитель
-			ISMult = 1;
-			for (int m = 2; m <= 16; m++)
-			{
-				if (256 * m <= scrW && 240 * m <= scrH)
-					ISMult = m;
-				else
-					break;
-			}
-
-			// Отступы для центрирования картинки
-			ISBorderX = (scrW - 256 * ISMult) / 2;
-			ISBorderY = (scrH - 240 * ISMult) / 2;
-			FullscreenBorder = 0; // не используется в этом режиме
+			MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			Fullscreen = FALSE;
+			Start();
+			return;
 		}
-		else
+		while (1)
 		{
-			// Стандартный режим Nintendulator: 640x480 (или шире)
-			static const int widths[] = {
-				640,		// 4:3 - last offset 0
-				720, 768,	// 16:10 - last offset 2
-				848, 856, 864	// 16:9 - last offset 5
-			};
-			static BOOL widths_ok[] = {
-				TRUE,
-				TRUE, TRUE,
-				TRUE, TRUE, TRUE
-			};
-			int i;
-			if (ratio < 1.4)
-				i = 0;
-			else if (ratio < 1.7)
-				i = 2;
-			else	i = 5;
-			if (!widths_ok[0])
+			FullscreenBorder = (widths[i] - 512) / 2;
+			if (!widths_ok[i] || FAILED(DirectDraw->SetDisplayMode(widths[i], 480, 32, 0, 0)))
 			{
-				MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
-				Fullscreen = FALSE;
-				Start();
-				return;
-			}
-			while (1)
-			{
-				FullscreenBorder = (widths[i] - 512) / 2;
-				if (!widths_ok[i] || FAILED(DirectDraw->SetDisplayMode(widths[i], 480, 32, 0, 0)))
+				widths_ok[i] = FALSE;
+				if (i == 0)
 				{
-					widths_ok[i] = FALSE;
-					if (i == 0)
-					{
-						Stop();
-						MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device! Reverting to Windowed mode..."), _T("Nintendulator"), MB_OK | MB_ICONERROR);
-						Fullscreen = FALSE;
-						Start();
-						return;
-					}
-					else	i--;
+					Stop();
+					MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device! Reverting to Windowed mode..."), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+					Fullscreen = FALSE;
+					Start();
+					return;
 				}
-				else	break;
+				else	i--;
 			}
+			else	break;
 		}
 		SetWindowLongPtr(hMainWnd, GWL_STYLE, WS_POPUP);
 		SetMenu(hMainWnd, NULL);
@@ -421,6 +606,8 @@ void	Start (void)
 
 void	Stop (void)
 {
+	GL_Destroy();
+
 	if (!DirectDraw)
 		return;
 	if (Clipper)
@@ -628,56 +815,8 @@ static inline unsigned long BlendColors32(unsigned long c1, unsigned long c2, in
 	return (r << 16) | (g << 8) | b;
 }
 
-// Отрисовка с билинейной интерполяцией (32-битный цвет, масштаб 2x)
-void	DrawBilinear2x (void)
-{
-	// src — исходный массив пикселей NES (256x240, индексы в таблицу Palette32)
-	unsigned short *src = PPU::DrawArray;
-	int x, y;
-
-	for (y = 0; y < 480; y++)
-	{
-		unsigned long *dst = (unsigned long *)((unsigned char *)SurfDesc.lpSurface + y * Pitch);
-
-		// Координата в исходном изображении (с дробной частью)
-		// y идёт от 0 до 479, маппируем на 0..239
-		int srcY0 = y / 2;
-		int srcY1 = (srcY0 + 1 < 240) ? srcY0 + 1 : 239;
-		int ty = (y & 1) ? 128 : 0; // дробная часть: 0 или 0.5 * 256
-
-		if (Fullscreen)
-		{
-			for (x = 0; x < FullscreenBorder; x++)
-				*dst++ = 0x000000;
-		}
-
-		for (x = 0; x < 512; x++)
-		{
-			int srcX0 = x / 2;
-			int srcX1 = (srcX0 + 1 < 256) ? srcX0 + 1 : 255;
-			int tx = (x & 1) ? 128 : 0;
-
-			unsigned long c00 = Palette32[src[srcY0 * 256 + srcX0]];
-			unsigned long c10 = Palette32[src[srcY0 * 256 + srcX1]];
-			unsigned long c01 = Palette32[src[srcY1 * 256 + srcX0]];
-			unsigned long c11 = Palette32[src[srcY1 * 256 + srcX1]];
-
-			unsigned long top    = BlendColors32(c00, c10, tx);
-			unsigned long bottom = BlendColors32(c01, c11, tx);
-			*dst++ = BlendColors32(top, bottom, ty);
-		}
-
-		if (Fullscreen)
-		{
-			for (x = 0; x < FullscreenBorder; x++)
-				*dst++ = 0x000000;
-		}
-	}
-}
-
 // Рисует картинку NES с целым множителем ISMult по центру экрана.
 // Остальное заливается чёрным. Работает только в 32-битном режиме.
-void DrawIntegerScaleWithBilinear(void);
 void	DrawIntegerScale (void)
 {
 	int x, y;
@@ -877,108 +1016,36 @@ void	Draw1x (void)
 
 void	Update (void)
 {
-	if (!SecondarySurf)
+	// OpenGL путь
+	if (UsingOpenGL)
+	{
+		GL_DrawFrame();
 		return;
+	}
+
+	// DirectDraw путь
+	if (!SecondarySurf) return;
 	if (SecondarySurf->IsLost() == DDERR_SURFACELOST)
 		SecondarySurf->Restore();
-	if (InError)
-		return;
+	if (InError) return;
 
 	Try(SecondarySurf->Lock(NULL, &SurfDesc, DDLOCK_WAIT | DDLOCK_NOSYSLOCK | DDLOCK_WRITEONLY | DDLOCK_SURFACEMEMORYPTR, NULL), _T("Failed to lock secondary surface"));
 
-	// === ВАРИАНТ 2: Bilinear + Integer Scaling ===
-	if (IntegerScale && Fullscreen && Depth == 32)
-	{
-		if (Bilinear)
-			DrawIntegerScaleWithBilinear();   // сглаживание поверх integer
-		else
-			DrawIntegerScale();               // обычный integer
-	}
-	else if (Bilinear && Depth == 32)
-	{
-		DrawBilinear2x();
-	}
-	else if (Fullscreen || Scanlines)
-	{
+	if (Fullscreen || Scanlines)
 		Draw2x();
-	}
 	else
-	{
 		Draw1x();
-	}
 
 	Try(SecondarySurf->Unlock(NULL), _T("Failed to unlock secondary surface"));
 	Repaint();
 }
-
-// Integer Scaling + Bilinear filtering
-void DrawIntegerScaleWithBilinear(void)
-{
-	int scrW = (int)SurfDesc.dwWidth;
-	int scrH = (int)SurfDesc.dwHeight;
-	int imgW = 256 * ISMult;
-
-	// Предварительно считаем tx и srcX1 для каждого экранного X
-	static int tx_lut[256 * 16];
-	static int srcX1_lut[256 * 16];
-	for (int x = 0; x < imgW; x++)
-	{
-		int pixX = x / ISMult;
-		int subX = x % ISMult;
-		srcX1_lut[x] = (pixX + 1 < 256) ? pixX + 1 : 255;
-		tx_lut[x] = (subX * 2 + 1) * 255 / (ISMult * 2);
-	}
-
-	for (int y = 0; y < scrH; y++)
-	{
-		unsigned long *dst = (unsigned long *)((unsigned char *)SurfDesc.lpSurface + y * Pitch);
-
-		if (y < ISBorderY || y >= ISBorderY + 240 * ISMult)
-		{
-			memset(dst, 0, scrW * sizeof(unsigned long));
-			continue;
-		}
-
-		int pixY  = (y - ISBorderY) / ISMult;
-		int subY  = (y - ISBorderY) % ISMult;
-		int srcY1 = (pixY + 1 < 240) ? pixY + 1 : 239;
-		int ty    = (subY * 2 + 1) * 255 / (ISMult * 2);
-		int ity   = 255 - ty;
-
-		unsigned short *row0 = PPU::DrawArray + pixY  * 256;
-		unsigned short *row1 = PPU::DrawArray + srcY1 * 256;
-
-		// Левая чёрная полоса
-		memset(dst, 0, ISBorderX * sizeof(unsigned long));
-		dst += ISBorderX;
-
-		for (int x = 0; x < imgW; x++)
-		{
-			int pixX  = x / ISMult;
-			int srcX1 = srcX1_lut[x];
-			int tx    = tx_lut[x];
-			int itx   = 255 - tx;
-
-			unsigned long c00 = Palette32[row0[pixX]];
-			unsigned long c10 = Palette32[row0[srcX1]];
-			unsigned long c01 = Palette32[row1[pixX]];
-			unsigned long c11 = Palette32[row1[srcX1]];
-
-			unsigned long r = (((c00>>16&0xFF)*itx + (c10>>16&0xFF)*tx)*ity/255 + ((c01>>16&0xFF)*itx + (c11>>16&0xFF)*tx)*ty/255) / 255;
-			unsigned long g = (((c00>> 8&0xFF)*itx + (c10>> 8&0xFF)*tx)*ity/255 + ((c01>> 8&0xFF)*itx + (c11>> 8&0xFF)*tx)*ty/255) / 255;
-			unsigned long b = (((c00     &0xFF)*itx + (c10     &0xFF)*tx)*ity/255 + ((c01     &0xFF)*itx + (c11     &0xFF)*tx)*ty/255) / 255;
-
-			*dst++ = (r << 16) | (g << 8) | b;
-		}
-
-		// Правая чёрная полоса
-		memset(dst, 0, (scrW - ISBorderX - imgW) * sizeof(unsigned long));
-	}
-}
 	
 void	Repaint (void)
 {
-	// ensure primary surface exists
+	// OpenGL сам делает SwapBuffers в GL_DrawFrame
+	if (UsingOpenGL)
+		return;
+
 	if (!PrimarySurf)
 		return;
 	// if it got lost, try to restore it
