@@ -581,10 +581,20 @@ case ID_PPU_SCANLINES:
     break;
 
 case ID_PPU_BILINEAR:
+{
+    BOOL wasFullscreen = GFX::Fullscreen;
     NES::Stop();
     GFX::Stop();
+    if (wasFullscreen)
+        GFX::Fullscreen = FALSE;
     GFX::Bilinear = !GFX::Bilinear;
     GFX::Start();
+    if (wasFullscreen)
+    {
+        GFX::Stop();
+        GFX::Fullscreen = TRUE;
+        GFX::Start();
+    }
     if (running)
         NES::Start(FALSE);
     if (GFX::Bilinear)
@@ -592,6 +602,7 @@ case ID_PPU_BILINEAR:
     else
         CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_UNCHECKED);
     break;
+}
 case ID_PPU_MATCHRATE:
 			GFX::MatchMonitorRate = !GFX::MatchMonitorRate;
 	if (!GFX::MatchMonitorRate)
