@@ -994,7 +994,7 @@ void	SetRegion (void)
 	LockSize = LOCK_SIZE / WantFPS;
 	buflen = LockSize / (BITS / 8);
 	if (buffer)
-		delete buffer;
+		delete[] buffer;
 	buffer = new short[buflen];
 	if (Started)
 		Start();
