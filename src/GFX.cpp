@@ -91,15 +91,8 @@ void ApplyGLFilter(void)
 
 	glBindTexture(GL_TEXTURE_2D, glTex);
 
-	glTexParameteri(
-		GL_TEXTURE_2D,
-		GL_TEXTURE_MIN_FILTER,
-		Bilinear ? GL_LINEAR : GL_NEAREST);
-
-	glTexParameteri(
-		GL_TEXTURE_2D,
-		GL_TEXTURE_MAG_FILTER,
-		Bilinear ? GL_LINEAR : GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, Bilinear ? GL_LINEAR : GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, Bilinear ? GL_LINEAR : GL_NEAREST);
 
 	wglMakeCurrent(NULL, NULL);
 }
