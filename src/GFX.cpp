@@ -152,6 +152,7 @@ static BOOL GL_Init(int winW, int winH)
 	glClear(GL_COLOR_BUFFER_BIT);
 	SwapBuffers(hGLDC);
 	wglMakeCurrent(NULL, NULL);
+	UsingOpenGL = TRUE;
 	return TRUE;
 }
 
