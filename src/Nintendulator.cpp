@@ -592,6 +592,17 @@ case ID_PPU_BILINEAR:
     else
         CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_UNCHECKED);
     break;
+case ID_PPU_MATCHRATE:
+			GFX::MatchMonitorRate = !GFX::MatchMonitorRate;
+	if (!GFX::MatchMonitorRate)
+	{
+		// При выключении — сбрасываем частоту воспроизведения на стандарт
+		APU::UpdateDRC();
+	}
+	if (GFX::MatchMonitorRate)
+				CheckMenuItem(hMenu, ID_PPU_MATCHRATE, MF_CHECKED);
+	else	CheckMenuItem(hMenu, ID_PPU_MATCHRATE, MF_UNCHECKED);
+	break;
 
 case ID_PPU_INTSCALE:
     NES::Stop();
