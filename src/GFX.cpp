@@ -41,7 +41,7 @@ unsigned short Palette15[512];
 unsigned short Palette16[512];
 unsigned long Palette32[512];
 char Depth;
-BOOL Fullscreen, Scanlines, Bilinear;
+BOOL Fullscreen, Scanlines, Bilinear, MatchMonitorRate;
 
 LARGE_INTEGER ClockFreq;
 LARGE_INTEGER LastClockVal;
