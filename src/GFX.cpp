@@ -464,7 +464,6 @@ void	Start (void)
 		LoadPalette(PALETTE_MAX);
 		return;
 	}
-}
 
 	// DirectDraw путь
 	if (FAILED(DirectDrawCreateEx(NULL, (LPVOID *)&DirectDraw, IID_IDirectDraw7, NULL)))
