@@ -295,25 +295,19 @@ static void GL_DrawFrame(void)
 	glEnd();
 	if (Scanlines)
 {
-	RECT rc;
-	GetClientRect(hMainWnd, &rc);
-
-	int width = rc.right - rc.left;
-	int height = rc.bottom - rc.top;
-
 	glDisable(GL_TEXTURE_2D);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	glColor4f(0.0f, 0.0f, 0.0f, 0.35f);
+	glColor4f(0.0f, 0.0f, 0.0f, 0.30f);
 
 	glBegin(GL_LINES);
 
-	for (int y = 1; y < height; y += 2)
+	for (int y = dstY + 1; y < dstY + dstH; y += 2)
 	{
-		glVertex2f(0.0f, (float)y);
-		glVertex2f((float)width, (float)y);
+		glVertex2i(dstX, y);
+		glVertex2i(dstX + dstW, y);
 	}
 
 	glEnd();
