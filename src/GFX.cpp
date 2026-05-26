@@ -231,7 +231,7 @@ void GL_Resize(int w, int h)
 
 static void GL_DrawFrame(void)
 {
-	static unsigned long frameBuf[256 * 240];
+	static uint32_t frameBuf[256 * 240];
 	unsigned short *src = PPU::DrawArray;
 	for (int i = 0; i < 256 * 240; i++)
 		frameBuf[i] = Palette32[src[i]];
