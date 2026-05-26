@@ -353,13 +353,6 @@ if (Scanlines)
 	glColor4f(1,1,1,1);
 }
 
-	glPopMatrix();
-
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-
-	glMatrixMode(GL_MODELVIEW);
-
 	SwapBuffers(hGLDC);
 	wglMakeCurrent(NULL, NULL);
 }
