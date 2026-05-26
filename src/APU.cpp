@@ -1120,7 +1120,7 @@ void	Stop (void)
 	}
 	if (buffer)
 	{
-		delete buffer;
+		delete[] buffer;
 		buffer = NULL;
 	}
 #endif	/* !NSFPLAYER */
