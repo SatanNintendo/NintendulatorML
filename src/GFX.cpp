@@ -114,7 +114,7 @@ LPDIRECTDRAWCREATEEX DirectDrawCreateEx;
 // OpenGL вспомогательные функции
 // ============================================================
 
-static inline BOOL UseOpenGL(void)
+BOOL UseOpenGL(void)
 {
 	return (Bilinear || IntegerScale) && Depth == 32;
 }
