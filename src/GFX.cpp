@@ -1139,7 +1139,7 @@ void	Draw2x (void)
 void	Draw1x (void)
 {
 	int x, y;
-	register unsigned short *src = PPU::DrawArray;
+	unsigned short *src = PPU::DrawArray;
 	if (Depth == 32)
 	{
 		register unsigned long *dst;
