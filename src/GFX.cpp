@@ -148,8 +148,10 @@ static BOOL GL_Init(int winW, int winH)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	SwapBuffers(hGLDC);
 	wglMakeCurrent(NULL, NULL);
-	UsingOpenGL = TRUE;
 	return TRUE;
 }
 
