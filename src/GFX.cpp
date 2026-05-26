@@ -301,30 +301,29 @@ static void GL_DrawFrame(void)
 	int width = rc.right - rc.left;
 	int height = rc.bottom - rc.top;
 
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-
-	glOrtho(0, width, height, 0, -1, 1);
-
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-
 	glDisable(GL_TEXTURE_2D);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	glColor4f(0.0f, 0.0f, 0.0f, 0.30f);
+	glColor4f(0.0f, 0.0f, 0.0f, 0.35f);
 
 	glBegin(GL_LINES);
 
 	for (int y = 1; y < height; y += 2)
 	{
-		glVertex2i(0, y);
-		glVertex2i(width, y);
+		glVertex2f(0.0f, (float)y);
+		glVertex2f((float)width, (float)y);
 	}
+
+	glEnd();
+
+	glDisable(GL_BLEND);
+
+	glEnable(GL_TEXTURE_2D);
+
+	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+}
 
 	glEnd();
 
