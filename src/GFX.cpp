@@ -1142,7 +1142,7 @@ void	Draw1x (void)
 	unsigned short *src = PPU::DrawArray;
 	if (Depth == 32)
 	{
-		register unsigned long *dst;
+		unsigned long *dst;
 		for (y = 0; y < 240; y++)
 		{
 			dst = (unsigned long *)((unsigned char *)SurfDesc.lpSurface + y*Pitch);
