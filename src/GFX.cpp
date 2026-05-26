@@ -806,6 +806,9 @@ void	DrawScreen (void)
 		}
 		aFPScnt = 0;
 		aFPSnum = 0;
+		// Dynamic Rate Control: подстраиваем частоту звука под реальную скорость
+		if (MatchMonitorRate)
+			APU::UpdateDRC();
 	}
 	if (!TitleDelay--)
 	{
