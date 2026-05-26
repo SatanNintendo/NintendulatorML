@@ -582,18 +582,27 @@ case ID_PPU_SCANLINES:
 
 case ID_PPU_BILINEAR:
 {
-    BOOL wasFullscreen = GFX::Fullscreen;
-    NES::Stop();
-    GFX::Stop();
-    GFX::Fullscreen = FALSE;
     GFX::Bilinear = !GFX::Bilinear;
-    GFX::Start();
-    GFX::Stop();
-    GFX::Fullscreen = wasFullscreen;
-    Sleep(300);
-    GFX::Start();
-    if (running)
-        NES::Start(FALSE);
+    if (GFX::Fullscreen)
+    {
+        NES::Stop();
+        GFX::Stop();
+        GFX::Fullscreen = FALSE;
+        GFX::Start();
+        GFX::Stop();
+        GFX::Fullscreen = TRUE;
+        GFX::Start();
+        if (running)
+            NES::Start(FALSE);
+    }
+    else
+    {
+        NES::Stop();
+        GFX::Stop();
+        GFX::Start();
+        if (running)
+            NES::Start(FALSE);
+    }
     if (GFX::Bilinear)
         CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
     else
