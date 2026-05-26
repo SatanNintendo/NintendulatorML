@@ -4,8 +4,11 @@
 
 #pragma once
 
-#define	DIRECTDRAW_VERSION 0x0700
+#define DIRECTDRAW_VERSION 0x0700
 #include <ddraw.h>
+
+// OpenGL для аппаратного масштабирования
+#include <GL/gl.h>
 
 namespace GFX
 {
@@ -14,7 +17,8 @@ enum PALETTE { PALETTE_NTSC, PALETTE_PAL, PALETTE_PC10, PALETTE_VS1, PALETTE_VS2
 extern unsigned char RawPalette[8][64][3];
 extern unsigned long Palette32[512];
 extern BOOL Fullscreen, Scanlines, Bilinear, IntegerScale;
-// Отступы при Integer Scaling: горизонтальный и вертикальный (в пикселях)
+
+// Отступы и множитель для Integer Scaling
 extern int ISBorderX, ISBorderY, ISMult;
 
 extern int FPSnum, FPSCnt, FSkip;
@@ -32,7 +36,12 @@ extern TCHAR CustPalette[4][MAX_PATH];
 extern int NTSChue, NTSCsat, PALsat;
 extern BOOL PC10compat;
 
+// DirectDraw — используется для обычных режимов и Scanlines
 extern LPDIRECTDRAW7 DirectDraw;
+
+// OpenGL контекст — используется для Integer Scaling и Bilinear
+extern HGLRC hGLRC;
+extern HDC   hGLDC;
 
 void	Init (void);
 void	Destroy (void);
@@ -47,6 +56,7 @@ void	Draw2x (void);
 void	DrawIntegerScale (void);
 void	Update (void);
 void	Repaint (void);
+void	GL_Resize (int, int);
 void	LoadPalette (PALETTE);
 void	SetFrameskip (int);
 void	ForceNoSkip (BOOL);
