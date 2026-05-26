@@ -390,33 +390,26 @@ void	SetRegion (void)
 
 void	Start (void)
 {
-	// OpenGL путь — Bilinear или Integer Scaling
-	if (UseOpenGL())
-	{
-		int winW, winH;
-
-		if (Fullscreen)
-		{
-			winW = GetSystemMetrics(SM_CXSCREEN);
-			winH = GetSystemMetrics(SM_CYSCREEN);
-
-			SetWindowLongPtr(hMainWnd, GWL_STYLE, WS_POPUP);
-			SetMenu(hMainWnd, NULL);
-
-			SetWindowPos(
-				hMainWnd,
-				HWND_TOP,
-				0,
-				0,
-				winW,
-				winH,
-				SWP_FRAMECHANGED
-			);
-
-			ShowWindow(hMainWnd, SW_MAXIMIZE);
-
-			if (dbgVisible)
-				ShowWindow(hDebug, SW_MINIMIZE);
+			RECT rc;
+			GetClientRect(hMainWnd, &rc);
+			int cw = rc.right - rc.left;
+			int ch = rc.bottom - rc.top;
+			if (cw > 0 && ch > 0)
+			{
+				glWinW = cw;
+				glWinH = ch;
+				wglMakeCurrent(hGLDC, hGLRC);
+				glViewport(0, 0, cw, ch);
+				glMatrixMode(GL_PROJECTION);
+				glLoadIdentity();
+				glOrtho(0, cw, ch, 0, -1, 1);
+				glMatrixMode(GL_MODELVIEW);
+				glLoadIdentity();
+				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+				glClear(GL_COLOR_BUFFER_BIT);
+				SwapBuffers(hGLDC);
+				wglMakeCurrent(NULL, NULL);
+			}
 		}
 		else
 		{
