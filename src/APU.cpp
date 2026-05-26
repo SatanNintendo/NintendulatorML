@@ -30,8 +30,11 @@ namespace APU
 {
 int			Cycles;
 int			BufPos;
+int			InternalClock = 0;
+
 #ifndef	NSFPLAYER
 unsigned long		next_pos;
+unsigned long		LockSize = 0;
 BOOL			isEnabled;
 
 LPDIRECTSOUND		DirectSound;
