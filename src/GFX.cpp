@@ -397,11 +397,8 @@ void	Start (void)
 		}
 		else
 {
-    RECT rc;
-    GetClientRect(hMainWnd, &rc);
-
-    winW = rc.right - rc.left;
-    winH = rc.bottom - rc.top;
+    winW = 256 * SizeMult;
+    winH = 240 * SizeMult;
 }
 		if (!GL_Init(winW, winH))
 		{
