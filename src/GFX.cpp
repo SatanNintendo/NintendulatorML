@@ -293,6 +293,45 @@ static void GL_DrawFrame(void)
 		glTexCoord2f(1.0f, 1.0f); glVertex2i(dstX + dstW, dstY + dstH);
 		glTexCoord2f(0.0f, 1.0f); glVertex2i(dstX,        dstY + dstH);
 	glEnd();
+	if (Scanlines)
+{
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0, winW, winH, 0, -1, 1);
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	glDisable(GL_TEXTURE_2D);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glColor4f(0.0f, 0.0f, 0.0f, 0.30f);
+
+	glBegin(GL_LINES);
+
+	for (int y = 1; y < winH; y += 2)
+	{
+		glVertex2i(0, y);
+		glVertex2i(winW, y);
+	}
+
+	glEnd();
+
+	glDisable(GL_BLEND);
+
+	glEnable(GL_TEXTURE_2D);
+
+	glPopMatrix();
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+
+	glMatrixMode(GL_MODELVIEW);
+}
 
 	SwapBuffers(hGLDC);
 	wglMakeCurrent(NULL, NULL);
