@@ -385,36 +385,77 @@ void	Start (void)
 	if (UseOpenGL())
 	{
 		int winW, winH;
+
 		if (Fullscreen)
 		{
 			winW = GetSystemMetrics(SM_CXSCREEN);
 			winH = GetSystemMetrics(SM_CYSCREEN);
+
 			SetWindowLongPtr(hMainWnd, GWL_STYLE, WS_POPUP);
 			SetMenu(hMainWnd, NULL);
-			SetWindowPos(hMainWnd, HWND_TOP, 0, 0, winW, winH, SWP_FRAMECHANGED);
+
+			SetWindowPos(
+				hMainWnd,
+				HWND_TOP,
+				0,
+				0,
+				winW,
+				winH,
+				SWP_FRAMECHANGED
+			);
+
 			ShowWindow(hMainWnd, SW_MAXIMIZE);
-			if (dbgVisible) ShowWindow(hDebug, SW_MINIMIZE);
+
+			if (dbgVisible)
+				ShowWindow(hDebug, SW_MINIMIZE);
 		}
 		else
-{
-    winW = 256 * SizeMult;
-    winH = 240 * SizeMult;
-}
+		{
+			// Начальный размер OpenGL
+			winW = 256 * SizeMult;
+			winH = 240 * SizeMult;
+		}
+
 		if (!GL_Init(winW, winH))
 		{
-			MessageBox(hMainWnd, _T("Failed to initialize OpenGL! Falling back to DirectDraw."), _T("Nintendulator"), MB_OK | MB_ICONWARNING);
+			MessageBox(
+				hMainWnd,
+				_T("Failed to initialize OpenGL! Falling back to DirectDraw."),
+				_T("Nintendulator"),
+				MB_OK | MB_ICONWARNING
+			);
+
 			Bilinear     = FALSE;
 			IntegerScale = FALSE;
+
 			CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_UNCHECKED);
 			CheckMenuItem(hMenu, ID_PPU_INTSCALE, MF_UNCHECKED);
+
 			Start();
 			return;
 		}
+
+		// КРИТИЧНО:
+		// После создания OpenGL context получаем
+		// РЕАЛЬНЫЙ размер client area
+		// и принудительно обновляем projection/viewport.
+		{
+			RECT rc;
+			GetClientRect(hMainWnd, &rc);
+
+			GL_Resize(
+				rc.right - rc.left,
+				rc.bottom - rc.top
+			);
+		}
+
 		Depth  = 32;
 		FPSCnt = FSkip;
+
 		LoadPalette(PALETTE_MAX);
 		return;
 	}
+}
 
 	// DirectDraw путь
 	if (FAILED(DirectDrawCreateEx(NULL, (LPVOID *)&DirectDraw, IID_IDirectDraw7, NULL)))
