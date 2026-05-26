@@ -13,6 +13,7 @@
 #include "AVI.h"
 #include <commctrl.h>
 #include "Lang.h"
+#include "APU.h"
 
 #if (_MSC_VER < 1400)
 // newer versions of the DirectX SDK helpfully fail to include ddraw.lib
