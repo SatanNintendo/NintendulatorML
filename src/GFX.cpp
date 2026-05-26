@@ -766,6 +766,7 @@ void	Stop (void)
 	if (dbgVisible)
 		ShowWindow(hDebug, SW_RESTORE);
 	NES::UpdateInterface();
+	Fullscreen = FALSE;
 	return;
 }
 	GL_Destroy();
