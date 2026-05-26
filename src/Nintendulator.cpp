@@ -590,7 +590,7 @@ case ID_PPU_BILINEAR:
     GFX::Start();
     GFX::Stop();
     GFX::Fullscreen = wasFullscreen;
-    Sleep(100);
+    Sleep(300);
     GFX::Start();
     if (running)
         NES::Start(FALSE);
