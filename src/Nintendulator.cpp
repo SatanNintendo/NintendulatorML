@@ -708,19 +708,59 @@ case ID_SOUND_ENABLED:
 		NES::OpenFile(FileName);
 		break;
 	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
-		if (!NES::Running)
-			GFX::Repaint();
-		EndPaint(hWnd, &ps);
-		break;
-	case WM_SIZE:
+	hdc = BeginPaint(hWnd, &ps);
+	if (!NES::Running)
+		GFX::Repaint();
+	EndPaint(hWnd, &ps);
+	break;
+
+case WM_KEYDOWN:
+	if (wParam == VK_F11)
+	{
+		BOOL running = NES::Running;
+
+		NES::Stop();
+		GFX::Stop();
+
+		GFX::Fullscreen = !GFX::Fullscreen;
+
+		GFX::Start();
+
+		if (running)
+			NES::Start(FALSE);
+
+		return 0;
+	}
+	break;
+
+case WM_SYSKEYDOWN:
+	if (wParam == VK_RETURN && (lParam & (1 << 29)))
+	{
+		BOOL running = NES::Running;
+
+		NES::Stop();
+		GFX::Stop();
+
+		GFX::Fullscreen = !GFX::Fullscreen;
+
+		GFX::Start();
+
+		if (running)
+			NES::Start(FALSE);
+
+		return 0;
+	}
+	break;
+
+case WM_SIZE:
 {
-    RECT rc;
-    GetClientRect(hWnd, &rc);
-    GFX::GL_Resize(rc.right - rc.left, rc.bottom - rc.top);
+	RECT rc;
+	GetClientRect(hWnd, &rc);
+	GFX::GL_Resize(rc.right - rc.left, rc.bottom - rc.top);
 }
 break;
-	case WM_CLOSE:
+
+case WM_CLOSE:
 		NES::Stop();
 		// Cannot safely shutdown DirectDraw while in fullscreen mode,
 		// so defer it to the message loop
