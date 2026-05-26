@@ -703,8 +703,12 @@ case ID_SOUND_ENABLED:
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_SIZE:
-		GFX::GL_Resize(LOWORD(lParam), HIWORD(lParam));
-		break;
+{
+    RECT rc;
+    GetClientRect(hWnd, &rc);
+    GFX::GL_Resize(rc.right - rc.left, rc.bottom - rc.top);
+}
+break;
 	case WM_CLOSE:
 		NES::Stop();
 		// Cannot safely shutdown DirectDraw while in fullscreen mode,
