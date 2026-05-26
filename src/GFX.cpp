@@ -82,6 +82,27 @@ static GLuint glTex  = 0;
 static int    glWinW = 0;
 static int    glWinH = 0;
 static BOOL   UsingOpenGL = FALSE;
+void ApplyGLFilter(void)
+{
+	if (!UsingOpenGL || !glTex)
+		return;
+
+	wglMakeCurrent(hGLDC, hGLRC);
+
+	glBindTexture(GL_TEXTURE_2D, glTex);
+
+	glTexParameteri(
+		GL_TEXTURE_2D,
+		GL_TEXTURE_MIN_FILTER,
+		Bilinear ? GL_LINEAR : GL_NEAREST);
+
+	glTexParameteri(
+		GL_TEXTURE_2D,
+		GL_TEXTURE_MAG_FILTER,
+		Bilinear ? GL_LINEAR : GL_NEAREST);
+
+	wglMakeCurrent(NULL, NULL);
+}
 
 #if (_MSC_VER >= 1400)
 typedef HRESULT (WINAPI *LPDIRECTDRAWCREATEEX)(GUID FAR *, LPVOID *, REFIID,IUnknown FAR *);
