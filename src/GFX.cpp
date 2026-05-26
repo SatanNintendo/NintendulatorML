@@ -981,7 +981,7 @@ void	DrawIntegerScale (void)
 	int scrW = ISBorderX * 2 + 256 * ISMult;
 	int scrH = ISBorderY * 2 + 240 * ISMult;
 
-	register unsigned long *dst;
+	unsigned long *dst;
 	for (y = 0; y < scrH; y++)
 	{
 		dst = (unsigned long *)((unsigned char *)SurfDesc.lpSurface + y * Pitch);
