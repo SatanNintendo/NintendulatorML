@@ -581,12 +581,8 @@ case ID_PPU_SCANLINES:
     break;
 
 case ID_PPU_BILINEAR:
-    NES::Stop();
-    GFX::Stop();
     GFX::Bilinear = !GFX::Bilinear;
-    GFX::Start();
-    if (running)
-        NES::Start(FALSE);
+    GFX::ApplyGLFilter();
     if (GFX::Bilinear)
         CheckMenuItem(hMenu, ID_PPU_BILINEAR, MF_CHECKED);
     else
