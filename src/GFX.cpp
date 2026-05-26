@@ -203,6 +203,8 @@ static void GL_DrawFrame(void)
 
 	wglMakeCurrent(hGLDC, hGLRC);
 
+	glViewport(0, 0, glWinW, glWinH);
+
 	glBindTexture(GL_TEXTURE_2D, glTex);
 	if (Bilinear)
 	{
