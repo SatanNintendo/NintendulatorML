@@ -46,20 +46,18 @@ BYTE			Regs[0x18];
 
 unsigned long		MHz;
 #ifndef	NSFPLAYER
-unsigned long		LockSize;
 // Dynamic Rate Control
-static double		drc_target_fill = 0.5;   // целевое заполнение буфера — 50%
-static DWORD		drc_play_freq   = FREQ;  // текущая частота воспроизведения
-static const double	drc_max_adjust  = 0.05;  // максимальное отклонение ±5%
-#endif	/* !NSFPLAYER */
-int			InternalClock;
+static double		drc_target_fill = 0.5;
+static const double	drc_max_adjust  = 0.05;
 
-#ifndef	NSFPLAYER
+// === ПЕРЕМЕСТИТЬ СЮДА ===
 #define	FREQ		44100
 #define	BITS		16
 #define	FRAMEBUF	4
-const	unsigned int	LOCK_SIZE = FREQ * (BITS / 8);
-#endif	/* !NSFPLAYER */
+const unsigned int	LOCK_SIZE = FREQ * (BITS / 8);
+
+static DWORD		drc_play_freq   = FREQ;  // теперь всё ок
+#endif
 
 const	unsigned char	LengthCounts[32] = {
 	0x09,0xFD,
