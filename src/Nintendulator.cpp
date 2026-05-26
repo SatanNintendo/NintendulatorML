@@ -585,16 +585,12 @@ case ID_PPU_BILINEAR:
     BOOL wasFullscreen = GFX::Fullscreen;
     NES::Stop();
     GFX::Stop();
-    if (wasFullscreen)
-        GFX::Fullscreen = FALSE;
+    GFX::Fullscreen = FALSE;
     GFX::Bilinear = !GFX::Bilinear;
     GFX::Start();
-    if (wasFullscreen)
-    {
-        GFX::Stop();
-        GFX::Fullscreen = TRUE;
-        GFX::Start();
-    }
+    GFX::Stop();
+    GFX::Fullscreen = wasFullscreen;
+    GFX::Start();
     if (running)
         NES::Start(FALSE);
     if (GFX::Bilinear)
