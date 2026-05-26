@@ -1022,7 +1022,7 @@ void	Draw2x (void)
 	unsigned short *src = PPU::DrawArray;
 	if (Depth == 32)
 	{
-		register unsigned long *dst;
+		unsigned long *dst;
 		for (y = 0; y < 480; y++)
 		{
 			dst = (unsigned long *)((unsigned char *)SurfDesc.lpSurface + y*Pitch);
