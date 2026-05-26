@@ -179,18 +179,19 @@ void GL_Resize(int w, int h)
 {
 	if (!UsingOpenGL || !hGLRC || !hGLDC)
 		return;
+
 	glWinW = w;
 	glWinH = h;
+
 	wglMakeCurrent(hGLDC, hGLRC);
-	glViewport(0, 0, w, h);
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0, w, h, 0, -1, 1);
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-	SwapBuffers(hGLDC);
+
 	wglMakeCurrent(NULL, NULL);
 }
 
