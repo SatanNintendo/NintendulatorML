@@ -1009,7 +1009,7 @@ void	Init (void)
 	DirectSound	= NULL;
 	PrimaryBuffer	= NULL;
 	Buffer		= NULL;
-	buffer		= new short[1];
+	buffer		= nullptr;
 	isEnabled	= FALSE;
 #endif	/* !NSFPLAYER */
 	MHz		= 1;
