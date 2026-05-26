@@ -353,19 +353,12 @@ if (Scanlines)
 	glColor4f(1,1,1,1);
 }
 
-	glEnd();
-
-	glDisable(GL_BLEND);
-
-	glEnable(GL_TEXTURE_2D);
-
 	glPopMatrix();
 
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 
 	glMatrixMode(GL_MODELVIEW);
-}
 
 	SwapBuffers(hGLDC);
 	wglMakeCurrent(NULL, NULL);
