@@ -599,6 +599,17 @@ void	Start (void)
 
 void	Stop (void)
 {
+	if (UsingOpenGL && Fullscreen)
+	{
+		GL_Destroy();
+		SetWindowLongPtr(hMainWnd, GWL_STYLE, WS_OVERLAPPEDWINDOW);
+		SetMenu(hMainWnd, hMenu);
+		ShowWindow(hMainWnd, SW_RESTORE);
+		if (dbgVisible)
+			ShowWindow(hDebug, SW_RESTORE);
+		NES::UpdateInterface();
+		return;
+	}
 	GL_Destroy();
 
 	if (!DirectDraw)
