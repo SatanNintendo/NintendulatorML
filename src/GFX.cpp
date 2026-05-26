@@ -390,19 +390,26 @@ void	SetRegion (void)
 
 void	Start (void)
 {
-			RECT rc;
-			GetClientRect(hMainWnd, &rc);
-			int cw = rc.right - rc.left;
-			int ch = rc.bottom - rc.top;
-			if (cw > 0 && ch > 0)
+	if (UseOpenGL())
+	{
+		// OpenGL путь
+		RECT rc;
+		GetClientRect(hMainWnd, &rc);
+		int winW = rc.right - rc.left;
+		int winH = rc.bottom - rc.top;
+
+		// Если уже инициализирован — просто обновляем viewport
+		if (UsingOpenGL)
+		{
+			if (winW > 0 && winH > 0)
 			{
-				glWinW = cw;
-				glWinH = ch;
+				glWinW = winW;
+				glWinH = winH;
 				wglMakeCurrent(hGLDC, hGLRC);
-				glViewport(0, 0, cw, ch);
+				glViewport(0, 0, winW, winH);
 				glMatrixMode(GL_PROJECTION);
 				glLoadIdentity();
-				glOrtho(0, cw, ch, 0, -1, 1);
+				glOrtho(0, winW, winH, 0, -1, 1);
 				glMatrixMode(GL_MODELVIEW);
 				glLoadIdentity();
 				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -410,13 +417,12 @@ void	Start (void)
 				SwapBuffers(hGLDC);
 				wglMakeCurrent(NULL, NULL);
 			}
+			return;
 		}
-		else
-		{
-			// Начальный размер OpenGL
-			winW = 256 * SizeMult;
-			winH = 240 * SizeMult;
-		}
+
+		// Первичная инициализация OpenGL
+		if (winW <= 0) winW = 256 * 2;
+		if (winH <= 0) winH = 240 * 2;
 
 		if (!GL_Init(winW, winH))
 		{
@@ -439,11 +445,11 @@ void	Start (void)
 
 		if (!Fullscreen)
 		{
-			RECT rc = { 0, 0, 256 * SizeMult, 240 * SizeMult };
-			AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, TRUE);
+			RECT rcAdj = { 0, 0, winW, winH };
+			AdjustWindowRect(&rcAdj, WS_OVERLAPPEDWINDOW, TRUE);
 			SetWindowPos(hMainWnd, NULL, 0, 0,
-				rc.right - rc.left,
-				rc.bottom - rc.top,
+				rcAdj.right - rcAdj.left,
+				rcAdj.bottom - rcAdj.top,
 				SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
 		}
 
