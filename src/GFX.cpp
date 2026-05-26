@@ -116,7 +116,7 @@ LPDIRECTDRAWCREATEEX DirectDrawCreateEx;
 
 BOOL UseOpenGL(void)
 {
-	return (Bilinear || IntegerScale || Scanlines) && Depth == 32;
+	return TRUE;
 }
 
 static BOOL GL_Init(int winW, int winH)
