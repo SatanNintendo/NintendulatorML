@@ -1493,6 +1493,75 @@ BOOL	sample_ok = FALSE;
 #endif	/* !NSFPLAYER */
 int sampcycles = 0, samppos = 0;
 
+// Dynamic Rate Control.
+// Вызывается каждые ~20 кадров из GFX::Update когда включён Match Monitor Rate.
+//
+// Смотрим насколько заполнен кольцевой звуковой буфер DirectSound:
+//   - Буфер слишком полный  → эмулятор генерирует звук быстрее чем DirectSound играет
+//   - Буфер слишком пустой  → эмулятор медленнее
+// В обоих случаях рано или поздно будет щелчок и срыв картинки.
+//
+// Решение: чуть-чуть ускорить или замедлить воспроизведение через SetFrequency,
+// удерживая буфер около 50% заполненности. Отклонение не превышает ±5% от 44100 Hz
+// и абсолютно не слышно на ухо.
+//
+void	UpdateDRC (void)
+{
+#ifndef NSFPLAYER
+	if (!Buffer || !isEnabled)
+		return;
+
+	// Узнаём текущие позиции в буфере
+	unsigned long rpos, wpos;
+	if (FAILED(Buffer->GetCurrentPosition(&rpos, &wpos)))
+		return;
+
+	// Полный размер кольцевого буфера в байтах
+	DWORD totalSize = LockSize * FRAMEBUF;
+	if (totalSize == 0)
+		return;
+
+	// Сколько байт сейчас ждёт воспроизведения (с учётом кольца)
+	long fill;
+	if (wpos >= rpos)
+		fill = (long)(wpos - rpos);
+	else
+		fill = (long)(totalSize - rpos + wpos);
+
+	// Заполненность как доля 0.0..1.0
+	double fillRatio = (double)fill / (double)totalSize;
+
+	// Отклонение от цели 50%:
+	// положительное = буфер слишком полный → надо ускорить воспроизведение
+	// отрицательное = буфер слишком пустой → надо замедлить
+	double error = fillRatio - drc_target_fill;
+
+	// Плавная коррекция: коэффициент 0.1 означает что мы устраняем 10% ошибки
+	// за каждый вызов. При отклонении в 10% частота изменится на 1% от 44100.
+	double adjustment = error * 0.1;
+
+	// Ограничиваем максимальное отклонение ±5%
+	if (adjustment >  drc_max_adjust) adjustment =  drc_max_adjust;
+	if (adjustment < -drc_max_adjust) adjustment = -drc_max_adjust;
+
+	// Вычисляем новую частоту воспроизведения
+	DWORD newFreq = (DWORD)((double)FREQ * (1.0 + adjustment) + 0.5);
+
+	// Жёсткие границы на всякий случай (±5% от 44100)
+	if (newFreq < 39690) newFreq = 39690;
+	if (newFreq > 46305) newFreq = 46305;
+
+	// Применяем только если изменение существенное (≥10 Hz)
+	// чтобы не дёргать SetFrequency без нужды
+	if (newFreq != drc_play_freq &&
+	    (newFreq > drc_play_freq + 10 || newFreq + 10 < drc_play_freq))
+	{
+		drc_play_freq = newFreq;
+		Buffer->SetFrequency(newFreq);
+	}
+#endif /* !NSFPLAYER */
+}
+
 void	Run (void)
 {
 #ifndef	NSFPLAYER
