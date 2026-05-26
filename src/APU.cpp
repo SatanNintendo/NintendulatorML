@@ -1186,6 +1186,10 @@ void	SoundON (void)
 	isEnabled = TRUE;
 	Try(Buffer->Play(0, 0, DSBPLAY_LOOPING), Lang::GetString(LANG_ERR_APU_BUFFER));
 	next_pos = 0;
+	// Сбрасываем DRC на стандартную частоту при каждом старте звука
+	drc_play_freq = FREQ;
+	if (Buffer)
+		Buffer->SetFrequency(FREQ);
 }
 
 INT_PTR	CALLBACK	VolumeConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
