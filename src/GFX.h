@@ -57,6 +57,8 @@ void	DrawIntegerScale (void);
 void	Update (void);
 void	Repaint (void);
 void	GL_Resize (int, int);
+void	ApplyGLFilter (void);
+BOOL	UseOpenGL (void);
 void	LoadPalette (PALETTE);
 void	SetFrameskip (int);
 void	ForceNoSkip (BOOL);
