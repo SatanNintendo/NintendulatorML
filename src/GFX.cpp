@@ -593,11 +593,11 @@ else
 			720, 768,	// 16:10 - last offset 2
 			848, 856, 864	// 16:9 - last offset 5
 		};
-		static BOOL widths_ok[] = {
-			TRUE,
-			TRUE, TRUE,
-			TRUE, TRUE, TRUE
-		};
+		BOOL widths_ok[] = {
+	TRUE,
+	TRUE, TRUE,
+	TRUE, TRUE, TRUE
+};
 		int i;
 		if (ratio < 1.4)
 			i = 0;
