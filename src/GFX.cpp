@@ -395,10 +395,13 @@ void	Start (void)
 			if (dbgVisible) ShowWindow(hDebug, SW_MINIMIZE);
 		}
 		else
-		{
-			winW = 256 * SizeMult;
-			winH = 240 * SizeMult;
-		}
+{
+    RECT rc;
+    GetClientRect(hMainWnd, &rc);
+
+    winW = rc.right - rc.left;
+    winH = rc.bottom - rc.top;
+}
 		if (!GL_Init(winW, winH))
 		{
 			MessageBox(hMainWnd, _T("Failed to initialize OpenGL! Falling back to DirectDraw."), _T("Nintendulator"), MB_OK | MB_ICONWARNING);
