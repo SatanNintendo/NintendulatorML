@@ -576,7 +576,7 @@ else
 		// We'll support 4:3, 16:10, and 16:9
 		double ratio = (double)GetSystemMetrics(SM_CXSCREEN) / (double)GetSystemMetrics(SM_CYSCREEN);
 
-		if (FAILED(DirectDraw->SetCooperativeLevel(hMainWnd, DDSCL_EXCLUSIVE | DDSCL_FULLSCREEN | DDSCL_NOWINDOWCHANGES)))
+		if (FAILED(DirectDraw->SetCooperativeLevel(hMainWnd, DDSCL_EXCLUSIVE | DDSCL_FULLSCREEN)))
 		{
 			Stop();
 			MessageBox(hMainWnd, _T("Failed to set fullscreen cooperative level! Returning to Windowed mode..."), _T("Nintendulator"), MB_OK | MB_ICONERROR);
