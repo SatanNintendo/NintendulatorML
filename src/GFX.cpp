@@ -763,6 +763,12 @@ void	Stop (void)
 	SetMenu(hMainWnd, hMenu);
 	ShowWindow(hMainWnd, SW_RESTORE);
 	UpdateWindow(hMainWnd);
+	MSG msg;
+	while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
 	if (dbgVisible)
 		ShowWindow(hDebug, SW_RESTORE);
 	NES::UpdateInterface();
