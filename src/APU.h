@@ -46,6 +46,7 @@ void	Config		(void);
 #endif	/* !NSFPLAYER */
 void	Run		(void);
 void	SetRegion	(void);
+void	UpdateDRC	(void);
 int	MAPINT	IntRead (int, int);
 void	MAPINT	IntWrite (int, int, int);
 } // namespace APU
