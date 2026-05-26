@@ -326,6 +326,7 @@ void	Init (void)
 	ISBorderY = 0;
 	ISMult = 2;
 	Bilinear     = FALSE;
+	MatchMonitorRate = FALSE;
 	InError      = FALSE;
 	hGLRC        = NULL;
 	hGLDC        = NULL;
