@@ -707,6 +707,7 @@ void	SaveSettings (HKEY SettingsBase)
 	RegSetValueEx(SettingsBase, _T("aFSkip")      , 0, REG_DWORD, (LPBYTE)&aFSkip     , sizeof(BOOL));
 	RegSetValueEx(SettingsBase, _T("Scanlines")   , 0, REG_DWORD, (LPBYTE)&Scanlines  , sizeof(BOOL));
 	RegSetValueEx(SettingsBase, _T("Bilinear")    , 0, REG_DWORD, (LPBYTE)&Bilinear   , sizeof(BOOL));
+	RegSetValueEx(SettingsBase, _T("MatchRate")   , 0, REG_DWORD, (LPBYTE)&MatchMonitorRate, sizeof(BOOL));
 	RegSetValueEx(SettingsBase, _T("IntScale")    , 0, REG_DWORD, (LPBYTE)&IntegerScale, sizeof(BOOL));
 
 	RegSetValueEx(SettingsBase, _T("FSkip")       , 0, REG_DWORD, (LPBYTE)&FSkip      , sizeof(DWORD));
