@@ -241,6 +241,12 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Bad opcode, CPU locked"),
     _T("APU started"),
     _T("Unknown region, APU not configured")
+    _T("Unable to reopen file! Discard changes?"),
+    _T("Unable to open ROM!"),
+    _T("Selected file is not an iNES ROM image!"),
+    _T("Selected ROM appears to have been corrupted by \"DiskDude!\" - cleaning..."),
+    _T("Unrecognized or inconsistent data detected in ROM header! Do you wish to clean it?"),
+    _T("iNES Editor"),
 };
 
 // ============================================================
