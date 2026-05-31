@@ -283,8 +283,7 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Illegal palette selected!"),
     _T("Unable to load the specified palette! Reverting to default!"),
     _T("Selected file is not a valid palette!"),
-    // NES
-    _T("Nintendulator was unable to fully relocate its data files to \"%s\".\nPlease delete the folder \"%s\" after relocating its contents."),
+   
 };
 
 // ============================================================
