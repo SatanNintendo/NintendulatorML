@@ -881,10 +881,10 @@ void UpdateTitlebar (void)
 	if (NES::Running)
 	{
 		if (GFX::forceNoSkip)
-			_stprintf(titlebar, _T("Nintendulator - %i FPS (No FSkip)"), GFX::FPSnum);
-		else	_stprintf(titlebar, _T("Nintendulator - %i FPS (%i %sFSkip)"), GFX::FPSnum, GFX::FSkip, GFX::aFSkip?_T("Auto"):_T(""));
+			_stprintf(titlebar, Lang::GetString(LANG_WINDOW_TITLE_FPS_NOSKIP), GFX::FPSnum);
+		else	_stprintf(titlebar, Lang::GetString(LANG_WINDOW_TITLE_FPS_FSKIP), GFX::FPSnum, GFX::FSkip, GFX::aFSkip ? Lang::GetString(LANG_TITLEBAR_AUTO) : _T(""));
 	}
-	else	_tcscpy(titlebar, _T("Nintendulator - Stopped"));
+	else	_tcscpy(titlebar, Lang::GetString(LANG_WINDOW_TITLE_STOPPED));
 	if (TitlebarDelay > 0)
 	{
 		TitlebarDelay--;
