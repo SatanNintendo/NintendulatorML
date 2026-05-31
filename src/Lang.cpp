@@ -278,6 +278,11 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Failed to initialize OpenGL! Falling back to DirectDraw."),
     // MapperInterface
     _T("No mapper DLLs found!"),
+    _T("Nintendulator was unable to fully relocate its data files to \"%s\".\nPlease delete the folder \"%s\" after relocating its contents."),
+    _T("Failed to flip to primary surface! Reverting to Windowed mode..."),
+    _T("Illegal palette selected!"),
+    _T("Unable to load the specified palette! Reverting to default!"),
+    _T("Selected file is not a valid palette!"),
     // NES
     _T("Nintendulator was unable to fully relocate its data files to \"%s\".\nPlease delete the folder \"%s\" after relocating its contents."),
 };
