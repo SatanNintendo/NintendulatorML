@@ -239,6 +239,29 @@ INT_PTR	CALLBACK	StdPort_FourScore_ConfigProc (HWND hDlg, UINT uMsg, WPARAM wPar
 			EnableWindow(GetDlgItem(hDlg, IDC_CONT_SPORT3), TRUE);
 			EnableWindow(GetDlgItem(hDlg, IDC_CONT_SPORT4), TRUE);
 		}
+		SetWindowText(hDlg, Lang::GetString(LANG_DLG_CTRL_FOURSCORE));
+		HWND hChild = GetWindow(hDlg, GW_CHILD);
+		while (hChild) {
+			TCHAR txt[64] = {0};
+			GetWindowText(hChild, txt, 64);
+			struct { const TCHAR *orig; LangStringID id; } labels[] = {
+				{ _T("Port &1:"), LANG_DLG_CTRL_PORT1  },
+				{ _T("Port &2:"), LANG_DLG_CTRL_PORT2  },
+				{ _T("Port &3:"), LANG_DLG_CTRL_PORT3  },
+				{ _T("Port &4:"), LANG_DLG_CTRL_PORT4  },
+				{ _T("&Config"), LANG_DLG_CTRL_CONFIG  },
+				{ _T("C&onfig"), LANG_DLG_CTRL_CONFIG  },
+				{ _T("Co&nfig"), LANG_DLG_CTRL_CONFIG  },
+				{ _T("Con&fig"), LANG_DLG_CTRL_CONFIG  },
+				{ _T("Close"),   LANG_DLG_CTRL_CLOSE   },
+				{ NULL, LANG_STRING_COUNT }
+			};
+			for (int k = 0; labels[k].orig != NULL; k++)
+				if (_tcscmp(txt, labels[k].orig) == 0)
+					{ SetWindowText(hChild, Lang::GetString(labels[k].id)); break; }
+			hChild = GetWindow(hChild, GW_HWNDNEXT);
+		}
+		return TRUE;
 		return TRUE;
 	case WM_COMMAND:
 		wmId    = LOWORD(wParam); 
