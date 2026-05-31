@@ -1079,7 +1079,7 @@ void	Start (void)
 	if (FAILED(PrimaryBuffer->SetFormat(&WFX)))
 	{
 		Stop();
-		MessageBox(hMainWnd, _T("Sound format error!"), _T("Nintendulator"), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 	if (FAILED(PrimaryBuffer->Play(0, 0, DSBPLAY_LOOPING)))
@@ -1096,7 +1096,7 @@ void	Start (void)
 	if (FAILED(DirectSound->CreateSoundBuffer(&DSBD, &Buffer, NULL)))
 	{
 		Stop();
-		MessageBox(hMainWnd, _T("Sound buffer error!"), _T("Nintendulator"), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 	EI.DbgOut(_T("APU disabled."));
