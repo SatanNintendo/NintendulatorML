@@ -8,6 +8,7 @@
 #include "Movie.h"
 #include "Controllers.h"
 #include "GFX.h"
+#include "Lang.h"
 
 namespace Controllers
 {
