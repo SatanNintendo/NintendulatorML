@@ -238,7 +238,9 @@ enum LangStringID
 
     // ---------- CPU ----------
     LANG_ERR_CPU_BAD_OPCODE,
-    LANG_STRING_COUNT   // ← всегда последним!
+    LANG_MSG_APU_STARTED,
+    LANG_ERR_APU_REGION,
+    LANG_STRING_COUNT
 };
 
 #define LANG_MAX_STRING 1024
