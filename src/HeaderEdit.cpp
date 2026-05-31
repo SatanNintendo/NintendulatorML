@@ -233,7 +233,7 @@ bool	OpenROM (void)
 	fclose(rom);
 	if (memcmp(header, "NES\x1A", 4))
 	{
-		MessageBox(hMainWnd, _T("Selected file is not an iNES ROM image!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_HEADER_NOT_INES), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return false;
 	}
 	if ((header[7] & 0x0C) == 0x04)
