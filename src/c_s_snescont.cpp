@@ -135,6 +135,31 @@ INT_PTR	CALLBACK	StdPort_SnesController_ConfigProc (HWND hDlg, UINT uMsg, WPARAM
 	if (uMsg == WM_INITDIALOG)
 	{
 		SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
+		SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
+
+		SetWindowText(hDlg, Lang::GetString(LANG_DLG_CTRL_SNESCONT));
+		HWND hChild = GetWindow(hDlg, GW_CHILD);
+		while (hChild) {
+			TCHAR txt[64] = {0};
+			GetWindowText(hChild, txt, 64);
+			struct { const TCHAR *orig; LangStringID id; } labels[] = {
+				{ _T("Buttons"),  LANG_DLG_CTRL_BUTTONS },
+				{ _T("D-pad"),    LANG_DLG_CTRL_DPAD    },
+				{ _T("&A"),       LANG_DLG_CTRL_A       },
+				{ _T("&B"),       LANG_DLG_CTRL_B       },
+				{ _T("&Select"),  LANG_DLG_CTRL_SELECT  },
+				{ _T("S&tart"),   LANG_DLG_CTRL_START   },
+				{ _T("&Up"),      LANG_DLG_CTRL_UP      },
+				{ _T("&Down"),    LANG_DLG_CTRL_DOWN    },
+				{ _T("&Left"),    LANG_DLG_CTRL_LEFT    },
+				{ _T("&Right"),   LANG_DLG_CTRL_RIGHT   },
+				{ NULL, LANG_STRING_COUNT }
+			};
+			for (int k = 0; labels[k].orig != NULL; k++)
+				if (_tcscmp(txt, labels[k].orig) == 0)
+					{ SetWindowText(hChild, Lang::GetString(labels[k].id)); break; }
+			hChild = GetWindow(hChild, GW_HWNDNEXT);
+		}
 		Cont = (StdPort *)lParam;
 	}
 	else	Cont = (StdPort *)GetWindowLongPtr(hDlg, GWLP_USERDATA);
