@@ -55,6 +55,11 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Nintendulator"),
     _T("Nintendulator [Paused]"),
     _T("Nintendulator - %s - %d FPS"),
+    _T("Nintendulator - Stopped"),
+    _T("Nintendulator - %i FPS (No FSkip)"),
+    _T("Nintendulator - %i FPS (%i %sFSkip)"),
+    _T("Auto"),
+    _T("Volume"),
 
     // Открытие файлов
     _T("Open ROM"),
