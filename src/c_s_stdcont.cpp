@@ -7,6 +7,7 @@
 #include "resource.h"
 #include "Movie.h"
 #include "Controllers.h"
+#include "Lang.h"
 
 namespace Controllers
 {
