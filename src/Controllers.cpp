@@ -563,7 +563,7 @@ void	Init (void)
 	
 	if (FAILED(DirectInput8Create(hInst, DIRECTINPUT_VERSION, IID_IDirectInput8, (LPVOID *)&DirectInput, NULL)))
 	{
-		MessageBox(hMainWnd, _T("Unable to initialize DirectInput!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_DEVICE_LEVEL), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return;
 	}
 
