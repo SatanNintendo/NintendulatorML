@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "Nintendulator.h"
 #include "Controllers.h"
+#include "Lang.h"
 
 namespace Controllers
 {
