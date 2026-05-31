@@ -1085,7 +1085,7 @@ void	Start (void)
 	if (FAILED(PrimaryBuffer->Play(0, 0, DSBPLAY_LOOPING)))
 	{
 		Stop();
-		MessageBox(hMainWnd, _T("Sound buffer error!"), _T("Nintendulator"), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 
