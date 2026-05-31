@@ -1205,6 +1205,33 @@ INT_PTR	CALLBACK	VolumeConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM l
 		case WM_INITDIALOG:
 		SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_SOUND));
 		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_OK));
+		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_VOL_CLOSE));
+		// Группы и чекбоксы Mute
+		static const int vol_groups[7] = {IDC_AUDIO_GRP_MASTER, IDC_AUDIO_GRP_SQ0, IDC_AUDIO_GRP_SQ1, IDC_AUDIO_GRP_TRI, IDC_AUDIO_GRP_NOI, IDC_AUDIO_GRP_PCM, IDC_AUDIO_GRP_EXT};
+		static const LangStringID vol_labels[7] = {LANG_DLG_VOL_MASTER, LANG_DLG_VOL_SQ0, LANG_DLG_VOL_SQ1, LANG_DLG_VOL_TRI, LANG_DLG_VOL_NOI, LANG_DLG_VOL_PCM, LANG_DLG_VOL_EXT};
+		HWND hChild = GetWindow(hDlg, GW_CHILD);
+		while (hChild) {
+			TCHAR txt[64] = {0};
+			GetWindowText(hChild, txt, 64);
+			if (_tcscmp(txt, _T("Mute")) == 0)
+				SetWindowText(hChild, Lang::GetString(LANG_DLG_VOL_MUTE));
+			else {
+				struct { const TCHAR *orig; LangStringID id; } groups[] = {
+					{ _T("&Master"), LANG_DLG_VOL_MASTER },
+					{ _T("SQ&0"),    LANG_DLG_VOL_SQ0   },
+					{ _T("SQ&1"),    LANG_DLG_VOL_SQ1   },
+					{ _T("&TRI"),    LANG_DLG_VOL_TRI   },
+					{ _T("&NOI"),    LANG_DLG_VOL_NOI   },
+					{ _T("&PCM"),    LANG_DLG_VOL_PCM   },
+					{ _T("&EXT"),    LANG_DLG_VOL_EXT   },
+					{ NULL, LANG_STRING_COUNT }
+				};
+				for (int k = 0; groups[k].orig != NULL; k++)
+					if (_tcscmp(txt, groups[k].orig) == 0)
+						{ SetWindowText(hChild, Lang::GetString(groups[k].id)); break; }
+			}
+			hChild = GetWindow(hChild, GW_HWNDNEXT);
+		}
 		for (i = 0; i < 7; i++)
 		{
 			SendDlgItemMessage(hDlg, vol_sliders[i], TBM_SETRANGE, FALSE, MAKELONG(0, 100));
