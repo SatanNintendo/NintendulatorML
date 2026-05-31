@@ -1079,7 +1079,7 @@ void	Start (void)
 	if (FAILED(PrimaryBuffer->SetFormat(&WFX)))
 	{
 		Stop();
-		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_FORMAT), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 	if (FAILED(PrimaryBuffer->Play(0, 0, DSBPLAY_LOOPING)))
