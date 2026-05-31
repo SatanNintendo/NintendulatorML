@@ -126,6 +126,47 @@ CONT_LABEL_EXP=&Expansion Port:
 CONT_CONFIG=&Config
 CONT_UDLR=&Allow simultaneous Left+Right and Up+Down
 CONT_POV=Configure &POV triggers as 8-way buttons
+# === Контроллеры — диалог ===
+CONT_LABEL_PORT1=Controller Port &1:
+CONT_LABEL_PORT2=Controller Port &2:
+CONT_LABEL_EXP=&Expansion Port:
+CONT_CONFIG=&Config
+CONT_UDLR=&Allow simultaneous Left+Right and Up+Down
+CONT_POV=Configure &POV triggers as 8-way buttons
+
+# === Контроллеры — диалоги настройки ===
+DLG_CTRL_STDCONT=Standard Controller Config
+DLG_CTRL_BUTTONS=Buttons
+DLG_CTRL_DPAD=D-pad
+DLG_CTRL_A=&A
+DLG_CTRL_B=&B
+DLG_CTRL_SELECT=&Select
+DLG_CTRL_START=S&tart
+DLG_CTRL_UP=&Up
+DLG_CTRL_DOWN=&Down
+DLG_CTRL_LEFT=&Left
+DLG_CTRL_RIGHT=&Right
+DLG_CTRL_TRIGGER=&Trigger
+DLG_CTRL_AXIS=&Axis
+DLG_CTRL_ZAPPER=Zapper Config
+DLG_CTRL_ARKPAD=Arkanoid Paddle Config
+DLG_CTRL_POWERPAD=Power Pad Config
+DLG_CTRL_FOURSCORE=Four-Score Configuration
+DLG_CTRL_FAMI4PLAY=Famicom 4-Player Adapter
+DLG_CTRL_SNESCONT=SNES Controller Config
+DLG_CTRL_SNESMOUSE=SNES Mouse Config
+DLG_CTRL_VSZAPPER=VS Zapper Config
+DLG_CTRL_FLIP=Fli&p
+DLG_CTRL_PORT1=Port &1:
+DLG_CTRL_PORT2=Port &2:
+DLG_CTRL_PORT3=Port &3:
+DLG_CTRL_PORT4=Port &4:
+DLG_CTRL_CONFIG=&Config
+DLG_CTRL_CLOSE=Close
+DLG_CTRL_MORE_BUTTONS=More Buttons
+DLG_CTRL_FAMTRAIN=Family Trainer Config
+DLG_CTRL_FBKEY=Family Basic Keyboard
+DLG_CTRL_TABLET=Oeka Kids Tablet
 
 # === Ошибки контроллеров ===
 ERR_CTRL_KEYBOARD_INIT=Unable to initialize keyboard input device!
