@@ -152,6 +152,16 @@ INT_PTR	CALLBACK	ExpPort_Tablet_ConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam,
 	if (uMsg == WM_INITDIALOG)
 	{
 		SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
+		
+		SetWindowText(hDlg, Lang::GetString(LANG_DLG_CTRL_TABLET));
+		HWND hChild = GetWindow(hDlg, GW_CHILD);
+		while (hChild) {
+			TCHAR txt[64] = {0};
+			GetWindowText(hChild, txt, 64);
+			if (_tcscmp(txt, _T("&Button")) == 0)
+				SetWindowText(hChild, Lang::GetString(LANG_DLG_CTRL_BUTTONS));
+			hChild = GetWindow(hChild, GW_HWNDNEXT);
+		}
 		Cont = (ExpPort *)lParam;
 	}
 	else	Cont = (ExpPort *)GetWindowLongPtr(hDlg, GWLP_USERDATA);
