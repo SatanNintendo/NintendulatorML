@@ -6,6 +6,7 @@
 #include "Nintendulator.h"
 #include "resource.h"
 #include "HeaderEdit.h"
+#include "Lang.h"
 
 namespace HeaderEdit
 {
