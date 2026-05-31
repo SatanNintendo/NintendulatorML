@@ -226,7 +226,7 @@ bool	OpenROM (void)
 	FILE *rom = _tfopen(filename, _T("rb"));
 	if (!rom)
 	{
-		MessageBox(hMainWnd, _T("Unable to open ROM!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_HEADER_OPEN), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return false;
 	}
 	fread(header, 16, 1, rom);
