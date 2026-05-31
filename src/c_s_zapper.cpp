@@ -10,6 +10,7 @@
 #include "MapperInterface.h"
 #include "PPU.h"
 #include "GFX.h"
+#include "Lang.h"
 
 namespace Controllers
 {
