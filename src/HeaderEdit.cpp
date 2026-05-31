@@ -242,7 +242,7 @@ bool	OpenROM (void)
 		memset(header+7, 0, 9);
 	}
 	else if (CheckHeader(false) && 
-		(MessageBox(hMainWnd, Lang::GetString(LANG_ERR_HEADER_INCONSISTENT), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_YESNO | MB_ICONQUESTION) == IDYES)
+		(MessageBox(hMainWnd, Lang::GetString(LANG_ERR_HEADER_INCONSISTENT), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_YESNO | MB_ICONQUESTION) == IDYES))
 	{
 		CheckHeader(true);
 	}
