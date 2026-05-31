@@ -284,4 +284,4 @@ ERR_GFX_SURF_DESC=Failed to retrieve surface description
 ERR_GFX_BIT_DEPTH=Invalid bit depth detected!
 ERR_GFX_OPENGL=Failed to initialize OpenGL! Falling back to DirectDraw.
 ERR_MAPPER_NO_DLLS=No mapper DLLs found!
-ERR_NES_RELOCATE=Nintendulator was unable to fully relocate its data files to "%s".\nPlease delete the folder "%s" after relocating its contents
+ERR_NES_RELOCATE=Nintendulator was unable to fully relocate its data files to "%s".\nPlease delete the folder "%s" after relocating its contents.
