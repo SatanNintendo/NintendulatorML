@@ -247,6 +247,39 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Selected ROM appears to have been corrupted by \"DiskDude!\" - cleaning..."),
     _T("Unrecognized or inconsistent data detected in ROM header! Do you wish to clean it?"),
     _T("iNES Editor"),
+    _T("Unable to modify device input cooperative level!"),
+    _T("Unable to initialize DirectInput!"),
+    _T("Unable to restore device input cooperative level!"),
+    // AVI
+    _T("No AVI capture is currently in progress!"),
+    _T("An AVI capture is already in progress!"),
+    _T("Failed to configure AVI compression!"),
+    _T("Error! AVI frame capture attempted while not recording!"),
+    _T("Failed to write video to AVI!"),
+    _T("Error! AVI audio capture attempted while not recording!"),
+    _T("Failed to write audio to AVI!"),
+    // GFX
+    _T("Failed to determine performance counter frequency!"),
+    _T("Fatal error: unable to load DirectDraw DLL!"),
+    _T("Fatal error: unable to locate entry point for DirectDrawCreateEx!"),
+    _T("Failed to initialize DirectDraw 7"),
+    _T("Failed to set fullscreen cooperative level! Returning to Windowed mode..."),
+    _T("No fullscreen resolutions are supported on your display device!"),
+    _T("No fullscreen resolutions are supported on your display device! Reverting to Windowed mode..."),
+    _T("Failed to set DirectDraw cooperative level"),
+    _T("Failed to create primary surface"),
+    _T("Failed to get secondary surface"),
+    _T("Failed to create secondary surface"),
+    _T("Failed to create clipper"),
+    _T("Failed to set clipper window"),
+    _T("Failed to assign clipper to primary surface"),
+    _T("Failed to retrieve surface description"),
+    _T("Invalid bit depth detected!"),
+    _T("Failed to initialize OpenGL! Falling back to DirectDraw."),
+    // MapperInterface
+    _T("No mapper DLLs found!"),
+    // NES
+    _T("Nintendulator was unable to fully relocate its data files to \"%s\".\nPlease delete the folder \"%s\" after relocating its contents."),
 };
 
 // ============================================================
