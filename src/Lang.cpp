@@ -312,7 +312,6 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("&Config"),
     _T("Close"),
     _T("More Buttons"),
-    _T("More Buttons"),
     _T("Family Trainer Config"),
     _T("Family Basic Keyboard"),
     _T("Oeka Kids Tablet"),
