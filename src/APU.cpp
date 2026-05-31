@@ -1025,7 +1025,7 @@ void	Init (void)
 	if (FAILED(DirectSoundCreate(&DSDEVID_DefaultPlayback, &DirectSound, NULL)))
 	{
 		Destroy();
-		MessageBox(hMainWnd, _T("Failed to initialize DirectSound!"), _T("Nintendulator"), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_DIRECTSOUND), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 	if (FAILED(DirectSound->SetCooperativeLevel(hMainWnd, DSSCL_PRIORITY)))
