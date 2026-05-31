@@ -1204,7 +1204,7 @@ INT_PTR	CALLBACK	VolumeConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM l
 	{
 	case WM_INITDIALOG:
 		{
-		SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_SOUND));
+		SetWindowText(hDlg, Lang::GetString(LANG_DLG_VOL_TITLE));
 		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_VOL_CLOSE));
 		// Localize channel labels and Mute checkboxes by matching window text
 		static const LangStringID vol_labels[7] = {LANG_DLG_VOL_MASTER, LANG_DLG_VOL_SQ0, LANG_DLG_VOL_SQ1, LANG_DLG_VOL_TRI, LANG_DLG_VOL_NOI, LANG_DLG_VOL_PCM, LANG_DLG_VOL_EXT};
