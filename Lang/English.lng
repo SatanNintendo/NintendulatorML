@@ -95,6 +95,10 @@ MENU_HELP_ABOUT=&About...
 WINDOW_TITLE=Nintendulator
 WINDOW_TITLE_PAUSED=Nintendulator [Paused]
 WINDOW_TITLE_FPS=Nintendulator - %s - %d FPS
+WINDOW_TITLE_STOPPED=Nintendulator - Stopped
+WINDOW_TITLE_FPS_NOSKIP=Nintendulator - %i FPS (No FSkip)
+WINDOW_TITLE_FPS_FSKIP=Nintendulator - %i FPS (%i %sFSkip)
+TITLEBAR_AUTO=Auto
 
 # === File dialogs ===
 OPEN_ROM_TITLE=Open ROM
