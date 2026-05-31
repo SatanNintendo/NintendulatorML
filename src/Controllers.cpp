@@ -7,6 +7,34 @@
 #include "resource.h"
 #include "MapperInterface.h"
 #include "Lang.h"
+static void LocalizeControllerDialog(HWND hDlg, LangStringID caption,
+    LangStringID grp1, LangStringID grp2)
+{
+    SetWindowText(hDlg, Lang::GetString(caption));
+    // Группы — IDC_STATIC, проходим по всем дочерним окнам
+    HWND hChild = GetWindow(hDlg, GW_CHILD);
+    int groupIdx = 0;
+    while (hChild)
+    {
+        TCHAR cls[32];
+        GetClassName(hChild, cls, 32);
+        if (_tcscmp(cls, _T("Button")) == 0)
+        {
+            TCHAR txt[64];
+            GetWindowText(hChild, txt, 64);
+            LONG style = GetWindowLong(hChild, GWL_STYLE);
+            if ((style & BS_GROUPBOX) == BS_GROUPBOX)
+            {
+                if (groupIdx == 0 && grp1 != LANG_STRING_COUNT)
+                    SetWindowText(hChild, Lang::GetString(grp1));
+                else if (groupIdx == 1 && grp2 != LANG_STRING_COUNT)
+                    SetWindowText(hChild, Lang::GetString(grp2));
+                groupIdx++;
+            }
+        }
+        hChild = GetWindow(hChild, GW_HWNDNEXT);
+    }
+}
 #include "Movie.h"
 #include "Controllers.h"
 #include <commdlg.h>
