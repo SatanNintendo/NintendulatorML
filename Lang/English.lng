@@ -19,6 +19,12 @@ MENU_LANGUAGE=&Language
 MENU_HELP=&Help
 MSG_APU_STARTED=APU started
 ERR_APU_REGION=Unknown region, APU not configured
+ERR_HEADER_REOPEN=Unable to reopen file! Discard changes?
+ERR_HEADER_OPEN=Unable to open ROM!
+ERR_HEADER_NOT_INES=Selected file is not an iNES ROM image!
+ERR_HEADER_DISKDUDE=Selected ROM appears to have been corrupted by "DiskDude!" - cleaning...
+ERR_HEADER_INCONSISTENT=Unrecognized or inconsistent data detected in ROM header! Do you wish to clean it?
+TITLE_INES_EDITOR=iNES Editor
 
 # === File подменю ===
 MENU_FILE_OPEN=&Open ROM...
