@@ -70,6 +70,9 @@ MENU_PPU_BILINEAR=&Билинейный фильтр
 MENU_SOUND_ENABLED=&Включить
 MENU_SETTINGS_SOUND=&Громкость...
 
+# === Звук — диалог громкости ===
+DLG_VOL_TITLE=Громкость
+
 # === Input подменю ===
 MENU_SETTINGS_CONTROLLERS=&Настройка...
 
