@@ -240,7 +240,7 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     // === CPU ===
     _T("Bad opcode, CPU locked"),
     _T("APU started"),
-    _T("Unknown region, APU not configured")
+    _T("Unknown region, APU not configured"),
     _T("Unable to reopen file! Discard changes?"),
     _T("Unable to open ROM!"),
     _T("Selected file is not an iNES ROM image!"),
