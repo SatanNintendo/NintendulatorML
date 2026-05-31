@@ -459,7 +459,9 @@ static const KeyMapping KeyMap[] =
     { L"MENU_PPU_BILINEAR",         LANG_MENU_PPU_BILINEAR },
     { L"LANG_CHANGED",              LANG_LANG_CHANGED },
     { L"LANG_CHANGED_MSG",          LANG_LANG_CHANGED_MSG },
-    { L"ERR_CPU_BAD_OPCODE",        LANG_ERR_CPU_BAD_OPCODE },   // ← Добавлено
+    { L"ERR_CPU_BAD_OPCODE",  LANG_ERR_CPU_BAD_OPCODE  },
+    { L"MSG_APU_STARTED",     LANG_MSG_APU_STARTED     },
+    { L"ERR_APU_REGION",      LANG_ERR_APU_REGION      },
     { NULL, LANG_STRING_COUNT }
 };
 
