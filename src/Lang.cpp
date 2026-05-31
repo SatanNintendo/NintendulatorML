@@ -618,6 +618,15 @@ static const KeyMapping KeyMap[] =
     { L"DLG_CTRL_FAMTRAIN",          LANG_DLG_CTRL_FAMTRAIN          },
     { L"DLG_CTRL_FBKEY",             LANG_DLG_CTRL_FBKEY             },
     { L"DLG_CTRL_TABLET",            LANG_DLG_CTRL_TABLET            },
+    { L"DLG_VOL_MASTER",             LANG_DLG_VOL_MASTER             },
+    { L"DLG_VOL_SQ0",                LANG_DLG_VOL_SQ0                },
+    { L"DLG_VOL_SQ1",                LANG_DLG_VOL_SQ1                },
+    { L"DLG_VOL_TRI",                LANG_DLG_VOL_TRI                },
+    { L"DLG_VOL_NOI",                LANG_DLG_VOL_NOI                },
+    { L"DLG_VOL_PCM",                LANG_DLG_VOL_PCM                },
+    { L"DLG_VOL_EXT",                LANG_DLG_VOL_EXT                },
+    { L"DLG_VOL_MUTE",               LANG_DLG_VOL_MUTE               },
+    { L"DLG_VOL_CLOSE",              LANG_DLG_VOL_CLOSE              },
     { NULL, LANG_STRING_COUNT }
 };
 
