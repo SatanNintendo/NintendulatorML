@@ -46,7 +46,7 @@ void	StdPort_Unconnected::Write (unsigned char Val)
 }
 void	StdPort_Unconnected::Config (HWND hWnd)
 {
-	MessageBox(hWnd, _T("No configuration necessary!"), _T("Nintendulator"), MB_OK);
+	MessageBox(hWnd, Lang::GetString(LANG_CONT_NO_CONFIG), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 }
 void	StdPort_Unconnected::SetMasks (void)
 {
