@@ -541,6 +541,11 @@ static const KeyMapping KeyMap[] =
     { L"ERR_GFX_OPENGL",                 LANG_ERR_GFX_OPENGL                 },
     { L"ERR_MAPPER_NO_DLLS",             LANG_ERR_MAPPER_NO_DLLS             },
     { L"ERR_NES_RELOCATE",               LANG_ERR_NES_RELOCATE               },
+    { L"ERR_NES_RELOCATE",               LANG_ERR_NES_RELOCATE               },
+    { L"ERR_GFX_FLIP",                   LANG_ERR_GFX_FLIP                   },
+    { L"ERR_GFX_ILLEGAL_PALETTE",        LANG_ERR_GFX_ILLEGAL_PALETTE        },
+    { L"ERR_GFX_LOAD_PALETTE",           LANG_ERR_GFX_LOAD_PALETTE           },
+    { L"ERR_GFX_INVALID_PALETTE",        LANG_ERR_GFX_INVALID_PALETTE        },
     { NULL, LANG_STRING_COUNT }
 };
 
