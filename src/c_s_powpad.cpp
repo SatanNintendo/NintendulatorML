@@ -132,6 +132,17 @@ INT_PTR	CALLBACK	StdPort_PowerPad_ConfigProc (HWND hDlg, UINT uMsg, WPARAM wPara
 	if (uMsg == WM_INITDIALOG)
 	{
 		SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
+		SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
+
+		SetWindowText(hDlg, Lang::GetString(LANG_DLG_CTRL_POWERPAD));
+		HWND hChild = GetWindow(hDlg, GW_CHILD);
+		while (hChild) {
+			TCHAR txt[64] = {0};
+			GetWindowText(hChild, txt, 64);
+			if (_tcscmp(txt, _T("Fli&p")) == 0)
+				SetWindowText(hChild, Lang::GetString(LANG_DLG_CTRL_FLIP));
+			hChild = GetWindow(hChild, GW_HWNDNEXT);
+		}
 		Cont = (StdPort *)lParam;
 	}
 	else	Cont = (StdPort *)GetWindowLongPtr(hDlg, GWLP_USERDATA);
