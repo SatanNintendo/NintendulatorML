@@ -7,7 +7,7 @@ Author=Nintendulator Dev Team
 Version=1.0
 
 [Strings]
-# === Главное меню — верхний уровень ===
+# === Main menu — top level ===
 MENU_FILE=&File
 MENU_CPU=&CPU
 MENU_PPU=&PPU
@@ -26,7 +26,7 @@ ERR_HEADER_DISKDUDE=Selected ROM appears to have been corrupted by "DiskDude!" -
 ERR_HEADER_INCONSISTENT=Unrecognized or inconsistent data detected in ROM header! Do you wish to clean it?
 TITLE_INES_EDITOR=iNES Editor
 
-# === File подменю ===
+# === File submenu ===
 MENU_FILE_OPEN=&Open ROM...
 MENU_FILE_CLOSE=&Close
 MENU_FILE_RECENT=Recent &Files
@@ -36,7 +36,7 @@ MENU_FILE_AUTORUN=&Auto-Run
 MENU_FILE_BROWSESAVES=&Browse Save Files
 MENU_FILE_EXIT=E&xit
 
-# === CPU подменю ===
+# === CPU submenu ===
 MENU_NES_RUN=&Run
 MENU_NES_PAUSE=&Step
 MENU_NES_STOP=S&top
@@ -52,7 +52,7 @@ MENU_CPU_FRAMESTEP=Fra&me Step
 MENU_CPU_FRAMESTEP_ENABLED=&Enabled
 MENU_CPU_FRAMESTEP_STEP=&Step
 
-# === PPU подменю ===
+# === PPU submenu ===
 MENU_PPU_FRAMESKIP=&Frameskip
 MENU_PPU_FRAMESKIP_AUTO=&Auto
 MENU_PPU_SIZE=&Size
@@ -66,34 +66,34 @@ MENU_PPU_FULLSCREEN=F&ullscreen
 MENU_PPU_SCANLINES=S&canlines
 MENU_PPU_BILINEAR=&Bilinear Filter
 
-# === Sound подменю ===
+# === Sound submenu ===
 MENU_SOUND_ENABLED=&Enabled
 MENU_SETTINGS_SOUND=&Volume...
 
-# === Input подменю ===
+# === Input submenu ===
 MENU_SETTINGS_CONTROLLERS=&Setup...
 
-# === Debug подменю ===
+# === Debug submenu ===
 MENU_DEBUG_CPU=&CPU Debugger
 MENU_DEBUG_PPU=&PPU Debugger
 MENU_DEBUG_STATWND=&Status Window
 
-# === Misc подменю ===
+# === Misc submenu ===
 MENU_MISC_STARTAVI=&Start AVI Capture...
 MENU_MISC_STOPAVI=St&op AVI Capture
 MENU_MOVIE_PLAY=P&lay Movie...
 MENU_MOVIE_RECORD=&Record Movie...
 MENU_MOVIE_STOP=Sto&p Movie
 
-# === Help подменю ===
+# === Help submenu ===
 MENU_HELP_ABOUT=&About...
 
-# === Заголовок окна ===
+# === Window title ===
 WINDOW_TITLE=Nintendulator
 WINDOW_TITLE_PAUSED=Nintendulator [Paused]
 WINDOW_TITLE_FPS=Nintendulator - %s - %d FPS
 
-# === Диалоги файлов ===
+# === File dialogs ===
 OPEN_ROM_TITLE=Open ROM
 OPEN_ROM_FILTER=NES ROMs (*.nes;*.unif;*.fds;*.nsf)\0*.nes;*.unif;*.fds;*.nsf\0All Files (*.*)\0*.*\0
 OPEN_MOVIE_TITLE=Open Movie
@@ -101,7 +101,7 @@ SAVE_MOVIE_TITLE=Save Movie
 OPEN_PALETTE_TITLE=Open Palette
 SAVE_AVI_TITLE=Save AVI
 
-# === Контроллеры — список устройств ===
+# === Controllers — device list ===
 CONT_UNCONNECTED=Unconnected
 CONT_STDCONTROLLER=Standard Controller
 CONT_ZAPPER=Zapper
@@ -119,14 +119,7 @@ CONT_SUBORKEYBOARD=Subor Keyboard
 CONT_FAMTRAINER=Family Trainer
 CONT_TABLET=Oeka Kids Tablet
 
-# === Контроллеры — диалог ===
-CONT_LABEL_PORT1=Controller Port &1:
-CONT_LABEL_PORT2=Controller Port &2:
-CONT_LABEL_EXP=&Expansion Port:
-CONT_CONFIG=&Config
-CONT_UDLR=&Allow simultaneous Left+Right and Up+Down
-CONT_POV=Configure &POV triggers as 8-way buttons
-# === Контроллеры — диалог ===
+# === Controllers — main dialog ===
 CONT_LABEL_PORT1=Controller Port &1:
 CONT_LABEL_PORT2=Controller Port &2:
 CONT_LABEL_EXP=&Expansion Port:
@@ -134,7 +127,7 @@ CONT_CONFIG=&Config
 CONT_UDLR=&Allow simultaneous Left+Right and Up+Down
 CONT_POV=Configure &POV triggers as 8-way buttons
 
-# === Контроллеры — диалоги настройки ===
+# === Controllers — config dialogs ===
 DLG_CTRL_STDCONT=Standard Controller Config
 DLG_CTRL_BUTTONS=Buttons
 DLG_CTRL_DPAD=D-pad
@@ -168,7 +161,7 @@ DLG_CTRL_FAMTRAIN=Family Trainer Config
 DLG_CTRL_FBKEY=Family Basic Keyboard
 DLG_CTRL_TABLET=Oeka Kids Tablet
 
-# === Ошибки контроллеров ===
+# === Controller errors ===
 ERR_CTRL_KEYBOARD_INIT=Unable to initialize keyboard input device!
 ERR_CTRL_KEYBOARD_FORMAT=Unable to set keyboard input data format!
 ERR_CTRL_KEYBOARD_LEVEL=Unable to set keyboard input cooperative level!
@@ -178,7 +171,7 @@ ERR_CTRL_JOY_LEVEL=Unable to restore joystick input cooperative level!
 ERR_CTRL_INVALID_STD=Error: selected invalid controller type for standard port!
 ERR_CTRL_INVALID_EXP=Error: selected invalid controller type for expansion port!
 
-# === Ошибки ROM ===
+# === ROM errors ===
 ERR_ROM_OPEN=Failed to open ROM file
 ERR_ROM_INVALID=Invalid ROM file format
 ERR_ROM_MAPPER=Unsupported mapper
@@ -190,7 +183,7 @@ MSG_ROM_LOADED=ROM loaded: %s
 MSG_ROM_CLOSED=ROM closed
 MSG_ROM_ALREADY_LOADED=A ROM is already loaded. Close it first.
 
-# === Видео ===
+# === Video ===
 ERR_GFX_DIRECTDRAW=Failed to initialize DirectDraw
 ERR_GFX_SURFACE=Failed to create DirectDraw surface
 ERR_GFX_PALETTE=Failed to set DirectDraw palette
@@ -198,7 +191,7 @@ ERR_GFX_RENDER=DirectDraw render error
 ERR_GFX_MODE=Unsupported video mode
 MSG_GFX_SCREENSHOT=Screenshot saved: %s
 
-# === Звук ===
+# === Sound ===
 ERR_APU_DIRECTSOUND=Failed to initialize DirectSound
 ERR_APU_BUFFER=Failed to create DirectSound buffer
 ERR_APU_FORMAT=Unsupported audio format
@@ -212,7 +205,8 @@ DLG_VOL_PCM=&PCM
 DLG_VOL_EXT=&EXT
 DLG_VOL_MUTE=Mute
 DLG_VOL_CLOSE=Close
-# === Редактор iNES заголовка ===
+
+# === iNES Header Editor dialog ===
 DLG_INES_TITLE=iNES Header Editor
 DLG_INES_FILENAME=ROM Filename:
 DLG_INES_VER1=Standard &iNES
@@ -237,7 +231,7 @@ DLG_INES_DUAL=&Dual
 DLG_INES_VSPPU=VS PP&U:
 DLG_INES_VSFLAGS=VS &Flags:
 
-# === Состояния сохранения ===
+# === Save states ===
 MSG_STATE_SAVED=State saved to slot %d
 MSG_STATE_LOADED=State loaded from slot %d
 ERR_STATE_SAVE=Failed to save state
@@ -246,7 +240,7 @@ ERR_STATE_VERSION=State file version mismatch
 ERR_STATE_CORRUPT=State file is corrupted
 MSG_STATE_SLOT=Slot %d
 
-# === Запись ===
+# === Recording ===
 MSG_MOVIE_RECORDING=Recording movie...
 MSG_MOVIE_PLAYING=Playing movie...
 MSG_MOVIE_STOPPED=Movie stopped
@@ -262,12 +256,12 @@ ERR_GENIE_INVALID=Invalid Game Genie code
 ERR_GENIE_TOO_MANY=Too many Game Genie codes (maximum 3)
 MSG_GENIE_APPLIED=Game Genie code applied
 
-# === Маппер ===
+# === Mapper ===
 ERR_MAPPER_LOAD=Failed to load %s - not a valid DLL file!
 ERR_MAPPER_NOTFOUND=Mapper not found
 ERR_MAPPER_VERSION=Failed to load mapper pack %s - version mismatch!
 
-# === Отладчик ===
+# === Debugger ===
 DBG_BREAK_EXEC=Exec: $%04X
 DBG_BREAK_READ=Read: $%04X
 DBG_BREAK_WRITE=Write: $%04X
@@ -286,7 +280,7 @@ MSG_DBG_LOG_STOPPED=Logging stopped
 # === CPU ===
 ERR_CPU_BAD_OPCODE=Bad opcode, CPU locked
 
-# === Общие диалоги ===
+# === Common dialogs ===
 DLG_OK=OK
 DLG_CANCEL=Cancel
 DLG_YES=Yes
@@ -299,20 +293,20 @@ DLG_NINTENDULATOR=Nintendulator
 ABOUT_TITLE=About Nintendulator
 ABOUT_TEXT=Nintendulator\nNES Emulator\n\nCopyright (C) QMT Productions
 
-# === Смена языка ===
+# === Language change ===
 LANG_CHANGED=Language Changed
 LANG_CHANGED_MSG=Language has been changed. Some elements will update on restart.
 
-# === Устаревшие/неиспользуемые ===
+# === Deprecated / unused ===
 MENU_NES=&NES
 MENU_SETTINGS=&Settings
 MENU_SETTINGS_VIDEO=&Video...
 MENU_SETTINGS_PATHS=&Paths...
 MENU_SETTINGS_CLOCK=&Clock speed...
 MENU_MOVIE=&Movie
-MENU_MOVIE_RECORD=&Record...
-MENU_MOVIE_PLAY=&Play...
-MENU_MOVIE_STOP=&Stop
+MENU_MOVIE_RECORD_OLD=&Record...
+MENU_MOVIE_PLAY_OLD=&Play...
+MENU_MOVIE_STOP_OLD=&Stop
 
 # === Controllers — additional messages ===
 CONT_NO_CONFIG=No configuration necessary!
