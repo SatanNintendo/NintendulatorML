@@ -581,7 +581,7 @@ void	Init (void)
 	}
 	delete ThisDLL;
 	if (MapperDLLs == NULL)
-		MessageBox(hMainWnd, _T("No mapper DLLs found!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_MAPPER_NO_DLLS), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 #else	/* NSFPLAYER */
 	DI = NULL;
 	dInst = LoadLibrary(_T("Plugins\\nsf.dll"));
