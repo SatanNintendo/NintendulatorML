@@ -238,7 +238,9 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Language has been changed. Some elements will update on restart."),
 
     // === CPU ===
-    _T("Bad opcode, CPU locked")   // ← Эта строка была пропущена
+    _T("Bad opcode, CPU locked"),
+    _T("APU started"),
+    _T("Unknown region, APU not configured")
 };
 
 // ============================================================
