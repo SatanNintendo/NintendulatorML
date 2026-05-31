@@ -209,6 +209,7 @@ INT_PTR	CALLBACK	StdPort_FourScore_ConfigProc (HWND hDlg, UINT uMsg, WPARAM wPar
 	switch (uMsg)
 	{
 	case WM_INITDIALOG:
+		{
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT1, CB_RESETCONTENT, 0, 0);
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT2, CB_RESETCONTENT, 0, 0);
 		SendDlgItemMessage(hDlg, IDC_CONT_SPORT3, CB_RESETCONTENT, 0, 0);
@@ -262,7 +263,7 @@ INT_PTR	CALLBACK	StdPort_FourScore_ConfigProc (HWND hDlg, UINT uMsg, WPARAM wPar
 			hChild = GetWindow(hChild, GW_HWNDNEXT);
 		}
 		return TRUE;
-		return TRUE;
+		}  // end WM_INITDIALOG
 	case WM_COMMAND:
 		wmId    = LOWORD(wParam); 
 		wmEvent = HIWORD(wParam); 
