@@ -298,7 +298,7 @@ BOOL CALLBACK	EnumKeyboardObjectsCallback (LPCDIDEVICEOBJECTINSTANCE lpddoi, LPV
 		ItemNum = lpddoi->dwOfs;
 		if ((ItemNum >= 0) && (ItemNum < 256))
 			dev.ButtonNames[ItemNum] = _tcsdup(lpddoi->tszName);
-		else	MessageBox(hMainWnd, _T("Error - encountered invalid keyboard key ID!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		else	MessageBox(hMainWnd, Lang::GetString(LANG_CONT_ERR_KEY_ID), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 	}
 	return DIENUM_CONTINUE;
 }
@@ -327,7 +327,7 @@ BOOL CALLBACK	EnumMouseObjectsCallback (LPCDIDEVICEOBJECTINSTANCE lpddoi, LPVOID
 		ItemNum = (lpddoi->dwOfs - FIELD_OFFSET(DIMOUSESTATE2, rgbButtons)) / sizeof(dev.MouseState.rgbButtons[0]);
 		if ((ItemNum >= 0) && (ItemNum < 8))
 			dev.ButtonNames[ItemNum] = _tcsdup(lpddoi->tszName);
-		else	MessageBox(hMainWnd, _T("Error - encountered invalid mouse button ID!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		else	MessageBox(hMainWnd, Lang::GetString(LANG_CONT_ERR_MOUSE_ID), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 	}
 
 	return DIENUM_CONTINUE;
@@ -568,13 +568,13 @@ void	Init (void)
 	}
 
 	if (!InitKeyboard())
-		MessageBox(hMainWnd, _T("Failed to initialize keyboard!"), _T("Nintendulator"), MB_OK | MB_ICONWARNING);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_KEYBOARD_INIT), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONWARNING);
 	if (!InitMouse())
-		MessageBox(hMainWnd, _T("Failed to initialize mouse!"), _T("Nintendulator"), MB_OK | MB_ICONWARNING);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_MOUSE_INIT), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONWARNING);
 
 	NumDevices = 2;	// joysticks start at slot 2
 	if (FAILED(DirectInput->EnumDevices(DI8DEVCLASS_GAMECTRL, EnumJoysticksCallback, NULL, DIEDFL_ALLDEVICES)))
-		MessageBox(hMainWnd, _T("Failed to initialize joysticks!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_JOY_LEVEL), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 
 	Movie::Mode = 0;
 }
@@ -1049,7 +1049,7 @@ int	GetConfigButton (HWND hWnd, int DevNum, BOOL AxesOnly = FALSE)
 
 	if (FAILED(dev.DIDevice->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE)))
 	{
-		MessageBox(hMainWnd, _T("Unable to modify device input cooperative level!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_DINPUT_LEVEL), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return Key;
 	}
 
@@ -1166,7 +1166,7 @@ int	GetConfigButton (HWND hWnd, int DevNum, BOOL AxesOnly = FALSE)
 	dev.DIDevice->Unacquire();
 	if (FAILED(dev.DIDevice->SetCooperativeLevel(hMainWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE)))
 	{
-		MessageBox(hMainWnd, _T("Unable to restore device input cooperative level!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_CTRL_DEVICE_RESTORE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return Key;
 	}
 	return Key;
