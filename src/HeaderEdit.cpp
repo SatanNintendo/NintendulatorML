@@ -260,6 +260,43 @@ INT_PTR CALLBACK	dlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_INITDIALOG:
 		SetDlgItemText(hDlg, IDC_INES_NAME, filename);
+		SetWindowText(hDlg, Lang::GetString(LANG_DLG_INES_TITLE));
+		SetDlgItemText(hDlg, IDOK,            Lang::GetString(LANG_DLG_OK));
+		SetDlgItemText(hDlg, IDCANCEL,        Lang::GetString(LANG_DLG_CANCEL));
+		HWND hChild = GetWindow(hDlg, GW_CHILD);
+		while (hChild) {
+			TCHAR txt[128] = {0};
+			GetWindowText(hChild, txt, 128);
+			struct { const TCHAR *orig; LangStringID id; } labels[] = {
+				{ _T("ROM Filename:"),          LANG_DLG_INES_FILENAME },
+				{ _T("Standard &iNES"),         LANG_DLG_INES_VER1    },
+				{ _T("NES &2.0"),               LANG_DLG_INES_VER2    },
+				{ _T("&Mapper Number:"),        LANG_DLG_INES_MAPPER  },
+				{ _T("&PRG ROM Banks:"),        LANG_DLG_INES_PRG     },
+				{ _T("&CHR ROM Banks:"),        LANG_DLG_INES_CHR     },
+				{ _T("&Horizontal Mirroring"),  LANG_DLG_INES_HORIZ   },
+				{ _T("&Vertical Mirroring"),    LANG_DLG_INES_VERT    },
+				{ _T("VS Unisyst&em"),          LANG_DLG_INES_VS      },
+				{ _T("Pla&ychoice-10"),         LANG_DLG_INES_PC10    },
+				{ _T("&4-screen VRAM"),         LANG_DLG_INES_4SCR    },
+				{ _T("Battery-backed &SRAM"),   LANG_DLG_INES_BATT    },
+				{ _T("&Trainer"),               LANG_DLG_INES_TRAIN   },
+				{ _T("Su&bmapper:"),            LANG_DLG_INES_SUBMAP  },
+				{ _T("(battery)"),              LANG_DLG_INES_BATTERY },
+				{ _T("PR&G RAM:"),              LANG_DLG_INES_PRGRAM  },
+				{ _T("CH&R RAM:"),              LANG_DLG_INES_CHRRAM  },
+				{ _T("&NTSC"),                  LANG_DLG_INES_NTSC    },
+				{ _T("P&AL"),                   LANG_DLG_INES_PAL     },
+				{ _T("&Dual"),                  LANG_DLG_INES_DUAL    },
+				{ _T("VS PP&U:"),               LANG_DLG_INES_VSPPU   },
+				{ _T("VS &Flags:"),             LANG_DLG_INES_VSFLAGS },
+				{ NULL, LANG_STRING_COUNT }
+			};
+			for (int k = 0; labels[k].orig != NULL; k++)
+				if (_tcscmp(txt, labels[k].orig) == 0)
+					{ SetWindowText(hChild, Lang::GetString(labels[k].id)); break; }
+			hChild = GetWindow(hChild, GW_HWNDNEXT);
+		}
 		for (i = 0; i < 16; i++)
 		{
 			SendDlgItemMessage(hDlg, IDC_INES_PRAM, CB_ADDSTRING, 0, (LPARAM)RAMsizes[i]);
