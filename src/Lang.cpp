@@ -611,7 +611,6 @@ static const KeyMapping KeyMap[] =
     { L"DLG_CTRL_FBKEY",             LANG_DLG_CTRL_FBKEY             },
     { L"DLG_CTRL_TABLET",            LANG_DLG_CTRL_TABLET            },
     { NULL, LANG_STRING_COUNT }
-    { NULL, LANG_STRING_COUNT }
 };
 
 // ============================================================
