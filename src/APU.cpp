@@ -1204,7 +1204,6 @@ INT_PTR	CALLBACK	VolumeConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM l
 	{
 		case WM_INITDIALOG:
 		SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_SOUND));
-		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_OK));
 		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_VOL_CLOSE));
 		// Группы и чекбоксы Mute
 		static const int vol_groups[7] = {IDC_AUDIO_GRP_MASTER, IDC_AUDIO_GRP_SQ0, IDC_AUDIO_GRP_SQ1, IDC_AUDIO_GRP_TRI, IDC_AUDIO_GRP_NOI, IDC_AUDIO_GRP_PCM, IDC_AUDIO_GRP_EXT};
