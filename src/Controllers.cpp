@@ -1436,7 +1436,22 @@ INT_PTR	ParseConfigMessages (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam,
 			for (j = 1; j < NumDevices; j++)
 				SendDlgItemMessage(hDlg, dlgDevices[i], CB_ADDSTRING, 0, (LPARAM)Devices[j].Name);	// add each device
 			SendDlgItemMessage(hDlg, dlgDevices[i], CB_SETCURSEL, Buttons[i] >> 16, 0);	// select the one we want
-			ConfigButton(&Buttons[i], Buttons[i] >> 16, GetDlgItem(hDlg, dlgButtons[i]), FALSE, i >= numButtons);	// and label the corresponding button
+			ConfigButton(&Buttons[i], Buttons[i] >> 16, GetDlgItem(hDlg, dlgButtons[i]), FALSE, i >= numButtons);
+			if (uMsg == WM_INITDIALOG)
+	{
+		for (i = 0; i < numButtons + numAxes; i++)
+		{
+			int j;
+			SendDlgItemMessage(hDlg, dlgDevices[i], CB_RESETCONTENT, 0, 0);
+			SendDlgItemMessage(hDlg, dlgDevices[i], CB_ADDSTRING, 0, i < numButtons ? (LPARAM)Devices[0].Name : (LPARAM)_T("Select a device..."));
+			for (j = 1; j < NumDevices; j++)
+				SendDlgItemMessage(hDlg, dlgDevices[i], CB_ADDSTRING, 0, (LPARAM)Devices[j].Name);
+			SendDlgItemMessage(hDlg, dlgDevices[i], CB_SETCURSEL, Buttons[i] >> 16, 0);
+			ConfigButton(&Buttons[i], Buttons[i] >> 16, GetDlgItem(hDlg, dlgButtons[i]), FALSE, i >= numButtons);
+		}
+		// ← СЮДА добавить:
+		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_OK));
+	}
 		}
 	}
 	if (uMsg != WM_COMMAND)
