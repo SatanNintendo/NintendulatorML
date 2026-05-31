@@ -411,7 +411,7 @@ void	Init (void)
 
 	if (!QueryPerformanceFrequency(&ClockFreq))
 	{
-		MessageBox(hMainWnd, _T("Failed to determine performance counter frequency!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_PERF_COUNTER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		Stop();
 		return;
 	}
@@ -420,13 +420,13 @@ void	Init (void)
 	dDrawInst = LoadLibrary(_T("ddraw.dll"));
 	if (!dDrawInst)
 	{
-		MessageBox(hMainWnd, _T("Fatal error: unable to load DirectDraw DLL!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_DDRAW_DLL), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return;
 	}
 	DirectDrawCreateEx = (LPDIRECTDRAWCREATEEX)GetProcAddress(dDrawInst, "DirectDrawCreateEx");
 	if (!DirectDrawCreateEx)
 	{
-		MessageBox(hMainWnd, _T("Fatal error: unable to locate entry point for DirectDrawCreateEx!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_DDRAW_ENTRY), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		Destroy();
 		return;
 	}
@@ -556,7 +556,7 @@ else
 	// DirectDraw путь
 	if (FAILED(DirectDrawCreateEx(NULL, (LPVOID *)&DirectDraw, IID_IDirectDraw7, NULL)))
 	{
-		MessageBox(hMainWnd, _T("Failed to initialize DirectDraw 7"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_DDRAW7), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return;
 	}
 	if (Fullscreen)
@@ -568,7 +568,7 @@ else
 		if (FAILED(DirectDraw->SetCooperativeLevel(hMainWnd, DDSCL_EXCLUSIVE | DDSCL_FULLSCREEN)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to set fullscreen cooperative level! Returning to Windowed mode..."), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_FULLSCREEN_LEVEL), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			Fullscreen = FALSE;
 			Start();
 			return;
@@ -595,7 +595,7 @@ else
 		else	i = 5;
 		if (!widths_ok[0])
 		{
-			MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_NO_FULLSCREEN_RES), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			Fullscreen = FALSE;
 			Start();
 			return;
@@ -609,7 +609,7 @@ else
 				if (i == 0)
 				{
 					Stop();
-					MessageBox(hMainWnd, _T("No fullscreen resolutions are supported on your display device! Reverting to Windowed mode..."), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+					MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_NO_FULLSCREEN_RES_REVERT), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 					Fullscreen = FALSE;
 					Start();
 					return;
@@ -627,7 +627,7 @@ else
 		if (FAILED(DirectDraw->SetCooperativeLevel(hMainWnd, DDSCL_NORMAL)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to set DirectDraw cooperative level"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_COOP_LEVEL), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 	}
@@ -644,7 +644,7 @@ else
 		if (FAILED(DirectDraw->CreateSurface(&SurfDesc, &PrimarySurf, NULL)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to create primary surface"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_PRIMARY_SURFACE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 
@@ -652,7 +652,7 @@ else
 		if (FAILED(PrimarySurf->GetAttachedSurface(&SurfDesc.ddsCaps, &SecondarySurf)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to get secondary surface"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_SECONDARY_SURFACE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 	}
@@ -664,7 +664,7 @@ else
 		if (FAILED(DirectDraw->CreateSurface(&SurfDesc, &PrimarySurf, NULL)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to create primary surface"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_PRIMARY_SURFACE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 
@@ -684,7 +684,7 @@ else
 		if (FAILED(DirectDraw->CreateSurface(&SurfDesc, &SecondarySurf, NULL)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to create secondary surface"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_CREATE_SECONDARY), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 	}
@@ -694,21 +694,21 @@ else
 		if (FAILED(DirectDraw->CreateClipper(0, &Clipper, NULL)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to create clipper"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_CLIPPER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 
 		if (FAILED(Clipper->SetHWnd(0, hMainWnd)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to set clipper window"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_CLIPPER_WINDOW), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 
 		if (FAILED(PrimarySurf->SetClipper(Clipper)))
 		{
 			Stop();
-			MessageBox(hMainWnd, _T("Failed to assign clipper to primary surface"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_CLIPPER_ASSIGN), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			return;
 		}
 	}
@@ -719,7 +719,7 @@ else
 	if (FAILED(SecondarySurf->GetSurfaceDesc(&SurfDesc)))
 	{
 		Stop();
-		MessageBox(hMainWnd, _T("Failed to retrieve surface description"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_SURF_DESC), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return;
 	}
 
@@ -734,7 +734,7 @@ else
 	case 32:Depth = 32;		break;
 	default:
 		Stop();
-		MessageBox(hMainWnd, _T("Invalid bit depth detected!"), _T("Nintendulator"), MB_OK | MB_ICONERROR);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_BIT_DEPTH), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 		return;			break;
 	}
 
