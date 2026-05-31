@@ -95,6 +95,10 @@ MENU_HELP_ABOUT=&О программе...
 WINDOW_TITLE=Nintendulator
 WINDOW_TITLE_PAUSED=Nintendulator [Пауза]
 WINDOW_TITLE_FPS=Nintendulator - %s - %d FPS
+WINDOW_TITLE_STOPPED=Nintendulator - Остановлен
+WINDOW_TITLE_FPS_NOSKIP=Nintendulator - %i FPS (без пропуска)
+WINDOW_TITLE_FPS_FSKIP=Nintendulator - %i FPS (%i %sпроп.)
+TITLEBAR_AUTO=Авто
 
 # === Диалоги файлов ===
 OPEN_ROM_TITLE=Открыть ROM
