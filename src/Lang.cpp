@@ -315,6 +315,16 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Family Trainer Config"),
     _T("Family Basic Keyboard"),
     _T("Oeka Kids Tablet"),
+// Sound Volume
+    _T("&Master"),
+    _T("SQ&0"),
+    _T("SQ&1"),
+    _T("&TRI"),
+    _T("&NOI"),
+    _T("&PCM"),
+    _T("&EXT"),
+    _T("Mute"),
+    _T("Close"),
    
 };
 
