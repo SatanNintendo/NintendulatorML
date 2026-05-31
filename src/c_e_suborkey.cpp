@@ -7,6 +7,7 @@
 #include "resource.h"
 #include "Movie.h"
 #include "Controllers.h"
+#include "Lang.h"
 
 namespace Controllers
 {
@@ -135,7 +136,7 @@ void	ExpPort_SuborKeyboard::Write (unsigned char Val)
 }
 void	ExpPort_SuborKeyboard::Config (HWND hWnd)
 {
-	MessageBox(hWnd, _T("No configuration necessary!"), _T("Nintendulator"), MB_OK);
+	MessageBox(hWnd, Lang::GetString(LANG_CONT_NO_CONFIG), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 }
 void	ExpPort_SuborKeyboard::SetMasks (void)
 {
