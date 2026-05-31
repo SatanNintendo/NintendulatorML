@@ -194,6 +194,15 @@ ERR_APU_DIRECTSOUND=Не удалось инициализировать DirectS
 ERR_APU_BUFFER=Не удалось создать буфер DirectSound
 ERR_APU_FORMAT=Неподдерживаемый аудиоформат
 MSG_APU_DISABLED=Звук отключён
+DLG_VOL_MASTER=&Общий
+DLG_VOL_SQ0=SQ&0
+DLG_VOL_SQ1=SQ&1
+DLG_VOL_TRI=&TRI
+DLG_VOL_NOI=&NOI
+DLG_VOL_PCM=&PCM
+DLG_VOL_EXT=&EXT
+DLG_VOL_MUTE=Откл
+DLG_VOL_CLOSE=Закрыть
 
 # === Состояния сохранения ===
 MSG_STATE_SAVED=Состояние сохранено в слот %d
