@@ -70,6 +70,9 @@ MENU_PPU_BILINEAR=&Bilinear Filter
 MENU_SOUND_ENABLED=&Enabled
 MENU_SETTINGS_SOUND=&Volume...
 
+# === Sound — volume dialog ===
+DLG_VOL_TITLE=Volume
+
 # === Input submenu ===
 MENU_SETTINGS_CONTROLLERS=&Setup...
 
