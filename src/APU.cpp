@@ -987,7 +987,7 @@ void	SetRegion (void)
 		Frame::CycleTable = FrameCyclesNTSC;
 		break;
 	default:
-		EI.DbgOut(Lang::GetString(LANG_ERR_APU_FORMAT));
+		EI.DbgOut(Lang::GetString(LANG_ERR_APU_REGION));
 		break;
 	}
 #ifndef	NSFPLAYER
