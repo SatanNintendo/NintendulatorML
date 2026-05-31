@@ -259,6 +259,7 @@ INT_PTR CALLBACK	dlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message)
 	{
 	case WM_INITDIALOG:
+		{
 		SetDlgItemText(hDlg, IDC_INES_NAME, filename);
 		SetWindowText(hDlg, Lang::GetString(LANG_DLG_INES_TITLE));
 		SetDlgItemText(hDlg, IDOK,            Lang::GetString(LANG_DLG_OK));
@@ -308,6 +309,7 @@ INT_PTR CALLBACK	dlgProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		UpdateDialog(hDlg);
 		return TRUE;
+		}  // end WM_INITDIALOG
 	case WM_COMMAND:
 		switch (LOWORD(wParam))
 		{
