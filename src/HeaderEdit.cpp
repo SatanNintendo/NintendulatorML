@@ -238,7 +238,7 @@ bool	OpenROM (void)
 	}
 	if ((header[7] & 0x0C) == 0x04)
 	{
-		MessageBox(hMainWnd, _T("Selected ROM appears to have been corrupted by \"DiskDude!\" - cleaning..."), _T("Nintendulator"), MB_OK | MB_ICONWARNING);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_HEADER_DISKDUDE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONWARNING);
 		memset(header+7, 0, 9);
 	}
 	else if (CheckHeader(false) && 
