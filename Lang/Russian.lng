@@ -203,6 +203,30 @@ DLG_VOL_PCM=&PCM
 DLG_VOL_EXT=&EXT
 DLG_VOL_MUTE=Откл
 DLG_VOL_CLOSE=Закрыть
+# === Редактор iNES заголовка ===
+DLG_INES_TITLE=Редактор заголовка iNES
+DLG_INES_FILENAME=Имя файла ROM:
+DLG_INES_VER1=Стандартный &iNES
+DLG_INES_VER2=NES &2.0
+DLG_INES_MAPPER=Номер &маппера:
+DLG_INES_PRG=Банки &PRG ROM:
+DLG_INES_CHR=Банки &CHR ROM:
+DLG_INES_HORIZ=&Горизонтальное зеркалирование
+DLG_INES_VERT=&Вертикальное зеркалирование
+DLG_INES_VS=VS Unisyst&em
+DLG_INES_PC10=Pla&ychoice-10
+DLG_INES_4SCR=&4-экранная VRAM
+DLG_INES_BATT=SRAM с батарейкой
+DLG_INES_TRAIN=&Трейнер
+DLG_INES_SUBMAP=Су&бмаппер:
+DLG_INES_BATTERY=(батарейка)
+DLG_INES_PRGRAM=PR&G RAM:
+DLG_INES_CHRRAM=CH&R RAM:
+DLG_INES_NTSC=&NTSC
+DLG_INES_PAL=P&AL
+DLG_INES_DUAL=&Dual
+DLG_INES_VSPPU=VS PP&U:
+DLG_INES_VSFLAGS=Флаги &VS:
 
 # === Состояния сохранения ===
 MSG_STATE_SAVED=Состояние сохранено в слот %d
