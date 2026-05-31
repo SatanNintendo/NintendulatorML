@@ -19,6 +19,12 @@ MENU_LANGUAGE=&Язык
 MENU_HELP=&Справка
 MSG_APU_STARTED=APU запущен
 ERR_APU_REGION=Неизвестный регион, APU не настроен
+ERR_HEADER_REOPEN=Не удалось повторно открыть файл! Отменить изменения?
+ERR_HEADER_OPEN=Не удалось открыть ROM!
+ERR_HEADER_NOT_INES=Выбранный файл не является образом iNES ROM!
+ERR_HEADER_DISKDUDE=ROM повреждён утилитой "DiskDude!" — выполняется очистка...
+ERR_HEADER_INCONSISTENT=В заголовке ROM обнаружены неизвестные или несовместимые данные. Очистить?
+TITLE_INES_EDITOR=Редактор iNES
 
 # === File подменю ===
 MENU_FILE_OPEN=&Открыть ROM...
