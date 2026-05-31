@@ -17,6 +17,8 @@ MENU_DEBUG=&Отладка
 MENU_MISC=&Разное
 MENU_LANGUAGE=&Язык
 MENU_HELP=&Справка
+MSG_APU_STARTED=APU запущен
+ERR_APU_REGION=Неизвестный регион, APU не настроен
 
 # === File подменю ===
 MENU_FILE_OPEN=&Открыть ROM...
