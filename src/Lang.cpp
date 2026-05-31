@@ -605,7 +605,6 @@ static const KeyMapping KeyMap[] =
     { L"DLG_CTRL_CONFIG",            LANG_DLG_CTRL_CONFIG            },
     { L"DLG_CTRL_CLOSE",             LANG_DLG_CTRL_CLOSE             },
     { L"DLG_CTRL_MORE_BUTTONS",      LANG_DLG_CTRL_MORE_BUTTONS      },
-    { L"DLG_CTRL_MORE_BUTTONS",      LANG_DLG_CTRL_MORE_BUTTONS      },
     { L"DLG_CTRL_FAMTRAIN",          LANG_DLG_CTRL_FAMTRAIN          },
     { L"DLG_CTRL_FBKEY",             LANG_DLG_CTRL_FBKEY             },
     { L"DLG_CTRL_TABLET",            LANG_DLG_CTRL_TABLET            },
