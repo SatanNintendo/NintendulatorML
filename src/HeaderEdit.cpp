@@ -210,7 +210,7 @@ bool	SaveROM (HWND hDlg)
 	FILE *ROM = _tfopen(filename, _T("r+b"));
 	if (ROM == NULL)
 	{
-		int result = MessageBox(hDlg, _T("Unable to reopen file! Discard changes?"), _T("iNES Editor"), MB_YESNO | MB_ICONQUESTION);
+		int result = MessageBox(hDlg, Lang::GetString(LANG_ERR_HEADER_REOPEN), Lang::GetString(LANG_TITLE_INES_EDITOR), MB_YESNO | MB_ICONQUESTION);
 		return (result == IDYES);
 	}
 	// ensure the header is in a consistent state - zero out all unused bits
