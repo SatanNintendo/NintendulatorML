@@ -1099,7 +1099,7 @@ void	Start (void)
 		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
-	EI.DbgOut(_T("APU disabled."));
+	EI.DbgOut(Lang::GetString(LANG_MSG_APU_DISABLED));
 #endif	/* !NSFPLAYER */
 }
 
