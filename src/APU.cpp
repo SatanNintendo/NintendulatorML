@@ -1202,11 +1202,11 @@ INT_PTR	CALLBACK	VolumeConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM l
 
 	switch (uMsg)
 	{
-		case WM_INITDIALOG:
+	case WM_INITDIALOG:
+		{
 		SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_SOUND));
 		SetDlgItemText(hDlg, IDOK, Lang::GetString(LANG_DLG_VOL_CLOSE));
-		// Группы и чекбоксы Mute
-		static const int vol_groups[7] = {IDC_AUDIO_GRP_MASTER, IDC_AUDIO_GRP_SQ0, IDC_AUDIO_GRP_SQ1, IDC_AUDIO_GRP_TRI, IDC_AUDIO_GRP_NOI, IDC_AUDIO_GRP_PCM, IDC_AUDIO_GRP_EXT};
+		// Localize channel labels and Mute checkboxes by matching window text
 		static const LangStringID vol_labels[7] = {LANG_DLG_VOL_MASTER, LANG_DLG_VOL_SQ0, LANG_DLG_VOL_SQ1, LANG_DLG_VOL_TRI, LANG_DLG_VOL_NOI, LANG_DLG_VOL_PCM, LANG_DLG_VOL_EXT};
 		HWND hChild = GetWindow(hDlg, GW_CHILD);
 		while (hChild) {
@@ -1247,6 +1247,7 @@ INT_PTR	CALLBACK	VolumeConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM l
 			}
 		}
 		return TRUE;
+		}  // end WM_INITDIALOG
 	case WM_COMMAND:
 		wmId    = LOWORD(wParam);
 		wmEvent = HIWORD(wParam);
