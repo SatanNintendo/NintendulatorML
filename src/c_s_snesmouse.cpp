@@ -150,6 +150,7 @@ INT_PTR	CALLBACK	StdPort_SnesMouse_ConfigProc (HWND hDlg, UINT uMsg, WPARAM wPar
 	if (uMsg == WM_INITDIALOG)
 	{
 		SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
+		SetWindowText(hDlg, Lang::GetString(LANG_DLG_CTRL_SNESMOUSE));
 		Cont = (StdPort *)lParam;
 	}
 	else	Cont = (StdPort *)GetWindowLongPtr(hDlg, GWLP_USERDATA);
