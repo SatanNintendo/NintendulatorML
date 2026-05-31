@@ -1065,7 +1065,7 @@ void	Start (void)
 	if (FAILED(DirectSound->CreateSoundBuffer(&DSBD, &PrimaryBuffer, NULL)))
 	{
 		Stop();
-		MessageBox(hMainWnd, _T("Sound buffer error!"), _T("Nintendulator"), MB_OK);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_APU_BUFFER), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 		return;
 	}
 
