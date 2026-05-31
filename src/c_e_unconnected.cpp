@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "Nintendulator.h"
 #include "Controllers.h"
+#include "Lang.h"
 
 namespace Controllers
 {
@@ -49,7 +50,7 @@ void	ExpPort_Unconnected::Write (unsigned char Val)
 }
 void	ExpPort_Unconnected::Config (HWND hWnd)
 {
-	MessageBox(hWnd, _T("No configuration necessary!"), _T("Nintendulator"), MB_OK);
+	MessageBox(hWnd, Lang::GetString(LANG_CONT_NO_CONFIG), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK);
 }
 void	ExpPort_Unconnected::SetMasks (void)
 {
