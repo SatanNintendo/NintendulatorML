@@ -1221,7 +1221,7 @@ void	Repaint (void)
 		if (SUCCEEDED(PrimarySurf->Flip(NULL, DDFLIP_WAIT)))
 			return;
 		Stop();
-		MessageBox(hMainWnd, _T("Failed to flip to primary surface! Reverting to Windowed mode..."), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONWARNING);
+		MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_FLIP), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONWARNING);
 		Fullscreen = FALSE;
 		Start();
 	}
@@ -1831,7 +1831,7 @@ void	GenerateRGB (int pal, BOOL compat)
 		LoadStaticPalette(Palette_VS_0003);
 	else if (pal == PALETTE_VS4)
 		LoadStaticPalette(Palette_VS_0004);
-	else	MessageBox(hMainWnd, _T("Illegal palette selected!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+	else	MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_ILLEGAL_PALETTE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 }
 
 BOOL	ImportPalette (const TCHAR *filename, BOOL load)
@@ -1905,7 +1905,7 @@ void	LoadPalette (PALETTE PalNum)
 	{
 		if (!ImportPalette(NULL, TRUE))
 		{
-			MessageBox(hMainWnd, _T("Unable to load the specified palette! Reverting to default!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+			MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_LOAD_PALETTE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			LoadPalette(DefaultPalette[NES::CurRegion]);
 			return;
 		}
@@ -2021,7 +2021,7 @@ INT_PTR	CALLBACK	PaletteConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM 
 		{
 			if (!ImportPalette(extfn, TRUE))
 			{
-				MessageBox(hMainWnd, _T("Unable to load the specified palette! Reverting to default!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+				MessageBox(hMainWnd, Lang::GetString(LANG_ERR_GFX_LOAD_PALETTE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 				pal = DefaultPalette[NES::CurRegion];
 			}
 		}
@@ -2129,7 +2129,7 @@ INT_PTR	CALLBACK	PaletteConfigProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM 
 					SetDlgItemText(hDlg, IDC_PAL_EXTFILE, extfn);
 					UpdatePalette(hDlg, pal);
 				}
-				else	MessageBox(hDlg, _T("Selected file is not a valid palette!"), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
+				else	MessageBox(hDlg, Lang::GetString(LANG_ERR_GFX_INVALID_PALETTE), Lang::GetString(LANG_DLG_NINTENDULATOR), MB_OK | MB_ICONERROR);
 			}
 			return TRUE;
 		case IDC_PAL_ER:
