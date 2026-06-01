@@ -161,6 +161,7 @@ DLG_CTRL_PORT3=Порт &3:
 DLG_CTRL_PORT4=Порт &4:
 DLG_CTRL_CONFIG=&Настроить
 DLG_CTRL_CLOSE=Закрыть
+DLG_CTRL_TITLE=Контроллеры
 DLG_CTRL_MORE_BUTTONS=Дополнительные кнопки
 DLG_CTRL_FAMTRAIN=Настройка Family Trainer
 DLG_CTRL_FBKEY=Клавиатура Family Basic
