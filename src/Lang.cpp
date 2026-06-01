@@ -704,6 +704,23 @@ static const KeyMapping KeyMap[] =
     { L"DLG_INES_DUAL",              LANG_DLG_INES_DUAL              },
     { L"DLG_INES_VSPPU",             LANG_DLG_INES_VSPPU             },
     { L"DLG_INES_VSFLAGS",           LANG_DLG_INES_VSFLAGS           },
+    { L"DLG_MOVIE_PLAY_TITLE",        LANG_DLG_MOVIE_PLAY_TITLE        },
+    { L"DLG_MOVIE_RECORD_TITLE",      LANG_DLG_MOVIE_RECORD_TITLE      },
+    { L"DLG_MOVIE_FILE",              LANG_DLG_MOVIE_FILE              },
+    { L"DLG_MOVIE_DESC",              LANG_DLG_MOVIE_DESC              },
+    { L"DLG_MOVIE_LENGTH",            LANG_DLG_MOVIE_LENGTH            },
+    { L"DLG_MOVIE_FRAMES",            LANG_DLG_MOVIE_FRAMES            },
+    { L"DLG_MOVIE_RERECORDS",         LANG_DLG_MOVIE_RERECORDS         },
+    { L"DLG_MOVIE_TVMODE",            LANG_DLG_MOVIE_TVMODE            },
+    { L"DLG_MOVIE_RESUME",            LANG_DLG_MOVIE_RESUME            },
+    { L"DLG_MOVIE_CONTROLLERS",       LANG_DLG_MOVIE_CONTROLLERS       },
+    { L"DLG_MOVIE_PORT1",             LANG_DLG_MOVIE_PORT1             },
+    { L"DLG_MOVIE_PORT2",             LANG_DLG_MOVIE_PORT2             },
+    { L"DLG_MOVIE_EXPANSION",         LANG_DLG_MOVIE_EXPANSION         },
+    { L"DLG_MOVIE_CONFIGURE",         LANG_DLG_MOVIE_CONFIGURE         },
+    { L"DLG_MOVIE_RECORD_FROM",       LANG_DLG_MOVIE_RECORD_FROM       },
+    { L"DLG_MOVIE_HARD_RESET",        LANG_DLG_MOVIE_HARD_RESET        },
+    { L"DLG_MOVIE_CUR_STATE",         LANG_DLG_MOVIE_CUR_STATE         },
     { NULL, LANG_STRING_COUNT }
 };
 
