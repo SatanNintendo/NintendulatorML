@@ -355,6 +355,24 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("&EXT"),
     _T("Mute"),
     _T("Close"),
+    // Movie dialogs
+    _T("Play Movie"),
+    _T("Record Movie"),
+    _T("&Movie File:"),
+    _T("&Description:"),
+    _T("Length:"),
+    _T("Frames:"),
+    _T("Rerecords:"),
+    _T("TV Mode:"),
+    _T("&Resume recording on savestate load"),
+    _T("Controllers"),
+    _T("Port 1:"),
+    _T("Port 2:"),
+    _T("Expansion:"),
+    _T("&Configure..."),
+    _T("Record from..."),
+    _T("&Hard Reset"),
+    _T("Current &State"),
    
 };
 
