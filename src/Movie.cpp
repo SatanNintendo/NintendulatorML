@@ -67,6 +67,31 @@ INT_PTR	CALLBACK	MoviePlayProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPar
 	switch (uMsg)
 	{
 	case WM_INITDIALOG:
+		SetWindowText(hDlg, Lang::GetString(LANG_DLG_MOVIE_PLAY_TITLE));
+		SetDlgItemText(hDlg, IDOK,                Lang::GetString(LANG_DLG_OK));
+		SetDlgItemText(hDlg, IDCANCEL,            Lang::GetString(LANG_DLG_CANCEL));
+		SetDlgItemText(hDlg, IDC_MOVIE_PLAY_BROWSE,  Lang::GetString(LANG_DLG_BROWSE));
+		SetDlgItemText(hDlg, IDC_MOVIE_PLAY_RESUME,  Lang::GetString(LANG_DLG_MOVIE_RESUME));
+		{
+			HWND hChild = GetWindow(hDlg, GW_CHILD);
+			while (hChild) {
+				TCHAR txt[64] = {0};
+				GetWindowText(hChild, txt, 64);
+				struct { const TCHAR *orig; LangStringID id; } labels[] = {
+					{ _T("&Movie File:"),  LANG_DLG_MOVIE_FILE      },
+					{ _T("&Description:"), LANG_DLG_MOVIE_DESC      },
+					{ _T("Length:"),       LANG_DLG_MOVIE_LENGTH    },
+					{ _T("Frames:"),       LANG_DLG_MOVIE_FRAMES    },
+					{ _T("Rerecords:"),    LANG_DLG_MOVIE_RERECORDS },
+					{ _T("TV Mode:"),      LANG_DLG_MOVIE_TVMODE    },
+					{ NULL, LANG_STRING_COUNT }
+				};
+				for (int k = 0; labels[k].orig != NULL; k++)
+					if (_tcscmp(txt, labels[k].orig) == 0)
+						{ SetWindowText(hChild, Lang::GetString(labels[k].id)); break; }
+				hChild = GetWindow(hChild, GW_HWNDNEXT);
+			}
+		}
 		return TRUE;
 	case WM_COMMAND:
 		wmId    = LOWORD(wParam); 
