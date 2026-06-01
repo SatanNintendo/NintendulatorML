@@ -166,7 +166,7 @@ INT_PTR	CALLBACK	ControllerProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPa
 	switch (uMsg)
 	{
 		case WM_INITDIALOG:
-		SetWindowText(hDlg, Lang::GetString(LANG_MENU_SETTINGS_CONTROLLERS));
+		SetWindowText(hDlg, Lang::GetString(LANG_DLG_CTRL_TITLE));
 		SetDlgItemText(hDlg, IDOK,               Lang::GetString(LANG_DLG_OK));
 		SetDlgItemText(hDlg, IDC_CONT_LABEL_PORT1,  Lang::GetString(LANG_CONT_LABEL_PORT1));
 		SetDlgItemText(hDlg, IDC_CONT_LABEL_PORT2,  Lang::GetString(LANG_CONT_LABEL_PORT2));
