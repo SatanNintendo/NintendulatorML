@@ -316,6 +316,7 @@ static const TCHAR *DefaultStrings[LANG_STRING_COUNT] =
     _T("Port &4:"),
     _T("&Config"),
     _T("Close"),
+    _T("Controllers"),
 // iNES Header Editor
     _T("iNES Header Editor"),
     _T("ROM Filename:"),
@@ -648,6 +649,7 @@ static const KeyMapping KeyMap[] =
     { L"DLG_CTRL_PORT4",             LANG_DLG_CTRL_PORT4             },
     { L"DLG_CTRL_CONFIG",            LANG_DLG_CTRL_CONFIG            },
     { L"DLG_CTRL_CLOSE",             LANG_DLG_CTRL_CLOSE             },
+    { L"DLG_CTRL_TITLE",             LANG_DLG_CTRL_TITLE             },
     { L"DLG_CTRL_MORE_BUTTONS",      LANG_DLG_CTRL_MORE_BUTTONS      },
     { L"DLG_CTRL_FAMTRAIN",          LANG_DLG_CTRL_FAMTRAIN          },
     { L"DLG_CTRL_FBKEY",             LANG_DLG_CTRL_FBKEY             },
