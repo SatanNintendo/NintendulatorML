@@ -408,6 +408,34 @@ INT_PTR	CALLBACK	MovieRecordProc (HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lP
 	switch (uMsg)
 	{
 	case WM_INITDIALOG:
+		SetWindowText(hDlg, Lang::GetString(LANG_DLG_MOVIE_RECORD_TITLE));
+		SetDlgItemText(hDlg, IDOK,                       Lang::GetString(LANG_DLG_OK));
+		SetDlgItemText(hDlg, IDCANCEL,                   Lang::GetString(LANG_DLG_CANCEL));
+		SetDlgItemText(hDlg, IDC_MOVIE_RECORD_BROWSE,    Lang::GetString(LANG_DLG_BROWSE));
+		SetDlgItemText(hDlg, IDC_MOVIE_RECORD_CONT_CONFIG, Lang::GetString(LANG_DLG_MOVIE_CONFIGURE));
+		{
+			HWND hChild = GetWindow(hDlg, GW_CHILD);
+			while (hChild) {
+				TCHAR txt[64] = {0};
+				GetWindowText(hChild, txt, 64);
+				struct { const TCHAR *orig; LangStringID id; } labels[] = {
+					{ _T("&Movie File:"),    LANG_DLG_MOVIE_FILE         },
+					{ _T("&Description:"),  LANG_DLG_MOVIE_DESC         },
+					{ _T("Controllers"),    LANG_DLG_MOVIE_CONTROLLERS   },
+					{ _T("Port 1:"),        LANG_DLG_MOVIE_PORT1         },
+					{ _T("Port 2:"),        LANG_DLG_MOVIE_PORT2         },
+					{ _T("Expansion:"),     LANG_DLG_MOVIE_EXPANSION     },
+					{ _T("Record from..."), LANG_DLG_MOVIE_RECORD_FROM   },
+					{ _T("&Hard Reset"),    LANG_DLG_MOVIE_HARD_RESET    },
+					{ _T("Current &State"), LANG_DLG_MOVIE_CUR_STATE     },
+					{ NULL, LANG_STRING_COUNT }
+				};
+				for (int k = 0; labels[k].orig != NULL; k++)
+					if (_tcscmp(txt, labels[k].orig) == 0)
+						{ SetWindowText(hChild, Lang::GetString(labels[k].id)); break; }
+				hChild = GetWindow(hChild, GW_HWNDNEXT);
+			}
+		}
 		SetDlgItemText(hDlg, IDC_MOVIE_RECORD_CONT_PORT1, Controllers::StdPort_Mappings[Controllers::Port1->Type]);
 		if (Controllers::Port1->Type == Controllers::STD_FOURSCORE)
 		{
