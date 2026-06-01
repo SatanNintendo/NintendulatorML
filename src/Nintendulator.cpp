@@ -134,6 +134,7 @@ int APIENTRY _tWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpC
 	Lang::Init(hInstance);
 	BuildLanguageMenu(GetMenu(hMainWnd));
 	Lang::UpdateMenu(GetMenu(hMainWnd));
+	UpdateTitlebar();
 
 	timeBeginPeriod(1);
 
