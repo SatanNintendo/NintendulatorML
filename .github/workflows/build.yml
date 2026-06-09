@@ -1,56 +1,154 @@
-name: Build NintendulatorML for Win7
+name: Build Nintendulator Extended
 
 on:
   workflow_dispatch:
+    inputs:
+      configuration:
+        description: 'Build configuration'
+        required: true
+        default: 'Release'
+        type: choice
+        options:
+          - Release
+          - Debug
+          - Both
+      platforms:
+        description: 'Target platforms'
+        required: true
+        default: 'Both'
+        type: choice
+        options:
+          - Win32
+          - x64
+          - Both
 
 jobs:
-  build:
-    runs-on: windows-2022
+  # ─── Resolve matrix from inputs ────────────────────────────────────────────
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+    steps:
+      - name: Build job matrix
+        id: build-matrix
+        run: |
+          CONFIGS=()
+          PLATS=()
 
+          case "${{ inputs.configuration }}" in
+            Both)  CONFIGS=(Release Debug) ;;
+            *)     CONFIGS=("${{ inputs.configuration }}") ;;
+          esac
+
+          case "${{ inputs.platforms }}" in
+            Both)  PLATS=(Win32 x64) ;;
+            *)     PLATS=("${{ inputs.platforms }}") ;;
+          esac
+
+          MATRIX='{"include":['
+          FIRST=true
+          for cfg in "${CONFIGS[@]}"; do
+            for plt in "${PLATS[@]}"; do
+              $FIRST || MATRIX+=','
+              MATRIX+="{\"configuration\":\"$cfg\",\"platform\":\"$plt\"}"
+              FIRST=false
+            done
+          done
+          MATRIX+=']}'
+
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+
+  # ─── Main build job ─────────────────────────────────────────────────────────
+  build:
+    needs: setup
+    runs-on: windows-2022
     strategy:
-      matrix:
-        platform: [Win32, x64]
+      fail-fast: false
+      matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
+
+    name: ${{ matrix.configuration }} | ${{ matrix.platform }}
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      # ── 1. Checkout ──────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1        # shallow clone – we don't need full history
 
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v2
+      # ── 2. Restore MSBuild / compiler cache ──────────────────────────────────
+      - name: Cache compiler intermediates
+        uses: actions/cache@v4
+        with:
+          path: |
+            msvc140/${{ matrix.platform }}/Release
+            msvc140/${{ matrix.platform }}/Debug
+          # Key changes when any source file, project file, or header changes.
+          # Using hashFiles on specific paths is faster than hashing the whole tree.
+          key: obj-${{ matrix.platform }}-${{ matrix.configuration }}-${{ hashFiles('src/**', 'msvc140/**') }}
+          restore-keys: |
+            obj-${{ matrix.platform }}-${{ matrix.configuration }}-
 
-    - name: Force Win7 compatible build
-      run: |
-        $proj = "msvc140/Nintendulator.vcxproj"
-        
-        # Меняем toolset на v143
-        (Get-Content $proj) -replace 'v140', 'v143' | Set-Content $proj
-        
-        # Ставим SDK
-        (Get-Content $proj) -replace '10\.0\.\d+', '10.0.22621.0' | Set-Content $proj
-        
-        # Важно: Static Runtime (/MT) + Win7 compatibility
-        (Get-Content $proj) -replace '<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>', '<RuntimeLibrary>MultiThreaded</RuntimeLibrary>' | Set-Content $proj
-        (Get-Content $proj) -replace '<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>', '<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>' | Set-Content $proj
+      # ── 3. Setup MSBuild ─────────────────────────────────────────────────────
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
 
-        Write-Host "Project configured for Windows 7 compatibility"
+      # ── 4. Build ─────────────────────────────────────────────────────────────
+      - name: Build ${{ matrix.configuration }} | ${{ matrix.platform }}
+        run: |
+          msbuild msvc140/Nintendulator.vcxproj `
+            /t:Rebuild `
+            /p:Configuration=${{ matrix.configuration }} `
+            /p:Platform=${{ matrix.platform }} `
+            /p:PlatformToolset=v143 `
+            /p:WindowsTargetPlatformVersion=10.0.22621.0 `
+            /p:MultiProcessorCompilation=true `
+            /p:CL_MPCount=$env:NUMBER_OF_PROCESSORS `
+            /maxcpucount `
+            /nodeReuse:false `
+            /verbosity:minimal `
+            /nologo
 
-    - name: Build
-      run: |
-        msbuild msvc140/Nintendulator.vcxproj /t:Rebuild `
-          /p:Configuration=Release `
-          /p:Platform=${{ matrix.platform }} `
-          /p:PlatformToolset=v143 `
-          /p:WindowsTargetPlatformVersion=10.0.22621.0
+      # ── 5. Stage artifact ────────────────────────────────────────────────────
+      - name: Stage artifact
+        shell: pwsh
+        run: |
+          $dest = "release"
+          New-Item -ItemType Directory -Force -Path $dest | Out-Null
 
-    - name: Prepare release
-      run: |
-        New-Item -ItemType Directory -Force -Path release
-        Copy-Item "msvc140/${{ matrix.platform }}/Release/*.exe" release/ -Force
-        Get-ChildItem -Recurse *.dll | Copy-Item -Destination release/ -Force
-        Copy-Item Lang release/Lang -Recurse -Force
+          $outDir = "msvc140/${{ matrix.platform }}/${{ matrix.configuration }}"
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: NintendulatorML-${{ matrix.platform }}
-        path: release
+          # Main executable
+          Copy-Item "$outDir/Nintendulator.exe" $dest -Force
+
+          # Any DLLs (mapper plugins etc.)
+          Get-ChildItem -Path $outDir -Filter "*.dll" -Recurse -ErrorAction SilentlyContinue |
+            Copy-Item -Destination $dest -Force
+
+          # Runtime assets
+          Copy-Item Lang    $dest/Lang    -Recurse -Force
+          Copy-Item doc/readme.txt $dest -Force
+          Copy-Item doc/COPYING    $dest -Force
+
+      # ── 6. Upload artifact ───────────────────────────────────────────────────
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Nintendulator-Extended-${{ matrix.platform }}-${{ matrix.configuration }}
+          path: release
+          retention-days: 30
+          # Compress everything – EXE + DLLs benefit from zip even at speed level
+          compression-level: 9
+
+  # ─── Optional summary job ───────────────────────────────────────────────────
+  summary:
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write build summary
+        run: |
+          echo "## Build results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | ${{ needs.build.result }} |" >> $GITHUB_STEP_SUMMARY
