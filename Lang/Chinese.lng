@@ -1,0 +1,502 @@
+# NintendulatorML Language File - Chinese (Simplified)
+# Format: KEY=Value  |  # = comment  |  \n = newline in value
+
+[Info]
+Language=简体中文 / Chinese (Simplified)
+Author=Community
+Version=1.0
+
+[Strings]
+
+
+# === 主菜单 — 顶层 ===
+MENU_FILE=&文件
+MENU_CPU=&CPU
+MENU_PPU=&PPU
+MENU_SOUND=&声音
+MENU_INPUT=&输入
+MENU_DEBUG=&调试
+MENU_MISC=&其他
+MENU_LANGUAGE=&语言
+MENU_HELP=&帮助
+
+# === 文件子菜单 ===
+MENU_FILE_OPEN=&打开 ROM...
+MENU_FILE_CLOSE=&关闭
+MENU_FILE_RECENT=最近的 &文件
+MENU_FILE_RECENT_CLEAR=&清除最近的文件
+MENU_FILE_HEADER=编辑 iNES &头
+MENU_FILE_AUTORUN=&自动运行
+MENU_FILE_BROWSESAVES=&浏览存档文件
+MENU_FILE_EXIT=退&出
+
+# === CPU 子菜单 ===
+MENU_NES_RUN=&运行\tF2
+MENU_NES_PAUSE=&单步\tShift+F2
+MENU_NES_STOP=&停止\tF3
+MENU_NES_RESET=&软复位\tF4
+MENU_NES_POWER=&硬复位\tShift+F4
+MENU_CPU_SAVESTATE=&保存状态\tF5
+MENU_CPU_LOADSTATE=&加载状态\tF8
+MENU_CPU_PREVSTATE=&上一个状态\tF6
+MENU_CPU_NEXTSTATE=&下一个状态\tF7
+MENU_SETTINGS_GAMEGENIE=&Game Genie\tCtrl+G
+MENU_CPU_BADOPS=&记录无效操作码
+MENU_CPU_FRAMESTEP=&帧跳过
+MENU_CPU_FRAMESTEP_ENABLED=&启用\tCtrl+F
+MENU_CPU_FRAMESTEP_STEP=&单步\t空格
+
+# === PPU 子菜单 ===
+MENU_PPU_FRAMESKIP=&帧跳过
+MENU_PPU_FRAMESKIP_AUTO=&自动
+MENU_PPU_SIZE=&大小
+MENU_PPU_FIXASPECT=&修正宽高比
+MENU_PPU_MODE=&模式
+MENU_PPU_MODE_HYBRID=&混合
+MENU_PPU_PALETTE=&调色板...
+MENU_PPU_SLOWDOWN=&减速
+MENU_PPU_SLOWDOWN_ENABLED=&启用\tTab
+MENU_PPU_FULLSCREEN=&全屏\tAlt+Enter / F11
+MENU_PPU_SCANLINES=&扫描线
+MENU_PPU_BILINEAR=&双线性滤镜\tCtrl+B
+MENU_PPU_INTSCALE=&整数缩放
+MENU_PPU_MATCHRATE=&匹配显示器刷新率
+MENU_PPU_ALWAYSONTOP=&总是置顶
+MENU_PPU_EXCLUSIVEFS=&独占全屏
+MENU_GAME=&游戏
+
+# === PPU 子菜单 — 主题 ===
+MENU_PPU_THEME=&主题
+MENU_PPU_THEME_LIGHT=&浅色
+MENU_PPU_THEME_DARK=&深色
+
+# === 声音子菜单 ===
+MENU_SOUND_ENABLED=&启用\tCtrl+S
+MENU_SETTINGS_SOUND=&音量...
+
+# === 输入子菜单 ===
+MENU_SETTINGS_CONTROLLERS=&设置...
+
+# === 调试子菜单 ===
+MENU_DEBUG_CPU=反&汇编\tCtrl+F1
+MENU_DEBUG_PPU=&视频\tCtrl+F2
+MENU_DEBUG_STATWND=&状态窗口
+
+# === 其他子菜单 ===
+MENU_MISC_STARTAVI=&开始 AVI 录制...
+MENU_MISC_STOPAVI=&停止 AVI 录制
+MENU_MOVIE_PLAY=&播放影片...
+MENU_MOVIE_RECORD=&录制影片...
+MENU_MOVIE_STOP=&停止影片
+
+# === 帮助子菜单 ===
+MENU_HELP_ABOUT=&关于...
+
+# === 窗口标题 ===
+WINDOW_TITLE=Nintendulator
+WINDOW_TITLE_PAUSED=Nintendulator [已暂停]
+WINDOW_TITLE_FPS=Nintendulator - %s - %d FPS
+WINDOW_TITLE_STOPPED=Nintendulator - 已停止
+WINDOW_TITLE_FPS_NOSKIP=Nintendulator - %i FPS (无帧跳过)
+WINDOW_TITLE_FPS_FSKIP=Nintendulator - %i FPS (%i %s帧跳过)
+TITLEBAR_AUTO=自动
+
+# === 通用对话框 ===
+DLG_OK=确定
+DLG_CANCEL=取消
+DLG_YES=是
+DLG_NO=否
+DLG_APPLY=应用
+DLG_BROWSE=浏览...
+DLG_NINTENDULATOR=Nintendulator
+
+# === 文件对话框 ===
+OPEN_ROM_TITLE=打开 ROM
+OPEN_ROM_FILTER=NES ROM (*.nes;*.unif;*.fds;*.nsf)\0*.nes;*.unif;*.fds;*.nsf\0所有文件 (*.*)\0*.*\0
+OPEN_MOVIE_TITLE=打开影片
+SAVE_MOVIE_TITLE=保存影片
+OPEN_PALETTE_TITLE=打开调色板
+SAVE_AVI_TITLE=保存 AVI
+
+# === 文件对话框过滤器显示名称 ===
+FILTER_ROM_ALL=所有支持的文件 (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)
+FILTER_ROM_INES=iNES ROM 映像 (*.NES)
+FILTER_ROM_UNIF=通用 NES 交换格式 ROM 文件 (*.UNIF, *.UNF)
+FILTER_ROM_FDS=Famicom 磁盘系统磁盘映像 (*.FDS)
+FILTER_ROM_NSF=NES 声音文件 (*.NSF)
+FILTER_ROM_INES_SHORT=iNES ROM 映像 (*.NES)
+FILTER_MOVIE=Nintendulator 影片 (*.NMV)
+FILTER_AVI=AVI 文件 (*.AVI)
+FILTER_PALETTE=调色板文件 (*.PAL)
+OPEN_HEADER_TITLE=编辑头
+
+# === 控制器 — 设备列表 ===
+CONT_UNCONNECTED=未连接
+CONT_STDCONTROLLER=标准控制器
+CONT_ZAPPER=Zapper 光枪
+CONT_ARKANOIDPADDLE=Arkanoid 球拍
+CONT_POWERPAD=力量垫
+CONT_FOURSCORE1=四分线 (仅端口 1)
+CONT_SNESCONTROLLER=SNES 控制器
+CONT_VSZAPPER=VS 系统光枪
+CONT_SNESMOUSE=SNES 鼠标
+CONT_FOURSCORE2=四分线 (仅端口 2)
+CONT_FAMI4PLAY=Famicom 4 玩家适配器
+CONT_EXP_ARKANOIDPADDLE=Famicom Arkanoid 球拍
+CONT_FAMILYBASICKEYBOARD=Family Basic 键盘
+CONT_SUBORKEYBOARD=Subor 键盘
+CONT_FAMTRAINER=家庭训练器
+CONT_TABLET=Oeka Kids 平板
+
+# === 控制器 — 主对话框 ===
+CONT_LABEL_PORT1=控制器端口 &1:
+CONT_LABEL_PORT2=控制器端口 &2:
+CONT_LABEL_EXP=&扩展端口:
+CONT_CONFIG=&配置
+CONT_UDLR=&允许同时按下左+右和上+下
+CONT_POV=将 &POV 触发器配置为 8 向按钮
+
+# === 控制器 — 配置对话框 ===
+DLG_CTRL_STDCONT=标准控制器配置
+DLG_CTRL_BUTTONS=按钮
+DLG_CTRL_DPAD=方向键
+DLG_CTRL_A=&A
+DLG_CTRL_B=&B
+DLG_CTRL_SELECT=&选择
+DLG_CTRL_START=&开始
+DLG_CTRL_UP=&上
+DLG_CTRL_DOWN=&下
+DLG_CTRL_LEFT=&左
+DLG_CTRL_RIGHT=&右
+DLG_CTRL_TRIGGER=&扳机
+DLG_CTRL_AXIS=&轴
+DLG_CTRL_ZAPPER=Zapper 光枪配置
+DLG_CTRL_ARKPAD=Arkanoid 球拍配置
+DLG_CTRL_POWERPAD=力量垫配置
+DLG_CTRL_FOURSCORE=四分线配置
+DLG_CTRL_FAMI4PLAY=Famicom 4 玩家适配器
+DLG_CTRL_SNESCONT=SNES 控制器配置
+DLG_CTRL_SNESMOUSE=SNES 鼠标配置
+DLG_CTRL_VSZAPPER=VS Zapper 光枪配置
+DLG_CTRL_FLIP=&翻转
+DLG_CTRL_PORT1=端口 &1:
+DLG_CTRL_PORT2=端口 &2:
+DLG_CTRL_PORT3=端口 &3:
+DLG_CTRL_PORT4=端口 &4:
+DLG_CTRL_CONFIG=&配置
+DLG_CTRL_CLOSE=关闭
+DLG_CTRL_TITLE=控制器
+DLG_CTRL_MORE_BUTTONS=更多按钮
+DLG_CTRL_FAMTRAIN=家庭训练器配置
+DLG_CTRL_FBKEY=Family Basic 键盘
+DLG_CTRL_TABLET=Oeka Kids 平板
+
+# === 控制器错误 ===
+ERR_CTRL_KEYBOARD_INIT=无法初始化键盘输入设备!
+ERR_CTRL_KEYBOARD_FORMAT=无法设置键盘输入数据格式!
+ERR_CTRL_KEYBOARD_LEVEL=无法设置键盘输入协作级别!
+ERR_CTRL_MOUSE_INIT=无法初始化鼠标输入设备!
+ERR_CTRL_MOUSE_LEVEL=无法设置鼠标输入协作级别!
+ERR_CTRL_JOY_LEVEL=无法恢复摇杆输入协作级别!
+ERR_CTRL_INVALID_STD=错误: 为标准端口选择了无效的控制器类型!
+ERR_CTRL_INVALID_EXP=错误: 为扩展端口选择了无效的控制器类型!
+CONT_NO_CONFIG=无需配置!
+CONT_ERR_DIRECTINPUT=无法初始化 DirectInput!
+CONT_ERR_KEYBOARD=键盘初始化失败!
+CONT_ERR_MOUSE=鼠标初始化失败!
+CONT_ERR_JOYSTICK=摇杆初始化失败!
+CONT_ERR_KEY_ID=错误 - 遇到无效的键盘键 ID!
+CONT_ERR_MOUSE_ID=错误 - 遇到无效的鼠标按钮 ID!
+ERR_CTRL_DINPUT_LEVEL=无法修改设备输入协作级别!
+ERR_CTRL_DEVICE_LEVEL=无法初始化 DirectInput!
+ERR_CTRL_DEVICE_RESTORE=无法恢复设备输入协作级别!
+
+# === 声音 — 音量对话框 ===
+DLG_VOL_TITLE=音量
+DLG_VOL_MASTER=&主音量
+DLG_VOL_SQ0=SQ&0
+DLG_VOL_SQ1=SQ&1
+DLG_VOL_TRI=&TRI
+DLG_VOL_NOI=&NOI
+DLG_VOL_PCM=&PCM
+DLG_VOL_EXT=&EXT
+DLG_VOL_MUTE=静音
+DLG_VOL_CLOSE=关闭
+
+# === iNES 头编辑器对话框 ===
+DLG_INES_TITLE=iNES 头编辑器
+DLG_INES_FILENAME=ROM 文件名:
+DLG_INES_VER1=标准 &iNES
+DLG_INES_VER2=NES &2.0
+DLG_INES_MAPPER=&映射器编号:
+DLG_INES_PRG=&PRG ROM 区:
+DLG_INES_CHR=&CHR ROM 区:
+DLG_INES_HORIZ=&水平镜像
+DLG_INES_VERT=&垂直镜像
+DLG_INES_VS=&VS 系统
+DLG_INES_PC10=Pla&ychoice-10
+DLG_INES_4SCR=&4 屏幕 VRAM
+DLG_INES_BATT=电池备份 &SRAM
+DLG_INES_TRAIN=&训练器
+DLG_INES_SUBMAP=&子映射器:
+DLG_INES_BATTERY=(电池)
+DLG_INES_PRGRAM=PR&G RAM:
+DLG_INES_CHRRAM=CH&R RAM:
+DLG_INES_NTSC=&NTSC
+DLG_INES_PAL=P&AL
+DLG_INES_DUAL=&双制式
+DLG_INES_VSPPU=VS PP&U:
+DLG_INES_VSFLAGS=VS &标志:
+TITLE_INES_EDITOR=iNES 编辑器
+
+# === 影片对话框 ===
+DLG_MOVIE_PLAY_TITLE=播放影片
+DLG_MOVIE_RECORD_TITLE=录制影片
+DLG_MOVIE_FILE=&影片文件:
+DLG_MOVIE_DESC=&描述:
+DLG_MOVIE_LENGTH=长度:
+DLG_MOVIE_FRAMES=帧数:
+DLG_MOVIE_RERECORDS=重录次数:
+DLG_MOVIE_TVMODE=电视模式:
+DLG_MOVIE_RESUME=&加载存档时继续录制
+DLG_MOVIE_CONTROLLERS=控制器
+DLG_MOVIE_PORT1=端口 1:
+DLG_MOVIE_PORT2=端口 2:
+DLG_MOVIE_EXPANSION=扩展:
+DLG_MOVIE_CONFIGURE=&配置...
+DLG_MOVIE_RECORD_FROM=从...录制
+DLG_MOVIE_HARD_RESET=&硬复位
+DLG_MOVIE_CUR_STATE=当前 &状态
+
+# === 调色板对话框 ===
+DLG_PAL_TITLE=调色板配置
+DLG_PAL_PALETTE=调色板
+DLG_PAL_HUE=&色相:
+DLG_PAL_SAT=&饱和度:
+DLG_PAL_CUSTOM=&自定义...
+DLG_PAL_PREVIEW=预览
+DLG_PAL_EMPHASIS=强调:
+DLG_PAL_NOTE=注意: PAL/Dendy 的红色和绿色强调已交换
+DLG_PAL_EXTRAGRAY=&额外灰度(兼容性)
+
+# === DLL 选择对话框 ===
+DLG_DLL_TITLE=选择映射器 DLL
+DLG_DLL_TEXT=此 ROM 支持多个映射器 DLL。\n请选择您要使用的那个。
+
+# === 断点对话框 ===
+DLG_BREAK_TITLE=添加/编辑断点
+DLG_BREAK_ENABLED=&启用断点
+DLG_BREAK_ADDR=地址
+DLG_BREAK_OP=操作
+DLG_BREAK_TIME=时间
+DLG_BREAK_EXEC=&执行
+DLG_BREAK_READ=&读取
+DLG_BREAK_WRITE=&写入
+DLG_BREAK_ACCESS=&访问
+DLG_BREAK_OPCODE=&操作码
+DLG_BREAK_NMI=&NMI
+DLG_BREAK_IRQ=&IRQ
+DLG_BREAK_BRK=&BRK
+DLG_BREAK_SCANLINE=&扫描线
+DLG_BREAK_FROM=&从
+DLG_BREAK_TO=&到
+
+# === 调试信息窗口 ===
+DLG_DEBUG_TITLE=调试信息
+
+# === 调试器 CPU ===
+DLG_DBGCPU_TITLE=调试器
+DLG_DBGCPU_REGISTERS=寄存器
+DLG_DBGCPU_TIMING=时序
+DLG_DBGCPU_IRQS=IRQ
+DLG_DBGCPU_FLAGS=标志
+DLG_DBGCPU_BANKS=区
+DLG_DBGCPU_BREAKPOINTS=断点
+DLG_DBGCPU_CONTROLS=控制
+DLG_DBGCPU_MEMORY=内存
+DLG_DBGCPU_TRACE=跟踪
+DLG_DBGCPU_RUN=运行
+DLG_DBGCPU_STEP=单步
+DLG_DBGCPU_RESET=复位
+DLG_DBGCPU_POWER=电源
+DLG_DBGCPU_DUMPCPU=转储 &CPU
+DLG_DBGCPU_DUMPPPU=转储 &PPU
+DLG_DBGCPU_STARTLOG=开始 &日志
+DLG_DBGCPU_STOPLOG=停止 &日志
+DLG_DBGCPU_SEEKPC=查找到 PC
+DLG_DBGCPU_SEEKTO=查找到地址:
+DLG_DBGCPU_SEEKSEL=选择>
+DLG_DBGCPU_ADD=添&加
+DLG_DBGCPU_EDIT=&编辑
+DLG_DBGCPU_DELETE=删&除
+
+# === 调试器 PPU ===
+DLG_DBGPPU_TITLE=调试器 - PPU
+DLG_DBGPPU_NAMETABLE=命名表
+DLG_DBGPPU_SPRITES=精灵
+DLG_DBGPPU_PATTERNS=图案表
+DLG_DBGPPU_PALETTE=调色板
+DLG_DBGPPU_DETAILS=详情
+DLG_DBGPPU_CLICK=左键点击循环调色板。
+DLG_DBGPPU_HOVER=将鼠标悬停在项目上查看详情。\n右键点击记住选择。
+DLG_DBGPPU_SELTYPE=选择类型:
+DLG_DBGPPU_TILEFLIP=8x1&6 翻转
+
+# === 关于 ===
+ABOUT_TITLE=关于 Nintendulator
+ABOUT_TEXT=Nintendulator\nNES 模拟器\n\nCopyright (C) QMT Productions
+
+# === 语言更改 ===
+LANG_CHANGED=语言已更改
+LANG_CHANGED_MSG=语言已更改。某些元素将在重启后更新。
+
+# === 语言菜单 ===
+NO_LANGUAGES=(未找到语言)
+
+# === APU ===
+MSG_APU_STARTED=APU 已启动
+ERR_APU_REGION=未知区域，APU 未配置
+
+# === CPU ===
+ERR_CPU_BAD_OPCODE=错误操作码，CPU 已锁定
+
+# === ROM 错误 ===
+ERR_ROM_OPEN=无法打开 ROM 文件
+ERR_ROM_INVALID=无效的 ROM 文件格式
+ERR_ROM_MAPPER=不支持的映射器
+ERR_ROM_UNIF=无效的 UNIF ROM
+ERR_ROM_FDS_HEADER=无效的 FDS 头
+ERR_ROM_FDS_DISKSIDE=无效的 FDS 磁盘面
+ERR_ROM_NSF=无效的 NSF 文件
+MSG_ROM_LOADED=ROM 已加载: %s
+MSG_ROM_CLOSED=ROM 已关闭
+MSG_ROM_ALREADY_LOADED=已加载 ROM。请先关闭它。
+
+# === 头错误 ===
+ERR_HEADER_REOPEN=无法重新打开文件! 放弃更改?
+ERR_HEADER_OPEN=无法打开 ROM!
+ERR_HEADER_NOT_INES=所选文件不是 iNES ROM 映像!
+ERR_HEADER_DISKDUDE=所选 ROM 似乎已被 "DiskDude!" 损坏 - 正在清理...
+ERR_HEADER_INCONSISTENT=在 ROM 头中检测到无法识别或不一致的数据! 您是否希望清理它?
+
+# === 视频 ===
+ERR_GFX_DIRECTDRAW=无法初始化 DirectDraw
+ERR_GFX_SURFACE=无法创建 DirectDraw 表面
+ERR_GFX_PALETTE=无法设置 DirectDraw 调色板
+ERR_GFX_RENDER=DirectDraw 渲染错误
+ERR_GFX_MODE=不支持的视频模式
+MSG_GFX_SCREENSHOT=截图已保存: %s
+ERR_GFX_FLIP=无法翻转到主表面! 正在恢复到窗口模式...
+ERR_GFX_ILLEGAL_PALETTE=选择了非法的调色板!
+ERR_GFX_LOAD_PALETTE=无法加载指定的调色板! 正在恢复到默认值!
+ERR_GFX_INVALID_PALETTE=所选文件不是有效的调色板!
+ERR_GFX_PERF_COUNTER=无法确定性能计数器频率!
+ERR_GFX_DDRAW_DLL=致命错误: 无法加载 DirectDraw DLL!
+ERR_GFX_DDRAW_ENTRY=致命错误: 无法找到 DirectDrawCreateEx 的入口点!
+ERR_GFX_DDRAW7=无法初始化 DirectDraw 7
+ERR_GFX_FULLSCREEN_LEVEL=无法设置全屏协作级别! 返回到窗口模式...
+ERR_GFX_NO_FULLSCREEN_RES=您的显示设备不支持全屏分辨率!
+ERR_GFX_NO_FULLSCREEN_RES_REVERT=您的显示设备不支持全屏分辨率! 正在恢复到窗口模式...
+ERR_GFX_COOP_LEVEL=无法设置 DirectDraw 协作级别
+ERR_GFX_PRIMARY_SURFACE=无法创建主表面
+ERR_GFX_SECONDARY_SURFACE=无法获取次级表面
+ERR_GFX_CREATE_SECONDARY=无法创建次级表面
+ERR_GFX_CLIPPER=无法创建裁剪器
+ERR_GFX_CLIPPER_WINDOW=无法设置裁剪器窗口
+ERR_GFX_CLIPPER_ASSIGN=无法将裁剪器分配给主表面
+ERR_GFX_SURF_DESC=无法获取表面描述
+ERR_GFX_BIT_DEPTH=检测到无效的位深度!
+ERR_GFX_OPENGL=无法初始化 OpenGL! 回退到 DirectDraw。
+
+# === 声音 ===
+ERR_APU_DIRECTSOUND=无法初始化 DirectSound
+ERR_APU_BUFFER=无法创建 DirectSound 缓冲区
+ERR_APU_FORMAT=不支持的声音格式
+MSG_APU_DISABLED=声音已禁用
+
+# === 存档状态 ===
+MSG_STATE_SAVED=状态已保存到插槽 %d
+MSG_STATE_LOADED=状态已从插槽 %d 加载
+ERR_STATE_SAVE=无法保存状态
+ERR_STATE_LOAD=无法加载状态
+ERR_STATE_VERSION=状态文件版本不匹配
+ERR_STATE_CORRUPT=状态文件已损坏
+MSG_STATE_SLOT=插槽 %d
+
+# === 录制 ===
+MSG_MOVIE_RECORDING=正在录制影片...
+MSG_MOVIE_PLAYING=正在播放影片...
+MSG_MOVIE_STOPPED=影片已停止
+ERR_MOVIE_OPEN=无法打开影片文件
+ERR_MOVIE_INVALID=无效的影片文件
+ERR_MOVIE_VERSION=影片版本不匹配
+MSG_AVI_RECORDING=正在录制 AVI...
+ERR_AVI_OPEN=无法打开 AVI 文件
+MSG_AVI_STOPPED=AVI 录制已停止
+
+# === AVI 错误 ===
+ERR_AVI_NOT_RECORDING=当前没有进行 AVI 录制!
+ERR_AVI_ALREADY_RECORDING=已有一个 AVI 录制正在进行中!
+ERR_AVI_COMPRESSION=无法配置 AVI 压缩!
+ERR_AVI_FRAME_NOT_RECORDING=错误! 尝试在未录制时捕获 AVI 帧!
+ERR_AVI_WRITE_VIDEO=无法将视频写入 AVI!
+ERR_AVI_AUDIO_NOT_RECORDING=错误! 尝试在未录制时捕获 AVI 音频!
+ERR_AVI_WRITE_AUDIO=无法将音频写入 AVI!
+
+# === Game Genie ===
+ERR_GENIE_INVALID=无效的 Game Genie 代码
+ERR_GENIE_TOO_MANY=Game Genie 代码过多(最多 3 个)
+MSG_GENIE_APPLIED=已应用 Game Genie 代码
+
+# === 映射器 ===
+ERR_MAPPER_LOAD=无法加载 %s - 不是有效的 DLL 文件!
+ERR_MAPPER_NOTFOUND=未找到映射器
+ERR_MAPPER_VERSION=无法加载映射器包 %s - 版本不匹配!
+ERR_MAPPER_NO_DLLS=未找到映射器 DLL!
+ERR_NES_RELOCATE=Nintendulator 无法将其数据文件完全重新定位到 "%s"。\n请在重新定位其内容后删除文件夹 "%s"。
+ERR_MAPPER_DLL_VERSION=错误的映射器 DLL 版本!
+ERR_MAPPER_DLL_LOAD=加载映射器 DLL 出错!
+
+# === 调试器 ===
+DBG_BREAK_EXEC=执行: $%04X
+DBG_BREAK_READ=读取: $%04X
+DBG_BREAK_WRITE=写入: $%04X
+DBG_BREAK_ACCESS=访问: $%04X
+DBG_BREAK_OPCODE=操作码: $%02X
+DBG_BREAK_NMI=中断: NMI
+DBG_BREAK_IRQ=中断: IRQ
+DBG_BREAK_BRK=中断: BRK
+DBG_BREAK_SCANLINE=扫描线: %i
+DBG_BREAK_UNDEF=未定义
+DBG_BREAK_ENABLED= (+)
+DBG_BREAK_DISABLED= (-)
+MSG_DBG_LOG_STARTED=日志已开始
+MSG_DBG_LOG_STOPPED=日志已停止
+
+# === 调试器验证 ===
+DBG_INVALID_ADDR=指定的地址范围无效!
+DBG_INVALID_OPCODE=指定的操作码无效!
+DBG_INVALID_SCANLINE=指定的扫描线无效!
+
+# === 影片 ===
+MOVIE_UNEXPECTED_EOF=影片中出现意外 EOF!
+MOVIE_TV_PAL=PAL
+MOVIE_TV_NTSC=NTSC
+MOVIE_LENGTH_FMT=长度: %i:%02i.%02i
+
+# === MapperInterface 兼容性 ===
+COMPAT_UNSUPPORTED=不支持
+COMPAT_PARTIAL=部分支持
+COMPAT_MOSTLY=大多支持
+COMPAT_FULL=完全支持!
+
+# === 已弃用 / 未使用 ===
+MENU_NES=&NES
+MENU_SETTINGS=&设置
+MENU_SETTINGS_VIDEO=&视频...
+MENU_SETTINGS_PATHS=&路径...
+MENU_SETTINGS_CLOCK=&时钟速度...
+MENU_MOVIE=&影片
+MENU_MOVIE_RECORD_OLD=&录制...
+MENU_MOVIE_PLAY_OLD=&播放...
+MENU_MOVIE_STOP_OLD=&停止

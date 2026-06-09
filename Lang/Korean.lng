@@ -1,0 +1,502 @@
+# NintendulatorML 언어 파일 - 한국어
+# 형식: KEY=Value  |  # = 주석  |  \n = 값 내 줄바꿈
+
+[Info]
+Language=한국어 / Korean
+Author=Community
+Version=1.0
+
+[Strings]
+
+
+# === 메인 메뉴 — 최상위 ===
+MENU_FILE=&파일
+MENU_CPU=&CPU
+MENU_PPU=&PPU
+MENU_SOUND=&사운드
+MENU_INPUT=&입력
+MENU_DEBUG=&디버그
+MENU_MISC=&기타
+MENU_LANGUAGE=&언어
+MENU_HELP=&도움말
+
+# === 파일 하위 메뉴 ===
+MENU_FILE_OPEN=&ROM 열기...
+MENU_FILE_CLOSE=&닫기
+MENU_FILE_RECENT=최근 &파일
+MENU_FILE_RECENT_CLEAR=&최근 파일 지우기
+MENU_FILE_HEADER=i&NES 헤더 편집
+MENU_FILE_AUTORUN=&자동 실행
+MENU_FILE_BROWSESAVES=&저장 파일 탐색
+MENU_FILE_EXIT=종료(&X)
+
+# === CPU 하위 메뉴 ===
+MENU_NES_RUN=실행(&R)\tF2
+MENU_NES_PAUSE=단계별 실행(&S)\tShift+F2
+MENU_NES_STOP=중지(&T)\tF3
+MENU_NES_RESET=소프트 리셋(&F)\tF4
+MENU_NES_POWER=하드 리셋(&H)\tShift+F4
+MENU_CPU_SAVESTATE=상태 저장(&V)\tF5
+MENU_CPU_LOADSTATE=상태 불러오기(&L)\tF8
+MENU_CPU_PREVSTATE=이전 상태(&P)\tF6
+MENU_CPU_NEXTSTATE=다음 상태(&N)\tF7
+MENU_SETTINGS_GAMEGENIE=게임 지니(&G)\tCtrl+G
+MENU_CPU_BADOPS=잘못된 오피코드 기록(&O)
+MENU_CPU_FRAMESTEP=프레임 단계별 실행(&E)
+MENU_CPU_FRAMESTEP_ENABLED=사용(&E)\tCtrl+F
+MENU_CPU_FRAMESTEP_STEP=단계별 실행(&S)\tSpace
+
+# === PPU 하위 메뉴 ===
+MENU_PPU_FRAMESKIP=프레임 건너뛰기(&F)
+MENU_PPU_FRAMESKIP_AUTO=자동(&A)
+MENU_PPU_SIZE=크기(&S)
+MENU_PPU_FIXASPECT=종횡비 고정(&F)
+MENU_PPU_MODE=모드(&M)
+MENU_PPU_MODE_HYBRID=하이브리드(&H)
+MENU_PPU_PALETTE=팔레트(&P)...
+MENU_PPU_SLOWDOWN=감속(&S)
+MENU_PPU_SLOWDOWN_ENABLED=사용(&E)\tTab
+MENU_PPU_FULLSCREEN=전체 화면(&U)\tAlt+Enter / F11
+MENU_PPU_SCANLINES=스캔라인(&S)
+MENU_PPU_BILINEAR=바일리너 필터(&B)\tCtrl+B
+MENU_PPU_INTSCALE=정수 스케일링(&I)
+MENU_PPU_MATCHRATE=모니터 속도 일치(&M)
+MENU_PPU_ALWAYSONTOP=항상 위에(&A)
+MENU_PPU_EXCLUSIVEFS=독점 전체 화면(&E)
+MENU_GAME=게임(&G)
+
+# === PPU 하위 메뉴 — 테마 ===
+MENU_PPU_THEME=테마(&T)
+MENU_PPU_THEME_LIGHT=밝은 테마(&L)
+MENU_PPU_THEME_DARK=어두운 테마(&D)
+
+# === 사운드 하위 메뉴 ===
+MENU_SOUND_ENABLED=사용(&E)\tCtrl+S
+MENU_SETTINGS_SOUND=볼륨(&V)...
+
+# === 입력 하위 메뉴 ===
+MENU_SETTINGS_CONTROLLERS=설정(&C)...
+
+# === 디버그 하위 메뉴 ===
+MENU_DEBUG_CPU=디스어셈블리(&A)\tCtrl+F1
+MENU_DEBUG_PPU=비디오(&V)\tCtrl+F2
+MENU_DEBUG_STATWND=상태 창(&S)
+
+# === 기타 하위 메뉴 ===
+MENU_MISC_STARTAVI=AVI 캡처 시작(&S)...
+MENU_MISC_STOPAVI=AVI 캡처 중지(&T)
+MENU_MOVIE_PLAY=영상 재생(&P)...
+MENU_MOVIE_RECORD=영상 녹화(&R)...
+MENU_MOVIE_STOP=영상 중지(&S)
+
+# === 도움말 하위 메뉴 ===
+MENU_HELP_ABOUT=정보(&A)...
+
+# === 창 제목 ===
+WINDOW_TITLE=Nintendulator
+WINDOW_TITLE_PAUSED=Nintendulator [일시정지]
+WINDOW_TITLE_FPS=Nintendulator - %s - %d FPS
+WINDOW_TITLE_STOPPED=Nintendulator - 중지됨
+WINDOW_TITLE_FPS_NOSKIP=Nintendulator - %i FPS (FSkip 없음)
+WINDOW_TITLE_FPS_FSKIP=Nintendulator - %i FPS (%i %sFSkip)
+TITLEBAR_AUTO=자동
+
+# === 일반 대화상자 ===
+DLG_OK=확인
+DLG_CANCEL=취소
+DLG_YES=예
+DLG_NO=아니오
+DLG_APPLY=적용
+DLG_BROWSE=찾아보기...
+DLG_NINTENDULATOR=Nintendulator
+
+# === 파일 대화상자 ===
+OPEN_ROM_TITLE=ROM 열기
+OPEN_ROM_FILTER=NES ROM (*.nes;*.unif;*.fds;*.nsf)\0*.nes;*.unif;*.fds;*.nsf\0모든 파일 (*.*)\0*.*\0
+OPEN_MOVIE_TITLE=영상 열기
+SAVE_MOVIE_TITLE=영상 저장
+OPEN_PALETTE_TITLE=팔레트 열기
+SAVE_AVI_TITLE=AVI 저장
+
+# === 파일 대화상자 필터 표시 이름 ===
+FILTER_ROM_ALL=모든 지원 파일 (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)
+FILTER_ROM_INES=iNES ROM 이미지 (*.NES)
+FILTER_ROM_UNIF=유니버설 NES 교환 형식 ROM 파일 (*.UNIF, *.UNF)
+FILTER_ROM_FDS=패미컴 디스크 시스템 디스크 이미지 (*.FDS)
+FILTER_ROM_NSF=NES 사운드 파일 (*.NSF)
+FILTER_ROM_INES_SHORT=iNES ROM 이미지 (*.NES)
+FILTER_MOVIE=Nintendulator 영상 (*.NMV)
+FILTER_AVI=AVI 파일 (*.AVI)
+FILTER_PALETTE=팔레트 파일 (*.PAL)
+OPEN_HEADER_TITLE=헤더 편집
+
+# === 컨트롤러 — 장치 목록 ===
+CONT_UNCONNECTED=연결되지 않음
+CONT_STDCONTROLLER=표준 컨트롤러
+CONT_ZAPPER=잭퍼
+CONT_ARKANOIDPADDLE=아르카노이드 패들
+CONT_POWERPAD=파워 패드
+CONT_FOURSCORE1=포어 스코어 (포트 1만)
+CONT_SNESCONTROLLER=SNES 컨트롤러
+CONT_VSZAPPER=VS 시스템 잭퍼
+CONT_SNESMOUSE=SNES 마우스
+CONT_FOURSCORE2=포어 스코어 (포트 2만)
+CONT_FAMI4PLAY=패미컴 4인용 어댑터
+CONT_EXP_ARKANOIDPADDLE=패미컴 아르카노이드 패들
+CONT_FAMILYBASICKEYBOARD=패밀리 베이직 키보드
+CONT_SUBORKEYBOARD=서보 키보드
+CONT_FAMTRAINER=패밀리 트레이너
+CONT_TABLET=오에카 키즈 태블릿
+
+# === 컨트롤러 — 메인 대화상자 ===
+CONT_LABEL_PORT1=컨트롤러 포트 1(&1):
+CONT_LABEL_PORT2=컨트롤러 포트 2(&2):
+CONT_LABEL_EXP=확장 포트(&E):
+CONT_CONFIG=설정(&C)
+CONT_UDLR=좌+우 및 상+하 동시 입력 허용(&U)
+CONT_POV=POV 트리거를 8방향 버튼으로 구성(&P)
+
+# === 컨트롤러 — 설정 대화상자 ===
+DLG_CTRL_STDCONT=표준 컨트롤러 설정
+DLG_CTRL_BUTTONS=버튼
+DLG_CTRL_DPAD=D-pad
+DLG_CTRL_A=A(&A)
+DLG_CTRL_B=B(&B)
+DLG_CTRL_SELECT=Select(&S)
+DLG_CTRL_START=Start(&T)
+DLG_CTRL_UP=Up(&U)
+DLG_CTRL_DOWN=Down(&D)
+DLG_CTRL_LEFT=Left(&L)
+DLG_CTRL_RIGHT=Right(&R)
+DLG_CTRL_TRIGGER=트리거(&T)
+DLG_CTRL_AXIS=축(&A)
+DLG_CTRL_ZAPPER=잭퍼 설정
+DLG_CTRL_ARKPAD=아르카노이드 패들 설정
+DLG_CTRL_POWERPAD=파워 패드 설정
+DLG_CTRL_FOURSCORE=포어 스코어 설정
+DLG_CTRL_FAMI4PLAY=패미컴 4인용 어댑터
+DLG_CTRL_SNESCONT=SNES 컨트롤러 설정
+DLG_CTRL_SNESMOUSE=SNES 마우스 설정
+DLG_CTRL_VSZAPPER=VS 잭퍼 설정
+DLG_CTRL_FLIP=플립(&F)
+DLG_CTRL_PORT1=포트 1(&1):
+DLG_CTRL_PORT2=포트 2(&2):
+DLG_CTRL_PORT3=포트 3(&3):
+DLG_CTRL_PORT4=포트 4(&4):
+DLG_CTRL_CONFIG=설정(&C)
+DLG_CTRL_CLOSE=닫기
+DLG_CTRL_TITLE=컨트롤러
+DLG_CTRL_MORE_BUTTONS=추가 버튼
+DLG_CTRL_FAMTRAIN=패밀리 트레이너 설정
+DLG_CTRL_FBKEY=패밀리 베이직 키보드
+DLG_CTRL_TABLET=오에카 키즈 태블릿
+
+# === 컨트롤러 오류 ===
+ERR_CTRL_KEYBOARD_INIT=키보드 입력 장치를 초기화할 수 없습니다!
+ERR_CTRL_KEYBOARD_FORMAT=키보드 입력 데이터 형식을 설정할 수 없습니다!
+ERR_CTRL_KEYBOARD_LEVEL=키보드 입력 협력 수준을 설정할 수 없습니다!
+ERR_CTRL_MOUSE_INIT=마우스 입력 장치를 초기화할 수 없습니다!
+ERR_CTRL_MOUSE_LEVEL=마우스 입력 협력 수준을 설정할 수 없습니다!
+ERR_CTRL_JOY_LEVEL=조이스틱 입력 협력 수준을 복원할 수 없습니다!
+ERR_CTRL_INVALID_STD=오류: 표준 포트에 잘못된 컨트롤러 유형이 선택되었습니다!
+ERR_CTRL_INVALID_EXP=오류: 확장 포트에 잘못된 컨트롤러 유형이 선택되었습니다!
+CONT_NO_CONFIG=설정이 필요하지 않습니다!
+CONT_ERR_DIRECTINPUT=DirectInput을 초기화할 수 없습니다!
+CONT_ERR_KEYBOARD=키보드 초기화에 실패했습니다!
+CONT_ERR_MOUSE=마우스 초기화에 실패했습니다!
+CONT_ERR_JOYSTICK=조이스틱 초기화에 실패했습니다!
+CONT_ERR_KEY_ID=오류 - 잘못된 키보드 키 ID가 발견되었습니다!
+CONT_ERR_MOUSE_ID=오류 - 잘못된 마우스 버튼 ID가 발견되었습니다!
+ERR_CTRL_DINPUT_LEVEL=장치 입력 협력 수준을 수정할 수 없습니다!
+ERR_CTRL_DEVICE_LEVEL=DirectInput을 초기화할 수 없습니다!
+ERR_CTRL_DEVICE_RESTORE=장치 입력 협력 수준을 복원할 수 없습니다!
+
+# === 사운드 — 볼륨 대화상자 ===
+DLG_VOL_TITLE=볼륨
+DLG_VOL_MASTER=마스터(&M)
+DLG_VOL_SQ0=SQ&0
+DLG_VOL_SQ1=SQ&1
+DLG_VOL_TRI=TRI(&T)
+DLG_VOL_NOI=NOI(&N)
+DLG_VOL_PCM=PCM(&P)
+DLG_VOL_EXT=EXT(&E)
+DLG_VOL_MUTE=음소거
+DLG_VOL_CLOSE=닫기
+
+# === iNES 헤더 편집기 대화상자 ===
+DLG_INES_TITLE=iNES 헤더 편집기
+DLG_INES_FILENAME=ROM 파일 이름:
+DLG_INES_VER1=표준 &iNES
+DLG_INES_VER2=NES &2.0
+DLG_INES_MAPPER=매퍼 번호(&M):
+DLG_INES_PRG=PRG ROM 뱅크(&P):
+DLG_INES_CHR=CHR ROM 뱅크(&C):
+DLG_INES_HORIZ=&수평 미러링
+DLG_INES_VERT=&수직 미러링
+DLG_INES_VS=VS 시스템(&S)
+DLG_INES_PC10=플레이초이스-10(&P)
+DLG_INES_4SCR=4스크린 VRAM(&4)
+DLG_INES_BATT=배터리 백업 SRAM(&B)
+DLG_INES_TRAIN=트레이너(&T)
+DLG_INES_SUBMAP=서브매퍼(&S):
+DLG_INES_BATTERY=(배터리)
+DLG_INES_PRGRAM=PRG RAM(&G):
+DLG_INES_CHRRAM=CHR RAM(&R):
+DLG_INES_NTSC=&NTSC
+DLG_INES_PAL=P&AL
+DLG_INES_DUAL=듀얼(&D)
+DLG_INES_VSPPU=VS PP&U:
+DLG_INES_VSFLAGS=VS 플래그(&F):
+TITLE_INES_EDITOR=iNES 편집기
+
+# === 영상 대화상자 ===
+DLG_MOVIE_PLAY_TITLE=영상 재생
+DLG_MOVIE_RECORD_TITLE=영상 녹화
+DLG_MOVIE_FILE=영상 파일(&M):
+DLG_MOVIE_DESC=설명(&D):
+DLG_MOVIE_LENGTH=길이:
+DLG_MOVIE_FRAMES=프레임:
+DLG_MOVIE_RERECORDS=재녹화:
+DLG_MOVIE_TVMODE=TV 모드:
+DLG_MOVIE_RESUME=상태 저장 불러올 때 녹화 재개(&R)
+DLG_MOVIE_CONTROLLERS=컨트롤러
+DLG_MOVIE_PORT1=포트 1:
+DLG_MOVIE_PORT2=포트 2:
+DLG_MOVIE_EXPANSION=확장:
+DLG_MOVIE_CONFIGURE=설정(&C)...
+DLG_MOVIE_RECORD_FROM=녹화 시작 위치...
+DLG_MOVIE_HARD_RESET=하드 리셋(&H)
+DLG_MOVIE_CUR_STATE=현재 상태(&S)
+
+# === 팔레트 대화상자 ===
+DLG_PAL_TITLE=팔레트 설정
+DLG_PAL_PALETTE=팔레트
+DLG_PAL_HUE=색상(&H):
+DLG_PAL_SAT=채도(&S):
+DLG_PAL_CUSTOM=사용자 지정(&C)...
+DLG_PAL_PREVIEW=미리보기
+DLG_PAL_EMPHASIS=강조:
+DLG_PAL_NOTE=참고: PAL/Dendy에서 빨강과 초록 강조가 바뀝니다
+DLG_PAL_EXTRAGRAY=추가 그레이(호환성)(&E)
+
+# === DLL 선택 대화상자 ===
+DLG_DLL_TITLE=매퍼 DLL 선택
+DLG_DLL_TEXT=이 ROM은 여러 매퍼 DLL에 의해 지원됩니다.\n사용하려는 것을 선택하세요.
+
+# === 중단점 대화상자 ===
+DLG_BREAK_TITLE=중단점 추가/편집
+DLG_BREAK_ENABLED=중단점 활성화(&E)
+DLG_BREAK_ADDR=주소
+DLG_BREAK_OP=작업
+DLG_BREAK_TIME=시간
+DLG_BREAK_EXEC=실행(&E)
+DLG_BREAK_READ=읽기(&R)
+DLG_BREAK_WRITE=쓰기(&W)
+DLG_BREAK_ACCESS=접근(&A)
+DLG_BREAK_OPCODE=오피코드(&O)
+DLG_BREAK_NMI=&NMI
+DLG_BREAK_IRQ=&IRQ
+DLG_BREAK_BRK=&BRK
+DLG_BREAK_SCANLINE=스캔라인(&S)
+DLG_BREAK_FROM=&From
+DLG_BREAK_TO=&To
+
+# === 디버그 정보 창 ===
+DLG_DEBUG_TITLE=디버그 정보
+
+# === 디버거 CPU ===
+DLG_DBGCPU_TITLE=디버거
+DLG_DBGCPU_REGISTERS=레지스터
+DLG_DBGCPU_TIMING=타이밍
+DLG_DBGCPU_IRQS=IRQ
+DLG_DBGCPU_FLAGS=플래그
+DLG_DBGCPU_BANKS=뱅크
+DLG_DBGCPU_BREAKPOINTS=중단점
+DLG_DBGCPU_CONTROLS=제어
+DLG_DBGCPU_MEMORY=메모리
+DLG_DBGCPU_TRACE=추적
+DLG_DBGCPU_RUN=실행
+DLG_DBGCPU_STEP=단계별 실행
+DLG_DBGCPU_RESET=리셋
+DLG_DBGCPU_POWER=전원
+DLG_DBGCPU_DUMPCPU=CPU 덤프(&D)
+DLG_DBGCPU_DUMPPPU=PPU 덤프(&P)
+DLG_DBGCPU_STARTLOG=로그 시작(&S)
+DLG_DBGCPU_STOPLOG=로그 중지(&T)
+DLG_DBGCPU_SEEKPC=PC로 이동
+DLG_DBGCPU_SEEKTO=주소로 이동:
+DLG_DBGCPU_SEEKSEL=선택>
+DLG_DBGCPU_ADD=추가(&A)
+DLG_DBGCPU_EDIT=편집(&E)
+DLG_DBGCPU_DELETE=삭제(&L)
+
+# === 디버거 PPU ===
+DLG_DBGPPU_TITLE=디버거 - PPU
+DLG_DBGPPU_NAMETABLE=네임테이블
+DLG_DBGPPU_SPRITES=스프라이트
+DLG_DBGPPU_PATTERNS=패턴 테이블
+DLG_DBGPPU_PALETTE=팔레트
+DLG_DBGPPU_DETAILS=세부 정보
+DLG_DBGPPU_CLICK=왼쪽 클릭으로 팔레트 순환합니다.
+DLG_DBGPPU_HOVER=아이템 위에 마우스를 올려 세부 정보를 봅니다.\n오른쪽 클릭으로 선택을 저장합니다.
+DLG_DBGPPU_SELTYPE=선택 유형:
+DLG_DBGPPU_TILEFLIP=8x1&6 플립
+
+# === 정보 ===
+ABOUT_TITLE=Nintendulator 정보
+ABOUT_TEXT=Nintendulator\nNES 에뮬레이터\n\nCopyright (C) QMT Productions
+
+# === 언어 변경 ===
+LANG_CHANGED=언어가 변경되었습니다
+LANG_CHANGED_MSG=언어가 변경되었습니다. 일부 요소는 재시작 시 업데이트됩니다.
+
+# === 언어 메뉴 ===
+NO_LANGUAGES=(언어를 찾을 수 없음)
+
+# === APU ===
+MSG_APU_STARTED=APU 시작됨
+ERR_APU_REGION=알 수 없는 지역, APU가 구성되지 않음
+
+# === CPU ===
+ERR_CPU_BAD_OPCODE=잘못된 오피코드, CPU가 잠겼습니다
+
+# === ROM 오류 ===
+ERR_ROM_OPEN=ROM 파일을 열 수 없습니다
+ERR_ROM_INVALID=잘못된 ROM 파일 형식
+ERR_ROM_MAPPER=지원되지 않는 매퍼
+ERR_ROM_UNIF=잘못된 UNIF ROM
+ERR_ROM_FDS_HEADER=잘못된 FDS 헤더
+ERR_ROM_FDS_DISKSIDE=잘못된 FDS 디스크 측면
+ERR_ROM_NSF=잘못된 NSF 파일
+MSG_ROM_LOADED=ROM 로드됨: %s
+MSG_ROM_CLOSED=ROM 닫힘
+MSG_ROM_ALREADY_LOADED=ROM이 이미 로드되어 있습니다. 먼저 닫으세요.
+
+# === 헤더 오류 ===
+ERR_HEADER_REOPEN=파일을 다시 열 수 없습니다! 변경 사항을 폐기하시겠습니까?
+ERR_HEADER_OPEN=ROM을 열 수 없습니다!
+ERR_HEADER_NOT_INES=선택된 파일은 iNES ROM 이미지가 아닙니다!
+ERR_HEADER_DISKDUDE=선택된 ROM이 "DiskDude!"에 의해 손상된 것으로 보입니다 - 정리 중...
+ERR_HEADER_INCONSISTENT=ROM 헤더에서 인식할 수 없거나 불일치하는 데이터가 감지되었습니다! 정리하시겠습니까?
+
+# === 비디오 ===
+ERR_GFX_DIRECTDRAW=DirectDraw 초기화에 실패했습니다
+ERR_GFX_SURFACE=DirectDraw 표면을 생성할 수 없습니다
+ERR_GFX_PALETTE=DirectDraw 팔레트를 설정할 수 없습니다
+ERR_GFX_RENDER=DirectDraw 렌더 오류
+ERR_GFX_MODE=지원되지 않는 비디오 모드
+MSG_GFX_SCREENSHOT=스크린샷 저장됨: %s
+ERR_GFX_FLIP=기본 표면으로 전환하지 못했습니다! 창 모드로 되돌립니다...
+ERR_GFX_ILLEGAL_PALETTE=잘못된 팔레트가 선택되었습니다!
+ERR_GFX_LOAD_PALETTE=지정된 팔레트를 로드할 수 없습니다! 기본값으로 되돌립니다!
+ERR_GFX_INVALID_PALETTE=선택된 파일은 유효한 팔레트가 아닙니다!
+ERR_GFX_PERF_COUNTER=성능 카운터 주파수를 결정하지 못했습니다!
+ERR_GFX_DDRAW_DLL=치명적 오류: DirectDraw DLL을 로드할 수 없습니다!
+ERR_GFX_DDRAW_ENTRY=치명적 오류: DirectDrawCreateEx 항목 지점을 찾을 수 없습니다!
+ERR_GFX_DDRAW7=DirectDraw 7 초기화에 실패했습니다
+ERR_GFX_FULLSCREEN_LEVEL=전체 화면 협력 수준을 설정하지 못했습니다! 창 모드로 돌아갑니다...
+ERR_GFX_NO_FULLSCREEN_RES=디스플레이 장치에서 전체 화면 해상도가 지원되지 않습니다!
+ERR_GFX_NO_FULLSCREEN_RES_REVERT=디스플레이 장치에서 전체 화면 해상도가 지원되지 않습니다! 창 모드로 되돌립니다...
+ERR_GFX_COOP_LEVEL=DirectDraw 협력 수준을 설정하지 못했습니다
+ERR_GFX_PRIMARY_SURFACE=기본 표면을 생성하지 못했습니다
+ERR_GFX_SECONDARY_SURFACE=보조 표면을 가져오지 못했습니다
+ERR_GFX_CREATE_SECONDARY=보조 표면을 생성하지 못했습니다
+ERR_GFX_CLIPPER=클리퍼를 생성하지 못했습니다
+ERR_GFX_CLIPPER_WINDOW=클리퍼 창을 설정하지 못했습니다
+ERR_GFX_CLIPPER_ASSIGN=클리퍼를 기본 표면에 할당하지 못했습니다
+ERR_GFX_SURF_DESC=표면 설명을 검색하지 못했습니다
+ERR_GFX_BIT_DEPTH=잘못된 비트 심도가 감지되었습니다!
+ERR_GFX_OPENGL=OpenGL 초기화에 실패했습니다! DirectDraw로 대체합니다.
+
+# === 사운드 ===
+ERR_APU_DIRECTSOUND=DirectSound 초기화에 실패했습니다
+ERR_APU_BUFFER=DirectSound 버퍼를 생성하지 못했습니다
+ERR_APU_FORMAT=지원되지 않는 오디오 형식
+MSG_APU_DISABLED=사운드가 비활성화되었습니다
+
+# === 상태 저장 ===
+MSG_STATE_SAVED=슬롯 %d에 상태 저장됨
+MSG_STATE_LOADED=슬롯 %d에서 상태 로드됨
+ERR_STATE_SAVE=상태 저장에 실패했습니다
+ERR_STATE_LOAD=상태 로드에 실패했습니다
+ERR_STATE_VERSION=상태 파일 버전 불일치
+ERR_STATE_CORRUPT=상태 파일이 손상되었습니다
+MSG_STATE_SLOT=슬롯 %d
+
+# === 녹화 ===
+MSG_MOVIE_RECORDING=영상 녹화 중...
+MSG_MOVIE_PLAYING=영상 재생 중...
+MSG_MOVIE_STOPPED=영상이 중지되었습니다
+ERR_MOVIE_OPEN=영상 파일을 열 수 없습니다
+ERR_MOVIE_INVALID=잘못된 영상 파일
+ERR_MOVIE_VERSION=영상 버전 불일치
+MSG_AVI_RECORDING=AVI 녹화 중...
+ERR_AVI_OPEN=AVI 파일을 열 수 없습니다
+MSG_AVI_STOPPED=AVI 녹화가 중지되었습니다
+
+# === AVI 오류 ===
+ERR_AVI_NOT_RECORDING=현재 진행 중인 AVI 캡처가 없습니다!
+ERR_AVI_ALREADY_RECORDING=이미 진행 중인 AVI 캡처가 있습니다!
+ERR_AVI_COMPRESSION=AVI 압축을 구성하지 못했습니다!
+ERR_AVI_FRAME_NOT_RECORDING=오류! 녹화 중이지 않을 때 AVI 프레임 캡처가 시도되었습니다!
+ERR_AVI_WRITE_VIDEO=비디오를 AVI에 쓰지 못했습니다!
+ERR_AVI_AUDIO_NOT_RECORDING=오류! 녹화 중이지 않을 때 AVI 오디오 캡처가 시도되었습니다!
+ERR_AVI_WRITE_AUDIO=오디오를 AVI에 쓰지 못했습니다!
+
+# === 게임 지니 ===
+ERR_GENIE_INVALID=잘못된 게임 지니 코드
+ERR_GENIE_TOO_MANY=게임 지니 코드가 너무 많습니다 (최대 3개)
+MSG_GENIE_APPLIED=게임 지니 코드가 적용되었습니다
+
+# === 매퍼 ===
+ERR_MAPPER_LOAD=%s를 로드하지 못했습니다 - 유효한 DLL 파일이 아닙니다!
+ERR_MAPPER_NOTFOUND=매퍼를 찾을 수 없습니다
+ERR_MAPPER_VERSION=매퍼 팩 %s를 로드하지 못했습니다 - 버전 불일치!
+ERR_MAPPER_NO_DLLS=매퍼 DLL을 찾을 수 없습니다!
+ERR_NES_RELOCATE=Nintendulator이 데이터 파일을 완전히 "%s"로 재배치하지 못했습니다.\n재배치 후 폴더 "%s"를 삭제하십시오.
+ERR_MAPPER_DLL_VERSION=잘못된 매퍼 DLL 버전!
+ERR_MAPPER_DLL_LOAD=매퍼 DLL 로드 오류!
+
+# === 디버거 ===
+DBG_BREAK_EXEC=실행: $%04X
+DBG_BREAK_READ=읽기: $%04X
+DBG_BREAK_WRITE=쓰기: $%04X
+DBG_BREAK_ACCESS=접근: $%04X
+DBG_BREAK_OPCODE=오피코드: $%02X
+DBG_BREAK_NMI=인터럽트: NMI
+DBG_BREAK_IRQ=인터럽트: IRQ
+DBG_BREAK_BRK=인터럽트: BRK
+DBG_BREAK_SCANLINE=스캔라인: %i
+DBG_BREAK_UNDEF=정의되지 않음
+DBG_BREAK_ENABLED= (+)
+DBG_BREAK_DISABLED= (-)
+MSG_DBG_LOG_STARTED=로깅 시작됨
+MSG_DBG_LOG_STOPPED=로깅 중지됨
+
+# === 디버거 검증 ===
+DBG_INVALID_ADDR=유효하지 않은 주소 범위가 지정되었습니다!
+DBG_INVALID_OPCODE=유효하지 않은 오피코드가 지정되었습니다!
+DBG_INVALID_SCANLINE=유효하지 않은 스캔라인이 지정되었습니다!
+
+# === 영상 ===
+MOVIE_UNEXPECTED_EOF=영상에서 예기치 않은 EOF!
+MOVIE_TV_PAL=PAL
+MOVIE_TV_NTSC=NTSC
+MOVIE_LENGTH_FMT=길이: %i:%02i.%02i
+
+# === MapperInterface 호환성 ===
+COMPAT_UNSUPPORTED=지원되지 않음
+COMPAT_PARTIAL=부분적으로 지원됨
+COMPAT_MOSTLY=대부분 지원됨
+COMPAT_FULL=완전히 지원됨!
+
+# === 사용되지 않음 ===
+MENU_NES=&NES
+MENU_SETTINGS=&설정
+MENU_SETTINGS_VIDEO=&비디오...
+MENU_SETTINGS_PATHS=&경로...
+MENU_SETTINGS_CLOCK=&속도...
+MENU_MOVIE=&영상
+MENU_MOVIE_RECORD_OLD=&녹화...
+MENU_MOVIE_PLAY_OLD=&재생...
+MENU_MOVIE_STOP_OLD=&중지...

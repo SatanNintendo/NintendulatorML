@@ -1,0 +1,502 @@
+# NintendulatorML Language File - Ukrainian
+# Format: KEY=Value  |  # = comment  |  \n = newline in value
+
+[Info]
+Language=Українська / Ukrainian
+Author=Community
+Version=1.0
+
+[Strings]
+
+
+# === Головне меню — верхній рівень ===
+MENU_FILE=&Файл
+MENU_CPU=&CPU
+MENU_PPU=&PPU
+MENU_SOUND=&Звук
+MENU_INPUT=&Введення
+MENU_DEBUG=&Зневадження
+MENU_MISC=&Різне
+MENU_LANGUAGE=&Мова
+MENU_HELP=&Допомога
+
+# === Підменю Файл ===
+MENU_FILE_OPEN=&Відкрити ROM...
+MENU_FILE_CLOSE=&Закрити
+MENU_FILE_RECENT=Останні &файли
+MENU_FILE_RECENT_CLEAR=&Очистити останні файли
+MENU_FILE_HEADER=&Редагувати заголовок iNES
+MENU_FILE_AUTORUN=&Автозапуск
+MENU_FILE_BROWSESAVES=&Перегляд файлів збереження
+MENU_FILE_EXIT=Ви&хід
+
+# === Підменю CPU ===
+MENU_NES_RUN=&Запустити\tF2
+MENU_NES_PAUSE=&Крок\tShift+F2
+MENU_NES_STOP=З&упинити\tF3
+MENU_NES_RESET=М'який &скид\tF4
+MENU_NES_POWER=Т&вердий скид\tShift+F4
+MENU_CPU_SAVESTATE=З&берегти стан\tF5
+MENU_CPU_LOADSTATE=&Завантажити стан\tF8
+MENU_CPU_PREVSTATE=&Попер. стан\tF6
+MENU_CPU_NEXTSTATE=&Наст. стан\tF7
+MENU_SETTINGS_GAMEGENIE=&Game Genie\tCtrl+G
+MENU_CPU_BADOPS=Л&огувати недійсні коди операцій
+MENU_CPU_FRAMESTEP=Крок &кадру
+MENU_CPU_FRAMESTEP_ENABLED=&Увімкнено\tCtrl+F
+MENU_CPU_FRAMESTEP_STEP=&Крок\tПробіл
+
+# === Підменю PPU ===
+MENU_PPU_FRAMESKIP=&Пропуск кадрів
+MENU_PPU_FRAMESKIP_AUTO=&Авто
+MENU_PPU_SIZE=&Розмір
+MENU_PPU_FIXASPECT=&Виправити співвідношення
+MENU_PPU_MODE=&Режим
+MENU_PPU_MODE_HYBRID=&Гібридний
+MENU_PPU_PALETTE=П&алітра...
+MENU_PPU_SLOWDOWN=&Сповільнення
+MENU_PPU_SLOWDOWN_ENABLED=&Увімкнено\tTab
+MENU_PPU_FULLSCREEN=&Повний екран\tAlt+Enter / F11
+MENU_PPU_SCANLINES=&Сканлінії
+MENU_PPU_BILINEAR=&Білінійний фільтр\tCtrl+B
+MENU_PPU_INTSCALE=&Ціле масштабування
+MENU_PPU_MATCHRATE=&Відповідність частоті монітора
+MENU_PPU_ALWAYSONTOP=Завжди &поверх
+MENU_PPU_EXCLUSIVEFS=&Ексклюзивний повний екран
+MENU_GAME=&Гра
+
+# === Підменю PPU — Тема ===
+MENU_PPU_THEME=&Тема
+MENU_PPU_THEME_LIGHT=&Світла
+MENU_PPU_THEME_DARK=&Темна
+
+# === Підменю Звук ===
+MENU_SOUND_ENABLED=&Увімкнено\tCtrl+S
+MENU_SETTINGS_SOUND=&Гучність...
+
+# === Підменю Введення ===
+MENU_SETTINGS_CONTROLLERS=&Налаштування...
+
+# === Підменю Зневадження ===
+MENU_DEBUG_CPU=&Дизасемблер\tCtrl+F1
+MENU_DEBUG_PPU=&Відео\tCtrl+F2
+MENU_DEBUG_STATWND=&Вікно статусу
+
+# === Підменю Різне ===
+MENU_MISC_STARTAVI=&Почати запис AVI...
+MENU_MISC_STOPAVI=З&упинити запис AVI
+MENU_MOVIE_PLAY=&Відтворити фільм...
+MENU_MOVIE_RECORD=&Записати фільм...
+MENU_MOVIE_STOP=З&упинити фільм
+
+# === Підменю Допомога ===
+MENU_HELP_ABOUT=&Про програму...
+
+# === Заголовок вікна ===
+WINDOW_TITLE=Nintendulator
+WINDOW_TITLE_PAUSED=Nintendulator [Пауза]
+WINDOW_TITLE_FPS=Nintendulator - %s - %d FPS
+WINDOW_TITLE_STOPPED=Nintendulator - Зупинено
+WINDOW_TITLE_FPS_NOSKIP=Nintendulator - %i FPS (Без пропусків кадрів)
+WINDOW_TITLE_FPS_FSKIP=Nintendulator - %i FPS (%i %sFSkip)
+TITLEBAR_AUTO=Авто
+
+# === Загальні діалогові вікна ===
+DLG_OK=Гаразд
+DLG_CANCEL=Скасувати
+DLG_YES=Так
+DLG_NO=Ні
+DLG_APPLY=Застосувати
+DLG_BROWSE=Огляд...
+DLG_NINTENDULATOR=Nintendulator
+
+# === Діалогові вікна файлів ===
+OPEN_ROM_TITLE=Відкрити ROM
+OPEN_ROM_FILTER=ROM NES (*.nes;*.unif;*.fds;*.nsf)\0*.nes;*.unif;*.fds;*.nsf\0Усі файли (*.*)\0*.*\0
+OPEN_MOVIE_TITLE=Відкрити фільм
+SAVE_MOVIE_TITLE=Зберегти фільм
+OPEN_PALETTE_TITLE=Відкрити палітру
+SAVE_AVI_TITLE=Зберегти AVI
+
+# === Назви фільтрів діалогових вікон файлів ===
+FILTER_ROM_ALL=Усі підтримувані файли (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)
+FILTER_ROM_INES=Зображення ROM iNES (*.NES)
+FILTER_ROM_UNIF=Файли ROM Universal NES Interchange Format (*.UNIF, *.UNF)
+FILTER_ROM_FDS=Зображення дисків Famicom Disk System (*.FDS)
+FILTER_ROM_NSF=Звукові файли NES (*.NSF)
+FILTER_ROM_INES_SHORT=Зображення ROM iNES (*.NES)
+FILTER_MOVIE=Фільм Nintendulator (*.NMV)
+FILTER_AVI=Файл AVI (*.AVI)
+FILTER_PALETTE=Файл палітри (*.PAL)
+OPEN_HEADER_TITLE=Редагувати заголовок
+
+# === Контролери — список пристроїв ===
+CONT_UNCONNECTED=Не підключено
+CONT_STDCONTROLLER=Стандартний контролер
+CONT_ZAPPER=Zapper
+CONT_ARKANOIDPADDLE=Руль Arkanoid
+CONT_POWERPAD=Power Pad
+CONT_FOURSCORE1=Four Score (тільки порт 1)
+CONT_SNESCONTROLLER=Контролер SNES
+CONT_VSZAPPER=Zapper VS Unisystem
+CONT_SNESMOUSE=Миша SNES
+CONT_FOURSCORE2=Four Score (тільки порт 2)
+CONT_FAMI4PLAY=Адаптер для 4 гравців Famicom
+CONT_EXP_ARKANOIDPADDLE=Руль Famicom Arkanoid
+CONT_FAMILYBASICKEYBOARD=Клавіатура Family Basic
+CONT_SUBORKEYBOARD=Клавіатура Subor
+CONT_FAMTRAINER=Family Trainer
+CONT_TABLET=Планшет Oeka Kids
+
+# === Контролери — головне діалогове вікно ===
+CONT_LABEL_PORT1=Порт контролера &1:
+CONT_LABEL_PORT2=Порт контролера &2:
+CONT_LABEL_EXP=&Розширення:
+CONT_CONFIG=&Налаштувати
+CONT_UDLR=&Дозволити одночасне Ліво+Право і Вгору+Вниз
+CONT_POV=Налаштувати триггери &POV як 8-направні кнопки
+
+# === Контролери — діалогові вікна налаштувань ===
+DLG_CTRL_STDCONT=Налаштування стандартного контролера
+DLG_CTRL_BUTTONS=Кнопки
+DLG_CTRL_DPAD=Керуючий хрест
+DLG_CTRL_A=&A
+DLG_CTRL_B=&B
+DLG_CTRL_SELECT=&Select
+DLG_CTRL_START=S&tart
+DLG_CTRL_UP=&Вгору
+DLG_CTRL_DOWN=&Вниз
+DLG_CTRL_LEFT=&Вліво
+DLG_CTRL_RIGHT=&Вправо
+DLG_CTRL_TRIGGER=&Спусковий гачок
+DLG_CTRL_AXIS=&Вісь
+DLG_CTRL_ZAPPER=Налаштування Zapper
+DLG_CTRL_ARKPAD=Налаштування руля Arkanoid
+DLG_CTRL_POWERPAD=Налаштування Power Pad
+DLG_CTRL_FOURSCORE=Налаштування Four-Score
+DLG_CTRL_FAMI4PLAY=Адаптер для 4 гравців Famicom
+DLG_CTRL_SNESCONT=Налаштування контролера SNES
+DLG_CTRL_SNESMOUSE=Налаштування миші SNES
+DLG_CTRL_VSZAPPER=Налаштування Zapper VS
+DLG_CTRL_FLIP=&Перевернути
+DLG_CTRL_PORT1=Порт &1:
+DLG_CTRL_PORT2=Порт &2:
+DLG_CTRL_PORT3=Порт &3:
+DLG_CTRL_PORT4=Порт &4:
+DLG_CTRL_CONFIG=&Налаштувати
+DLG_CTRL_CLOSE=Закрити
+DLG_CTRL_TITLE=Контролери
+DLG_CTRL_MORE_BUTTONS=Більше кнопок
+DLG_CTRL_FAMTRAIN=Налаштування Family Trainer
+DLG_CTRL_FBKEY=Клавіатура Family Basic
+DLG_CTRL_TABLET=Планшет Oeka Kids
+
+# === Помилки контролерів ===
+ERR_CTRL_KEYBOARD_INIT=Не вдалося ініціалізувати пристрій введення з клавіатури!
+ERR_CTRL_KEYBOARD_FORMAT=Не вдалося встановити формат даних введення з клавіатури!
+ERR_CTRL_KEYBOARD_LEVEL=Не вдалося встановити рівень співпраці введення з клавіатури!
+ERR_CTRL_MOUSE_INIT=Не вдалося ініціалізувати пристрій введення з миші!
+ERR_CTRL_MOUSE_LEVEL=Не вдалося встановити рівень співпраці введення з миші!
+ERR_CTRL_JOY_LEVEL=Не вдалося відновити рівень співпрації введення з джойстиком!
+ERR_CTRL_INVALID_STD=Помилка: вибраний недійсний тип контролера для стандартного порту!
+ERR_CTRL_INVALID_EXP=Помилка: вибраний недійсний тип контролера для порту розширення!
+CONT_NO_CONFIG=Не потрібно налаштувань!
+CONT_ERR_DIRECTINPUT=Не вдалося ініціалізувати DirectInput!
+CONT_ERR_KEYBOARD=Не вдалося ініціалізувати клавіатуру!
+CONT_ERR_MOUSE=Не вдалося ініціалізувати мишу!
+CONT_ERR_JOYSTICK=Не вдалося ініціалізувати джойстики!
+CONT_ERR_KEY_ID=Помилка - виявлено недійсний ID клавіші клавіатури!
+CONT_ERR_MOUSE_ID=Помилка - виявлено недійсний ID кнопки миші!
+ERR_CTRL_DINPUT_LEVEL=Не вдалося змінити рівень співпрації введення пристрою!
+ERR_CTRL_DEVICE_LEVEL=Не вдалося ініціалізувати DirectInput!
+ERR_CTRL_DEVICE_RESTORE=Не вдалося відновити рівень співпрації введення пристрою!
+
+# === Звук — діалог гучності ===
+DLG_VOL_TITLE=Гучність
+DLG_VOL_MASTER=&Головна
+DLG_VOL_SQ0=SQ&0
+DLG_VOL_SQ1=SQ&1
+DLG_VOL_TRI=&TRI
+DLG_VOL_NOI=&NOI
+DLG_VOL_PCM=&PCM
+DLG_VOL_EXT=&EXT
+DLG_VOL_MUTE=Без звуку
+DLG_VOL_CLOSE=Закрити
+
+# === Діалог редактора заголовка iNES ===
+DLG_INES_TITLE=Редактор заголовка iNES
+DLG_INES_FILENAME=Ім'я файлу ROM:
+DLG_INES_VER1=Стандартний &iNES
+DLG_INES_VER2=NES &2.0
+DLG_INES_MAPPER=&Номер мапера:
+DLG_INES_PRG=&Банки PRG ROM:
+DLG_INES_CHR=&Банки CHR ROM:
+DLG_INES_HORIZ=&Горизонтальне дзеркалювання
+DLG_INES_VERT=&Вертикальне дзеркалювання
+DLG_INES_VS=VS Unisyst&em
+DLG_INES_PC10=Pla&ychoice-10
+DLG_INES_4SCR=&4-екранне VRAM
+DLG_INES_BATT=Battery-backed &SRAM
+DLG_INES_TRAIN=&Тренажер
+DLG_INES_SUBMAP=П&ідмапер:
+DLG_INES_BATTERY=(батарея)
+DLG_INES_PRGRAM=PR&G RAM:
+DLG_INES_CHRRAM=CH&R RAM:
+DLG_INES_NTSC=&NTSC
+DLG_INES_PAL=P&AL
+DLG_INES_DUAL=&Двійковий
+DLG_INES_VSPPU=VS PP&U:
+DLG_INES_VSFLAGS=VS &Прапори:
+TITLE_INES_EDITOR=Редактор iNES
+
+# === Діалоги фільмів ===
+DLG_MOVIE_PLAY_TITLE=Відтворити фільм
+DLG_MOVIE_RECORD_TITLE=Записати фільм
+DLG_MOVIE_FILE=&Файл фільму:
+DLG_MOVIE_DESC=&Опис:
+DLG_MOVIE_LENGTH=Тривалість:
+DLG_MOVIE_FRAMES=Кадри:
+DLG_MOVIE_RERECORDS=Перезаписи:
+DLG_MOVIE_TVMODE=TV режим:
+DLG_MOVIE_RESUME=&Продовжити запис після завантаження стану
+DLG_MOVIE_CONTROLLERS=Контролери
+DLG_MOVIE_PORT1=Порт 1:
+DLG_MOVIE_PORT2=Порт 2:
+DLG_MOVIE_EXPANSION=Розширення:
+DLG_MOVIE_CONFIGURE=&Налаштувати...
+DLG_MOVIE_RECORD_FROM=Записати з...
+DLG_MOVIE_HARD_RESET=&Твердий скид
+DLG_MOVIE_CUR_STATE=Поточний &стан
+
+# === Діалог палітри ===
+DLG_PAL_TITLE=Налаштування палітри
+DLG_PAL_PALETTE=Палітра
+DLG_PAL_HUE=&Відтінок:
+DLG_PAL_SAT=&Насиченість:
+DLG_PAL_CUSTOM=&Користувацька...
+DLG_PAL_PREVIEW=Попередній перегляд
+DLG_PAL_EMPHASIS=Акцент:
+DLG_PAL_NOTE=Примітка: Червоний і зелений акценти поміняні місцями для PAL/Dendy
+DLG_PAL_EXTRAGRAY=&Додаткові сірі (сумісність)
+
+# === Діалог вибору DLL ===
+DLG_DLL_TITLE=Вибрати DLL мапера
+DLG_DLL_TEXT=Цей ROM підтримується декількома DLL маперів.\nБудь ласка, виберіть той, який ви хочете використовувати.
+
+# === Діалог точки зупинки ===
+DLG_BREAK_TITLE=Додати/Редагувати точку зупинки
+DLG_BREAK_ENABLED=&Увімкнути точку зупинки
+DLG_BREAK_ADDR=Адреса
+DLG_BREAK_OP=Операція
+DLG_BREAK_TIME=Час
+DLG_BREAK_EXEC=Ви&конання
+DLG_BREAK_READ=&Читання
+DLG_BREAK_WRITE=&Запис
+DLG_BREAK_ACCESS=&Доступ
+DLG_BREAK_OPCODE=&Код операції
+DLG_BREAK_NMI=&NMI
+DLG_BREAK_IRQ=&IRQ
+DLG_BREAK_BRK=&BRK
+DLG_BREAK_SCANLINE=&Сканлінія
+DLG_BREAK_FROM=&Від
+DLG_BREAK_TO=&До
+
+# === Діалогове вікно інформації про зневадження ===
+DLG_DEBUG_TITLE=Інформація про зневадження
+
+# === Зневадження CPU ===
+DLG_DBGCPU_TITLE=Зневадження
+DLG_DBGCPU_REGISTERS=Регістри
+DLG_DBGCPU_TIMING=Часування
+DLG_DBGCPU_IRQS=IRQ
+DLG_DBGCPU_FLAGS=Прапори
+DLG_DBGCPU_BANKS=Банки
+DLG_DBGCPU_BREAKPOINTS=Точки зупинки
+DLG_DBGCPU_CONTROLS=Керування
+DLG_DBGCPU_MEMORY=Пам'ять
+DLG_DBGCPU_TRACE=Трасування
+DLG_DBGCPU_RUN=Запустити
+DLG_DBGCPU_STEP=Крок
+DLG_DBGCPU_RESET=Скинути
+DLG_DBGCPU_POWER=Живлення
+DLG_DBGCPU_DUMPCPU=Д&амп CPU
+DLG_DBGCPU_DUMPPPU=Дамп &PPU
+DLG_DBGCPU_STARTLOG=Роз&почати лог
+DLG_DBGCPU_STOPLOG=Зупинити &лог
+DLG_DBGCPU_SEEKPC=Перейти до PC
+DLG_DBGCPU_SEEKTO=Перейти до адреси:
+DLG_DBGCPU_SEEKSEL=Виб>
+DLG_DBGCPU_ADD=Д&одати
+DLG_DBGCPU_EDIT=&Редагувати
+DLG_DBGCPU_DELETE=Ви&далити
+
+# === Зневадження PPU ===
+DLG_DBGPPU_TITLE=Зневадження - PPU
+DLG_DBGPPU_NAMETABLE=Таблиця імен
+DLG_DBGPPU_SPRITES=Спрайти
+DLG_DBGPPU_PATTERNS=Таблиці шаблонів
+DLG_DBGPPU_PALETTE=Палітра
+DLG_DBGPPU_DETAILS=Деталі
+DLG_DBGPPU_CLICK=Лівий клік для перемикання палітр.
+DLG_DBGPPU_HOVER=Наведіть курсор на елемент для перегляду деталей.\nПравий клік для запам'ятовування вибору.
+DLG_DBGPPU_SELTYPE=Тип вибору:
+DLG_DBGPPU_TILEFLIP=Перевернути 8x&16
+
+# === Про програму ===
+ABOUT_TITLE=Про Nintendulator
+ABOUT_TEXT=Nintendulator\nЕмулятор NES\n\nCopyright (C) QMT Productions
+
+# === Зміна мови ===
+LANG_CHANGED=Мову змінено
+LANG_CHANGED_MSG=Мову змінено. Деякі елементи оновляться після перезапуску.
+
+# === Меню мови ===
+NO_LANGUAGES=(Мов не знайдено)
+
+# === APU ===
+MSG_APU_STARTED=APU запущено
+ERR_APU_REGION=Невідомий регіон, APU не налаштовано
+
+# === CPU ===
+ERR_CPU_BAD_OPCODE=Недійсний код операції, CPU заблоковано
+
+# === Помилки ROM ===
+ERR_ROM_OPEN=Не вдалося відкрити файл ROM
+ERR_ROM_INVALID=Недійсний формат файлу ROM
+ERR_ROM_MAPPER=Непідтримуваний мапер
+ERR_ROM_UNIF=Недійсний ROM UNIF
+ERR_ROM_FDS_HEADER=Недійсний заголовок FDS
+ERR_ROM_FDS_DISKSIDE=Недійсна сторона диска FDS
+ERR_ROM_NSF=Недійсний файл NSF
+MSG_ROM_LOADED=ROM завантажено: %s
+MSG_ROM_CLOSED=ROM закрито
+MSG_ROM_ALREADY_LOADED=ROM вже завантажено. Спочатку закрийте його.
+
+# === Помилки заголовка ===
+ERR_HEADER_REOPEN=Не вдалося повторно відкрити файл! Відхилити зміни?
+ERR_HEADER_OPEN=Не вдалося відкрити ROM!
+ERR_HEADER_NOT_INES=Вибраний файл не є зображенням ROM iNES!
+ERR_HEADER_DISKDUDE=Вибраний ROM, схоже, було пошкоджено "DiskDude!" - очищення...
+ERR_HEADER_INCONSISTENT=Виявлено нерозпізнані або суперечливі дані у заголовку ROM! Бажаєте очистити їх?
+
+# === Відео ===
+ERR_GFX_DIRECTDRAW=Не вдалося ініціалізувати DirectDraw
+ERR_GFX_SURFACE=Не вдалося створити поверхню DirectDraw
+ERR_GFX_PALETTE=Не вдалося встановити палітру DirectDraw
+ERR_GFX_RENDER=Помилка рендерингу DirectDraw
+ERR_GFX_MODE=Непідтримуваний відеорежим
+MSG_GFX_SCREENSHOT=Знімок збережено: %s
+ERR_GFX_FLIP=Не вдалося перемкнути на первинну поверхню! Повернення до режиму вікна...
+ERR_GFX_ILLEGAL_PALETTE=Вибрано недійсну палітру!
+ERR_GFX_LOAD_PALETTE=Не вдалося завантажити вказану палітру! Повернення до стандартної!
+ERR_GFX_INVALID_PALETTE=Вибраний файл не є дійсною палітрою!
+ERR_GFX_PERF_COUNTER=Не вдалося визначити частоту лічильника продуктивності!
+ERR_GFX_DDRAW_DLL=Критична помилка: не вдалося завантажити DLL DirectDraw!
+ERR_GFX_DDRAW_ENTRY=Критична помилка: не вдалося знайти точку входу для DirectDrawCreateEx!
+ERR_GFX_DDRAW7=Не вдалося ініціалізувати DirectDraw 7
+ERR_GFX_FULLSCREEN_LEVEL=Не вдалося встановити рівень співпраці повного екрану! Повернення до режиму вікна...
+ERR_GFX_NO_FULLSCREEN_RES=На вашому пристрої відображення не підтримуються роздільні здатності повного екрану!
+ERR_GFX_NO_FULLSCREEN_RES_REVERT=На вашому пристрої відображення не підтримуються роздільні здатності повного екрану! Повернення до режиму вікна...
+ERR_GFX_COOP_LEVEL=Не вдалося встановити рівень співпраці DirectDraw
+ERR_GFX_PRIMARY_SURFACE=Не вдалося створити первинну поверхню
+ERR_GFX_SECONDARY_SURFACE=Не вдалося отримати вторинну поверхню
+ERR_GFX_CREATE_SECONDARY=Не вдалося створити вторинну поверхню
+ERR_GFX_CLIPPER=Не вдалося створити обрізач
+ERR_GFX_CLIPPER_WINDOW=Не вдалося встановити вікно обрізача
+ERR_GFX_CLIPPER_ASSIGN=Не вдалося призначити обрізач первинній поверхні
+ERR_GFX_SURF_DESC=Не вдалося отримати опис поверхні
+ERR_GFX_BIT_DEPTH=Виявлено недійсну глибину кольору!
+ERR_GFX_OPENGL=Не вдалося ініціалізувати OpenGL! Повернення до DirectDraw.
+
+# === Звук ===
+ERR_APU_DIRECTSOUND=Не вдалося ініціалізувати DirectSound
+ERR_APU_BUFFER=Не вдалося створити буфер DirectSound
+ERR_APU_FORMAT=Непідтримуваний аудіоформат
+MSG_APU_DISABLED=Звук вимкнено
+
+# === Стани збереження ===
+MSG_STATE_SAVED=Стан збережено у слот %d
+MSG_STATE_LOADED=Стан завантажено зі слоту %d
+ERR_STATE_SAVE=Не вдалося зберегти стан
+ERR_STATE_LOAD=Не вдалося завантажити стан
+ERR_STATE_VERSION=Невідповідність версії файлу стану
+ERR_STATE_CORRUPT=Файл стану пошкоджено
+MSG_STATE_SLOT=Слот %d
+
+# === Запис ===
+MSG_MOVIE_RECORDING=Запис фільму...
+MSG_MOVIE_PLAYING=Відтворення фільму...
+MSG_MOVIE_STOPPED=Фільм зупинено
+ERR_MOVIE_OPEN=Не вдалося відкрити файл фільму
+ERR_MOVIE_INVALID=Недійсний файл фільму
+ERR_MOVIE_VERSION=Невідповідність версії фільму
+MSG_AVI_RECORDING=Запис AVI...
+ERR_AVI_OPEN=Не вдалося відкрити файл AVI
+MSG_AVI_STOPPED=Запис AVI зупинено
+
+# === Помилки AVI ===
+ERR_AVI_NOT_RECORDING=Наразі не ведеться запис AVI!
+ERR_AVI_ALREADY_RECORDING=Вже ведеться запис AVI!
+ERR_AVI_COMPRESSION=Не вдалося налаштувати стиснення AVI!
+ERR_AVI_FRAME_NOT_RECORDING=Помилка! Спроба запису кадру AVI, коли запис не ведеться!
+ERR_AVI_WRITE_VIDEO=Не вдалося записати відео у AVI!
+ERR_AVI_AUDIO_NOT_RECORDING=Помилка! Спроба запису аудіо AVI, коли запис не ведеться!
+ERR_AVI_WRITE_AUDIO=Не вдалося записати аудіо у AVI!
+
+# === Game Genie ===
+ERR_GENIE_INVALID=Недійсний код Game Genie
+ERR_GENIE_TOO_MANY=Забагато кодів Game Genie (максимум 3)
+MSG_GENIE_APPLIED=Код Game Genie застосовано
+
+# === Мапер ===
+ERR_MAPPER_LOAD=Не вдалося завантажити %s - недійсний файл DLL!
+ERR_MAPPER_NOTFOUND=Мапер не знайдено
+ERR_MAPPER_VERSION=Не вдалося завантажити пакет маперів %s - невідповідність версії!
+ERR_MAPPER_NO_DLLS=Не знайдено DLL маперів!
+ERR_NES_RELOCATE=Nintendulator не зміг повністю перемістити свої файли даних до "%s".\nБудь ласка, видаліть папку "%s" після переміщення її вмісту.
+ERR_MAPPER_DLL_VERSION=Невірна версія DLL мапера!
+ERR_MAPPER_DLL_LOAD=Помилка завантаження DLL мапера!
+
+# === Зневадження ===
+DBG_BREAK_EXEC=Виконання: $%04X
+DBG_BREAK_READ=Читання: $%04X
+DBG_BREAK_WRITE=Запис: $%04X
+DBG_BREAK_ACCESS=Доступ: $%04X
+DBG_BREAK_OPCODE=Код операції: $%02X
+DBG_BREAK_NMI=Переривання: NMI
+DBG_BREAK_IRQ=Переривання: IRQ
+DBG_BREAK_BRK=Переривання: BRK
+DBG_BREAK_SCANLINE=Сканлінія: %i
+DBG_BREAK_UNDEF=НЕВИЗНАЧЕНО
+DBG_BREAK_ENABLED= (+)
+DBG_BREAK_DISABLED= (-)
+MSG_DBG_LOG_STARTED=Логування розпочато
+MSG_DBG_LOG_STOPPED=Логування зупинено
+
+# === Перевірка зневадження ===
+DBG_INVALID_ADDR=Вказано недійсний діапазон адрес!
+DBG_INVALID_OPCODE=Вказано недійсний код операції!
+DBG_INVALID_SCANLINE=Вказано недійсну сканлінію!
+
+# === Фільм ===
+MOVIE_UNEXPECTED_EOF=Неочікуваний EOF у фільмі!
+MOVIE_TV_PAL=PAL
+MOVIE_TV_NTSC=NTSC
+MOVIE_LENGTH_FMT=Тривалість: %i:%02i.%02i
+
+# === Сумісність з MapperInterface ===
+COMPAT_UNSUPPORTED=Не підтримується
+COMPAT_PARTIAL=Частково підтримується
+COMPAT_MOSTLY=Більшістю підтримується
+COMPAT_FULL=Повністю підтримується!
+
+# === Застарілі / невикористовувані ===
+MENU_NES=&NES
+MENU_SETTINGS=&Налаштування
+MENU_SETTINGS_VIDEO=&Відео...
+MENU_SETTINGS_PATHS=&Шляхи...
+MENU_SETTINGS_CLOCK=&Швидкість тактування...
+MENU_MOVIE=&Фільм
+MENU_MOVIE_RECORD_OLD=&Записати...
+MENU_MOVIE_PLAY_OLD=&Відтворити...
+MENU_MOVIE_STOP_OLD=З&упинити

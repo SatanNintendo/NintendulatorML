@@ -1,0 +1,502 @@
+# NintendulatorML Language File - Japanese
+# Format: KEY=Value  |  # = comment  |  \n = newline in value
+
+[Info]
+Language=日本語
+Author=Community
+Version=1.0
+
+[Strings]
+
+
+# === メインメニュー — 最上位レベル ===
+MENU_FILE=&ファイル
+MENU_CPU=&CPU
+MENU_PPU=&PPU
+MENU_SOUND=&サウンド
+MENU_INPUT=&入力
+MENU_DEBUG=&デバッグ
+MENU_MISC=&その他
+MENU_LANGUAGE=&言語
+MENU_HELP=&ヘルプ
+
+# === ファイルサブメニュー ===
+MENU_FILE_OPEN=&ROMを開く...
+MENU_FILE_CLOSE=&閉じる
+MENU_FILE_RECENT=最近の&ファイル
+MENU_FILE_RECENT_CLEAR=最近のファイルをクリア(&C)
+MENU_FILE_HEADER=iNESヘッダーを編集(&H)
+MENU_FILE_AUTORUN=自動実行(&A)
+MENU_FILE_BROWSESAVES=セーブファイルを閲覧(&B)
+MENU_FILE_EXIT=終了(&X)
+
+# === CPUサブメニュー ===
+MENU_NES_RUN=実行(&R)\tF2
+MENU_NES_PAUSE=ステップ(&S)\tShift+F2
+MENU_NES_STOP=停止(&T)\tF3
+MENU_NES_RESET=ソフトリセット(&F)\tF4
+MENU_NES_POWER=ハードリセット(&H)\tShift+F4
+MENU_CPU_SAVESTATE=セーブ状態(&V)\tF5
+MENU_CPU_LOADSTATE=ロード状態(&L)\tF8
+MENU_CPU_PREVSTATE=前の状態(&P)\tF6
+MENU_CPU_NEXTSTATE=次の状態(&N)\tF7
+MENU_SETTINGS_GAMEGENIE=ゲームジーニー(&G)\tCtrl+G
+MENU_CPU_BADOPS=不正なオペコードを記録(&O)
+MENU_CPU_FRAMESTEP=フレームステップ(&F)
+MENU_CPU_FRAMESTEP_ENABLED=有効(&E)\tCtrl+F
+MENU_CPU_FRAMESTEP_STEP=ステップ(&S)\tSpace
+
+# === PPUサブメニュー ===
+MENU_PPU_FRAMESKIP=フレームスキップ(&F)
+MENU_PPU_FRAMESKIP_AUTO=自動(&A)
+MENU_PPU_SIZE=サイズ(&S)
+MENU_PPU_FIXASPECT=アスペクト比を修正(&F)
+MENU_PPU_MODE=モード(&M)
+MENU_PPU_MODE_HYBRID=ハイブリッド(&H)
+MENU_PPU_PALETTE=パレット(&P)...
+MENU_PPU_SLOWDOWN=スローダウン(&S)
+MENU_PPU_SLOWDOWN_ENABLED=有効(&E)\tTab
+MENU_PPU_FULLSCREEN=全画面表示(&F)\tAlt+Enter / F11
+MENU_PPU_SCANLINES=スキャンライン(&S)
+MENU_PPU_BILINEAR=バイリニアフィルター(&B)\tCtrl+B
+MENU_PPU_INTSCALE=整数スケーリング(&I)
+MENU_PPU_MATCHRATE=モニターのレートに合わせる(&M)
+MENU_PPU_ALWAYSONTOP=常に最前面に表示(&A)
+MENU_PPU_EXCLUSIVEFS=排他的全画面表示(&E)
+MENU_GAME=ゲーム(&G)
+
+# === PPUサブメニュー — テーマ ===
+MENU_PPU_THEME=テーマ(&T)
+MENU_PPU_THEME_LIGHT=ライト(&L)
+MENU_PPU_THEME_DARK=ダーク(&D)
+
+# === サウンドサブメニュー ===
+MENU_SOUND_ENABLED=有効(&E)\tCtrl+S
+MENU_SETTINGS_SOUND=音量(&V)...
+
+# === 入力サブメニュー ===
+MENU_SETTINGS_CONTROLLERS=設定(&C)...
+
+# === デバッグサブメニュー ===
+MENU_DEBUG_CPU=逆アセンブリ(&A)\tCtrl+F1
+MENU_DEBUG_PPU=ビデオ(&V)\tCtrl+F2
+MENU_DEBUG_STATWND=ステータスウィンドウ(&S)
+
+# === その他サブメニュー ===
+MENU_MISC_STARTAVI=AVIキャプチャを開始(&S)...
+MENU_MISC_STOPAVI=AVIキャプチャを停止(&S)
+MENU_MOVIE_PLAY=ムービーを再生(&P)...
+MENU_MOVIE_RECORD=ムービーを記録(&R)...
+MENU_MOVIE_STOP=ムービーを停止(&S)
+
+# === ヘルプサブメニュー ===
+MENU_HELP_ABOUT=バージョン情報(&A)...
+
+# === ウィンドウタイトル ===
+WINDOW_TITLE=Nintendulator
+WINDOW_TITLE_PAUSED=Nintendulator [一時停止]
+WINDOW_TITLE_FPS=Nintendulator - %s - %d FPS
+WINDOW_TITLE_STOPPED=Nintendulator - 停止中
+WINDOW_TITLE_FPS_NOSKIP=Nintendulator - %i FPS (FSkip無し)
+WINDOW_TITLE_FPS_FSKIP=Nintendulator - %i FPS (%i %sFSkip)
+TITLEBAR_AUTO=自動
+
+# === 共通ダイアログ ===
+DLG_OK=OK
+DLG_CANCEL=キャンセル
+DLG_YES=はい
+DLG_NO=いいえ
+DLG_APPLY=適用
+DLG_BROWSE=参照...
+DLG_NINTENDULATOR=Nintendulator
+
+# === ファイルダイアログ ===
+OPEN_ROM_TITLE=ROMを開く
+OPEN_ROM_FILTER=NES ROM (*.nes;*.unif;*.fds;*.nsf)\0*.nes;*.unif;*.fds;*.nsf\0すべてのファイル (*.*)\0*.*\0
+OPEN_MOVIE_TITLE=ムービーを開く
+SAVE_MOVIE_TITLE=ムービーを保存
+OPEN_PALETTE_TITLE=パレットを開く
+SAVE_AVI_TITLE=AVIを保存
+
+# === ファイルダイアログフィルター表示名 ===
+FILTER_ROM_ALL=サポートされているすべてのファイル (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)
+FILTER_ROM_INES=iNES ROMイメージ (*.NES)
+FILTER_ROM_UNIF=ユニバーサルNES交換形式ROMファイル (*.UNIF, *.UNF)
+FILTER_ROM_FDS=ファミリーコンピュータディスクシステムディスクイメージ (*.FDS)
+FILTER_ROM_NSF=NESサウンドファイル (*.NSF)
+FILTER_ROM_INES_SHORT=iNES ROMイメージ (*.NES)
+FILTER_MOVIE=Nintendulatorムービー (*.NMV)
+FILTER_AVI=AVIファイル (*.AVI)
+FILTER_PALETTE=パレットファイル (*.PAL)
+OPEN_HEADER_TITLE=ヘッダーを編集
+
+# === コントローラー — デバイスリスト ===
+CONT_UNCONNECTED=未接続
+CONT_STDCONTROLLER=標準コントローラー
+CONT_ZAPPER=ザッパー
+CONT_ARKANOIDPADDLE=アルカノイドパドル
+CONT_POWERPAD=パワーパッド
+CONT_FOURSCORE1=フォースコア (ポート1のみ)
+CONT_SNESCONTROLLER=SNESコントローラー
+CONT_VSZAPPER=VSシステムザッパー
+CONT_SNESMOUSE=SNESマウス
+CONT_FOURSCORE2=フォースコア (ポート2のみ)
+CONT_FAMI4PLAY=ファミリーコンピュータ4人プレイアダプター
+CONT_EXP_ARKANOIDPADDLE=ファミリーコンピュータアルカノイドパドル
+CONT_FAMILYBASICKEYBOARD=ファミリーベーシックキーボード
+CONT_SUBORKEYBOARD=サボーキーボード
+CONT_FAMTRAINER=ファミリートレーナー
+CONT_TABLET=オエカキッズタブレット
+
+# === コントローラー — メインダイアログ ===
+CONT_LABEL_PORT1=コントローラーポート1(&1):
+CONT_LABEL_PORT2=コントローラーポート2(&2):
+CONT_LABEL_EXP=拡張ポート(&E):
+CONT_CONFIG=設定(&C)
+CONT_UDLR=同時押し(左+右、上+下)を許可(&U)
+CONT_POV=POVトリガーを8方向ボタンとして設定(&P)
+
+# === コントローラー — 設定ダイアログ ===
+DLG_CTRL_STDCONT=標準コントローラー設定
+DLG_CTRL_BUTTONS=ボタン
+DLG_CTRL_DPAD=十字キー
+DLG_CTRL_A=&A
+DLG_CTRL_B=&B
+DLG_CTRL_SELECT=セレクト(&S)
+DLG_CTRL_START=スタート(&T)
+DLG_CTRL_UP=&上
+DLG_CTRL_DOWN=&下
+DLG_CTRL_LEFT=&左
+DLG_CTRL_RIGHT=&右
+DLG_CTRL_TRIGGER=トリガー(&T)
+DLG_CTRL_AXIS=軸(&A)
+DLG_CTRL_ZAPPER=ザッパー設定
+DLG_CTRL_ARKPAD=アルカノイドパドル設定
+DLG_CTRL_POWERPAD=パワーパッド設定
+DLG_CTRL_FOURSCORE=フォースコア設定
+DLG_CTRL_FAMI4PLAY=ファミリーコンピュータ4人プレイアダプター
+DLG_CTRL_SNESCONT=SNESコントローラー設定
+DLG_CTRL_SNESMOUSE=SNESマウス設定
+DLG_CTRL_VSZAPPER=VSザッパー設定
+DLG_CTRL_FLIP=反転(&F)
+DLG_CTRL_PORT1=ポート1(&1):
+DLG_CTRL_PORT2=ポート2(&2):
+DLG_CTRL_PORT3=ポート3(&3):
+DLG_CTRL_PORT4=ポート4(&4):
+DLG_CTRL_CONFIG=設定(&C)
+DLG_CTRL_CLOSE=閉じる
+DLG_CTRL_TITLE=コントローラー
+DLG_CTRL_MORE_BUTTONS=追加ボタン
+DLG_CTRL_FAMTRAIN=ファミリートレーナー設定
+DLG_CTRL_FBKEY=ファミリーベーシックキーボード
+DLG_CTRL_TABLET=オエカキッズタブレット
+
+# === コントローラーエラー ===
+ERR_CTRL_KEYBOARD_INIT=キーボード入力デバイスを初期化できません！
+ERR_CTRL_KEYBOARD_FORMAT=キーボード入力データ形式を設定できません！
+ERR_CTRL_KEYBOARD_LEVEL=キーボード入力協調レベルを設定できません！
+ERR_CTRL_MOUSE_INIT=マウス入力デバイスを初期化できません！
+ERR_CTRL_MOUSE_LEVEL=マウス入力協調レベルを設定できません！
+ERR_CTRL_JOY_LEVEL=ジョイスティック入力協調レベルを復元できません！
+ERR_CTRL_INVALID_STD=エラー: 標準ポートに無効なコントローラータイプが選択されました！
+ERR_CTRL_INVALID_EXP=エラー: 拡張ポートに無効なコントローラータイプが選択されました！
+CONT_NO_CONFIG=設定は不要です！
+CONT_ERR_DIRECTINPUT=DirectInputを初期化できません！
+CONT_ERR_KEYBOARD=キーボードの初期化に失敗しました！
+CONT_ERR_MOUSE=マウスの初期化に失敗しました！
+CONT_ERR_JOYSTICK=ジョイスティックの初期化に失敗しました！
+CONT_ERR_KEY_ID=エラー - 無効なキーボードキーIDが検出されました！
+CONT_ERR_MOUSE_ID=エラー - 無効なマウスボタンIDが検出されました！
+ERR_CTRL_DINPUT_LEVEL=デバイス入力協調レベルを変更できません！
+ERR_CTRL_DEVICE_LEVEL=DirectInputを初期化できません！
+ERR_CTRL_DEVICE_RESTORE=デバイス入力協調レベルを復元できません！
+
+# === サウンド — 音量ダイアログ ===
+DLG_VOL_TITLE=音量
+DLG_VOL_MASTER=マスター(&M)
+DLG_VOL_SQ0=SQ&0
+DLG_VOL_SQ1=SQ&1
+DLG_VOL_TRI=&TRI
+DLG_VOL_NOI=&NOI
+DLG_VOL_PCM=&PCM
+DLG_VOL_EXT=&EXT
+DLG_VOL_MUTE=Mute
+DLG_VOL_CLOSE=閉じる
+
+# === iNESヘッダーエディターダイアログ ===
+DLG_INES_TITLE=iNESヘッダーエディター
+DLG_INES_FILENAME=ROMファイル名:
+DLG_INES_VER1=標準iNES(&I)
+DLG_INES_VER2=NES 2.0(&2)
+DLG_INES_MAPPER=マッパー番号(&M):
+DLG_INES_PRG=PRG ROMバンク(&P):
+DLG_INES_CHR=CHR ROMバンク(&C):
+DLG_INES_HORIZ=水平ミラーリング(&H)
+DLG_INES_VERT=垂直ミラーリング(&V)
+DLG_INES_VS=VSシステム(&S)
+DLG_INES_PC10=プレイチョイス-10(&1)
+DLG_INES_4SCR=4画面VRAM(&4)
+DLG_INES_BATT=バックアップSRAM(&B)
+DLG_INES_TRAIN=トレーナー(&T)
+DLG_INES_SUBMAP=サブマッパー(&S):
+DLG_INES_BATTERY=(バッテリー)
+DLG_INES_PRGRAM=PRG RAM(&G):
+DLG_INES_CHRRAM=CHR RAM(&R):
+DLG_INES_NTSC=NTSC(&N)
+DLG_INES_PAL=PAL(&A)
+DLG_INES_DUAL=デュアル(&D)
+DLG_INES_VSPPU=VS PPU(&P):
+DLG_INES_VSFLAGS=VSフラグ(&F):
+TITLE_INES_EDITOR=iNESエディター
+
+# === ムービーダイアログ ===
+DLG_MOVIE_PLAY_TITLE=ムービーを再生
+DLG_MOVIE_RECORD_TITLE=ムービーを記録
+DLG_MOVIE_FILE=ムービーファイル(&M):
+DLG_MOVIE_DESC=説明(&D):
+DLG_MOVIE_LENGTH=長さ:
+DLG_MOVIE_FRAMES=フレーム:
+DLG_MOVIE_RERECORDS=再記録:
+DLG_MOVIE_TVMODE=TVモード:
+DLG_MOVIE_RESUME=セーブ状態ロード時に記録を再開(&R)
+DLG_MOVIE_CONTROLLERS=コントローラー
+DLG_MOVIE_PORT1=ポート1:
+DLG_MOVIE_PORT2=ポート2:
+DLG_MOVIE_EXPANSION=拡張:
+DLG_MOVIE_CONFIGURE=設定(&C)...
+DLG_MOVIE_RECORD_FROM=記録開始位置...
+DLG_MOVIE_HARD_RESET=ハードリセット(&H)
+DLG_MOVIE_CUR_STATE=現在の状態(&S)
+
+# === パレットダイアログ ===
+DLG_PAL_TITLE=パレット設定
+DLG_PAL_PALETTE=パレット
+DLG_PAL_HUE=色相(&H):
+DLG_PAL_SAT=彩度(&S):
+DLG_PAL_CUSTOM=カスタム(&C)...
+DLG_PAL_PREVIEW=プレビュー
+DLG_PAL_EMPHASIS=強調:
+DLG_PAL_NOTE=注意: PAL/Dendyでは赤と緑の強調が入れ替わります
+DLG_PAL_EXTRAGRAY=追加のグレー(互換性)(&E)
+
+# === DLL選択ダイアログ ===
+DLG_DLL_TITLE=マッパーDLLを選択
+DLG_DLL_TEXT=このROMは複数のマッパーDLLでサポートされています。\n使用したいものを選択してください。
+
+# === ブレークポイントダイアログ ===
+DLG_BREAK_TITLE=ブレークポイントの追加/編集
+DLG_BREAK_ENABLED=ブレークポイントを有効にする(&E)
+DLG_BREAK_ADDR=アドレス
+DLG_BREAK_OP=操作
+DLG_BREAK_TIME=時間
+DLG_BREAK_EXEC=実行(&E)
+DLG_BREAK_READ=読み取り(&R)
+DLG_BREAK_WRITE=書き込み(&W)
+DLG_BREAK_ACCESS=アクセス(&A)
+DLG_BREAK_OPCODE=オペコード(&O)
+DLG_BREAK_NMI=&NMI
+DLG_BREAK_IRQ=&IRQ
+DLG_BREAK_BRK=&BRK
+DLG_BREAK_SCANLINE=スキャンライン(&S)
+DLG_BREAK_FROM=から(&F)
+DLG_BREAK_TO=まで(&T)
+
+# === デバッグ情報ウィンドウ ===
+DLG_DEBUG_TITLE=デバッグ情報
+
+# === デバッガーCPU ===
+DLG_DBGCPU_TITLE=デバッガー
+DLG_DBGCPU_REGISTERS=レジスタ
+DLG_DBGCPU_TIMING=タイミング
+DLG_DBGCPU_IRQS=IRQ
+DLG_DBGCPU_FLAGS=フラグ
+DLG_DBGCPU_BANKS=バンク
+DLG_DBGCPU_BREAKPOINTS=ブレークポイント
+DLG_DBGCPU_CONTROLS=コントロール
+DLG_DBGCPU_MEMORY=メモリ
+DLG_DBGCPU_TRACE=トレース
+DLG_DBGCPU_RUN=実行
+DLG_DBGCPU_STEP=ステップ
+DLG_DBGCPU_RESET=リセット
+DLG_DBGCPU_POWER=電源
+DLG_DBGCPU_DUMPCPU=CPUダンプ(&D)
+DLG_DBGCPU_DUMPPPU=PPUダンプ(&P)
+DLG_DBGCPU_STARTLOG=ログ開始(&S)
+DLG_DBGCPU_STOPLOG=ログ停止(&G)
+DLG_DBGCPU_SEEKPC=PCへ移動
+DLG_DBGCPU_SEEKTO=アドレスへ移動:
+DLG_DBGCPU_SEEKSEL=選択>
+DLG_DBGCPU_ADD=追加(&A)
+DLG_DBGCPU_EDIT=編集(&E)
+DLG_DBGCPU_DELETE=削除(&D)
+
+# === デバッガーPPU ===
+DLG_DBGPPU_TITLE=デバッガー - PPU
+DLG_DBGPPU_NAMETABLE=ネームテーブル
+DLG_DBGPPU_SPRITES=スプライト
+DLG_DBGPPU_PATTERNS=パターンテーブル
+DLG_DBGPPU_PALETTE=パレット
+DLG_DBGPPU_DETAILS=詳細
+DLG_DBGPPU_CLICK=左クリックでパレットを切り替えます。
+DLG_DBGPPU_HOVER=カーソルをアイテム上にホバーして詳細を表示。\n右クリックで選択を記憶します。
+DLG_DBGPPU_SELTYPE=選択タイプ:
+DLG_DBGPPU_TILEFLIP=8x16反転(&F)
+
+# === バージョン情報 ===
+ABOUT_TITLE=Nintendulatorについて
+ABOUT_TEXT=Nintendulator\nNESエミュレーター\n\nCopyright (C) QMT Productions
+
+# === 言語変更 ===
+LANG_CHANGED=言語が変更されました
+LANG_CHANGED_MSG=言語が変更されました。一部の要素は再起動時に更新されます。
+
+# === 言語メニュー ===
+NO_LANGUAGES=(言語が見つかりません)
+
+# === APU ===
+MSG_APU_STARTED=APUを開始しました
+ERR_APU_REGION=不明なリージョン、APUが設定されていません
+
+# === CPU ===
+ERR_CPU_BAD_OPCODE=不正なオペコード、CPUがロックされました
+
+# === ROMエラー ===
+ERR_ROM_OPEN=ROMファイルを開けませんでした
+ERR_ROM_INVALID=無効なROMファイル形式
+ERR_ROM_MAPPER=サポートされていないマッパー
+ERR_ROM_UNIF=無効なUNIF ROM
+ERR_ROM_FDS_HEADER=無効なFDSヘッダー
+ERR_ROM_FDS_DISKSIDE=無効なFDSディスクサイド
+ERR_ROM_NSF=無効なNSFファイル
+MSG_ROM_LOADED=ROMが読み込まれました: %s
+MSG_ROM_CLOSED=ROMが閉じられました
+MSG_ROM_ALREADY_LOADED=ROMは既に読み込まれています。まず閉じてください。
+
+# === ヘッダーエラー ===
+ERR_HEADER_REOPEN=ファイルを再度開けません！変更を破棄しますか？
+ERR_HEADER_OPEN=ROMを開けません！
+ERR_HEADER_NOT_INES=選択されたファイルはiNES ROMイメージではありません！
+ERR_HEADER_DISKDUDE=選択されたROMは"DiskDude!"によって破損しているようです - 清理中...
+ERR_HEADER_INCONSISTENT=ROMヘッダーに認識できないまたは一貫性のないデータが検出されました！クリーンアップしますか？
+
+# === ビデオ ===
+ERR_GFX_DIRECTDRAW=DirectDrawの初期化に失敗しました
+ERR_GFX_SURFACE=DirectDrawサーフェスの作成に失敗しました
+ERR_GFX_PALETTE=DirectDrawパレットの設定に失敗しました
+ERR_GFX_RENDER=DirectDrawレンダーエラー
+ERR_GFX_MODE=サポートされていないビデオモード
+MSG_GFX_SCREENSHOT=スクリーンショットが保存されました: %s
+ERR_GFX_FLIP=プライマリサーフェスに切り替えに失敗しました！ウィンドウモードに戻します...
+ERR_GFX_ILLEGAL_PALETTE=不正なパレットが選択されました！
+ERR_GFX_LOAD_PALETTE=指定されたパレットを読み込めません！デフォルトに戻します！
+ERR_GFX_INVALID_PALETTE=選択されたファイルは有効なパレットではありません！
+ERR_GFX_PERF_COUNTER=パフォーマンスカウンター周波数の判定に失敗しました！
+ERR_GFX_DDRAW_DLL=致命的なエラー: DirectDraw DLLを読み込めません！
+ERR_GFX_DDRAW_ENTRY=致命的なエラー: DirectDrawCreateExのエントリーポイントが見つかりません！
+ERR_GFX_DDRAW7=DirectDraw 7の初期化に失敗しました
+ERR_GFX_FULLSCREEN_LEVEL=全画面協調レベルの設定に失敗しました！ウィンドウモードに戻します...
+ERR_GFX_NO_FULLSCREEN_RES=お使いの表示デバイスでは全画面解像度がサポートされていません！
+ERR_GFX_NO_FULLSCREEN_RES_REVERT=お使いの表示デバイスでは全画面解像度がサポートされていません！ウィンドウモードに戻します...
+ERR_GFX_COOP_LEVEL=DirectDraw協調レベルの設定に失敗しました
+ERR_GFX_PRIMARY_SURFACE=プライマリサーフェスの作成に失敗しました
+ERR_GFX_SECONDARY_SURFACE=セカンダリサーフェスの取得に失敗しました
+ERR_GFX_CREATE_SECONDARY=セカンダリサーフェスの作成に失敗しました
+ERR_GFX_CLIPPER=クリッパーの作成に失敗しました
+ERR_GFX_CLIPPER_WINDOW=クリッパーウィンドウの設定に失敗しました
+ERR_GFX_CLIPPER_ASSIGN=クリッパーをプライマリサーフェスに割り当てに失敗しました
+ERR_GFX_SURF_DESC=サーフェス記述の取得に失敗しました
+ERR_GFX_BIT_DEPTH=無効なビット深度が検出されました！
+ERR_GFX_OPENGL=OpenGLの初期化に失敗しました！DirectDrawにフォールバックします。
+
+# === サウンド ===
+ERR_APU_DIRECTSOUND=DirectSoundの初期化に失敗しました
+ERR_APU_BUFFER=DirectSoundバッファの作成に失敗しました
+ERR_APU_FORMAT=サポートされていないオーディオ形式
+MSG_APU_DISABLED=サウンドが無効になりました
+
+# === セーブ状態 ===
+MSG_STATE_SAVED=状態がスロット%dに保存されました
+MSG_STATE_LOADED=状態がスロット%dから読み込まれました
+ERR_STATE_SAVE=状態の保存に失敗しました
+ERR_STATE_LOAD=状態の読み込みに失敗しました
+ERR_STATE_VERSION=状態ファイルのバージョンが一致しません
+ERR_STATE_CORRUPT=状態ファイルが破損しています
+MSG_STATE_SLOT=スロット%d
+
+# === 記録 ===
+MSG_MOVIE_RECORDING=ムービーを記録中...
+MSG_MOVIE_PLAYING=ムービーを再生中...
+MSG_MOVIE_STOPPED=ムービーが停止しました
+ERR_MOVIE_OPEN=ムービーファイルを開けませんでした
+ERR_MOVIE_INVALID=無効なムービーファイル
+ERR_MOVIE_VERSION=ムービーバージョンが一致しません
+MSG_AVI_RECORDING=AVIを記録中...
+ERR_AVI_OPEN=AVIファイルを開けませんでした
+MSG_AVI_STOPPED=AVI記録が停止しました
+
+# === AVIエラー ===
+ERR_AVI_NOT_RECORDING=現在AVIキャプチャは進行していません！
+ERR_AVI_ALREADY_RECORDING=AVIキャプチャは既に進行中です！
+ERR_AVI_COMPRESSION=AVI圧縮の設定に失敗しました！
+ERR_AVI_FRAME_NOT_RECORDING=エラー！記録中でないのにAVIフレームキャプチャが試行されました！
+ERR_AVI_WRITE_VIDEO=AVIへのビデオ書き込みに失敗しました！
+ERR_AVI_AUDIO_NOT_RECORDING=エラー！記録中でないのにAVIオーディオキャプチャが試行されました！
+ERR_AVI_WRITE_AUDIO=AVIへのオーディオ書き込みに失敗しました！
+
+# === ゲームジーニー ===
+ERR_GENIE_INVALID=無効なゲームジーニーコード
+ERR_GENIE_TOO_MANY=ゲームジーニーコードが多すぎます（最大3つ）
+MSG_GENIE_APPLIED=ゲームジーニーコードが適用されました
+
+# === マッパー ===
+ERR_MAPPER_LOAD=%sの読み込みに失敗しました - 有効なDLLファイルではありません！
+ERR_MAPPER_NOTFOUND=マッパーが見つかりません
+ERR_MAPPER_VERSION=マッパーパック%sの読み込みに失敗しました - バージョンが一致しません！
+ERR_MAPPER_NO_DLLS=マッパーDLLが見つかりません！
+ERR_NES_RELOCATE=Nintendulatorはデータファイルを"%s"に完全に再配置できませんでした。\n再配置後、フォルダ"%s"を削除してください。
+ERR_MAPPER_DLL_VERSION=不正なマッパーDLLバージョン！
+ERR_MAPPER_DLL_LOAD=マッパーDLLの読み込みエラー！
+
+# === デバッガー ===
+DBG_BREAK_EXEC=実行: $%04X
+DBG_BREAK_READ=読み取り: $%04X
+DBG_BREAK_WRITE=書き込み: $%04X
+DBG_BREAK_ACCESS=アクセス: $%04X
+DBG_BREAK_OPCODE=オペコード: $%02X
+DBG_BREAK_NMI=割り込み: NMI
+DBG_BREAK_IRQ=割り込み: IRQ
+DBG_BREAK_BRK=割り込み: BRK
+DBG_BREAK_SCANLINE=スキャンライン: %i
+DBG_BREAK_UNDEF=未定義
+DBG_BREAK_ENABLED= (+)
+DBG_BREAK_DISABLED= (-)
+MSG_DBG_LOG_STARTED=ログを開始しました
+MSG_DBG_LOG_STOPPED=ログを停止しました
+
+# === デバッガー検証 ===
+DBG_INVALID_ADDR=無効なアドレス範囲が指定されました！
+DBG_INVALID_OPCODE=無効なオペコードが指定されました！
+DBG_INVALID_SCANLINE=無効なスキャンラインが指定されました！
+
+# === ムービー ===
+MOVIE_UNEXPECTED_EOF=ムービーに予期しないEOFがあります！
+MOVIE_TV_PAL=PAL
+MOVIE_TV_NTSC=NTSC
+MOVIE_LENGTH_FMT=長さ: %i:%02i.%02i
+
+# === MapperInterface互換性 ===
+COMPAT_UNSUPPORTED=サポートされていません
+COMPAT_PARTIAL=部分的にサポートされています
+COMPAT_MOSTLY=ほぼサポートされています
+COMPAT_FULL=完全にサポートされています！
+
+# === 非推奨 / 未使用 ===
+MENU_NES=&NES
+MENU_SETTINGS=&設定
+MENU_SETTINGS_VIDEO=&ビデオ...
+MENU_SETTINGS_PATHS=&パス...
+MENU_SETTINGS_CLOCK=&クロック速度...
+MENU_MOVIE=&ムービー
+MENU_MOVIE_RECORD_OLD=&記録...
+MENU_MOVIE_PLAY_OLD=&再生...
+MENU_MOVIE_STOP_OLD=&停止
