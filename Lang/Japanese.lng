@@ -2,7 +2,7 @@
 # Format: KEY=Value  |  # = comment  |  \n = newline in value
 
 [Info]
-Language=日本語
+Language=日本語 / Japanese
 Author=Community
 Version=1.0
 
