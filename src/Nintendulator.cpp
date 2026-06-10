@@ -942,6 +942,38 @@ case WM_CLOSE:
                         return TRUE;
                 }
                 return DefWindowProc(hWnd, message, wParam, lParam);
+        case WM_NCPAINT:
+        {
+                // Сначала даём системе нарисовать рамку и заголовок
+                DefWindowProc(hWnd, message, wParam, lParam);
+                if (Theme::IsDark())
+                {
+                        // Закрашиваем незанятую часть menu bar
+                        HDC dc = GetWindowDC(hWnd);
+                        if (dc)
+                        {
+                                RECT wr, cr;
+                                GetWindowRect(hWnd, &wr);
+                                GetClientRect(hWnd, &cr);
+                                // Смещение клиентской области
+                                POINT pt = {0, 0};
+                                ClientToScreen(hWnd, &pt);
+                                int frameX  = pt.x - wr.left;
+                                int frameTop = pt.y - wr.top;
+                                int menuH = GetSystemMetrics(SM_CYMENU);
+                                // Прямоугольник menu bar в оконных координатах
+                                RECT rcMenu = {
+                                        frameX,
+                                        frameTop - menuH,
+                                        wr.right - wr.left - frameX,
+                                        frameTop
+                                };
+                                FillRect(dc, &rcMenu, Theme::GetBackgroundBrush());
+                                ReleaseDC(hWnd, dc);
+                        }
+                }
+                return 0;
+        }
         default:
                 return DefWindowProc(hWnd, message, wParam, lParam);
                 break;

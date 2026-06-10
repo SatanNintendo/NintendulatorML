@@ -8,417 +8,298 @@
 #include "Debugger.h"
 #include <commctrl.h>
 #include <uxtheme.h>
+#include <dwmapi.h>
 
 #pragma comment(lib, "dwmapi.lib")
 #pragma comment(lib, "uxtheme.lib")
 
 namespace Theme
 {
-    // ================================================================
+    // ============================================================
     // State
-    // ================================================================
+    // ============================================================
     static Mode currentMode = MODE_LIGHT;
 
-    // ================================================================
+    // ============================================================
     // Color palettes
-    // ================================================================
+    // ============================================================
     struct ThemeColors
     {
-        COLORREF bg;
-        COLORREF text;
-        COLORREF controlBg;
-        COLORREF controlText;
-        COLORREF buttonBg;
-        COLORREF buttonText;
-        COLORREF menuBg;
-        COLORREF menuText;
-        COLORREF menuHighlight;
-        COLORREF menuHighlightText;
-        COLORREF menuBorder;
-        COLORREF menuGray;
-        COLORREF menuBar;
-        COLORREF menuBarText;
-        COLORREF menuBarHighlight;
+        COLORREF bg, text;
+        COLORREF controlBg, controlText;
+        COLORREF buttonBg, buttonText;
+        COLORREF menuBg, menuText;
+        COLORREF menuHilite, menuHiliteText;
+        COLORREF menuBorder, menuDisabled;
+        COLORREF menuBar, menuBarText;
+        COLORREF menuBarHilite;
     };
 
-    static const ThemeColors LightColors = {
-        RGB(240, 240, 240),   // bg
-        RGB(0,   0,   0),     // text
-        RGB(255, 255, 255),   // controlBg
-        RGB(0,   0,   0),     // controlText
-        RGB(225, 225, 225),   // buttonBg
-        RGB(0,   0,   0),     // buttonText
-        RGB(255, 255, 255),   // menuBg
-        RGB(0,   0,   0),     // menuText
-        RGB(0,   120, 215),   // menuHighlight
-        RGB(255, 255, 255),   // menuHighlightText
-        RGB(200, 200, 200),   // menuBorder
-        RGB(130, 130, 130),   // menuGray (disabled)
-        RGB(240, 240, 240),   // menuBar
-        RGB(0,   0,   0),     // menuBarText
-        RGB(205, 227, 247),   // menuBarHighlight
+    static const ThemeColors Light = {
+        RGB(240,240,240), RGB(0,0,0),
+        RGB(255,255,255), RGB(0,0,0),
+        RGB(225,225,225), RGB(0,0,0),
+        RGB(255,255,255), RGB(0,0,0),
+        RGB(0,120,215),   RGB(255,255,255),
+        RGB(200,200,200), RGB(130,130,130),
+        RGB(240,240,240), RGB(0,0,0),
+        RGB(205,227,247),
     };
 
-    static const ThemeColors DarkColors = {
-        RGB(30,  30,  30),    // bg
-        RGB(212, 212, 212),   // text
-        RGB(45,  45,  45),    // controlBg
-        RGB(212, 212, 212),   // controlText
-        RGB(55,  55,  55),    // buttonBg
-        RGB(212, 212, 212),   // buttonText
-        RGB(40,  40,  40),    // menuBg
-        RGB(212, 212, 212),   // menuText
-        RGB(0,   122, 204),   // menuHighlight
-        RGB(255, 255, 255),   // menuHighlightText
-        RGB(80,  80,  80),    // menuBorder
-        RGB(120, 120, 120),   // menuGray (disabled)
-        RGB(30,  30,  30),    // menuBar
-        RGB(212, 212, 212),   // menuBarText
-        RGB(60,  60,  60),    // menuBarHighlight
+    static const ThemeColors Dark = {
+        RGB(30,30,30),    RGB(212,212,212),
+        RGB(45,45,45),    RGB(212,212,212),
+        RGB(55,55,55),    RGB(212,212,212),
+        RGB(40,40,40),    RGB(212,212,212),
+        RGB(0,122,204),   RGB(255,255,255),
+        RGB(80,80,80),    RGB(120,120,120),
+        RGB(30,30,30),    RGB(212,212,212),
+        RGB(60,60,60),
     };
 
-    static const ThemeColors& Colors(void)
-    {
-        return (currentMode == MODE_DARK) ? DarkColors : LightColors;
-    }
+    static const ThemeColors& C() { return currentMode == MODE_DARK ? Dark : Light; }
 
-    // ================================================================
+    // ============================================================
     // GDI brushes
-    // ================================================================
-    static HBRUSH hBgBrush         = NULL;
-    static HBRUSH hControlBgBrush  = NULL;
-    static HBRUSH hButtonBgBrush   = NULL;
-    static HBRUSH hMenuBgBrush     = NULL;
-    static HBRUSH hMenuHiliteBrush = NULL;
-    static HBRUSH hMenuBarBrush    = NULL;
-    static HBRUSH hMenuBarHilBrush = NULL;
+    // ============================================================
+    static HBRUSH hBgBrush    = NULL;
+    static HBRUSH hCtrlBrush  = NULL;
+    static HBRUSH hBtnBrush   = NULL;
+    static HBRUSH hMnuBrush   = NULL;
+    static HBRUSH hMnuHilBrush= NULL;
+    static HBRUSH hMnuBarBrush= NULL;
+    static HBRUSH hMnuBarHil  = NULL;
 
-    static void CreateBrushes(void)
+    static void DeleteBrush(HBRUSH& b) { if (b) { DeleteObject(b); b = NULL; } }
+
+    static void CreateBrushes()
     {
-        const ThemeColors& c = Colors();
-        auto SafeDelete = [](HBRUSH& b) { if (b) { DeleteObject(b); b = NULL; } };
+        const ThemeColors& c = C();
+        DeleteBrush(hBgBrush);   DeleteBrush(hCtrlBrush); DeleteBrush(hBtnBrush);
+        DeleteBrush(hMnuBrush);  DeleteBrush(hMnuHilBrush);
+        DeleteBrush(hMnuBarBrush); DeleteBrush(hMnuBarHil);
 
-        SafeDelete(hBgBrush);
-        SafeDelete(hControlBgBrush);
-        SafeDelete(hButtonBgBrush);
-        SafeDelete(hMenuBgBrush);
-        SafeDelete(hMenuHiliteBrush);
-        SafeDelete(hMenuBarBrush);
-        SafeDelete(hMenuBarHilBrush);
-
-        hBgBrush         = CreateSolidBrush(c.bg);
-        hControlBgBrush  = CreateSolidBrush(c.controlBg);
-        hButtonBgBrush   = CreateSolidBrush(c.buttonBg);
-        hMenuBgBrush     = CreateSolidBrush(c.menuBg);
-        hMenuHiliteBrush = CreateSolidBrush(c.menuHighlight);
-        hMenuBarBrush    = CreateSolidBrush(c.menuBar);
-        hMenuBarHilBrush = CreateSolidBrush(c.menuBarHighlight);
+        hBgBrush     = CreateSolidBrush(c.bg);
+        hCtrlBrush   = CreateSolidBrush(c.controlBg);
+        hBtnBrush    = CreateSolidBrush(c.buttonBg);
+        hMnuBrush    = CreateSolidBrush(c.menuBg);
+        hMnuHilBrush = CreateSolidBrush(c.menuHilite);
+        hMnuBarBrush = CreateSolidBrush(c.menuBar);
+        hMnuBarHil   = CreateSolidBrush(c.menuBarHilite);
     }
 
-    // ================================================================
-    // Undocumented Windows 10+ uxtheme dark mode API
-    // ================================================================
-    typedef enum _PREFERRED_APP_MODE {
-        APPMODE_DEFAULT    = 0,
-        APPMODE_ALLOW_DARK = 1,
-        APPMODE_FORCE_DARK = 2,
-        APPMODE_FORCE_LIGHT = 3,
-    } PREFERRED_APP_MODE;
+    // ============================================================
+    // Undocumented uxtheme APIs (Win10 1903+ only, graceful fallback)
+    // ============================================================
+    typedef enum { APPMODE_DEFAULT=0, APPMODE_ALLOW_DARK=1 } PREFERRED_APP_MODE;
+    typedef BOOL (WINAPI *pfnAllow)(HWND,BOOL);
+    typedef PREFERRED_APP_MODE (WINAPI *pfnSetMode)(PREFERRED_APP_MODE);
+    typedef void (WINAPI *pfnRefresh)(void);
 
-    typedef BOOL  (WINAPI *pfnAllowDarkModeForWindow)(HWND, BOOL);
-    typedef PREFERRED_APP_MODE (WINAPI *pfnSetPreferredAppMode)(PREFERRED_APP_MODE);
-    typedef void  (WINAPI *pfnRefreshImmersiveColorPolicyState)(void);
+    static pfnAllow   _Allow   = NULL;
+    static pfnSetMode _SetMode = NULL;
+    static pfnRefresh _Refresh = NULL;
+    static BOOL       darkAPIs = FALSE;
 
-    static pfnAllowDarkModeForWindow        _AllowDarkModeForWindow        = NULL;
-    static pfnSetPreferredAppMode           _SetPreferredAppMode           = NULL;
-    static pfnRefreshImmersiveColorPolicyState _RefreshImmersiveColorPolicyState = NULL;
-    static BOOL darkModeAPIsAvailable = FALSE;
-
-    static void LoadDarkModeAPIs(void)
+    static void LoadDarkAPIs()
     {
-        HMODULE hUx = GetModuleHandle(_T("uxtheme.dll"));
-        if (!hUx) hUx = LoadLibrary(_T("uxtheme.dll"));
+        HMODULE hUx = LoadLibrary(_T("uxtheme.dll"));
         if (!hUx) return;
-
-        _AllowDarkModeForWindow = (pfnAllowDarkModeForWindow)
-            GetProcAddress(hUx, MAKEINTRESOURCEA(133));
-        _SetPreferredAppMode = (pfnSetPreferredAppMode)
-            GetProcAddress(hUx, MAKEINTRESOURCEA(135));
-        _RefreshImmersiveColorPolicyState = (pfnRefreshImmersiveColorPolicyState)
-            GetProcAddress(hUx, MAKEINTRESOURCEA(104));
-
-        if (_SetPreferredAppMode && _AllowDarkModeForWindow)
-        {
-            darkModeAPIsAvailable = TRUE;
-            _SetPreferredAppMode(APPMODE_ALLOW_DARK);
-            if (_RefreshImmersiveColorPolicyState)
-                _RefreshImmersiveColorPolicyState();
+        _Allow   = (pfnAllow)  GetProcAddress(hUx, MAKEINTRESOURCEA(133));
+        _SetMode = (pfnSetMode)GetProcAddress(hUx, MAKEINTRESOURCEA(135));
+        _Refresh = (pfnRefresh)GetProcAddress(hUx, MAKEINTRESOURCEA(104));
+        if (_Allow && _SetMode) {
+            darkAPIs = TRUE;
+            _SetMode(APPMODE_ALLOW_DARK);
+            if (_Refresh) _Refresh();
         }
     }
 
-    // ================================================================
-    // DWM dark title bar (Win10 1809+)
-    // ================================================================
+    // ============================================================
+    // Dark title bar (Win10 1809+)
+    // ============================================================
     void SetTitleBarDark(HWND hWnd, BOOL dark)
     {
-        typedef HRESULT (WINAPI *pfnDwmSetWindowAttribute)(HWND, DWORD, LPCVOID, DWORD);
-        static pfnDwmSetWindowAttribute pDwm = (pfnDwmSetWindowAttribute)-1;
-        if (pDwm == (pfnDwmSetWindowAttribute)-1)
-        {
-            HMODULE hDwm = GetModuleHandle(_T("dwmapi.dll"));
-            if (!hDwm) hDwm = LoadLibrary(_T("dwmapi.dll"));
-            pDwm = hDwm ? (pfnDwmSetWindowAttribute)GetProcAddress(hDwm, "DwmSetWindowAttribute") : NULL;
-        }
-        if (!pDwm) return;
-
-        BOOL val = dark ? TRUE : FALSE;
-        // Try attribute 20 (Win10 20H1+), fall back to 19 (Win10 1809)
-        if (FAILED(pDwm(hWnd, 20, &val, sizeof(val))))
-            pDwm(hWnd, 19, &val, sizeof(val));
+        BOOL v = dark;
+        // Attribute 20 = Win10 20H1+, attribute 19 = Win10 1809
+        if (FAILED(DwmSetWindowAttribute(hWnd, 20, &v, sizeof(v))))
+            DwmSetWindowAttribute(hWnd, 19, &v, sizeof(v));
     }
 
-    // ================================================================
-    // Disable Visual Styles for a control so WM_CTLCOLOR* is honoured
-    // ================================================================
-    static void DisableVisualStylesForControl(HWND hCtrl)
+    // ============================================================
+    // Fix up button controls: disable Visual Styles so
+    // WM_CTLCOLORBTN is honoured by the OS
+    // ============================================================
+    static void FixButtons(HWND hParent, BOOL dark)
     {
-        // SetWindowTheme with empty strings disables theming for this control,
-        // which makes the OS honour WM_CTLCOLORBTN for buttons.
-        SetWindowTheme(hCtrl, L"", L"");
-    }
-
-    // ================================================================
-    // Enumerate child controls and fix them up for dark mode
-    // ================================================================
-    static void ApplyToChildControls(HWND hParent, BOOL dark)
-    {
-        HWND hChild = GetWindow(hParent, GW_CHILD);
-        while (hChild)
-        {
-            TCHAR cls[64] = {0};
-            GetClassName(hChild, cls, 63);
-
-            if (_tcsicmp(cls, _T("Button")) == 0)
-            {
-                if (dark)
-                    DisableVisualStylesForControl(hChild);
-                else
-                    SetWindowTheme(hChild, NULL, NULL); // restore default
+        HWND h = GetWindow(hParent, GW_CHILD);
+        while (h) {
+            TCHAR cls[64] = {};
+            GetClassName(h, cls, 63);
+            if (_tcsicmp(cls, _T("Button")) == 0) {
+                // Disabling visual styles makes the classic draw path active,
+                // which then respects WM_CTLCOLORBTN from the parent dialog.
+                SetWindowTheme(h, dark ? L"" : NULL, dark ? L"" : NULL);
+                InvalidateRect(h, NULL, TRUE);
             }
-            else if (_tcsicmp(cls, _T("Edit")) == 0 ||
-                     _tcsicmp(cls, _T("ListBox")) == 0 ||
-                     _tcsicmp(cls, _T("ComboBox")) == 0)
-            {
-                // For these controls, AllowDarkModeForWindow handles
-                // scrollbar thumb colour on Win10+
-                if (darkModeAPIsAvailable)
-                    _AllowDarkModeForWindow(hChild, dark);
-            }
-
-            // Recurse into combo-box dropdown list etc.
-            ApplyToChildControls(hChild, dark);
-
-            hChild = GetWindow(hChild, GW_HWNDNEXT);
+            // Recurse (ComboBox contains a child edit/button etc.)
+            FixButtons(h, dark);
+            h = GetWindow(h, GW_HWNDNEXT);
         }
     }
 
-    // ================================================================
-    // Owner-draw menu support
-    // ================================================================
-
-    // Per-item data stored with each owner-draw menu item
-    struct MenuItemData
-    {
-        TCHAR text[256];
-        BOOL  isTopLevel; // TRUE = item on the menu bar itself
-    };
-
-    // Recursively convert all items in a menu to MF_OWNERDRAW
-    static void ConvertMenuToOwnerDraw(HMENU hM, BOOL topLevel)
-    {
-        int count = GetMenuItemCount(hM);
-        for (int i = 0; i < count; i++)
-        {
-            MENUITEMINFO mii = {0};
-            mii.cbSize = sizeof(mii);
-            mii.fMask  = MIIM_TYPE | MIIM_SUBMENU | MIIM_DATA | MIIM_STATE;
-            if (!GetMenuItemInfo(hM, i, TRUE, &mii))
-                continue;
-
-            // Separators stay as-is (they are drawn automatically)
-            if (mii.fType & MFT_SEPARATOR)
-                continue;
-
-            // Retrieve display text
-            TCHAR buf[256] = {0};
-            mii.fMask     = MIIM_STRING;
-            mii.dwTypeData = buf;
-            mii.cch        = 255;
-            GetMenuItemInfo(hM, i, TRUE, &mii);
-
-            // Allocate data for the item (freed in RebuildOwnerDrawMenu cleanup
-            // or when the menu is destroyed - Windows does not free it for us)
-            MenuItemData* pData = new MenuItemData();
-            _tcsncpy(pData->text, buf, 255);
-            pData->isTopLevel = topLevel;
-
-            // Apply OWNERDRAW
-            mii.fMask      = MIIM_TYPE | MIIM_DATA;
-            mii.fType      = (mii.fType & ~MFT_STRING) | MFT_OWNERDRAW;
-            mii.dwItemData = (ULONG_PTR)pData;
-            SetMenuItemInfo(hM, i, TRUE, &mii);
-
-            // Recurse into submenus
-            HMENU hSub = GetSubMenu(hM, i);
-            if (hSub)
-                ConvertMenuToOwnerDraw(hSub, FALSE);
-        }
-    }
-
-    // Recursively restore menu items to normal MF_STRING
-    static void ConvertMenuToString(HMENU hM)
-    {
-        int count = GetMenuItemCount(hM);
-        for (int i = 0; i < count; i++)
-        {
-            MENUITEMINFO mii = {0};
-            mii.cbSize = sizeof(mii);
-            mii.fMask  = MIIM_TYPE | MIIM_DATA | MIIM_SUBMENU;
-            if (!GetMenuItemInfo(hM, i, TRUE, &mii))
-                continue;
-
-            if (mii.fType & MFT_SEPARATOR)
-                continue;
-
-            if (mii.fType & MFT_OWNERDRAW)
-            {
-                MenuItemData* pData = (MenuItemData*)mii.dwItemData;
-                TCHAR buf[256]      = {0};
-                if (pData) _tcsncpy(buf, pData->text, 255);
-
-                mii.fMask      = MIIM_TYPE | MIIM_DATA;
-                mii.fType      = (mii.fType & ~MFT_OWNERDRAW) | MFT_STRING;
-                mii.dwTypeData = buf;
-                mii.cch        = (UINT)_tcslen(buf);
-                mii.dwItemData = 0;
-                SetMenuItemInfo(hM, i, TRUE, &mii);
-
-                delete pData;
-            }
-
-            HMENU hSub = GetSubMenu(hM, i);
-            if (hSub)
-                ConvertMenuToString(hSub);
-        }
-    }
-
-    // ================================================================
-    // Subclass WndProc for dialogs (handles background + controls)
-    // ================================================================
-    static LRESULT CALLBACK ThemeDialogProc(
-        HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
-        UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
+    // ============================================================
+    // Dialog subclass — handles all WM_CTLCOLOR* messages
+    // ============================================================
+    static LRESULT CALLBACK DlgProc(
+        HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam,
+        UINT_PTR, DWORD_PTR)
     {
         if (currentMode == MODE_DARK)
         {
-            switch (uMsg)
+            switch (msg)
             {
             case WM_CTLCOLORDLG:
-            case WM_CTLCOLORSTATIC:
-            {
-                HDC hdc = (HDC)wParam;
-                SetTextColor(hdc, DarkColors.text);
-                SetBkColor(hdc, DarkColors.bg);
-                SetBkMode(hdc, TRANSPARENT);
+            case WM_CTLCOLORSTATIC: {
+                HDC dc = (HDC)wParam;
+                SetTextColor(dc, Dark.text);
+                SetBkColor(dc, Dark.bg);
+                SetBkMode(dc, TRANSPARENT);
                 return (LRESULT)hBgBrush;
             }
             case WM_CTLCOLOREDIT:
-            {
-                HDC hdc = (HDC)wParam;
-                SetTextColor(hdc, DarkColors.controlText);
-                SetBkColor(hdc, DarkColors.controlBg);
-                return (LRESULT)hControlBgBrush;
-            }
             case WM_CTLCOLORLISTBOX:
-            case WM_CTLCOLORSCROLLBAR:
-            {
-                HDC hdc = (HDC)wParam;
-                SetTextColor(hdc, DarkColors.controlText);
-                SetBkColor(hdc, DarkColors.controlBg);
-                return (LRESULT)hControlBgBrush;
+            case WM_CTLCOLORSCROLLBAR: {
+                HDC dc = (HDC)wParam;
+                SetTextColor(dc, Dark.controlText);
+                SetBkColor(dc, Dark.controlBg);
+                return (LRESULT)hCtrlBrush;
             }
-            case WM_CTLCOLORBTN:
-            {
-                // Honoured only after SetWindowTheme(btn,"","") has been called
-                HDC hdc = (HDC)wParam;
-                SetTextColor(hdc, DarkColors.buttonText);
-                SetBkColor(hdc, DarkColors.buttonBg);
-                SetBkMode(hdc, TRANSPARENT);
-                return (LRESULT)hButtonBgBrush;
+            case WM_CTLCOLORBTN: {
+                // Works only after SetWindowTheme(btn,"","")
+                HDC dc = (HDC)wParam;
+                SetTextColor(dc, Dark.buttonText);
+                SetBkColor(dc, Dark.buttonBg);
+                SetBkMode(dc, TRANSPARENT);
+                return (LRESULT)hBtnBrush;
             }
-            case WM_ERASEBKGND:
-            {
-                HDC hdc = (HDC)wParam;
+            case WM_ERASEBKGND: {
                 RECT rc;
                 GetClientRect(hWnd, &rc);
-                FillRect(hdc, &rc, hBgBrush);
+                FillRect((HDC)wParam, &rc, hBgBrush);
                 return TRUE;
             }
             }
         }
-
-        if (uMsg == WM_DESTROY)
-            RemoveWindowSubclass(hWnd, ThemeDialogProc, 0);
-
-        return DefSubclassProc(hWnd, uMsg, wParam, lParam);
+        if (msg == WM_DESTROY)
+            RemoveWindowSubclass(hWnd, DlgProc, 0);
+        return DefSubclassProc(hWnd, msg, wParam, lParam);
     }
 
-    // ================================================================
-    // Force repaint of a window and its children
-    // ================================================================
     static void ForceRepaint(HWND hWnd)
     {
-        InvalidateRect(hWnd, NULL, TRUE);
-        UpdateWindow(hWnd);
+        RedrawWindow(hWnd, NULL, NULL,
+            RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN | RDW_ERASE);
+    }
 
-        HWND hChild = GetWindow(hWnd, GW_CHILD);
-        while (hChild)
-        {
-            InvalidateRect(hChild, NULL, TRUE);
-            UpdateWindow(hChild);
-            hChild = GetWindow(hChild, GW_HWNDNEXT);
+    // ============================================================
+    // Owner-draw menu
+    // ============================================================
+    struct ItemData {
+        TCHAR text[256];
+        BOOL  topLevel;
+    };
+
+    // Get system menu font height — used for correct item sizing
+    static int GetMenuFontHeight()
+    {
+        NONCLIENTMETRICS ncm = {};
+        ncm.cbSize = sizeof(ncm);
+        SystemParametersInfo(SPI_GETNONCLIENTMETRICS, sizeof(ncm), &ncm, 0);
+        // Create font and measure an actual character
+        HDC hdc = GetDC(NULL);
+        HFONT hf = CreateFontIndirect(&ncm.lfMenuFont);
+        HFONT old = (HFONT)SelectObject(hdc, hf);
+        TEXTMETRIC tm = {};
+        GetTextMetrics(hdc, &tm);
+        SelectObject(hdc, old);
+        DeleteObject(hf);
+        ReleaseDC(NULL, hdc);
+        return tm.tmHeight;
+    }
+
+    static void ConvertToOwnerDraw(HMENU hM, BOOL top)
+    {
+        int n = GetMenuItemCount(hM);
+        for (int i = 0; i < n; i++) {
+            MENUITEMINFO mi = {}; mi.cbSize = sizeof(mi);
+            mi.fMask = MIIM_FTYPE | MIIM_DATA | MIIM_STRING | MIIM_SUBMENU;
+            if (!GetMenuItemInfo(hM, i, TRUE, &mi)) continue;
+            if (mi.fType & MFT_SEPARATOR) continue;
+
+            // Read text
+            TCHAR buf[256] = {};
+            mi.fMask = MIIM_STRING; mi.dwTypeData = buf; mi.cch = 255;
+            GetMenuItemInfo(hM, i, TRUE, &mi);
+
+            ItemData* d = new ItemData();
+            _tcsncpy(d->text, buf, 255);
+            d->topLevel = top;
+
+            mi.fMask     = MIIM_FTYPE | MIIM_DATA;
+            mi.fType     = MFT_OWNERDRAW;
+            mi.dwItemData = (ULONG_PTR)d;
+            SetMenuItemInfo(hM, i, TRUE, &mi);
+
+            if (mi.hSubMenu)
+                ConvertToOwnerDraw(mi.hSubMenu, FALSE);
         }
     }
 
-    // ================================================================
-    // Public: Init
-    // ================================================================
-    void Init(void)
+    static void ConvertToString(HMENU hM)
+    {
+        int n = GetMenuItemCount(hM);
+        for (int i = 0; i < n; i++) {
+            MENUITEMINFO mi = {}; mi.cbSize = sizeof(mi);
+            mi.fMask = MIIM_FTYPE | MIIM_DATA | MIIM_SUBMENU;
+            if (!GetMenuItemInfo(hM, i, TRUE, &mi)) continue;
+            if (mi.fType & MFT_SEPARATOR) continue;
+            if (mi.fType & MFT_OWNERDRAW) {
+                ItemData* d = (ItemData*)mi.dwItemData;
+                TCHAR buf[256] = {};
+                if (d) _tcsncpy(buf, d->text, 255);
+                mi.fMask      = MIIM_FTYPE | MIIM_DATA | MIIM_STRING;
+                mi.fType      = MFT_STRING;
+                mi.dwTypeData = buf;
+                mi.cch        = (UINT)_tcslen(buf);
+                mi.dwItemData = 0;
+                SetMenuItemInfo(hM, i, TRUE, &mi);
+                delete d;
+            }
+            if (mi.hSubMenu) ConvertToString(mi.hSubMenu);
+        }
+    }
+
+    // ============================================================
+    // Public API
+    // ============================================================
+
+    void Init()
     {
         currentMode = MODE_LIGHT;
         CreateBrushes();
-        LoadDarkModeAPIs();
+        LoadDarkAPIs();
     }
 
-    // ================================================================
-    // Public: Destroy
-    // ================================================================
-    void Destroy(void)
+    void Destroy()
     {
-        auto SafeDelete = [](HBRUSH& b) { if (b) { DeleteObject(b); b = NULL; } };
-        SafeDelete(hBgBrush);
-        SafeDelete(hControlBgBrush);
-        SafeDelete(hButtonBgBrush);
-        SafeDelete(hMenuBgBrush);
-        SafeDelete(hMenuHiliteBrush);
-        SafeDelete(hMenuBarBrush);
-        SafeDelete(hMenuBarHilBrush);
+        DeleteBrush(hBgBrush);  DeleteBrush(hCtrlBrush);
+        DeleteBrush(hBtnBrush); DeleteBrush(hMnuBrush);
+        DeleteBrush(hMnuHilBrush); DeleteBrush(hMnuBarBrush);
+        DeleteBrush(hMnuBarHil);
     }
 
-    // ================================================================
-    // Public: GetMode / SetMode
-    // ================================================================
-    Mode GetMode(void) { return currentMode; }
+    Mode GetMode()  { return currentMode; }
 
     void SetMode(Mode mode)
     {
@@ -427,300 +308,224 @@ namespace Theme
         CreateBrushes();
     }
 
-    // ================================================================
-    // Public: ApplyToDialog
-    // ================================================================
     void ApplyToDialog(HWND hDlg)
     {
         BOOL dark = (currentMode == MODE_DARK);
-
-        // Subclass for WM_CTLCOLOR* handling (install if dark, remove if light)
         if (dark)
-            SetWindowSubclass(hDlg, ThemeDialogProc, 0, 0);
+            SetWindowSubclass(hDlg, DlgProc, 0, 0);
         else
-            RemoveWindowSubclass(hDlg, ThemeDialogProc, 0);
+            RemoveWindowSubclass(hDlg, DlgProc, 0);
 
-        // Dark title bar (Win10+)
         SetTitleBarDark(hDlg, dark);
-
-        // Fix up child controls
-        ApplyToChildControls(hDlg, dark);
-
-        // uxtheme for scroll bars etc. (Win10+)
-        if (darkModeAPIsAvailable)
-            _AllowDarkModeForWindow(hDlg, dark);
-
+        if (darkAPIs) _Allow(hDlg, dark);
+        FixButtons(hDlg, dark);
         ForceRepaint(hDlg);
     }
 
-    // ================================================================
-    // Public: RemoveFromDialog
-    // ================================================================
     void RemoveFromDialog(HWND hDlg)
     {
-        RemoveWindowSubclass(hDlg, ThemeDialogProc, 0);
+        RemoveWindowSubclass(hDlg, DlgProc, 0);
     }
 
-    // ================================================================
-    // Public: ApplyToMainWindow
-    // ================================================================
     void ApplyToMainWindow(HWND hWnd)
     {
         BOOL dark = (currentMode == MODE_DARK);
-
-        // Window class background
         SetClassLongPtr(hWnd, GCLP_HBRBACKGROUND,
             dark ? (LONG_PTR)hBgBrush
                  : (LONG_PTR)(HBRUSH)(COLOR_APPWORKSPACE + 1));
-
-        // Dark title bar (Win10+)
         SetTitleBarDark(hWnd, dark);
-
-        // uxtheme for the window and its controls (Win10+)
-        if (darkModeAPIsAvailable)
-        {
-            _AllowDarkModeForWindow(hWnd, dark);
-            if (_RefreshImmersiveColorPolicyState)
-                _RefreshImmersiveColorPolicyState();
+        if (darkAPIs) {
+            _Allow(hWnd, dark);
+            if (_Refresh) _Refresh();
         }
-
-        InvalidateRect(hWnd, NULL, TRUE);
-        UpdateWindow(hWnd);
+        RedrawWindow(hWnd, NULL, NULL,
+            RDW_INVALIDATE | RDW_UPDATENOW | RDW_ERASE | RDW_FRAME);
     }
 
-    // ================================================================
-    // Public: RebuildOwnerDrawMenu
-    // Must be called AFTER the menu is fully built (including language
-    // items and checkmarks), and AFTER SetMode has been called.
-    // Pass the HMENU returned by GetMenu(hMainWnd).
-    // ================================================================
     void RebuildOwnerDrawMenu(HMENU hMenu)
     {
         if (!hMenu) return;
-
-        // First, strip any existing owner-draw to free old data
-        ConvertMenuToString(hMenu);
-
+        ConvertToString(hMenu);
         if (currentMode == MODE_DARK)
-        {
-            // Re-apply owner-draw for dark mode
-            ConvertMenuToOwnerDraw(hMenu, TRUE);
-        }
-
-        // Force the menu bar to repaint
+            ConvertToOwnerDraw(hMenu, TRUE);
         DrawMenuBar(hMainWnd);
     }
 
-    // ================================================================
-    // Public: Reapply
-    // Call after SetMode or after language change
-    // ================================================================
-    void Reapply(void)
+    void Reapply()
     {
         ApplyToMainWindow(hMainWnd);
-
-        if (hDebug)
-            ApplyToDialog(hDebug);
-
+        if (hDebug) ApplyToDialog(hDebug);
 #ifdef ENABLE_DEBUGGER
-        if (Debugger::CPUWnd)
-            ApplyToDialog(Debugger::CPUWnd);
-        if (Debugger::PPUWnd)
-            ApplyToDialog(Debugger::PPUWnd);
+        if (Debugger::CPUWnd) ApplyToDialog(Debugger::CPUWnd);
+        if (Debugger::PPUWnd) ApplyToDialog(Debugger::PPUWnd);
 #endif
-
-        // Rebuild owner-draw menu
         RebuildOwnerDrawMenu(GetMenu(hMainWnd));
     }
 
-    // ================================================================
-    // Public: SaveSettings / LoadSettings
-    // ================================================================
-    void SaveSettings(HKEY SettingsBase)
+    void SaveSettings(HKEY base)
     {
-        DWORD val = (DWORD)currentMode;
-        RegSetValueEx(SettingsBase, _T("ThemeMode"), 0, REG_DWORD, (LPBYTE)&val, sizeof(DWORD));
+        DWORD v = currentMode;
+        RegSetValueEx(base, _T("ThemeMode"), 0, REG_DWORD, (LPBYTE)&v, sizeof(v));
     }
 
-    void LoadSettings(HKEY SettingsBase)
+    void LoadSettings(HKEY base)
     {
-        DWORD val  = 0;
-        DWORD size = sizeof(DWORD);
-        RegQueryValueEx(SettingsBase, _T("ThemeMode"), 0, NULL, (LPBYTE)&val, &size);
-        currentMode = (Mode)val;
+        DWORD v = 0, sz = sizeof(v);
+        RegQueryValueEx(base, _T("ThemeMode"), 0, NULL, (LPBYTE)&v, &sz);
+        currentMode = (Mode)v;
         CreateBrushes();
     }
 
-    // ================================================================
-    // Public: SyncMenuChecks
-    // ================================================================
-    void SyncMenuChecks(void)
+    void SyncMenuChecks()
     {
         if (!hMenu) return;
         CheckMenuItem(hMenu, ID_PPU_THEME_DARK,
-            (currentMode == MODE_DARK) ? MF_CHECKED : MF_UNCHECKED);
+            currentMode == MODE_DARK ? MF_CHECKED : MF_UNCHECKED);
         CheckMenuItem(hMenu, ID_PPU_THEME_LIGHT,
-            (currentMode == MODE_LIGHT) ? MF_CHECKED : MF_UNCHECKED);
+            currentMode == MODE_LIGHT ? MF_CHECKED : MF_UNCHECKED);
     }
 
-    // ================================================================
-    // Public: Accessors
-    // ================================================================
-    HBRUSH   GetBackgroundBrush(void)    { return hBgBrush; }
-    HBRUSH   GetControlBrush(void)       { return hControlBgBrush; }
-    COLORREF GetBgColor(void)            { return Colors().bg; }
-    COLORREF GetTextColor(void)          { return Colors().text; }
-    COLORREF GetControlBgColor(void)     { return Colors().controlBg; }
-    COLORREF GetControlTextColor(void)   { return Colors().controlText; }
-    bool     IsDark(void)                { return currentMode == MODE_DARK; }
+    HBRUSH   GetBackgroundBrush()   { return hBgBrush;  }
+    HBRUSH   GetControlBrush()      { return hCtrlBrush; }
+    COLORREF GetBgColor()           { return C().bg;     }
+    COLORREF GetTextColor()         { return C().text;   }
+    COLORREF GetControlBgColor()    { return C().controlBg;   }
+    COLORREF GetControlTextColor()  { return C().controlText; }
+    bool     IsDark()               { return currentMode == MODE_DARK; }
 
-    // ================================================================
-    // Owner-draw menu message handlers
-    // These must be called from the main WndProc (WM_MEASUREITEM,
-    // WM_DRAWITEM).  See Step 3 for where to call them.
-    // ================================================================
-
-    // Call from WM_MEASUREITEM in WndProc
-    void HandleMeasureItem(HWND /*hWnd*/, MEASUREITEMSTRUCT* pMIS)
+    // ============================================================
+    // WM_MEASUREITEM — fixes the vertical spacing of menu items
+    // ============================================================
+    void HandleMeasureItem(HWND /*hWnd*/, MEASUREITEMSTRUCT* p)
     {
-        if (pMIS->CtlType != ODT_MENU) return;
-        MenuItemData* pData = (MenuItemData*)pMIS->itemData;
-        if (!pData) return;
+        if (p->CtlType != ODT_MENU) return;
+        ItemData* d = (ItemData*)p->itemData;
+        if (!d) return;
 
-        HDC hdc = GetDC(hMainWnd);
-        HFONT hOldFont = NULL;
-        NONCLIENTMETRICS ncm = {0};
-        ncm.cbSize = sizeof(ncm);
+        // Use the actual system menu font metrics for correct height
+        NONCLIENTMETRICS ncm = {}; ncm.cbSize = sizeof(ncm);
         SystemParametersInfo(SPI_GETNONCLIENTMETRICS, sizeof(ncm), &ncm, 0);
-        HFONT hFont = CreateFontIndirect(&ncm.lfMenuFont);
-        if (hFont) hOldFont = (HFONT)SelectObject(hdc, hFont);
 
-        SIZE sz = {0};
-        // Remove accelerator tab character for measurement
-        TCHAR displayText[256];
-        _tcsncpy(displayText, pData->text, 255);
-        TCHAR* tab = _tcschr(displayText, _T('\t'));
-        if (tab) *tab = 0;
+        HDC hdc  = GetDC(hMainWnd);
+        HFONT hf = CreateFontIndirect(&ncm.lfMenuFont);
+        HFONT old= (HFONT)SelectObject(hdc, hf);
 
-        GetTextExtentPoint32(hdc, displayText, (int)_tcslen(displayText), &sz);
+        // Measure text (strip tab/accelerator part)
+        TCHAR txt[256]; _tcsncpy(txt, d->text, 255);
+        TCHAR* tab = _tcschr(txt, _T('\t')); if (tab) *tab = 0;
 
-        if (hOldFont) SelectObject(hdc, hOldFont);
-        if (hFont) DeleteObject(hFont);
+        SIZE sz = {};
+        GetTextExtentPoint32(hdc, txt, (int)_tcslen(txt), &sz);
+        SelectObject(hdc, old);
+        DeleteObject(hf);
         ReleaseDC(hMainWnd, hdc);
 
-        if (pData->isTopLevel)
-        {
-            pMIS->itemWidth  = sz.cx + 12;
-            pMIS->itemHeight = sz.cy + 6;
-        }
-        else
-        {
-            pMIS->itemWidth  = sz.cx + 50; // room for check/icon on left, accel on right
-            pMIS->itemHeight = sz.cy + 4;
+        // --- KEY FIX: match system menu item proportions exactly ---
+        // GetSystemMetrics(SM_CYMENU) gives the standard menu bar height.
+        // For popup items we want font-height + 2px padding (top+bottom).
+        int fontH = sz.cy;
+
+        if (d->topLevel) {
+            // Top-level bar items: width = text + 16px padding, height = SM_CYMENU
+            p->itemWidth  = (UINT)(sz.cx + 16);
+            p->itemHeight = (UINT)GetSystemMetrics(SM_CYMENU);
+        } else {
+            // Popup items: height = font height + 4px (2 top, 2 bottom)
+            // Width accounts for: check column (20) + text + accel gap (30)
+            p->itemHeight = (UINT)(fontH + 4);
+            p->itemWidth  = (UINT)(sz.cx + 50);
         }
     }
 
-    // Call from WM_DRAWITEM in WndProc
-    void HandleDrawItem(HWND /*hWnd*/, DRAWITEMSTRUCT* pDIS)
+    // ============================================================
+    // WM_DRAWITEM — paints menu items
+    // ============================================================
+    void HandleDrawItem(HWND /*hWnd*/, DRAWITEMSTRUCT* p)
     {
-        if (pDIS->CtlType != ODT_MENU) return;
-        MenuItemData* pData = (MenuItemData*)pDIS->itemData;
-        if (!pData) return;
+        if (p->CtlType != ODT_MENU) return;
+        ItemData* d = (ItemData*)p->itemData;
+        if (!d) return;
 
-        const ThemeColors& c = Colors();
-        HDC    hdc  = pDIS->hDC;
-        RECT   rc   = pDIS->rcItem;
-        BOOL   sel  = (pDIS->itemState & ODS_SELECTED)  != 0;
-        BOOL   gray = (pDIS->itemState & ODS_GRAYED)    != 0;
-        BOOL   chk  = (pDIS->itemState & ODS_CHECKED)   != 0;
+        const ThemeColors& c = C();
+        HDC  dc  = p->hDC;
+        RECT rc  = p->rcItem;
+        BOOL sel  = (p->itemState & ODS_SELECTED) != 0;
+        BOOL gray = (p->itemState & ODS_GRAYED)   != 0;
+        BOOL chk  = (p->itemState & ODS_CHECKED)  != 0;
 
-        // ---- Background ----
-        HBRUSH hBg;
-        COLORREF clrText;
-
-        if (pData->isTopLevel)
-        {
-            hBg     = sel ? hMenuBarHilBrush : hMenuBarBrush;
-            clrText = gray ? c.menuGray : (sel ? c.menuHighlightText : c.menuBarText);
+        // --- Background ---
+        HBRUSH bgBrush;
+        COLORREF fgColor;
+        if (d->topLevel) {
+            bgBrush = sel ? hMnuBarHil : hMnuBarBrush;
+            fgColor = gray ? c.menuDisabled
+                           : (sel ? c.menuHiliteText : c.menuBarText);
+        } else {
+            bgBrush = sel ? hMnuHilBrush : hMnuBrush;
+            fgColor = gray ? c.menuDisabled
+                           : (sel ? c.menuHiliteText : c.menuText);
         }
-        else
-        {
-            hBg     = sel ? hMenuHiliteBrush : hMenuBgBrush;
-            clrText = gray ? c.menuGray : (sel ? c.menuHighlightText : c.menuText);
-        }
+        FillRect(dc, &rc, bgBrush);
 
-        FillRect(hdc, &rc, hBg);
-
-        // ---- Checkmark (non-top-level only) ----
-        if (!pData->isTopLevel && chk)
-        {
-            RECT rcCheck = rc;
-            rcCheck.right = rcCheck.left + 20;
-
-            SetTextColor(hdc, clrText);
-            SetBkMode(hdc, TRANSPARENT);
-
-            // Draw a simple checkmark using the Marlett font (available on all Windows)
-            LOGFONT lf = {0};
-            lf.lfHeight    = rc.bottom - rc.top - 2;
-            lf.lfCharSet   = SYMBOL_CHARSET;
-            _tcscpy(lf.lfFaceName, _T("Marlett"));
-            HFONT hMarlettFont = CreateFontIndirect(&lf);
-            HFONT hOld = (HFONT)SelectObject(hdc, hMarlettFont);
-            DrawText(hdc, _T("a"), 1, &rcCheck, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-            SelectObject(hdc, hOld);
-            DeleteObject(hMarlettFont);
-        }
-
-        // ---- Text ----
-        NONCLIENTMETRICS ncm = {0};
-        ncm.cbSize = sizeof(ncm);
+        // --- System menu font ---
+        NONCLIENTMETRICS ncm = {}; ncm.cbSize = sizeof(ncm);
         SystemParametersInfo(SPI_GETNONCLIENTMETRICS, sizeof(ncm), &ncm, 0);
-        HFONT hMenuFont = CreateFontIndirect(&ncm.lfMenuFont);
-        HFONT hOldFont  = (HFONT)SelectObject(hdc, hMenuFont);
+        HFONT hf  = CreateFontIndirect(&ncm.lfMenuFont);
+        HFONT old = (HFONT)SelectObject(dc, hf);
+        SetTextColor(dc, fgColor);
+        SetBkMode(dc, TRANSPARENT);
 
-        SetTextColor(hdc, clrText);
-        SetBkMode(hdc, TRANSPARENT);
+        // --- Checkmark (popup items only) ---
+        if (!d->topLevel && chk) {
+            LOGFONT lf = {}; lf.lfCharSet = SYMBOL_CHARSET;
+            lf.lfHeight = rc.bottom - rc.top - 2;
+            _tcscpy(lf.lfFaceName, _T("Marlett"));
+            HFONT hm  = CreateFontIndirect(&lf);
+            HFONT oldm = (HFONT)SelectObject(dc, hm);
+            RECT rcChk = { rc.left, rc.top, rc.left + 20, rc.bottom };
+            DrawText(dc, _T("a"), 1, &rcChk,
+                DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            SelectObject(dc, oldm);
+            DeleteObject(hm);
+            SelectObject(dc, hf); // restore menu font
+            SetTextColor(dc, fgColor);
+            SetBkMode(dc, TRANSPARENT);
+        }
 
-        RECT rcText = rc;
-        if (!pData->isTopLevel)
-            rcText.left += 24; // leave room for check/icon
-
-        // Split text on tab (accelerator)
-        TCHAR main[256] = {0}, accel[256] = {0};
-        _tcsncpy(main, pData->text, 255);
+        // --- Text ---
+        TCHAR main[256] = {}, accel[256] = {};
+        _tcsncpy(main, d->text, 255);
         TCHAR* tab = _tcschr(main, _T('\t'));
         if (tab) { *tab = 0; _tcsncpy(accel, tab + 1, 255); }
 
-        // Draw main label
-        DrawText(hdc, main, -1, &rcText,
+        RECT rcText = rc;
+        if (!d->topLevel) rcText.left += 24;   // space for check column
+        else              rcText.left += 6;    // small left padding on bar
+
+        DrawText(dc, main, -1, &rcText,
             DT_LEFT | DT_VCENTER | DT_SINGLELINE | DT_HIDEPREFIX);
 
-        // Draw accelerator right-aligned
-        if (accel[0])
-        {
-            RECT rcAccel = rc;
-            rcAccel.right -= 8;
-            DrawText(hdc, accel, -1, &rcAccel,
+        if (accel[0]) {
+            RECT rcA = rc; rcA.right -= 8;
+            DrawText(dc, accel, -1, &rcA,
                 DT_RIGHT | DT_VCENTER | DT_SINGLELINE);
         }
 
-        SelectObject(hdc, hOldFont);
-        DeleteObject(hMenuFont);
+        SelectObject(dc, old);
+        DeleteObject(hf);
 
-        // ---- Border for top-level selected/focused ----
-        if (pData->isTopLevel && sel)
-        {
-            HPEN hPen  = CreatePen(PS_SOLID, 1, c.menuBorder);
-            HPEN hOldP = (HPEN)SelectObject(hdc, hPen);
+        // --- Thin border around selected top-level item ---
+        if (d->topLevel && sel) {
+            HPEN pen  = CreatePen(PS_SOLID, 1, c.menuBorder);
+            HPEN oldp = (HPEN)SelectObject(dc, pen);
             POINT pts[5] = {
-                {rc.left, rc.top}, {rc.right-1, rc.top},
-                {rc.right-1, rc.bottom-1}, {rc.left, rc.bottom-1},
-                {rc.left, rc.top}
+                {rc.left,rc.top},{rc.right-1,rc.top},
+                {rc.right-1,rc.bottom-1},{rc.left,rc.bottom-1},
+                {rc.left,rc.top}
             };
-            Polyline(hdc, pts, 5);
-            SelectObject(hdc, hOldP);
-            DeleteObject(hPen);
+            Polyline(dc, pts, 5);
+            SelectObject(dc, oldp);
+            DeleteObject(pen);
         }
     }
 

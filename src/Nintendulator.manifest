@@ -6,7 +6,6 @@
     name="Nintendulator"
     type="win32"
   />
-  <description>Nintendulator NES Emulator</description>
   <dependency>
     <dependentAssembly>
       <assemblyIdentity
