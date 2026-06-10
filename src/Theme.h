@@ -1,12 +1,5 @@
 /* Nintendulator - Dark/Light Theme engine
- *
  * Works on Windows 7, 8, 10, 11.
- *
- * - Dialogs/backgrounds : WM_CTLCOLOR* subclassing (all Windows)
- * - Buttons             : SetWindowTheme("","") + WM_CTLCOLORBTN (all Windows)
- * - Menu                : MF_OWNERDRAW owner-draw (all Windows)
- *                         + uxtheme ordinals on Win10 1903+ as bonus
- * - Title bar           : DWMWA_USE_IMMERSIVE_DARK_MODE (Win10 1809+)
  */
 
 #pragma once
@@ -16,19 +9,17 @@ namespace Theme
 {
     enum Mode { MODE_LIGHT = 0, MODE_DARK = 1 };
 
-    void Init(void);          // call once before window creation
-    void Destroy(void);       // call at shutdown
+    void Init(void);
+    void Destroy(void);
 
     Mode GetMode(void);
     void SetMode(Mode mode);
+    void Toggle(void);        // legacy
 
-    void Reapply(void);       // call after SetMode
+    void Reapply(void);
 
-    // Call from WM_INITDIALOG of every dialog
     void ApplyToDialog(HWND hDlg);
     void RemoveFromDialog(HWND hDlg);
-
-    // Call after main window is created and after every menu rebuild
     void ApplyToMainWindow(HWND hWnd);
     void RebuildOwnerDrawMenu(HMENU hMenu);
 
@@ -46,8 +37,10 @@ namespace Theme
     bool     IsDark(void);
 
     void SetTitleBarDark(HWND hWnd, BOOL dark);
+    void EnableForWindow(HWND hWnd, BOOL enable); // legacy
+    void RefreshMenuBar(void);                    // legacy
 
-    // Owner-draw menu callbacks — call from WndProc
-    void HandleMeasureItem(HWND hWnd, MEASUREITEMSTRUCT* p);
-    void HandleDrawItem(HWND hWnd, DRAWITEMSTRUCT* p);
+    // Owner-draw menu callbacks — call from main WndProc
+    void HandleMeasureItem(HWND hWnd, MEASUREITEMSTRUCT *p);
+    void HandleDrawItem(HWND hWnd, DRAWITEMSTRUCT *p);
 }
