@@ -2,7 +2,7 @@
 # Format: KEY=Value  |  # = comment  |  \n = newline in value
 
 [Info]
-Language=Dutch
+Language=Nederlands / Dutch
 Author=Nintendulator Community
 Version=1.0
 
