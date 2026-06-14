@@ -419,13 +419,13 @@ MSG_STATE_SAVED=Состояние сохранено в слот %d
 MSG_STATE_LOADED=Состояние загружено из слота %d
 ERR_STATE_SAVE=Не удалось сохранить состояние
 ERR_STATE_LOAD=Не удалось загрузить состояние
-ERR_STATE_VERSION=Версия файла состояния не совпадает
-ERR_STATE_CORRUPT=Файл состояния повреждён
+ERR_STATE_VERSION=Версия файла сохрания не совпадает
+ERR_STATE_CORRUPT=Файл сохранения повреждён
 MSG_STATE_SLOT=Слот %d
 
 # === Запись ===
-MSG_MOVIE_RECORDING=Запись фильма...
-MSG_MOVIE_PLAYING=Воспроизведение фильма...
+MSG_MOVIE_RECORDING=Запись ролика...
+MSG_MOVIE_PLAYING=Воспроизведение ролика...
 MSG_MOVIE_STOPPED=Запись остановлена
 ERR_MOVIE_OPEN=Не удалось открыть файл записи
 ERR_MOVIE_INVALID=Неверный файл записи
@@ -478,8 +478,8 @@ DBG_INVALID_ADDR=Указан недопустимый диапазон адре
 DBG_INVALID_OPCODE=Указан недопустимый опкод!
 DBG_INVALID_SCANLINE=Указана недопустимая сканлайн!
 
-# === Фильм ===
-MOVIE_UNEXPECTED_EOF=Неожиданный конец фильма!
+# === Ролик ===
+MOVIE_UNEXPECTED_EOF=Неожиданный конец ролика!
 MOVIE_TV_PAL=PAL
 MOVIE_TV_NTSC=NTSC
 MOVIE_LENGTH_FMT=Длина: %i:%02i.%02i
