@@ -1,0 +1,502 @@
+# NintendulatorML Language File - Spanish
+# Format: KEY=Value  |  # = comment  |  \n = newline in value
+
+[Info]
+Language=Spanish
+Author=Nintendulator Community
+Version=1.0
+
+[Strings]
+
+
+# === Main menu — top level ===
+MENU_FILE=&Archivo
+MENU_CPU=&CPU
+MENU_PPU=&PPU
+MENU_SOUND=&Sonido
+MENU_INPUT=&Entrada
+MENU_DEBUG=&Depuracion
+MENU_MISC=&Varios
+MENU_LANGUAGE=&Idioma
+MENU_HELP=&Ayuda
+
+# === File submenu ===
+MENU_FILE_OPEN=&Abrir ROM...
+MENU_FILE_CLOSE=&Cerrar
+MENU_FILE_RECENT=Archivos &recientes
+MENU_FILE_RECENT_CLEAR=&Limpiar archivos recientes
+MENU_FILE_HEADER=Editar cabecera i&NES
+MENU_FILE_AUTORUN=&Autoejecutar
+MENU_FILE_BROWSESAVES=&Explorar archivos de guardado
+MENU_FILE_EXIT=&Salir
+
+# === CPU submenu ===
+MENU_NES_RUN=&Ejecutar\\tF2
+MENU_NES_PAUSE=&Paso\\tShift+F2
+MENU_NES_STOP=&Detener\\tF3
+MENU_NES_RESET=Reinicio s&uave\\tF4
+MENU_NES_POWER=Reinicio &completo\\tShift+F4
+MENU_CPU_SAVESTATE=&Guardar estado\\tF5
+MENU_CPU_LOADSTATE=&Cargar estado\\tF8
+MENU_CPU_PREVSTATE=Estado &anterior\\tF6
+MENU_CPU_NEXTSTATE=Estado &siguiente\\tF7
+MENU_SETTINGS_GAMEGENIE=&Game Genie\\tCtrl+G
+MENU_CPU_BADOPS=&Registrar opcodes invalidos
+MENU_CPU_FRAMESTEP=A&vance por fotograma
+MENU_CPU_FRAMESTEP_ENABLED=&Activado\\tCtrl+F
+MENU_CPU_FRAMESTEP_STEP=&Avanzar\\tSpace
+
+# === PPU submenu ===
+MENU_PPU_FRAMESKIP=&Salto de fotogramas
+MENU_PPU_FRAMESKIP_AUTO=&Automatico
+MENU_PPU_SIZE=&Tamano
+MENU_PPU_FIXASPECT=&Corregir aspecto
+MENU_PPU_MODE=&Modo
+MENU_PPU_MODE_HYBRID=&Hibrido
+MENU_PPU_PALETTE=P&aleta...
+MENU_PPU_SLOWDOWN=Re&tardo
+MENU_PPU_SLOWDOWN_ENABLED=&Activado\\tTab
+MENU_PPU_FULLSCREEN=P&antalla completa\\tAlt+Enter / F11
+MENU_PPU_SCANLINES=&Lineas de exploracion
+MENU_PPU_BILINEAR=Filtro &bilineal\\tCtrl+B
+MENU_PPU_INTSCALE=Escalado &entero
+MENU_PPU_MATCHRATE=&Coincidir con tasa del monitor
+MENU_PPU_ALWAYSONTOP=Siem&pre visible
+MENU_PPU_EXCLUSIVEFS=Pantalla completa &exclusiva
+MENU_GAME=&Juego
+
+# === PPU submenu — Theme ===
+MENU_PPU_THEME=&Tema
+MENU_PPU_THEME_LIGHT=&Claro
+MENU_PPU_THEME_DARK=&Oscuro
+
+# === Sound submenu ===
+MENU_SOUND_ENABLED=&Activado\\tCtrl+S
+MENU_SETTINGS_SOUND=&Volumen...
+
+# === Input submenu ===
+MENU_SETTINGS_CONTROLLERS=&Configuracion...
+
+# === Debug submenu ===
+MENU_DEBUG_CPU=Des&ensamblador\\tCtrl+F1
+MENU_DEBUG_PPU=&Video\\tCtrl+F2
+MENU_DEBUG_STATWND=&Ventana de estado
+
+# === Misc submenu ===
+MENU_MISC_STARTAVI=&Iniciar captura AVI...
+MENU_MISC_STOPAVI=&Detener captura AVI
+MENU_MOVIE_PLAY=&Reproducir pelicula...
+MENU_MOVIE_RECORD=&Grabar pelicula...
+MENU_MOVIE_STOP=&Detener pelicula
+
+# === Help submenu ===
+MENU_HELP_ABOUT=&Acerca de...
+
+# === Window title ===
+WINDOW_TITLE=Nintendulator
+WINDOW_TITLE_PAUSED=Nintendulator [En pausa]
+WINDOW_TITLE_FPS=Nintendulator - %s - %d FPS
+WINDOW_TITLE_STOPPED=Nintendulator - Detenido
+WINDOW_TITLE_FPS_NOSKIP=Nintendulator - %i FPS (Sin salto)
+WINDOW_TITLE_FPS_FSKIP=Nintendulator - %i FPS (%i %s salto)
+TITLEBAR_AUTO=Auto
+
+# === Common dialogs ===
+DLG_OK=Aceptar
+DLG_CANCEL=Cancelar
+DLG_YES=Si
+DLG_NO=No
+DLG_APPLY=Aplicar
+DLG_BROWSE=Examinar...
+DLG_NINTENDULATOR=Nintendulator
+
+# === File dialogs ===
+OPEN_ROM_TITLE=Abrir ROM
+OPEN_ROM_FILTER=ROMs de NES (*.nes;*.unif;*.fds;*.nsf)\\0*.nes;*.unif;*.fds;*.nsf\\0Todos los archivos (*.*)\\0*.*\\0
+OPEN_MOVIE_TITLE=Abrir pelicula
+SAVE_MOVIE_TITLE=Guardar pelicula
+OPEN_PALETTE_TITLE=Abrir paleta
+SAVE_AVI_TITLE=Guardar AVI
+
+# === File dialog filter display names ===
+FILTER_ROM_ALL=Todos los archivos compatibles (*.NES, *.UNIF, *.UNF, *.FDS, *.NSF)
+FILTER_ROM_INES=Imagenes ROM iNES (*.NES)
+FILTER_ROM_UNIF=Archivos ROM en formato Universal NES Interchange Format (*.UNIF, *.UNF)
+FILTER_ROM_FDS=Imagenes de disco Famicom Disk System (*.FDS)
+FILTER_ROM_NSF=Archivos de sonido NES (*.NSF)
+FILTER_ROM_INES_SHORT=Imagenes ROM iNES (*.NES)
+FILTER_MOVIE=Pelicula de Nintendulator (*.NMV)
+FILTER_AVI=Archivo AVI (*.AVI)
+FILTER_PALETTE=Archivo de paleta (*.PAL)
+OPEN_HEADER_TITLE=Editar cabecera
+
+# === Controllers — device list ===
+CONT_UNCONNECTED=Desconectado
+CONT_STDCONTROLLER=Controlador estandar
+CONT_ZAPPER=Zapper
+CONT_ARKANOIDPADDLE=Palanca de Arkanoid
+CONT_POWERPAD=Power Pad
+CONT_FOURSCORE1=Four Score (solo puerto 1)
+CONT_SNESCONTROLLER=Controlador SNES
+CONT_VSZAPPER=Zapper VS Unisystem
+CONT_SNESMOUSE=Raton SNES
+CONT_FOURSCORE2=Four Score (solo puerto 2)
+CONT_FAMI4PLAY=Adaptador Famicom 4 jugadores
+CONT_EXP_ARKANOIDPADDLE=Palanca de Arkanoid Famicom
+CONT_FAMILYBASICKEYBOARD=Teclado Family Basic
+CONT_SUBORKEYBOARD=Teclado Subor
+CONT_FAMTRAINER=Family Trainer
+CONT_TABLET=Tableta Oeka Kids
+
+# === Controllers — main dialog ===
+CONT_LABEL_PORT1=Puerto de controlador &1:
+CONT_LABEL_PORT2=Puerto de controlador &2:
+CONT_LABEL_EXP=Puerto de e&xpansion:
+CONT_CONFIG=&Configurar
+CONT_UDLR=&Permitir Izquierda+Derecha y Arriba+Abajo simultaneos
+CONT_POV=Configurar &disparadores POV como botones de 8 direcciones
+
+# === Controllers — config dialogs ===
+DLG_CTRL_STDCONT=Configuracion del controlador estandar
+DLG_CTRL_BUTTONS=Botones
+DLG_CTRL_DPAD=Cruceta
+DLG_CTRL_A=&A
+DLG_CTRL_B=&B
+DLG_CTRL_SELECT=&Select
+DLG_CTRL_START=S&tart
+DLG_CTRL_UP=&Arriba
+DLG_CTRL_DOWN=A&bajo
+DLG_CTRL_LEFT=&Izquierda
+DLG_CTRL_RIGHT=&Derecha
+DLG_CTRL_TRIGGER=&Gatillo
+DLG_CTRL_AXIS=&Eje
+DLG_CTRL_ZAPPER=Configuracion del Zapper
+DLG_CTRL_ARKPAD=Configuracion de la palanca de Arkanoid
+DLG_CTRL_POWERPAD=Configuracion del Power Pad
+DLG_CTRL_FOURSCORE=Configuracion del Four Score
+DLG_CTRL_FAMI4PLAY=Adaptador Famicom 4 jugadores
+DLG_CTRL_SNESCONT=Configuracion del controlador SNES
+DLG_CTRL_SNESMOUSE=Configuracion del raton SNES
+DLG_CTRL_VSZAPPER=Configuracion del Zapper VS
+DLG_CTRL_FLIP=In&vertir
+DLG_CTRL_PORT1=Puerto &1:
+DLG_CTRL_PORT2=Puerto &2:
+DLG_CTRL_PORT3=Puerto &3:
+DLG_CTRL_PORT4=Puerto &4:
+DLG_CTRL_CONFIG=&Configurar
+DLG_CTRL_CLOSE=Cerrar
+DLG_CTRL_TITLE=Controladores
+DLG_CTRL_MORE_BUTTONS=Mas botones
+DLG_CTRL_FAMTRAIN=Configuracion del Family Trainer
+DLG_CTRL_FBKEY=Teclado Family Basic
+DLG_CTRL_TABLET=Tableta Oeka Kids
+
+# === Controller errors ===
+ERR_CTRL_KEYBOARD_INIT=No se pudo inicializar el dispositivo de entrada del teclado!
+ERR_CTRL_KEYBOARD_FORMAT=No se pudo establecer el formato de datos del teclado!
+ERR_CTRL_KEYBOARD_LEVEL=No se pudo establecer el nivel cooperativo del teclado!
+ERR_CTRL_MOUSE_INIT=No se pudo inicializar el dispositivo de entrada del raton!
+ERR_CTRL_MOUSE_LEVEL=No se pudo establecer el nivel cooperativo del raton!
+ERR_CTRL_JOY_LEVEL=No se pudo restaurar el nivel cooperativo del joystick!
+ERR_CTRL_INVALID_STD=Error: tipo de controlador invalido seleccionado para el puerto estandar!
+ERR_CTRL_INVALID_EXP=Error: tipo de controlador invalido seleccionado para el puerto de expansion!
+CONT_NO_CONFIG=No es necesaria ninguna configuracion!
+CONT_ERR_DIRECTINPUT=No se pudo inicializar DirectInput!
+CONT_ERR_KEYBOARD=Fallo al inicializar el teclado!
+CONT_ERR_MOUSE=Fallo al inicializar el raton!
+CONT_ERR_JOYSTICK=Fallo al inicializar los joysticks!
+CONT_ERR_KEY_ID=Error: se encontro un ID de tecla de teclado invalido!
+CONT_ERR_MOUSE_ID=Error: se encontro un ID de boton de raton invalido!
+ERR_CTRL_DINPUT_LEVEL=No se pudo modificar el nivel cooperativo del dispositivo de entrada!
+ERR_CTRL_DEVICE_LEVEL=No se pudo inicializar DirectInput!
+ERR_CTRL_DEVICE_RESTORE=No se pudo restaurar el nivel cooperativo del dispositivo de entrada!
+
+# === Sound — volume dialog ===
+DLG_VOL_TITLE=Volumen
+DLG_VOL_MASTER=&Master
+DLG_VOL_SQ0=SQ&0
+DLG_VOL_SQ1=SQ&1
+DLG_VOL_TRI=&TRI
+DLG_VOL_NOI=&NOI
+DLG_VOL_PCM=&PCM
+DLG_VOL_EXT=&EXT
+DLG_VOL_MUTE=Silenciar
+DLG_VOL_CLOSE=Cerrar
+
+# === iNES Header Editor dialog ===
+DLG_INES_TITLE=Editor de cabecera iNES
+DLG_INES_FILENAME=Nombre del archivo ROM:
+DLG_INES_VER1=iNES &estandar
+DLG_INES_VER2=NES &2.0
+DLG_INES_MAPPER=Numero de &mapper:
+DLG_INES_PRG=Bancos ROM &PRG:
+DLG_INES_CHR=Bancos ROM &CHR:
+DLG_INES_HORIZ=&Espejo horizontal
+DLG_INES_VERT=Espejo &vertical
+DLG_INES_VS=VS Unisyst&em
+DLG_INES_PC10=Pla&ychoice-10
+DLG_INES_4SCR=VRAM de &4 pantallas
+DLG_INES_BATT=&SRAM con bateria
+DLG_INES_TRAIN=&Trainer
+DLG_INES_SUBMAP=Su&bmapper:
+DLG_INES_BATTERY=(bateria)
+DLG_INES_PRGRAM=RAM de PR&G:
+DLG_INES_CHRRAM=RAM de CH&R:
+DLG_INES_NTSC=&NTSC
+DLG_INES_PAL=P&AL
+DLG_INES_DUAL=&Dual
+DLG_INES_VSPPU=VS PP&U:
+DLG_INES_VSFLAGS=&Flags VS:
+TITLE_INES_EDITOR=Editor iNES
+
+# === Movie dialogs ===
+DLG_MOVIE_PLAY_TITLE=Reproducir pelicula
+DLG_MOVIE_RECORD_TITLE=Grabar pelicula
+DLG_MOVIE_FILE=Archivo de &pelicula:
+DLG_MOVIE_DESC=&Descripcion:
+DLG_MOVIE_LENGTH=Duracion:
+DLG_MOVIE_FRAMES=Fotogramas:
+DLG_MOVIE_RERECORDS=Reregrabaciones:
+DLG_MOVIE_TVMODE=Modo TV:
+DLG_MOVIE_RESUME=&Reanudar grabacion al cargar estado
+DLG_MOVIE_CONTROLLERS=Controladores
+DLG_MOVIE_PORT1=Puerto 1:
+DLG_MOVIE_PORT2=Puerto 2:
+DLG_MOVIE_EXPANSION=Expansion:
+DLG_MOVIE_CONFIGURE=&Configurar...
+DLG_MOVIE_RECORD_FROM=Grabar desde...
+DLG_MOVIE_HARD_RESET=&Reinicio completo
+DLG_MOVIE_CUR_STATE=&Estado actual
+
+# === Palette dialog ===
+DLG_PAL_TITLE=Configuracion de paleta
+DLG_PAL_PALETTE=Paleta
+DLG_PAL_HUE=&Tono:
+DLG_PAL_SAT=&Saturacion:
+DLG_PAL_CUSTOM=&Personalizada...
+DLG_PAL_PREVIEW=Vista previa
+DLG_PAL_EMPHASIS=Enfasis:
+DLG_PAL_NOTE=Nota: el enfasis rojo y verde estan intercambiados para PAL/Dendy
+DLG_PAL_EXTRAGRAY=Gris e&xtra (compatibilidad)
+
+# === DLL Select dialog ===
+DLG_DLL_TITLE=Seleccionar DLL de mapper
+DLG_DLL_TEXT=Esta ROM es compatible con varias DLLs de mapper.\\nSeleccione la que desea utilizar.
+
+# === Breakpoint dialog ===
+DLG_BREAK_TITLE=Anadir/editar punto de interrupcion
+DLG_BREAK_ENABLED=&Activar punto de interrupcion
+DLG_BREAK_ADDR=Direccion
+DLG_BREAK_OP=Operacion
+DLG_BREAK_TIME=Tiempo
+DLG_BREAK_EXEC=E&jecucion
+DLG_BREAK_READ=&Lectura
+DLG_BREAK_WRITE=&Escritura
+DLG_BREAK_ACCESS=&Acceso
+DLG_BREAK_OPCODE=&Opcode
+DLG_BREAK_NMI=&NMI
+DLG_BREAK_IRQ=&IRQ
+DLG_BREAK_BRK=&BRK
+DLG_BREAK_SCANLINE=&Linea de exploracion
+DLG_BREAK_FROM=&Desde
+DLG_BREAK_TO=&Hasta
+
+# === Debug Information window ===
+DLG_DEBUG_TITLE=Informacion de depuracion
+
+# === Debugger CPU ===
+DLG_DBGCPU_TITLE=Depurador
+DLG_DBGCPU_REGISTERS=Registros
+DLG_DBGCPU_TIMING=Temporizacion
+DLG_DBGCPU_IRQS=IRQs
+DLG_DBGCPU_FLAGS=Flags
+DLG_DBGCPU_BANKS=Bancos
+DLG_DBGCPU_BREAKPOINTS=Puntos de interrupcion
+DLG_DBGCPU_CONTROLS=Controles
+DLG_DBGCPU_MEMORY=Memoria
+DLG_DBGCPU_TRACE=Traza
+DLG_DBGCPU_RUN=Ejecutar
+DLG_DBGCPU_STEP=Paso
+DLG_DBGCPU_RESET=Reiniciar
+DLG_DBGCPU_POWER=Encender
+DLG_DBGCPU_DUMPCPU=&Volcar CPU
+DLG_DBGCPU_DUMPPPU=V&olcar PPU
+DLG_DBGCPU_STARTLOG=I&niciar registro
+DLG_DBGCPU_STOPLOG=D&etener registro
+DLG_DBGCPU_SEEKPC=Ir al PC
+DLG_DBGCPU_SEEKTO=Ir a la direccion:
+DLG_DBGCPU_SEEKSEL=Sel>
+DLG_DBGCPU_ADD=An&adir
+DLG_DBGCPU_EDIT=&Editar
+DLG_DBGCPU_DELETE=&Eliminar
+
+# === Debugger PPU ===
+DLG_DBGPPU_TITLE=Depurador - PPU
+DLG_DBGPPU_NAMETABLE=Tabla de nombres
+DLG_DBGPPU_SPRITES=Sprites
+DLG_DBGPPU_PATTERNS=Tablas de patrones
+DLG_DBGPPU_PALETTE=Paleta
+DLG_DBGPPU_DETAILS=Detalles
+DLG_DBGPPU_CLICK=Clic izquierdo para recorrer las paletas.
+DLG_DBGPPU_HOVER=Pase el cursor sobre un elemento para ver los detalles.\\nClic derecho para recordar la seleccion.
+DLG_DBGPPU_SELTYPE=Tipo de seleccion:
+DLG_DBGPPU_TILEFLIP=Volteo 8x1&6
+
+# === About ===
+ABOUT_TITLE=Acerca de Nintendulator
+ABOUT_TEXT=Nintendulator\\nEmulador de NES\\n\\nCopyright (C) QMT Productions
+
+# === Language change ===
+LANG_CHANGED=Idioma cambiado
+LANG_CHANGED_MSG=El idioma ha sido cambiado. Algunos elementos se actualizaran al reiniciar.
+
+# === Language menu ===
+NO_LANGUAGES=(No se encontraron idiomas)
+
+# === APU ===
+MSG_APU_STARTED=APU iniciada
+ERR_APU_REGION=Region desconocida, APU no configurada
+
+# === CPU ===
+ERR_CPU_BAD_OPCODE=Opcode invalido, CPU bloqueada
+
+# === ROM errors ===
+ERR_ROM_OPEN=No se pudo abrir el archivo ROM
+ERR_ROM_INVALID=Formato de archivo ROM invalido
+ERR_ROM_MAPPER=Mapper no compatible
+ERR_ROM_UNIF=ROM UNIF invalida
+ERR_ROM_FDS_HEADER=Cabecera FDS invalida
+ERR_ROM_FDS_DISKSIDE=Lado de disco FDS invalido
+ERR_ROM_NSF=Archivo NSF invalido
+MSG_ROM_LOADED=ROM cargada: %s
+MSG_ROM_CLOSED=ROM cerrada
+MSG_ROM_ALREADY_LOADED=Ya hay una ROM cargada. Cierrala primero.
+
+# === Header errors ===
+ERR_HEADER_REOPEN=No se pudo reabrir el archivo! Descartar cambios?
+ERR_HEADER_OPEN=No se pudo abrir la ROM!
+ERR_HEADER_NOT_INES=El archivo seleccionado no es una imagen ROM iNES!
+ERR_HEADER_DISKDUDE=La ROM seleccionada parece haber sido danada por \"DiskDude!\" - limpiando...
+ERR_HEADER_INCONSISTENT=Se detectaron datos no reconocidos o inconsistentes en la cabecera de la ROM! Desea limpiarla?
+
+# === Video ===
+ERR_GFX_DIRECTDRAW=Fallo al inicializar DirectDraw
+ERR_GFX_SURFACE=Fallo al crear la superficie DirectDraw
+ERR_GFX_PALETTE=Fallo al establecer la paleta de DirectDraw
+ERR_GFX_RENDER=Error de renderizado de DirectDraw
+ERR_GFX_MODE=Modo de video no compatible
+MSG_GFX_SCREENSHOT=Captura de pantalla guardada: %s
+ERR_GFX_FLIP=Fallo al cambiar a la superficie primaria! Volviendo al modo ventana...
+ERR_GFX_ILLEGAL_PALETTE=Paleta ilegal seleccionada!
+ERR_GFX_LOAD_PALETTE=No se pudo cargar la paleta especificada! Usando la predeterminada!
+ERR_GFX_INVALID_PALETTE=El archivo seleccionado no es una paleta valida!
+ERR_GFX_PERF_COUNTER=Fallo al determinar la frecuencia del contador de rendimiento!
+ERR_GFX_DDRAW_DLL=Error fatal: no se pudo cargar la DLL de DirectDraw!
+ERR_GFX_DDRAW_ENTRY=Error fatal: no se pudo encontrar el punto de entrada para DirectDrawCreateEx!
+ERR_GFX_DDRAW7=Fallo al inicializar DirectDraw 7
+ERR_GFX_FULLSCREEN_LEVEL=Fallo al establecer el nivel cooperativo de pantalla completa! Volviendo al modo ventana...
+ERR_GFX_NO_FULLSCREEN_RES=No hay resoluciones de pantalla completa compatibles con su dispositivo de pantalla!
+ERR_GFX_NO_FULLSCREEN_RES_REVERT=No hay resoluciones de pantalla completa compatibles con su dispositivo de pantalla! Volviendo al modo ventana...
+ERR_GFX_COOP_LEVEL=Fallo al establecer el nivel cooperativo de DirectDraw
+ERR_GFX_PRIMARY_SURFACE=Fallo al crear la superficie primaria
+ERR_GFX_SECONDARY_SURFACE=Fallo al obtener la superficie secundaria
+ERR_GFX_CREATE_SECONDARY=Fallo al crear la superficie secundaria
+ERR_GFX_CLIPPER=Fallo al crear el clipper
+ERR_GFX_CLIPPER_WINDOW=Fallo al establecer la ventana del clipper
+ERR_GFX_CLIPPER_ASSIGN=Fallo al asignar el clipper a la superficie primaria
+ERR_GFX_SURF_DESC=Fallo al recuperar la descripcion de la superficie
+ERR_GFX_BIT_DEPTH=Profundidad de bits invalida detectada!
+ERR_GFX_OPENGL=Fallo al inicializar OpenGL! Retrocediendo a DirectDraw.
+
+# === Sound ===
+ERR_APU_DIRECTSOUND=Fallo al inicializar DirectSound
+ERR_APU_BUFFER=Fallo al crear el bufer de DirectSound
+ERR_APU_FORMAT=Formato de audio no compatible
+MSG_APU_DISABLED=Sonido desactivado
+
+# === Save states ===
+MSG_STATE_SAVED=Estado guardado en la ranura %d
+MSG_STATE_LOADED=Estado cargado desde la ranura %d
+ERR_STATE_SAVE=Fallo al guardar el estado
+ERR_STATE_LOAD=Fallo al cargar el estado
+ERR_STATE_VERSION=La version del archivo de estado no coincide
+ERR_STATE_CORRUPT=El archivo de estado esta corrupto
+MSG_STATE_SLOT=Ranura %d
+
+# === Recording ===
+MSG_MOVIE_RECORDING=Grabando pelicula...
+MSG_MOVIE_PLAYING=Reproduciendo pelicula...
+MSG_MOVIE_STOPPED=Pelicula detenida
+ERR_MOVIE_OPEN=Fallo al abrir el archivo de pelicula
+ERR_MOVIE_INVALID=Archivo de pelicula invalido
+ERR_MOVIE_VERSION=La version de la pelicula no coincide
+MSG_AVI_RECORDING=Grabando AVI...
+ERR_AVI_OPEN=Fallo al abrir el archivo AVI
+MSG_AVI_STOPPED=Grabacion AVI detenida
+
+# === AVI errors ===
+ERR_AVI_NOT_RECORDING=No hay ninguna captura AVI en curso!
+ERR_AVI_ALREADY_RECORDING=Ya hay una captura AVI en curso!
+ERR_AVI_COMPRESSION=Fallo al configurar la compresion AVI!
+ERR_AVI_FRAME_NOT_RECORDING=Error! Se intento capturar un fotograma AVI sin estar grabando!
+ERR_AVI_WRITE_VIDEO=Fallo al escribir video en el AVI!
+ERR_AVI_AUDIO_NOT_RECORDING=Error! Se intento capturar audio AVI sin estar grabando!
+ERR_AVI_WRITE_AUDIO=Fallo al escribir audio en el AVI!
+
+# === Game Genie ===
+ERR_GENIE_INVALID=Codigo Game Genie invalido
+ERR_GENIE_TOO_MANY=Demasiados codigos Game Genie (maximo 3)
+MSG_GENIE_APPLIED=Codigo Game Genie aplicado
+
+# === Mapper ===
+ERR_MAPPER_LOAD=Fallo al cargar %s - no es un archivo DLL valido!
+ERR_MAPPER_NOTFOUND=Mapper no encontrado
+ERR_MAPPER_VERSION=Fallo al cargar el paquete de mapper %s - la version no coincide!
+ERR_MAPPER_NO_DLLS=No se encontraron DLLs de mapper!
+ERR_NES_RELOCATE=Nintendulator no pudo reubicar completamente sus archivos de datos a \"%s\".\\nElimine la carpeta \"%s\" despues de reubicar su contenido.
+ERR_MAPPER_DLL_VERSION=Version de DLL de mapper incorrecta!
+ERR_MAPPER_DLL_LOAD=Error al cargar la DLL del mapper!
+
+# === Debugger ===
+DBG_BREAK_EXEC=Ejec: $%04X
+DBG_BREAK_READ=Lect: $%04X
+DBG_BREAK_WRITE=Escr: $%04X
+DBG_BREAK_ACCESS=Acce: $%04X
+DBG_BREAK_OPCODE=Opcode: $%02X
+DBG_BREAK_NMI=Interrupcion: NMI
+DBG_BREAK_IRQ=Interrupcion: IRQ
+DBG_BREAK_BRK=Interrupcion: BRK
+DBG_BREAK_SCANLINE=Linea de exploracion: %i
+DBG_BREAK_UNDEF=INDEFINIDO
+DBG_BREAK_ENABLED= (+)
+DBG_BREAK_DISABLED= (-)
+MSG_DBG_LOG_STARTED=Registro iniciado
+MSG_DBG_LOG_STOPPED=Registro detenido
+
+# === Debugger validation ===
+DBG_INVALID_ADDR=Rango de direccion invalido!
+DBG_INVALID_OPCODE=Opcode invalido!
+DBG_INVALID_SCANLINE=Linea de exploracion invalida!
+
+# === Movie ===
+MOVIE_UNEXPECTED_EOF=EOF inesperado en la pelicula!
+MOVIE_TV_PAL=PAL
+MOVIE_TV_NTSC=NTSC
+MOVIE_LENGTH_FMT=Duracion: %i:%02i.%02i
+
+# === MapperInterface compatibility ===
+COMPAT_UNSUPPORTED=No compatible
+COMPAT_PARTIAL=Parcialmente compatible
+COMPAT_MOSTLY=Mayormemente compatible
+COMPAT_FULL=Totalmente compatible!
+
+# === Deprecated / unused ===
+MENU_NES=&NES
+MENU_SETTINGS=&Configuracion
+MENU_SETTINGS_VIDEO=&Video...
+MENU_SETTINGS_PATHS=&Rutas...
+MENU_SETTINGS_CLOCK=&Velocidad de reloj...
+MENU_MOVIE=&Pelicula
+MENU_MOVIE_RECORD_OLD=&Grabar...
+MENU_MOVIE_PLAY_OLD=&Reproducir...
+MENU_MOVIE_STOP_OLD=&Detener
